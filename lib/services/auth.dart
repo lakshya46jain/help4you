@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 // Dependency Imports
 import 'package:firebase_auth/firebase_auth.dart';
 // File Imports
+import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/verification_container.dart';
 
@@ -38,7 +39,13 @@ class AuthService {
         verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
           _auth.signInWithCredential(phoneAuthCredential).then(
             (UserCredential result) {
-              // TODO: Navigate To Home Page
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Wrapper(),
+                ),
+                (route) => false,
+              );
             },
           );
         },
@@ -61,7 +68,13 @@ class AuthService {
                 );
                 _auth.signInWithCredential(credential).then(
                   (UserCredential result) {
-                    // TODO: Navigate To Home Page
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Wrapper(),
+                      ),
+                      (route) => false,
+                    );
                   },
                 );
               },

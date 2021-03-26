@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
+import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/models/user_model.dart';
-import 'package:help4you/screens/welcome_screen/welcome_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             value: AuthService().user,
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
-              home: WelcomeScreen(),
+              home: Wrapper(),
             ),
           );
         }
