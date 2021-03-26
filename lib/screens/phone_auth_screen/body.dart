@@ -1,8 +1,11 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // Dependency Imports
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // File Imports
+import 'package:help4you/services/auth.dart';
+import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/phone_number_field.dart';
 
@@ -71,8 +74,34 @@ class _BodyState extends State<Body> {
               height: MediaQuery.of(context).size.height / (1792 / 50),
             ),
             SignatureButton(
-              onTap: () {
-                // TODO: Give Continue Button Functionality
+              onTap: () async {
+                HapticFeedback.heavyImpact();
+                FocusScope.of(context).unfocus();
+                dynamic result = await AuthService().phoneAuthentication(
+                  phoneIsoCode,
+                  nonInternationalNumber,
+                  phoneNumber,
+                  context,
+                );
+                if (nonInternationalNumber == "") {
+                  showCustomSnackBar(
+                    context,
+                    FontAwesomeIcons.exclamationCircle,
+                    Colors.white,
+                    "Please enter your phone number.",
+                    Colors.white,
+                    Colors.red,
+                  );
+                } else if (result == "Error") {
+                  showCustomSnackBar(
+                    context,
+                    FontAwesomeIcons.exclamationCircle,
+                    Colors.white,
+                    "There was an error while verifying your account. Please try again later.",
+                    Colors.white,
+                    Colors.red,
+                  );
+                }
               },
               text: "Continue",
               icon: FontAwesomeIcons.chevronRight,
