@@ -10,6 +10,7 @@ import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/verification_container.dart';
+import 'package:help4you/screens/register_profile_screen/register_profile_screen.dart';
 
 class AuthService {
   // Firebase Auth Instance
@@ -121,7 +122,7 @@ class AuthService {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Wrapper(),
+                          builder: (context) => RegisterProfile(),
                         ),
                         (route) => false,
                       );

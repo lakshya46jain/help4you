@@ -2,6 +2,7 @@
 // Dependency Imports
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
+import 'package:help4you/models/user_model.dart';
 
 class DatabaseService {
   final String uid;
@@ -28,7 +29,7 @@ class DatabaseService {
         'Full Name': fullName,
         'Phone Number': phoneNumber,
         'Phone ISO Code': phoneIsoCode,
-        'Non Internation Number': nonInternationalNumber,
+        'Non International Number': nonInternationalNumber,
       },
     );
   }
@@ -42,5 +43,22 @@ class DatabaseService {
         'Profile Picture': profilePicture,
       },
     );
+  }
+
+  // User Data from Snapshot
+  UserDataCustomer _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return UserDataCustomer(
+      uid: uid,
+      fullName: snapshot.data()['Full Name'],
+      phoneNumber: snapshot.data()['Phone Number'],
+      phoneIsoCode: snapshot.data()['Phone ISO Code'],
+      nonInternationalNumber: snapshot.data()['Non International Number'],
+      profilePicture: snapshot.data()['Profile Picture'],
+    );
+  }
+
+  // Get User Document
+  Stream<UserDataCustomer> get userData {
+    return customerCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
   }
 }
