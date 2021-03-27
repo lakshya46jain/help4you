@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(
-          MediaQuery.of(context).size.height / (1792 / 100),
+          MediaQuery.of(context).size.height / (1792 / 200),
         ),
         child: HomeAppBar(),
       ),
