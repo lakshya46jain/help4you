@@ -8,7 +8,7 @@ import 'package:ant_icons/ant_icons.dart';
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/expanded_button.dart';
-import 'package:help4you/screens/settings_screen/stream_builder.dart';
+import 'package:help4you/screens/settings_screen/edit_profile_toggle.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -20,7 +20,7 @@ class Body extends StatelessWidget {
       child: Column(
         children: [
           if (user != null) ...[
-            ProfileCardStreamBuilder(),
+            EditProfileToggle(),
             ExpandedButton(
               icon: AntIcons.info_circle_outline,
               text: "About Us",

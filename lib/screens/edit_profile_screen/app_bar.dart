@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
+import 'package:help4you/constants/back_button.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 
 class EditProfileAppBar extends StatelessWidget {
@@ -38,6 +39,7 @@ class EditProfileAppBar extends StatelessWidget {
     return AppBar(
       elevation: 0.0,
       backgroundColor: Colors.transparent,
+      leading: CustomBackButton(),
       title: Text(
         "Edit Profile",
         style: TextStyle(
@@ -50,75 +52,64 @@ class EditProfileAppBar extends StatelessWidget {
           stream: DatabaseService(uid: user.uid).userData,
           builder: (context, snapshot) {
             UserDataCustomer userData = snapshot.data;
-            return Padding(
-              padding: EdgeInsets.all(14.5),
-              child: GestureDetector(
-                child: Text(
-                  "Done",
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.black,
-                  ),
-                ),
-                onTap: () async {
-                  // Upload Picture to Firebase
-                  Future setProfilePicture() async {
-                    if (imageFile == null) {
-                      await DatabaseService(uid: user.uid)
-                          .updateProfilePicture(userData.profilePicture);
-                    } else {
-                      Reference firebaseStorageRef = FirebaseStorage.instance
-                          .ref()
-                          .child(("H4Y Profile Pictures/" + user.uid));
-                      UploadTask uploadTask =
-                          firebaseStorageRef.putFile(imageFile);
-                      await uploadTask;
-                      String downloadAddress =
-                          await firebaseStorageRef.getDownloadURL();
-                      await DatabaseService(uid: user.uid)
-                          .updateProfilePicture(downloadAddress);
-                    }
-                  }
-
-                  HapticFeedback.heavyImpact();
-                  FocusScope.of(context).unfocus();
-                  try {
-                    if (formKey.currentState.validate()) {
-                      await DatabaseService(uid: user.uid).updateUserData(
-                        fullName ?? userData.fullName,
-                        phoneNumber ?? userData.phoneNumber,
-                        phoneIsoCode ?? userData.phoneIsoCode,
-                        nonInternationalNumber ??
-                            userData.nonInternationalNumber,
-                      );
-                    }
-                    if (imageFile == null) {
-                      await DatabaseService(uid: user.uid).updateProfilePicture(
-                        "https://firebasestorage.googleapis.com/v0/b/help4you-24c07.appspot.com/o/Default%20Profile%20Picture.png?alt=media&token=fd813e4d-80f9-4c2f-aa7a-b07602efaf09",
-                      );
-                    } else {
-                      setProfilePicture();
-                    }
-                    showCustomSnackBar(
-                      context,
-                      FontAwesomeIcons.checkCircle,
-                      Colors.white,
-                      "Your profile was updated successfully.",
-                      Colors.white,
-                      Colors.green,
-                    );
-                  } catch (error) {
-                    showCustomSnackBar(
-                      context,
-                      FontAwesomeIcons.exclamationCircle,
-                      Colors.white,
-                      "There was an error updating your profile. Please try again later.",
-                      Colors.white,
-                      Colors.red,
-                    );
-                  }
-                },
+            return IconButton(
+              icon: Icon(
+                FontAwesomeIcons.check,
+                color: Colors.black,
+                size: 20.0,
               ),
+              onPressed: () async {
+                // Upload Picture to Firebase
+                Future setProfilePicture() async {
+                  if (imageFile == null) {
+                    await DatabaseService(uid: user.uid)
+                        .updateProfilePicture(userData.profilePicture);
+                  } else {
+                    Reference firebaseStorageRef = FirebaseStorage.instance
+                        .ref()
+                        .child(("H4Y Profile Pictures/" + user.uid));
+                    UploadTask uploadTask =
+                        firebaseStorageRef.putFile(imageFile);
+                    await uploadTask;
+                    String downloadAddress =
+                        await firebaseStorageRef.getDownloadURL();
+                    await DatabaseService(uid: user.uid)
+                        .updateProfilePicture(downloadAddress);
+                  }
+                }
+
+                HapticFeedback.heavyImpact();
+                FocusScope.of(context).unfocus();
+                try {
+                  if (formKey.currentState.validate()) {
+                    await DatabaseService(uid: user.uid).updateUserData(
+                      fullName ?? userData.fullName,
+                      phoneNumber ?? userData.phoneNumber,
+                      phoneIsoCode ?? userData.phoneIsoCode,
+                      nonInternationalNumber ?? userData.nonInternationalNumber,
+                    );
+                  }
+                  setProfilePicture();
+                  showCustomSnackBar(
+                    context,
+                    FontAwesomeIcons.checkCircle,
+                    Colors.white,
+                    "Your profile was updated successfully.",
+                    Colors.white,
+                    Colors.green,
+                  );
+                  Navigator.pop(context);
+                } catch (error) {
+                  showCustomSnackBar(
+                    context,
+                    FontAwesomeIcons.exclamationCircle,
+                    Colors.white,
+                    "There was an error updating your profile. Please try again later.",
+                    Colors.white,
+                    Colors.red,
+                  );
+                }
+              },
             );
           },
         ),
