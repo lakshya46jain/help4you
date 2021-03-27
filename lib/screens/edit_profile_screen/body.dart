@@ -7,6 +7,7 @@ import 'package:fluentui_icons/fluentui_icons.dart';
 // File Imports
 import 'package:help4you/constants/expanded_button.dart';
 import 'package:help4you/screens/edit_profile_screen/stream_builder.dart';
+import 'package:help4you/screens/delete_account_screen/delete_account.dart';
 
 class Body extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -50,7 +51,12 @@ class Body extends StatelessWidget {
               text: "Delete Account",
               onPressed: () {
                 HapticFeedback.lightImpact();
-                // TODO: Give Delete Account Button
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DeleteAccount(),
+                  ),
+                );
               },
             ),
           ],
