@@ -1,7 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
-import 'package:ant_icons/ant_icons.dart';
+import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 // File Imports
 import 'package:help4you/screens/home_screen/home_screen.dart';
@@ -56,7 +56,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               onTabChange: onTap,
               tabs: [
                 GButton(
-                  icon: AntIcons.home_outline,
+                  icon: FluentSystemIcons.ic_fluent_home_regular,
                   text: 'Home',
                   gap: gap,
                   iconActiveColor: mainColor,
@@ -67,7 +67,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   padding: padding,
                 ),
                 GButton(
-                  icon: AntIcons.solution,
+                  icon: FluentSystemIcons.ic_fluent_notebook_regular,
                   text: 'Bookings',
                   gap: gap,
                   iconActiveColor: mainColor,
@@ -78,7 +78,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   padding: padding,
                 ),
                 GButton(
-                  icon: AntIcons.message_outline,
+                  icon: FluentSystemIcons.ic_fluent_chat_regular,
                   text: 'Messages',
                   gap: gap,
                   iconActiveColor: mainColor,
@@ -89,7 +89,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   padding: padding,
                 ),
                 GButton(
-                  icon: AntIcons.setting_outline,
+                  icon: FluentSystemIcons.ic_fluent_settings_regular,
                   text: 'Settings',
                   gap: gap,
                   iconActiveColor: mainColor,

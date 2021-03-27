@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:share/share.dart';
+import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:ant_icons/ant_icons.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/models/user_model.dart';
@@ -22,22 +22,22 @@ class Body extends StatelessWidget {
           if (user != null) ...[
             EditProfileToggle(),
             ExpandedButton(
-              icon: AntIcons.info_circle_outline,
+              icon: FluentSystemIcons.ic_fluent_info_regular,
               text: "About Us",
               onPressed: () {},
             ),
             ExpandedButton(
-              icon: AntIcons.question_circle_outline,
+              icon: FluentSystemIcons.ic_fluent_person_feedback_regular,
               text: "Feedback",
               onPressed: () {},
             ),
             ExpandedButton(
-              icon: AntIcons.star_outline,
+              icon: FluentSystemIcons.ic_fluent_star_regular,
               text: "Rate Us",
               onPressed: () {},
             ),
             ExpandedButton(
-              icon: AntIcons.share_alt,
+              icon: FluentSystemIcons.ic_fluent_share_regular,
               text: "Share Help4You",
               onPressed: () {
                 Share.share(
@@ -47,7 +47,7 @@ class Body extends StatelessWidget {
               },
             ),
             ExpandedButton(
-              icon: AntIcons.logout_outline,
+              icon: FluentSystemIcons.ic_fluent_sign_out_regular,
               text: "Sign Out",
               onPressed: () {
                 return AuthService().signOut();

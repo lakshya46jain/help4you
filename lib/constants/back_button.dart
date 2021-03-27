@@ -1,7 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fluentui_icons/fluentui_icons.dart';
 // File Imports
 
 class CustomBackButton extends StatelessWidget {
@@ -9,7 +9,7 @@ class CustomBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(
-        FontAwesomeIcons.chevronLeft,
+        FluentSystemIcons.ic_fluent_arrow_left_filled,
         size: 25.0,
         color: Colors.black,
       ),

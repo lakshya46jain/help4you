@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Dependency Imports
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fluentui_icons/fluentui_icons.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/constants/policy_dialog.dart';
@@ -88,7 +88,7 @@ class _BodyState extends State<Body> {
                 if (nonInternationalNumber == "") {
                   showCustomSnackBar(
                     context,
-                    FontAwesomeIcons.exclamationCircle,
+                    FluentSystemIcons.ic_fluent_error_circle_regular,
                     Colors.white,
                     "Please enter your phone number.",
                     Colors.white,
@@ -97,7 +97,7 @@ class _BodyState extends State<Body> {
                 } else if (result == "Error") {
                   showCustomSnackBar(
                     context,
-                    FontAwesomeIcons.exclamationCircle,
+                    FluentSystemIcons.ic_fluent_error_circle_regular,
                     Colors.white,
                     "There was an error while verifying your account. Please try again later.",
                     Colors.white,
@@ -106,7 +106,7 @@ class _BodyState extends State<Body> {
                 }
               },
               text: "Continue",
-              icon: FontAwesomeIcons.chevronRight,
+              icon: FluentSystemIcons.ic_fluent_arrow_right_filled,
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / (1792 / 785),

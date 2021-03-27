@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Dependency Imports
-import 'package:ant_icons/ant_icons.dart';
+import 'package:fluentui_icons/fluentui_icons.dart';
 // File Imports
 import 'package:help4you/constants/expanded_button.dart';
 import 'package:help4you/screens/edit_profile_screen/stream_builder.dart';
@@ -46,7 +46,7 @@ class Body extends StatelessWidget {
               onPressed2: onPressed2,
             ),
             ExpandedButton(
-              icon: AntIcons.delete_outline,
+              icon: FluentSystemIcons.ic_fluent_delete_regular,
               text: "Delete Account",
               onPressed: () {
                 HapticFeedback.lightImpact();

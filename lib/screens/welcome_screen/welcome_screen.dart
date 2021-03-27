@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Dependency Imports
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fluentui_icons/fluentui_icons.dart';
 // File Imports
 import 'package:help4you/screens/welcome_screen/bottom_sheet.dart';
 import 'package:help4you/screens/welcome_screen/page_view_container.dart';
@@ -108,7 +108,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     width: 5.0,
                                   ),
                                   Icon(
-                                    FontAwesomeIcons.chevronRight,
+                                    FluentSystemIcons
+                                        .ic_fluent_arrow_right_filled,
                                     color: Colors.grey[700],
                                     size: 22.0,
                                   ),

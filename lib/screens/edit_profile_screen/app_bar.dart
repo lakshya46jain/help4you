@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
+import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
@@ -54,9 +54,9 @@ class EditProfileAppBar extends StatelessWidget {
             UserDataCustomer userData = snapshot.data;
             return IconButton(
               icon: Icon(
-                FontAwesomeIcons.check,
+                FluentSystemIcons.ic_fluent_checkmark_filled,
+                size: 24.0,
                 color: Colors.black,
-                size: 20.0,
               ),
               onPressed: () async {
                 // Upload Picture to Firebase
@@ -92,7 +92,7 @@ class EditProfileAppBar extends StatelessWidget {
                   setProfilePicture();
                   showCustomSnackBar(
                     context,
-                    FontAwesomeIcons.checkCircle,
+                    FluentSystemIcons.ic_fluent_checkmark_circle_regular,
                     Colors.white,
                     "Your profile was updated successfully.",
                     Colors.white,
@@ -102,7 +102,7 @@ class EditProfileAppBar extends StatelessWidget {
                 } catch (error) {
                   showCustomSnackBar(
                     context,
-                    FontAwesomeIcons.exclamationCircle,
+                    FluentSystemIcons.ic_fluent_error_circle_regular,
                     Colors.white,
                     "There was an error updating your profile. Please try again later.",
                     Colors.white,

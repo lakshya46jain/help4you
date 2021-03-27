@@ -1,7 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fluentui_icons/fluentui_icons.dart';
 // File Imports
 
 class ExpandedButton extends StatelessWidget {
@@ -52,7 +52,7 @@ class ExpandedButton extends StatelessWidget {
                 ),
               ),
               Icon(
-                FontAwesomeIcons.chevronRight,
+                FluentSystemIcons.ic_fluent_arrow_right_filled,
                 color: Colors.black,
                 size: 25.0,
               ),
