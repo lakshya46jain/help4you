@@ -1,5 +1,6 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:help4you/screens/about_us_screen/about_us.dart';
 // Dependency Imports
 import 'package:share/share.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
@@ -24,7 +25,14 @@ class Body extends StatelessWidget {
             ExpandedButton(
               icon: FluentSystemIcons.ic_fluent_info_regular,
               text: "About Us",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AboutUs(),
+                  ),
+                );
+              },
             ),
             ExpandedButton(
               icon: FluentSystemIcons.ic_fluent_person_feedback_regular,
