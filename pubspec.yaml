@@ -56,6 +56,17 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Launcher Icon
+  flutter_launcher_icons: ^0.9.0
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: 'assets/images/launcher_icons/Help4You_AppIcon.png'
+  image_path_android: 'assets/images/launcher_icons/Help4You_AppIcon.png'
+  adaptive_icon_background: 'assets/images/launcher_icons/Help4You_Background_AppIcon.png'
+  adaptive_icon_foreground: 'assets/images/launcher_icons/Help4You_Foreground_AppIcon.png'
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -76,6 +87,10 @@ flutter:
     - assets/graphics/Help4You_Illustration_2.svg
     - assets/graphics/Help4You_Illustration_3.svg
     - assets/graphics/Help4You_Illustration_4.svg
+    # Images
+    - assets/images/launcher_icons/Help4You_AppIcon.png
+    - assets/images/launcher_icons/Help4You_Background_AppIcon.png
+    - assets/images/launcher_icons/Help4You_Foreground_AppIcon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
