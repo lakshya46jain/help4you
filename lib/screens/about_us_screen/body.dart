@@ -50,7 +50,16 @@ class Body extends StatelessWidget {
           ExpandedButton(
             text: "Privacy Policy",
             icon: FluentSystemIcons.ic_fluent_lock_shield_regular,
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return PolicyDialog(
+                    mdFileName: 'privacy_policy.md',
+                  );
+                },
+              );
+            },
           ),
         ],
       ),

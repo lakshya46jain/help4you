@@ -82,6 +82,7 @@ flutter:
   assets:
     # Files
     - assets/files/terms_and_conditions.md 
+    - assets/files/privacy_policy.md
     # Graphics
     - assets/graphics/Help4You_Illustration_1.svg
     - assets/graphics/Help4You_Illustration_2.svg
