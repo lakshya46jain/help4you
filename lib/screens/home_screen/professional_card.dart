@@ -1,7 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
-import 'package:fluentui_icons/fluentui_icons.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
 
@@ -93,7 +93,7 @@ class ProfessionalCard extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(
-                                  FluentSystemIcons.ic_fluent_star_filled,
+                                  FluentIcons.star_12_filled,
                                   color: Colors.yellow[600],
                                   size: 14.0,
                                 ),

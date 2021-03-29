@@ -1,7 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
-import 'package:fluentui_icons/fluentui_icons.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/constants/policy_dialog.dart';
 import 'package:help4you/constants/expanded_button.dart';
@@ -30,12 +30,12 @@ class Body extends StatelessWidget {
           ),
           ExpandedButton(
             text: "About Help4You",
-            icon: FluentSystemIcons.ic_fluent_more_regular,
+            icon: FluentIcons.question_circle_24_regular,
             onPressed: () {},
           ),
           ExpandedButton(
             text: "Terms and Conditions",
-            icon: FluentSystemIcons.ic_fluent_person_accounts_regular,
+            icon: FluentIcons.person_accounts_24_regular,
             onPressed: () {
               showDialog(
                 context: context,
@@ -49,7 +49,7 @@ class Body extends StatelessWidget {
           ),
           ExpandedButton(
             text: "Privacy Policy",
-            icon: FluentSystemIcons.ic_fluent_lock_shield_regular,
+            icon: FluentIcons.lock_shield_24_regular,
             onPressed: () {
               showDialog(
                 context: context,

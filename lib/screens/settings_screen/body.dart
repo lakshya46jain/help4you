@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:help4you/screens/about_us_screen/about_us.dart';
 // Dependency Imports
 import 'package:share/share.dart';
-import 'package:fluentui_icons/fluentui_icons.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:provider/provider.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
@@ -23,7 +23,7 @@ class Body extends StatelessWidget {
           if (user != null) ...[
             EditProfileToggle(),
             ExpandedButton(
-              icon: FluentSystemIcons.ic_fluent_info_regular,
+              icon: FluentIcons.info_24_regular,
               text: "About Us",
               onPressed: () {
                 Navigator.push(
@@ -35,17 +35,17 @@ class Body extends StatelessWidget {
               },
             ),
             ExpandedButton(
-              icon: FluentSystemIcons.ic_fluent_person_feedback_regular,
+              icon: FluentIcons.person_feedback_24_regular,
               text: "Feedback",
               onPressed: () {},
             ),
             ExpandedButton(
-              icon: FluentSystemIcons.ic_fluent_star_regular,
+              icon: FluentIcons.star_24_regular,
               text: "Rate Us",
               onPressed: () {},
             ),
             ExpandedButton(
-              icon: FluentSystemIcons.ic_fluent_share_regular,
+              icon: FluentIcons.share_24_regular,
               text: "Share Help4You",
               onPressed: () {
                 Share.share(
@@ -55,7 +55,7 @@ class Body extends StatelessWidget {
               },
             ),
             ExpandedButton(
-              icon: FluentSystemIcons.ic_fluent_sign_out_regular,
+              icon: FluentIcons.sign_out_24_regular,
               text: "Sign Out",
               onPressed: () {
                 return AuthService().signOut();

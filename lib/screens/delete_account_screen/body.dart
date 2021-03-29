@@ -1,7 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
-import 'package:fluentui_icons/fluentui_icons.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/phone_number_field.dart';
@@ -62,7 +62,7 @@ class Body extends StatelessWidget {
             SignatureButton(
               onTap: () {},
               text: "Continue",
-              icon: FluentSystemIcons.ic_fluent_arrow_right_filled,
+              icon: FluentIcons.arrow_right_24_regular,
             ),
           ],
         ),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
-import 'package:fluentui_icons/fluentui_icons.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
@@ -122,7 +122,7 @@ class EditProfileStreamBuilder extends StatelessWidget {
                                 ),
                               ),
                               child: Icon(
-                                FluentSystemIcons.ic_fluent_camera_regular,
+                                FluentIcons.camera_24_regular,
                                 color: Colors.black,
                               ),
                             ),

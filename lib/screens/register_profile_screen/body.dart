@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
-import 'package:fluentui_icons/fluentui_icons.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 // File Imports
 import 'package:help4you/screens/wrapper.dart';
@@ -90,7 +90,7 @@ class Body extends StatelessWidget {
                   padding: EdgeInsets.all(14.5),
                   child: SignatureButton(
                     text: "Continue",
-                    icon: FluentSystemIcons.ic_fluent_arrow_right_filled,
+                    icon: FluentIcons.arrow_right_24_regular,
                     onTap: () async {
                       // Upload Picture to Firebase
                       Future setProfilePicture() async {
@@ -134,7 +134,7 @@ class Body extends StatelessWidget {
                       } catch (error) {
                         showCustomSnackBar(
                           context,
-                          FluentSystemIcons.ic_fluent_error_circle_regular,
+                          FluentIcons.error_circle_24_regular,
                           Colors.white,
                           "There was an error updating your profile. Please try again later.",
                           Colors.white,

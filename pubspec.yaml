@@ -29,7 +29,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # Aesthetics
-  fluentui_icons: ^0.2.0
+  fluentui_system_icons: ^1.1.112
   
   # Widgets
   share: ^2.0.1
