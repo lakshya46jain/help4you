@@ -53,78 +53,84 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: AnnotatedRegion(
-        value: SystemUiOverlayStyle.dark,
-        child: Container(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 15.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                PageViewContainer(
-                  pageController: _pageController,
-                  onPageChanged: (int page) {
-                    setState(
-                      () {
-                        _currentPage = page;
-                      },
-                    );
-                  },
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: _buildPageIndicator(),
-                ),
-                _currentPage != _numPages - 1
-                    ? Expanded(
-                        child: Align(
-                          alignment: FractionalOffset.bottomRight,
-                          child: GestureDetector(
-                            onTap: () {
-                              _pageController.nextPage(
-                                duration: Duration(milliseconds: 500),
-                                curve: Curves.ease,
-                              );
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 10.0,
-                                vertical: 40.0,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Next',
-                                    style: TextStyle(
-                                      color: Colors.grey[700],
-                                      fontSize: 22.0,
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: AnnotatedRegion(
+          value: SystemUiOverlayStyle.dark,
+          child: Container(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  PageViewContainer(
+                    pageController: _pageController,
+                    onPageChanged: (int page) {
+                      setState(
+                        () {
+                          _currentPage = page;
+                        },
+                      );
+                    },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: _buildPageIndicator(),
+                  ),
+                  _currentPage != _numPages - 1
+                      ? Expanded(
+                          child: Align(
+                            alignment: FractionalOffset.bottomRight,
+                            child: GestureDetector(
+                              onTap: () {
+                                _pageController.nextPage(
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.ease,
+                                );
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 10.0,
+                                  vertical: 40.0,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Next',
+                                      style: TextStyle(
+                                        color: Colors.grey[700],
+                                        fontSize: 22.0,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 5.0,
-                                  ),
-                                  Icon(
-                                    FluentIcons.arrow_right_24_regular,
-                                    color: Colors.grey[700],
-                                    size: 22.0,
-                                  ),
-                                ],
+                                    SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    Icon(
+                                      FluentIcons.arrow_right_24_regular,
+                                      color: Colors.grey[700],
+                                      size: 22.0,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      )
-                    : Container(),
-              ],
+                        )
+                      : Container(),
+                ],
+              ),
             ),
           ),
         ),
+        bottomSheet:
+            _currentPage == _numPages - 1 ? WelcomeBottomSheet() : null,
       ),
-      bottomSheet: _currentPage == _numPages - 1 ? WelcomeBottomSheet() : null,
     );
   }
 }

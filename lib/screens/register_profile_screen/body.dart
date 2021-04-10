@@ -79,25 +79,21 @@ class Body extends StatelessWidget {
               onPressed1: onPressed1,
               onPressed2: onPressed2,
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / (1792 / 50),
-            ),
             StreamBuilder<UserDataCustomer>(
               stream: DatabaseService(uid: user.uid).userData,
               builder: (context, snapshot) {
                 UserDataCustomer userData = snapshot.data;
                 return Padding(
-                  padding: EdgeInsets.all(14.5),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 14.5,
+                  ),
                   child: SignatureButton(
                     text: "Continue",
                     icon: FluentIcons.arrow_right_24_regular,
                     onTap: () async {
                       // Upload Picture to Firebase
                       Future setProfilePicture() async {
-                        if (imageFile == null) {
-                          await DatabaseService(uid: user.uid)
-                              .updateProfilePicture(userData.profilePicture);
-                        } else {
+                        if (imageFile != null) {
                           Reference firebaseStorageRef = FirebaseStorage
                               .instance
                               .ref()
@@ -109,6 +105,9 @@ class Body extends StatelessWidget {
                               await firebaseStorageRef.getDownloadURL();
                           await DatabaseService(uid: user.uid)
                               .updateProfilePicture(downloadAddress);
+                        } else {
+                          await DatabaseService(uid: user.uid)
+                              .updateProfilePicture(userData.profilePicture);
                         }
                       }
 
@@ -123,14 +122,14 @@ class Body extends StatelessWidget {
                             nonInternationalNumber ??
                                 userData.nonInternationalNumber,
                           );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Wrapper(),
+                            ),
+                          );
                         }
                         setProfilePicture();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Wrapper(),
-                          ),
-                        );
                       } catch (error) {
                         showCustomSnackBar(
                           context,

@@ -61,10 +61,7 @@ class EditProfileAppBar extends StatelessWidget {
               onPressed: () async {
                 // Upload Picture to Firebase
                 Future setProfilePicture() async {
-                  if (imageFile == null) {
-                    await DatabaseService(uid: user.uid)
-                        .updateProfilePicture(userData.profilePicture);
-                  } else {
+                  if (imageFile != null) {
                     Reference firebaseStorageRef = FirebaseStorage.instance
                         .ref()
                         .child(("H4Y Profile Pictures/" + user.uid));
@@ -75,6 +72,9 @@ class EditProfileAppBar extends StatelessWidget {
                         await firebaseStorageRef.getDownloadURL();
                     await DatabaseService(uid: user.uid)
                         .updateProfilePicture(downloadAddress);
+                  } else {
+                    await DatabaseService(uid: user.uid)
+                        .updateProfilePicture(userData.profilePicture);
                   }
                 }
 
@@ -88,17 +88,9 @@ class EditProfileAppBar extends StatelessWidget {
                       phoneIsoCode ?? userData.phoneIsoCode,
                       nonInternationalNumber ?? userData.nonInternationalNumber,
                     );
+                    Navigator.pop(context);
                   }
                   setProfilePicture();
-                  showCustomSnackBar(
-                    context,
-                    FluentIcons.checkmark_circle_24_regular,
-                    Colors.white,
-                    "Your profile was updated successfully.",
-                    Colors.white,
-                    Colors.green,
-                  );
-                  Navigator.pop(context);
                 } catch (error) {
                   showCustomSnackBar(
                     context,

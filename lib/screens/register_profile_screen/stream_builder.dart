@@ -145,7 +145,7 @@ class ProfileStreamBuilder extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / (1792 / 75),
+                  height: MediaQuery.of(context).size.height / (1792 / 50),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(

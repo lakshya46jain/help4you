@@ -13,14 +13,19 @@ class MessageListScreen extends StatefulWidget {
 class _MessageListScreenState extends State<MessageListScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(
-          MediaQuery.of(context).size.height / (1792 / 100),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(
+            MediaQuery.of(context).size.height / (1792 / 100),
+          ),
+          child: MessageListAppBar(),
         ),
-        child: MessageListAppBar(),
+        body: Body(),
       ),
-      body: Body(),
     );
   }
 }

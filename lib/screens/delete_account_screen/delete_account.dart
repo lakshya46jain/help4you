@@ -18,31 +18,36 @@ class _DeleteAccountState extends State<DeleteAccount> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(
-          MediaQuery.of(context).size.height / (1792 / 100),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(
+            MediaQuery.of(context).size.height / (1792 / 100),
+          ),
+          child: DeleteAccountAppBar(),
         ),
-        child: DeleteAccountAppBar(),
-      ),
-      body: Body(
-        phoneNumber: phoneNumber,
-        phoneIsoCode: phoneIsoCode,
-        nonInternationalNumber: nonInternationalNumber,
-        onPhoneNumberChange: (
-          String number,
-          String internationalizedPhoneNumber,
-          String isoCode,
-        ) {
-          setState(
-            () {
-              phoneNumber = internationalizedPhoneNumber;
-              phoneIsoCode = isoCode;
-              nonInternationalNumber = number;
-            },
-          );
-        },
+        body: Body(
+          phoneNumber: phoneNumber,
+          phoneIsoCode: phoneIsoCode,
+          nonInternationalNumber: nonInternationalNumber,
+          onPhoneNumberChange: (
+            String number,
+            String internationalizedPhoneNumber,
+            String isoCode,
+          ) {
+            setState(
+              () {
+                phoneNumber = internationalizedPhoneNumber;
+                phoneIsoCode = isoCode;
+                nonInternationalNumber = number;
+              },
+            );
+          },
+        ),
       ),
     );
   }

@@ -13,14 +13,19 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(
-          MediaQuery.of(context).size.height / (1792 / 200),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(
+            MediaQuery.of(context).size.height / (1792 / 200),
+          ),
+          child: HomeAppBar(),
         ),
-        child: HomeAppBar(),
+        body: Body(),
       ),
-      body: Body(),
     );
   }
 }

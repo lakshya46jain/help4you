@@ -13,14 +13,19 @@ class BookingsScreen extends StatefulWidget {
 class _BookingsScreenState extends State<BookingsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(
-          MediaQuery.of(context).size.height / (1792 / 100),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(
+            MediaQuery.of(context).size.height / (1792 / 100),
+          ),
+          child: BookingsAppBar(),
         ),
-        child: BookingsAppBar(),
+        body: Body(),
       ),
-      body: Body(),
     );
   }
 }

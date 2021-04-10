@@ -13,15 +13,20 @@ class PhoneAuthentication extends StatefulWidget {
 class _PhoneAuthenticationState extends State<PhoneAuthentication> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(
-          MediaQuery.of(context).size.height / (1792 / 100),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(
+            MediaQuery.of(context).size.height / (1792 / 100),
+          ),
+          child: AuthenticationBar(),
         ),
-        child: AuthenticationBar(),
+        body: Body(),
       ),
-      body: Body(),
     );
   }
 }

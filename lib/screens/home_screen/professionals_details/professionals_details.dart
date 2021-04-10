@@ -22,20 +22,25 @@ class ProfessionalsDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.deepOrangeAccent,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(
-          MediaQuery.of(context).size.height / (1792 / 100),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: Colors.deepOrangeAccent,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(
+            MediaQuery.of(context).size.height / (1792 / 100),
+          ),
+          child: ProfessionalDetailBar(),
         ),
-        child: ProfessionalDetailBar(),
-      ),
-      body: Body(
-        uid: uid,
-        profilePicture: profilePicture,
-        fullName: fullName,
-        occupation: occupation,
-        phoneNumber: phoneNumber,
+        body: Body(
+          uid: uid,
+          profilePicture: profilePicture,
+          fullName: fullName,
+          occupation: occupation,
+          phoneNumber: phoneNumber,
+        ),
       ),
     );
   }
