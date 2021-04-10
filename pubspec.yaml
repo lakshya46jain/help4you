@@ -29,22 +29,24 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # Aesthetics
+  animations: ^2.0.0
   fluentui_system_icons: ^1.1.112
   
   # Widgets
-  share: ^2.0.1
   pinput: ^1.2.0
-  animations: ^2.0.0
-  image_picker: ^0.7.3
   rate_my_app: ^1.1.0+1
-  image_cropper: ^1.4.0
   google_nav_bar: ^5.0.3
   flutter_spinkit: ^5.0.0
-  flutter_markdown: ^0.6.1
   international_phone_input: ^1.0.4
+  cached_network_image: ^3.0.0-nullsafety
+
+  # Features
+  share: ^2.0.1
+  image_picker: ^0.7.3
+  image_cropper: ^1.4.0
+  flutter_markdown: ^0.6.1
   flutter_svg: ^0.21.0-nullsafety.0
   flutter_phone_direct_caller: ^2.0.0
-  cached_network_image: ^3.0.0-nullsafety
 
   # Database Utilities
   provider: ^5.0.0
