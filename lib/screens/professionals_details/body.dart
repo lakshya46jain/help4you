@@ -33,6 +33,7 @@ class Body extends StatelessWidget {
                 margin: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.296),
                 height: 500,
+                width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -80,9 +81,10 @@ class Body extends StatelessWidget {
                             CustomMediaButton(
                               onTap: () {
                                 FlutterPhoneDirectCaller.callNumber(
-                                    phoneNumber);
+                                  phoneNumber,
+                                );
                               },
-                              icon: FluentIcons.phone_28_regular,
+                              icon: FluentIcons.phone_laptop_24_regular,
                               text: "Call",
                             ),
                             CustomMediaButton(

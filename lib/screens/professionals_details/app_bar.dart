@@ -12,7 +12,7 @@ class ProfessionalDetailBar extends StatelessWidget {
       backgroundColor: Colors.transparent,
       leading: IconButton(
         icon: Icon(
-          FluentIcons.delete_24_regular,
+          FluentIcons.arrow_left_24_regular,
           size: 25.0,
           color: Colors.white,
         ),
