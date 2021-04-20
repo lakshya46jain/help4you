@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
+import 'package:help4you/screens/cart_screen/cart.dart';
 
 class HomeAppBar extends StatelessWidget {
   @override
@@ -25,7 +26,12 @@ class HomeAppBar extends StatelessWidget {
             size: 25.0,
           ),
           onPressed: () {
-            // TODO: Navigate To Cart Screen
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CartScreen(),
+              ),
+            );
           },
         ),
       ],
