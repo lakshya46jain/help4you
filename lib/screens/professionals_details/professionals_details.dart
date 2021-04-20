@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/screens/home_screen/professionals_details/body.dart';
-import 'package:help4you/screens/home_screen/professionals_details/app_bar.dart';
+import 'package:help4you/screens/professionals_details/body.dart';
+import 'package:help4you/screens/professionals_details/app_bar.dart';
 
 class ProfessionalsDetails extends StatelessWidget {
   final String uid;
