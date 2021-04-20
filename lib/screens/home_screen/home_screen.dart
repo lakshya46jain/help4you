@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(
-            MediaQuery.of(context).size.height / (1792 / 200),
+            MediaQuery.of(context).size.height / (1792 / 100),
           ),
           child: HomeAppBar(),
         ),

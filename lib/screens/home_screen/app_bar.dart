@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/constants/search_bar.dart';
 
 class HomeAppBar extends StatelessWidget {
   @override
@@ -15,14 +14,6 @@ class HomeAppBar extends StatelessWidget {
         style: TextStyle(
           color: Colors.black,
           fontSize: 20.0,
-        ),
-      ),
-      bottom: PreferredSize(
-        preferredSize: Size.fromHeight(
-          MediaQuery.of(context).size.height / (1792 / 100),
-        ),
-        child: SearchBar(
-          hintText: "Search Professionals...",
         ),
       ),
     );
