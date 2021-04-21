@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 // File Imports
 import 'package:help4you/constants/custom_media_button.dart';
+import 'package:help4you/screens/professionals_details/service_stream_builder.dart';
 
 class Body extends StatelessWidget {
   final String uid;
@@ -47,7 +48,9 @@ class Body extends StatelessWidget {
                     top: 40.0,
                     right: 20.0,
                   ),
-                  // TODO: Add Service Tile Child
+                  child: ServiceTileBuilder(
+                    uid: uid,
+                  ),
                 ),
               ),
               Padding(
