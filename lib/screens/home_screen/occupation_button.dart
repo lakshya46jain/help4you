@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
+import 'package:help4you/screens/professional_listing/professional_listing.dart';
 
 class OccupationButton extends StatelessWidget {
   final String imageUrl;
@@ -17,7 +18,14 @@ class OccupationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: Navigate To Service
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProfessionalListing(
+              occupation: occupation,
+            ),
+          ),
+        );
       },
       child: Padding(
         padding: EdgeInsets.only(
