@@ -9,7 +9,7 @@ class ServiceTiles extends StatefulWidget {
   final String docId;
   final String serviceTitle;
   final String serviceDescription;
-  final int servicePrice;
+  final String servicePrice;
 
   ServiceTiles({
     @required this.professionalUID,
