@@ -79,7 +79,7 @@ class Body extends StatelessWidget {
               onPressed1: onPressed1,
               onPressed2: onPressed2,
             ),
-            StreamBuilder<UserDataCustomer>(
+            StreamBuilder(
               stream: DatabaseService(uid: user.uid).userData,
               builder: (context, snapshot) {
                 UserDataCustomer userData = snapshot.data;

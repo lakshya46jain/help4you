@@ -14,7 +14,7 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
+    return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection("H4Y Users Database")
           .where("Account Type", isEqualTo: "Professional")
