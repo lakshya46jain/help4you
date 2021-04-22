@@ -21,24 +21,22 @@ class Body extends StatelessWidget {
           .where("Occupation", isEqualTo: occupation)
           .snapshots(),
       builder: (context, snapshot) {
-        return SingleChildScrollView(
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: ClampingScrollPhysics(),
-            itemCount: snapshot.data.docs.length,
-            itemBuilder: (context, index) {
-              DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
-              return ProfessionalsToggle(
-                uid: documentSnapshot["User UID"],
-                profilePicture: documentSnapshot["Profile Picture"],
-                fullName: documentSnapshot["Full Name"],
-                occupation: documentSnapshot["Occupation"],
-                phoneNumber: documentSnapshot["Phone Number"],
-                services: 0,
-                rating: 0,
-              );
-            },
-          ),
+        return ListView.builder(
+          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
+          itemCount: snapshot.data.docs.length,
+          itemBuilder: (context, index) {
+            DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
+            return ProfessionalsToggle(
+              uid: documentSnapshot["User UID"],
+              profilePicture: documentSnapshot["Profile Picture"],
+              fullName: documentSnapshot["Full Name"],
+              occupation: documentSnapshot["Occupation"],
+              phoneNumber: documentSnapshot["Phone Number"],
+              services: 0,
+              rating: 0,
+            );
+          },
         );
       },
     );

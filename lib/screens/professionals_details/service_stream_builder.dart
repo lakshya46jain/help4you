@@ -22,22 +22,20 @@ class ServiceTileBuilder extends StatelessWidget {
           .where("Visibility", isEqualTo: true)
           .snapshots(),
       builder: (context, snapshot) {
-        return SingleChildScrollView(
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: ClampingScrollPhysics(),
-            itemCount: snapshot.data.docs.length,
-            itemBuilder: (context, index) {
-              DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
-              return ServiceTiles(
-                professionalUID: uid,
-                docId: documentSnapshot.id,
-                serviceTitle: documentSnapshot["Service Title"],
-                serviceDescription: documentSnapshot["Service Description"],
-                servicePrice: documentSnapshot["Service Price"],
-              );
-            },
-          ),
+        return ListView.builder(
+          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
+          itemCount: snapshot.data.docs.length,
+          itemBuilder: (context, index) {
+            DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
+            return ServiceTiles(
+              professionalUID: uid,
+              docId: documentSnapshot.id,
+              serviceTitle: documentSnapshot["Service Title"],
+              serviceDescription: documentSnapshot["Service Description"],
+              servicePrice: documentSnapshot["Service Price"],
+            );
+          },
         );
       },
     );
