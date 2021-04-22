@@ -88,7 +88,7 @@ class Body extends StatelessWidget {
                                   phoneNumber,
                                 );
                               },
-                              icon: FluentIcons.phone_laptop_24_regular,
+                              icon: FluentIcons.call_24_regular,
                               text: "Call",
                             ),
                             CustomMediaButton(
