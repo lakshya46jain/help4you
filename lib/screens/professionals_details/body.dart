@@ -1,11 +1,12 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 // File Imports
 import 'package:help4you/constants/custom_media_button.dart';
+import 'package:help4you/screens/message_screen/messages.dart';
 import 'package:help4you/screens/professionals_details/service_stream_builder.dart';
 
 class Body extends StatelessWidget {
@@ -92,7 +93,18 @@ class Body extends StatelessWidget {
                             ),
                             CustomMediaButton(
                               onTap: () {
-                                // TODO: Add Messaging Feature To Button
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MessageScreen(
+                                      uid: uid,
+                                      fullName: fullName,
+                                      occupation: occupation,
+                                      phoneNumber: phoneNumber,
+                                      profilePicture: profilePicture,
+                                    ),
+                                  ),
+                                );
                               },
                               icon: FluentIcons.chat_28_regular,
                               text: "Message",
