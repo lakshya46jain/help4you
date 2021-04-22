@@ -27,44 +27,28 @@ class OccupationButton extends StatelessWidget {
           ),
         );
       },
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: 20.0,
-          right: 0.0,
-          top: 20.0,
-          bottom: 20.0,
-        ),
-        child: Container(
-          height: 60.0,
-          padding: EdgeInsets.all(10.0),
-          decoration: BoxDecoration(
-            color: Color(0xFFFFECDF),
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-          child: Row(
-            children: [
-              AspectRatio(
-                aspectRatio: 1,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5.0),
-                  child: CachedNetworkImage(
-                    imageUrl: imageUrl,
-                  ),
-                ),
+      child: Container(
+        height: 90.0,
+        width: 90.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ClipOval(
+              child: CachedNetworkImage(
+                height: 65,
+                width: 65,
+                imageUrl: imageUrl,
               ),
-              SizedBox(
-                width: 10.0,
+            ),
+            Text(
+              occupation,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 14.0,
               ),
-              Text(
-                occupation,
-                style: TextStyle(
-                  color: Colors.deepOrangeAccent,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       ),
     );
