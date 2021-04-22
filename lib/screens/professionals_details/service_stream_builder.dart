@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
-import 'package:help4you/screens/home_screen/service_tiles.dart';
+import 'package:help4you/screens/professionals_details/service_tiles.dart';
 
 class ServiceTileBuilder extends StatelessWidget {
   final String uid;
