@@ -11,7 +11,7 @@ class CartServiceTile extends StatelessWidget {
   final String professionalUID;
   final String serviceTitle;
   final String serviceDescription;
-  final int servicePrice;
+  final String servicePrice;
 
   CartServiceTile({
     @required this.customerUID,
