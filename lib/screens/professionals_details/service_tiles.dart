@@ -1,8 +1,12 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // Dependency Imports
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
+import 'package:help4you/models/user_model.dart';
 
 class ServiceTiles extends StatefulWidget {
   final String professionalUID;
@@ -26,6 +30,9 @@ class ServiceTiles extends StatefulWidget {
 class _ServiceTilesState extends State<ServiceTiles> {
   @override
   Widget build(BuildContext context) {
+    // Get User
+    final user = Provider.of<Help4YouUser>(context);
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
@@ -73,7 +80,22 @@ class _ServiceTilesState extends State<ServiceTiles> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () async {
+                      await FirebaseFirestore.instance
+                          .collection("H4Y Users Database")
+                          .doc(user.uid)
+                          .collection("Cart")
+                          .doc(widget.docId)
+                          .set(
+                        {
+                          "Service Price": widget.servicePrice,
+                          "Service Title": widget.serviceTitle,
+                          "Service Description": widget.serviceDescription,
+                          "Professional UID": widget.professionalUID,
+                        },
+                      );
+                      HapticFeedback.heavyImpact();
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.0),
