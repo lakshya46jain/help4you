@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
+import 'package:help4you/screens/all_services/all_services.dart';
+import 'package:help4you/screens/home_screen/announcement_page_view.dart';
 import 'package:help4you/screens/home_screen/occupation_list_builder.dart';
 
 class Body extends StatelessWidget {
@@ -25,7 +27,12 @@ class Body extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // TODO: Navigate To See All Page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AllServicesScreen(),
+                      ),
+                    );
                   },
                   child: Text(
                     "See All",
