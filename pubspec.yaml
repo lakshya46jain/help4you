@@ -43,6 +43,7 @@ dependencies:
 
   # Features
   share: ^2.0.1
+  url_launcher: ^6.0.3
   image_picker: ^0.7.3
   image_cropper: ^1.4.0
   flutter_markdown: ^0.6.1

@@ -1,12 +1,27 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:url_launcher/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
 
 class AnnouncementPageView extends StatelessWidget {
+  // URL Launcher
+  Future _launchInApp(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: true,
+        forceWebView: true,
+        headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,7 +41,9 @@ class AnnouncementPageView extends StatelessWidget {
               DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
               return GestureDetector(
                 onTap: () {
-                  // TODO: Give Functionality To Carousel Gesture Detector
+                  _launchInApp(
+                    documentSnapshot["Website URL"],
+                  );
                 },
                 child: Container(
                   height: 200.0,
