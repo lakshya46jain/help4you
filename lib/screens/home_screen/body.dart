@@ -12,6 +12,11 @@ class Body extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          SizedBox(
+            height: 220.0,
+            width: double.infinity,
+            child: AnnouncementPageView(),
+          ),
           Padding(
             padding: EdgeInsets.all(10.0),
             child: Row(
