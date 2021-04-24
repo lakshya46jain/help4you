@@ -31,7 +31,7 @@ class OccupationButton extends StatelessWidget {
         height: 90.0,
         width: 90.0,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ClipOval(
               child: CachedNetworkImage(
@@ -39,6 +39,9 @@ class OccupationButton extends StatelessWidget {
                 width: 65,
                 imageUrl: imageUrl,
               ),
+            ),
+            SizedBox(
+              height: 10.0,
             ),
             Text(
               occupation,
