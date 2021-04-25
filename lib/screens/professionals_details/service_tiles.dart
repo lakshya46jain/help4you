@@ -161,7 +161,7 @@ class _ServiceTilesState extends State<ServiceTiles> {
                     "Professional UID": widget.professionalUID,
                     "Quantity": quantity,
                   },
-                ); // * do u have a stream to get these cart servcies and map them to a calass thearent mapped to a class map them i suggest m really bad at mapping so i just do this lol lol ok can I see ur sdabatbase,dart ok new tab
+                );
                 HapticFeedback.heavyImpact();
               },
               child: Container(

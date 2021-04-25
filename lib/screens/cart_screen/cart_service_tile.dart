@@ -131,7 +131,6 @@ class CartServiceTile extends StatelessWidget {
                   HapticFeedback.heavyImpact();
                 },
                 child: Container(
-                  // Che
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.0),
                     color: Colors.redAccent,
