@@ -7,7 +7,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/screens/cart_screen/cart_service_tile.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     // Get User UID
@@ -35,6 +40,7 @@ class Body extends StatelessWidget {
                 servicePrice: documentSnapshot["Service Price"],
                 professionalUID: documentSnapshot["Professional UID"],
                 serviceDescription: documentSnapshot["Service Description"],
+                quantity: documentSnapshot["Quantity"],
               );
             },
           );

@@ -28,6 +28,9 @@ class ServiceTiles extends StatefulWidget {
 }
 
 class _ServiceTilesState extends State<ServiceTiles> {
+  // Text Field Variables
+  int quantity = 1;
+
   @override
   Widget build(BuildContext context) {
     // Get User
@@ -36,6 +39,7 @@ class _ServiceTilesState extends State<ServiceTiles> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
+        padding: EdgeInsets.all(20.0),
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.0),
@@ -44,94 +48,149 @@ class _ServiceTilesState extends State<ServiceTiles> {
             color: Colors.grey,
           ),
         ),
-        child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.serviceTitle,
-                style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.serviceTitle,
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(
-                height: 10,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              widget.serviceDescription,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Colors.grey[600],
               ),
-              Text(
-                widget.serviceDescription,
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.grey[600],
-                ),
-              ),
-              SizedBox(
-                height: 7.5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Price : ${widget.servicePrice}",
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.black,
-                    ),
+            ),
+            SizedBox(
+              height: 7.5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Price : ${widget.servicePrice}",
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.black,
                   ),
-                  GestureDetector(
-                    onTap: () async {
-                      await FirebaseFirestore.instance
-                          .collection("H4Y Users Database")
-                          .doc(user.uid)
-                          .collection("Cart")
-                          .doc(widget.docId)
-                          .set(
-                        {
-                          "Service Price": widget.servicePrice,
-                          "Service Title": widget.serviceTitle,
-                          "Service Description": widget.serviceDescription,
-                          "Professional UID": widget.professionalUID,
-                        },
-                      );
-                      HapticFeedback.heavyImpact();
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.0),
-                        border: Border.all(
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: Container(
+                        padding: EdgeInsets.all(2.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            color: Colors.deepOrangeAccent,
+                          ),
+                        ),
+                        child: Icon(
+                          FluentIcons.subtract_20_regular,
                           color: Colors.deepOrangeAccent,
+                          size: 16.0,
                         ),
                       ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 5,
-                        vertical: 2.5,
+                      onPressed: () {
+                        if (quantity != 1) {
+                          setState(
+                            () {
+                              quantity--;
+                            },
+                          );
+                        }
+                      },
+                    ),
+                    Text(
+                      "$quantity",
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.black,
                       ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            FluentIcons.add_16_regular,
+                    ),
+                    IconButton(
+                      icon: Container(
+                        padding: EdgeInsets.all(2.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
                             color: Colors.deepOrangeAccent,
-                            size: 15.0,
                           ),
-                          SizedBox(
-                            width: 3,
-                          ),
-                          Text(
-                            "Add",
-                            style: TextStyle(
-                              color: Colors.deepOrangeAccent,
-                              fontSize: 15.0,
-                            ),
-                          ),
-                        ],
+                        ),
+                        child: Icon(
+                          FluentIcons.add_20_regular,
+                          color: Colors.deepOrangeAccent,
+                          size: 16.0,
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(
+                          () {
+                            quantity++;
+                          },
+                        );
+                      },
+                    )
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            MaterialButton(
+              padding: EdgeInsets.all(0.0),
+              onPressed: () async {
+                await FirebaseFirestore.instance
+                    .collection("H4Y Users Database")
+                    .doc(user.uid)
+                    .collection("Cart")
+                    .doc(widget.docId)
+                    .set(
+                  {
+                    "Service Price": widget.servicePrice,
+                    "Service Title": widget.serviceTitle,
+                    "Service Description": widget.serviceDescription,
+                    "Professional UID": widget.professionalUID,
+                    "Quantity": quantity,
+                  },
+                ); // * do u have a stream to get these cart servcies and map them to a calass thearent mapped to a class map them i suggest m really bad at mapping so i just do this lol lol ok can I see ur sdabatbase,dart ok new tab
+                HapticFeedback.heavyImpact();
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.deepOrangeAccent,
+                ),
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height / (1792 / 80),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 20.0,
+                  ),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Add to Cart",
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
