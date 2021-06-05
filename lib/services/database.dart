@@ -71,6 +71,22 @@ class DatabaseService {
     );
   }
 
+  // Update Cart Quantity
+  Future updateQuantity(
+    String serviceId,
+    int quantity,
+  ) async {
+    return await customerCollection
+        .doc(uid)
+        .collection("Cart")
+        .doc(serviceId)
+        .update(
+      {
+        'Quantity': quantity,
+      },
+    );
+  }
+
   // User Data from Snapshot
   UserDataCustomer _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserDataCustomer(

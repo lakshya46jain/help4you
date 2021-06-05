@@ -1,6 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:help4you/services/database.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -92,7 +93,21 @@ class CartServiceTile extends StatelessWidget {
                             size: 16.0,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          await DatabaseService(uid: user.uid).updateQuantity(
+                            serviceId,
+                            quantity - 1,
+                          );
+                          if (quantity - 1 == 0) {
+                            await FirebaseFirestore.instance
+                                .collection("H4Y Users Database")
+                                .doc(user.uid)
+                                .collection("Cart")
+                                .doc(serviceId)
+                                .delete();
+                            HapticFeedback.heavyImpact();
+                          }
+                        },
                       ),
                       Text(
                         "$quantity",
@@ -116,7 +131,12 @@ class CartServiceTile extends StatelessWidget {
                             size: 16.0,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          await DatabaseService(uid: user.uid).updateQuantity(
+                            serviceId,
+                            quantity + 1,
+                          );
+                        },
                       )
                     ],
                   ),
