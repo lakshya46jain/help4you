@@ -17,7 +17,6 @@ class OccupationListBuilder extends StatelessWidget {
             .snapshots(),
         builder: (context, snapshot) {
           return ListView.builder(
-            physics: ClampingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: snapshot.data.docs.length,
             itemBuilder: (context, index) {
