@@ -2,23 +2,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Dependency Imports
+import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
+import 'package:help4you/models/user_model.dart';
 
 class CartServiceTile extends StatelessWidget {
-  final String customerUID;
-  final String docId;
-  final String professionalUID;
+  final String serviceId;
+  final String professionalId;
   final String serviceTitle;
   final String serviceDescription;
-  final String servicePrice;
+  final int servicePrice;
   final int quantity;
 
   CartServiceTile({
-    @required this.customerUID,
-    @required this.docId,
-    @required this.professionalUID,
+    this.serviceId,
+    @required this.professionalId,
     @required this.serviceTitle,
     @required this.serviceDescription,
     @required this.servicePrice,
@@ -26,6 +26,9 @@ class CartServiceTile extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    // Get User UID
+    final user = Provider.of<Help4YouUser>(context);
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
@@ -124,9 +127,9 @@ class CartServiceTile extends StatelessWidget {
                 onPressed: () async {
                   await FirebaseFirestore.instance
                       .collection("H4Y Users Database")
-                      .doc(customerUID)
+                      .doc(user.uid)
                       .collection("Cart")
-                      .doc(docId)
+                      .doc(serviceId)
                       .delete();
                   HapticFeedback.heavyImpact();
                 },

@@ -83,8 +83,35 @@ class DatabaseService {
     );
   }
 
+  // Service Data from Snapshot
+  List<Help4YouCartServices> _help4youCartServicesFromSnapshot(
+      QuerySnapshot snapshot) {
+    return snapshot.docs.toList().map(
+      (document) {
+        Help4YouCartServices help4youCartServices = Help4YouCartServices(
+          professionalId: document.data()["Professional UID"],
+          serviceId: document.data()["Service ID"],
+          serviceTitle: document.data()["Service Title"],
+          serviceDescription: document.data()["Service Description"],
+          servicePrice: document.data()["Service Price"],
+          quantity: document.data()["Quantity"],
+        );
+        return help4youCartServices;
+      },
+    ).toList();
+  }
+
   // Get User Document
   Stream<UserDataCustomer> get userData {
     return customerCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
+  }
+
+  // Get Service Document
+  Stream<List<Help4YouCartServices>> get cartServiceData {
+    return customerCollection
+        .doc(uid)
+        .collection("Cart")
+        .snapshots()
+        .map(_help4youCartServicesFromSnapshot);
   }
 }

@@ -2,9 +2,10 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
+import 'package:help4you/services/database.dart';
+import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/screens/cart_screen/cart_service_tile.dart';
 
 class Body extends StatefulWidget {
@@ -21,29 +22,29 @@ class _BodyState extends State<Body> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection("H4Y Users Database")
-            .doc(user.uid)
-            .collection("Cart")
-            .snapshots(),
+        stream: DatabaseService(uid: user.uid).cartServiceData,
         builder: (context, snapshot) {
-          return ListView.builder(
-            shrinkWrap: true,
-            physics: ClampingScrollPhysics(),
-            itemCount: snapshot.data.docs.length,
-            itemBuilder: (context, index) {
-              DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
-              return CartServiceTile(
-                customerUID: user.uid,
-                docId: documentSnapshot.id,
-                serviceTitle: documentSnapshot["Service Title"],
-                servicePrice: documentSnapshot["Service Price"],
-                professionalUID: documentSnapshot["Professional UID"],
-                serviceDescription: documentSnapshot["Service Description"],
-                quantity: documentSnapshot["Quantity"],
-              );
-            },
-          );
+          List<Help4YouCartServices> cartServices = snapshot.data;
+          if (snapshot.hasData) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: cartServices.length,
+              itemBuilder: (context, index) {
+                return CartServiceTile(
+                  serviceId: cartServices[index].serviceId,
+                  professionalId: cartServices[index].professionalId,
+                  serviceTitle: cartServices[index].serviceTitle,
+                  serviceDescription: cartServices[index].serviceDescription,
+                  servicePrice: cartServices[index].servicePrice,
+                  quantity: cartServices[index].quantity,
+                );
+              },
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
         },
       ),
     );
