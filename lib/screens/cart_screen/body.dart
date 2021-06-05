@@ -25,26 +25,20 @@ class _BodyState extends State<Body> {
         stream: DatabaseService(uid: user.uid).cartServiceData,
         builder: (context, snapshot) {
           List<Help4YouCartServices> cartServices = snapshot.data;
-          if (snapshot.hasData) {
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: cartServices.length,
-              itemBuilder: (context, index) {
-                return CartServiceTile(
-                  serviceId: cartServices[index].serviceId,
-                  professionalId: cartServices[index].professionalId,
-                  serviceTitle: cartServices[index].serviceTitle,
-                  serviceDescription: cartServices[index].serviceDescription,
-                  servicePrice: cartServices[index].servicePrice,
-                  quantity: cartServices[index].quantity,
-                );
-              },
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: cartServices.length,
+            itemBuilder: (context, index) {
+              return CartServiceTile(
+                serviceId: cartServices[index].serviceId,
+                professionalId: cartServices[index].professionalId,
+                serviceTitle: cartServices[index].serviceTitle,
+                serviceDescription: cartServices[index].serviceDescription,
+                servicePrice: cartServices[index].servicePrice,
+                quantity: cartServices[index].quantity,
+              );
+            },
+          );
         },
       ),
     );
