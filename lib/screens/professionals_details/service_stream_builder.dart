@@ -28,8 +28,8 @@ class ServiceTileBuilder extends StatelessWidget {
           itemBuilder: (context, index) {
             DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
             return ServiceTiles(
-              professionalUID: uid,
-              docId: documentSnapshot.id,
+              professionalId: uid,
+              serviceId: documentSnapshot.id,
               serviceTitle: documentSnapshot["Service Title"],
               serviceDescription: documentSnapshot["Service Description"],
               servicePrice: documentSnapshot["Service Price"],
