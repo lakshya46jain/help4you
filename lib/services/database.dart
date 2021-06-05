@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
+import 'package:help4you/models/cart_service_model.dart';
 
 class DatabaseService {
   final String uid;
@@ -41,6 +42,31 @@ class DatabaseService {
     return await customerCollection.doc(uid).update(
       {
         'Profile Picture': profilePicture,
+      },
+    );
+  }
+
+  // Add To Cart
+  Future addToCart(
+    String serviceId,
+    String professionalId,
+    String serviceTitle,
+    String serviceDescription,
+    int servicePrice,
+    int quantity,
+  ) async {
+    return await customerCollection
+        .doc(uid)
+        .collection("Cart")
+        .doc(serviceId)
+        .set(
+      {
+        'Service ID': serviceId,
+        'Professional UID': professionalId,
+        'Service Title': serviceTitle,
+        'Service Description': serviceDescription,
+        'Service Price': servicePrice,
+        'Quantity': quantity,
       },
     );
   }

@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
+import 'package:help4you/services/database.dart';
 
 class ServiceTiles extends StatefulWidget {
-  final String professionalUID;
-  final String docId;
+  final String serviceId;
+  final String professionalId;
   final String serviceTitle;
   final String serviceDescription;
-  final String servicePrice;
+  final int servicePrice;
 
   ServiceTiles({
-    @required this.professionalUID,
-    @required this.docId,
+    @required this.serviceId,
+    @required this.professionalId,
     @required this.serviceTitle,
     @required this.serviceDescription,
     @required this.servicePrice,
@@ -148,19 +148,13 @@ class _ServiceTilesState extends State<ServiceTiles> {
             MaterialButton(
               padding: EdgeInsets.all(0.0),
               onPressed: () async {
-                await FirebaseFirestore.instance
-                    .collection("H4Y Users Database")
-                    .doc(user.uid)
-                    .collection("Cart")
-                    .doc(widget.docId)
-                    .set(
-                  {
-                    "Service Price": widget.servicePrice,
-                    "Service Title": widget.serviceTitle,
-                    "Service Description": widget.serviceDescription,
-                    "Professional UID": widget.professionalUID,
-                    "Quantity": quantity,
-                  },
+                await DatabaseService(uid: user.uid).addToCart(
+                  widget.serviceId,
+                  widget.professionalId,
+                  widget.serviceTitle,
+                  widget.serviceDescription,
+                  widget.servicePrice,
+                  quantity,
                 );
                 HapticFeedback.heavyImpact();
               },
