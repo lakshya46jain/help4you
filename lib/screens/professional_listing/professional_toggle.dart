@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:animations/animations.dart';
 // File Imports
-import 'package:help4you/screens/home_screen/professional_card.dart';
+import 'package:help4you/screens/professional_listing/professional_card.dart';
 import 'package:help4you/screens/professionals_details/professionals_details.dart';
 
 class ProfessionalsToggle extends StatelessWidget {
