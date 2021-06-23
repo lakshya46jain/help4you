@@ -48,6 +48,8 @@ class OccupationButton extends StatelessWidget {
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 14.0,
+                fontFamily: "BalooPaaji",
+                fontWeight: FontWeight.w300,
               ),
               textAlign: TextAlign.center,
             ),

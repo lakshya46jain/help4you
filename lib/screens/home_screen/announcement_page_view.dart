@@ -29,6 +29,7 @@ class AnnouncementPageView extends StatelessWidget {
       child: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("H4Y Announcements Database")
+            .where("Start Date", isLessThanOrEqualTo: DateTime.now())
             .snapshots(),
         builder: (context, snapshot) {
           return Swiper(
@@ -41,15 +42,18 @@ class AnnouncementPageView extends StatelessWidget {
               DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
               return GestureDetector(
                 onTap: () {
-                  _launchInApp(
-                    documentSnapshot["Website URL"],
-                  );
+                  if (documentSnapshot["Website URL"] != "") {
+                    _launchInApp(
+                      documentSnapshot["Website URL"],
+                    );
+                  }
                 },
                 child: Container(
                   height: 200.0,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Color(0xFFF5F6F9),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
