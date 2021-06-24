@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
+import 'package:help4you/constants/custom_snackbar.dart';
 
 class ServiceTiles extends StatefulWidget {
   final String serviceId;
@@ -148,15 +150,40 @@ class _ServiceTilesState extends State<ServiceTiles> {
             MaterialButton(
               padding: EdgeInsets.all(0.0),
               onPressed: () async {
-                await DatabaseService(uid: user.uid).addToCart(
-                  widget.serviceId,
-                  widget.professionalId,
-                  widget.serviceTitle,
-                  widget.serviceDescription,
-                  widget.servicePrice,
-                  quantity,
-                );
-                HapticFeedback.heavyImpact();
+                DocumentSnapshot ds = await FirebaseFirestore.instance
+                    .collection("H4Y Users Database")
+                    .doc(user.uid)
+                    .collection("Cart")
+                    .doc(widget.serviceId)
+                    .get();
+                if (ds.exists) {
+                  showCustomSnackBar(
+                    context,
+                    FluentIcons.checkmark_circle_24_regular,
+                    Colors.white,
+                    "${widget.serviceTitle} has already been added to your cart.",
+                    Colors.white,
+                    Colors.redAccent,
+                  );
+                } else {
+                  await DatabaseService(uid: user.uid).addToCart(
+                    widget.serviceId,
+                    widget.professionalId,
+                    widget.serviceTitle,
+                    widget.serviceDescription,
+                    widget.servicePrice,
+                    quantity,
+                  );
+                  HapticFeedback.heavyImpact();
+                  showCustomSnackBar(
+                    context,
+                    FluentIcons.checkmark_circle_24_regular,
+                    Colors.white,
+                    "${widget.serviceTitle} was added to your cart.",
+                    Colors.white,
+                    Colors.green,
+                  );
+                }
               },
               child: Container(
                 decoration: BoxDecoration(
