@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>231681079480-tvj743g19rdll3p0bnjbegpbeoefqp1o.apps.googleusercontent.com</string>
+	<string>541516325231-3o34fnb0sb2pdd8niprk3g9o3ni496fs.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.231681079480-tvj743g19rdll3p0bnjbegpbeoefqp1o</string>
+	<string>com.googleusercontent.apps.541516325231-3o34fnb0sb2pdd8niprk3g9o3ni496fs</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCdJfCramUYNArGxpB5uW2MSWQ-Apjk94Y</string>
+	<string>AIzaSyBFO-DXJ0NazFbZ05iT7MNY54UB_d9FNCM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>231681079480</string>
+	<string>541516325231</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.lakshya.help4you</string>
 	<key>PROJECT_ID</key>
-	<string>help4you-24c07</string>
+	<string>help4you-f4e08</string>
 	<key>STORAGE_BUCKET</key>
-	<string>help4you-24c07.appspot.com</string>
+	<string>help4you-f4e08.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,10 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:231681079480:ios:9c841568f6ec2d6e82dc4d</string>
-	<key>DATABASE_URL</key>
-	<string>https://help4you-24c07.firebaseio.com</string>
-	<key>ADMOB_APP_ID</key>
-	<string>ca-app-pub-7034458903159384~7414072508</string>
+	<string>1:541516325231:ios:7fd81c6c777edd8792089a</string>
 </dict>
 </plist>
