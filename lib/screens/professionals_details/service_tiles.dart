@@ -160,10 +160,9 @@ class _ServiceTilesState extends State<ServiceTiles> {
                   showCustomSnackBar(
                     context,
                     FluentIcons.checkmark_circle_24_regular,
-                    Colors.white,
-                    "${widget.serviceTitle} has already been added to your cart.",
-                    Colors.white,
-                    Colors.redAccent,
+                    Colors.orange,
+                    "Warning!",
+                    "Service has already been added to your cart",
                   );
                 } else {
                   await DatabaseService(uid: user.uid).addToCart(
@@ -178,10 +177,9 @@ class _ServiceTilesState extends State<ServiceTiles> {
                   showCustomSnackBar(
                     context,
                     FluentIcons.checkmark_circle_24_regular,
-                    Colors.white,
-                    "${widget.serviceTitle} was added to your cart.",
-                    Colors.white,
                     Colors.green,
+                    "Congratulations!",
+                    "Service was added to your cart",
                   );
                 }
               },

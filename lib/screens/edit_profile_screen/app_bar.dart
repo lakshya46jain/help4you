@@ -95,10 +95,9 @@ class EditProfileAppBar extends StatelessWidget {
                   showCustomSnackBar(
                     context,
                     FluentIcons.error_circle_24_regular,
-                    Colors.white,
-                    "There was an error updating your profile. Please try again later.",
-                    Colors.white,
                     Colors.red,
+                    "Error!",
+                    "Please try updating your profile later.",
                   );
                 }
               },
