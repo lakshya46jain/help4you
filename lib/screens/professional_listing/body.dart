@@ -32,7 +32,6 @@ class Body extends StatelessWidget {
               fullName: documentSnapshot["Full Name"],
               occupation: documentSnapshot["Occupation"],
               phoneNumber: documentSnapshot["Phone Number"],
-              services: 0,
               rating: 0,
             );
           },

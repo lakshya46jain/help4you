@@ -1,23 +1,24 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
 
 class ProfessionalCard extends StatelessWidget {
+  final String uid;
   final String fullName;
   final String occupation;
   final int rating;
   final String profilePicture;
-  final int services;
 
   ProfessionalCard({
+    @required this.uid,
     @required this.fullName,
     @required this.occupation,
     @required this.rating,
     @required this.profilePicture,
-    @required this.services,
   });
 
   @override
@@ -126,11 +127,26 @@ class ProfessionalCard extends StatelessWidget {
                             SizedBox(
                               height: 2.5,
                             ),
-                            Text(
-                              "$services",
-                              style: TextStyle(
-                                fontSize: 12.0,
-                              ),
+                            StreamBuilder(
+                              stream: FirebaseFirestore.instance
+                                  .collection("H4Y Users Database")
+                                  .doc(uid)
+                                  .collection("Services")
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                int totalServices = 0;
+                                if (snapshot.connectionState ==
+                                    ConnectionState.active) {
+                                  List documents = snapshot.data.docs;
+                                  totalServices = documents.length;
+                                }
+                                return Text(
+                                  "$totalServices" ?? "0",
+                                  style: TextStyle(
+                                    fontSize: 12.0,
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),

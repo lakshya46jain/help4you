@@ -12,7 +12,6 @@ class ProfessionalsToggle extends StatelessWidget {
   final String fullName;
   final String occupation;
   final String phoneNumber;
-  final int services;
   final int rating;
 
   ProfessionalsToggle({
@@ -21,7 +20,6 @@ class ProfessionalsToggle extends StatelessWidget {
     @required this.fullName,
     @required this.occupation,
     @required this.phoneNumber,
-    @required this.services,
     @required this.rating,
   });
 
@@ -37,10 +35,10 @@ class ProfessionalsToggle extends StatelessWidget {
       transitionType: ContainerTransitionType.fade,
       closedBuilder: (context, action) {
         return ProfessionalCard(
+          uid: uid,
           profilePicture: profilePicture,
           fullName: fullName,
           occupation: occupation,
-          services: services,
           rating: rating,
         );
       },
