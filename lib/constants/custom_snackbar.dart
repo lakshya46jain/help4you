@@ -49,7 +49,6 @@ showCustomSnackBar(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(13.0),
     ),
-    elevation: 0.0,
     backgroundColor: Colors.white,
     duration: Duration(seconds: 3),
     behavior: SnackBarBehavior.floating,
