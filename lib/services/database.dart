@@ -14,7 +14,7 @@ class DatabaseService {
   });
 
   // Collection Reference (User Database)
-  final CollectionReference customerCollection =
+  final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('H4Y Users Database');
   // Collection Reference (Occupation Database)
   final CollectionReference occupationCollection =
@@ -27,7 +27,7 @@ class DatabaseService {
     String phoneIsoCode,
     String nonInternationalNumber,
   ) async {
-    return await customerCollection.doc(uid).set(
+    return await userCollection.doc(uid).set(
       {
         'Account Type': "Customer",
         'User UID': uid,
@@ -44,7 +44,7 @@ class DatabaseService {
   Future updateProfilePicture(
     String profilePicture,
   ) async {
-    return await customerCollection.doc(uid).update(
+    return await userCollection.doc(uid).update(
       {
         'Profile Picture': profilePicture,
       },
@@ -60,11 +60,7 @@ class DatabaseService {
     int servicePrice,
     int quantity,
   ) async {
-    return await customerCollection
-        .doc(uid)
-        .collection("Cart")
-        .doc(serviceId)
-        .set(
+    return await userCollection.doc(uid).collection("Cart").doc(serviceId).set(
       {
         'Service ID': serviceId,
         'Professional UID': professionalId,
@@ -81,7 +77,7 @@ class DatabaseService {
     String serviceId,
     int quantity,
   ) async {
-    return await customerCollection
+    return await userCollection
         .doc(uid)
         .collection("Cart")
         .doc(serviceId)
@@ -139,12 +135,12 @@ class DatabaseService {
 
   // Get User Document
   Stream<UserDataCustomer> get userData {
-    return customerCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
+    return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
   }
 
   // Get Service Document
   Stream<List<Help4YouCartServices>> get cartServiceData {
-    return customerCollection
+    return userCollection
         .doc(uid)
         .collection("Cart")
         .snapshots()
