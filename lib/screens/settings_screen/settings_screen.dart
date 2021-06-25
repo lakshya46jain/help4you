@@ -9,6 +9,7 @@ import 'package:help4you/services/auth.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/expanded_button.dart';
 import 'package:help4you/screens/about_us_screen/about_us.dart';
+import 'package:help4you/screens/settings_screen/admin_stream.dart';
 import 'package:help4you/screens/settings_screen/stream_builder.dart';
 import 'package:help4you/screens/edit_profile_screen/edit_profile_screen.dart';
 
@@ -76,6 +77,7 @@ class _SettingsScreensState extends State<SettingsScreens> {
                     );
                   },
                 ),
+                AdminStreamBuilder(),
                 ExpandedButton(
                   icon: FluentIcons.sign_out_24_regular,
                   text: "Sign Out",

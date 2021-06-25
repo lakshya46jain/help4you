@@ -28,6 +28,7 @@ class DatabaseService {
         'Account Type': "Customer",
         'User UID': uid,
         'Full Name': fullName,
+        'Administrative Level': 0,
         'Phone Number': phoneNumber,
         'Phone ISO Code': phoneIsoCode,
         'Non International Number': nonInternationalNumber,
@@ -96,6 +97,7 @@ class DatabaseService {
       phoneIsoCode: snapshot.data()['Phone ISO Code'],
       nonInternationalNumber: snapshot.data()['Non International Number'],
       profilePicture: snapshot.data()['Profile Picture'],
+      adminLevel: snapshot.data()['Administrative Level'],
     );
   }
 

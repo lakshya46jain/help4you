@@ -15,6 +15,7 @@ class UserDataCustomer {
   final String phoneIsoCode;
   final String nonInternationalNumber;
   final String phoneNumber;
+  final int adminLevel;
 
   UserDataCustomer({
     this.uid,
@@ -23,5 +24,6 @@ class UserDataCustomer {
     this.phoneIsoCode,
     this.nonInternationalNumber,
     this.phoneNumber,
+    this.adminLevel,
   });
 }
