@@ -1,14 +1,20 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 // File Imports
+import 'package:help4you/services/database.dart';
+import 'package:help4you/models/user_model.dart';
+import 'package:help4you/models/service_category_model.dart';
 import 'package:help4you/screens/all_services/all_services.dart';
 import 'package:help4you/screens/home_screen/occupation_button.dart';
 
 class OccupationListBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Get User UID
+    final user = Provider.of<Help4YouUser>(context);
+
     return Column(
       children: [
         Padding(
@@ -47,27 +53,29 @@ class OccupationListBuilder extends StatelessWidget {
             ],
           ),
         ),
-        Container(
-          height: 100.0,
-          child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection("H4Y Occupation Database")
-                .orderBy("Occupation")
-                .snapshots(),
-            builder: (context, snapshot) {
-              return ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
-                  return OccupationButton(
-                    imageUrl: documentSnapshot["Image URL"],
-                    occupation: documentSnapshot["Occupation"],
-                  );
-                },
-              );
-            },
-          ),
+        StreamBuilder(
+          stream: DatabaseService(uid: user.uid).serviceCategoryData,
+          builder: (context, snapshot) {
+            List<ServiceCategory> servicesCategory = snapshot.data;
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ...List.generate(
+                    servicesCategory.length,
+                    (index) {
+                      return OccupationButton(
+                        imageUrl: servicesCategory[index].imageUrl,
+                        occupation: servicesCategory[index].occupation,
+                      );
+                    },
+                  )
+                ],
+              ),
+            );
+          },
         ),
       ],
     );

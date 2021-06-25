@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/models/cart_service_model.dart';
+import 'package:help4you/models/service_category_model.dart';
 
 class DatabaseService {
   final String uid;
@@ -15,6 +16,9 @@ class DatabaseService {
   // Collection Reference (User Database)
   final CollectionReference customerCollection =
       FirebaseFirestore.instance.collection('H4Y Users Database');
+  // Collection Reference (Occupation Database)
+  final CollectionReference occupationCollection =
+      FirebaseFirestore.instance.collection('H4Y Occupation Database');
 
   // Update User Data
   Future updateUserData(
@@ -119,6 +123,20 @@ class DatabaseService {
     ).toList();
   }
 
+  // Service Category Data from Snapshot
+  List<ServiceCategory> _help4YouServiceCategoryFromSnapshot(
+      QuerySnapshot snapshot) {
+    return snapshot.docs.toList().map(
+      (document) {
+        ServiceCategory help4youServiceCategory = ServiceCategory(
+          imageUrl: document.data()["Image URL"],
+          occupation: document.data()["Occupation"],
+        );
+        return help4youServiceCategory;
+      },
+    ).toList();
+  }
+
   // Get User Document
   Stream<UserDataCustomer> get userData {
     return customerCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
@@ -131,5 +149,12 @@ class DatabaseService {
         .collection("Cart")
         .snapshots()
         .map(_help4youCartServicesFromSnapshot);
+  }
+
+  // Get Service Category Document
+  Stream<List<ServiceCategory>> get serviceCategoryData {
+    return occupationCollection
+        .snapshots()
+        .map(_help4YouServiceCategoryFromSnapshot);
   }
 }

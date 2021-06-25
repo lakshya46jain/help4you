@@ -28,12 +28,12 @@ class OccupationButton extends StatelessWidget {
         );
       },
       child: Container(
-        height: 90.0,
         width: 90.0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ClipOval(
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
               child: CachedNetworkImage(
                 height: 65,
                 width: 65,
@@ -47,7 +47,8 @@ class OccupationButton extends StatelessWidget {
               occupation,
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 14.0,
+                height: 1.0,
+                fontSize: 15.0,
                 fontFamily: "BalooPaaji",
                 fontWeight: FontWeight.w300,
               ),

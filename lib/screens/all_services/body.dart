@@ -1,28 +1,31 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 // File Imports
+import 'package:help4you/models/user_model.dart';
+import 'package:help4you/services/database.dart';
+import 'package:help4you/models/service_category_model.dart';
 import 'package:help4you/screens/home_screen/occupation_button.dart';
 
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Get User
+    final user = Provider.of<Help4YouUser>(context);
+
     return StreamBuilder(
-      stream: FirebaseFirestore.instance
-          .collection("H4Y Occupation Database")
-          .orderBy("Occupation")
-          .snapshots(),
+      stream: DatabaseService(uid: user.uid).serviceCategoryData,
       builder: (context, snapshot) {
+        List<ServiceCategory> servicesCategory = snapshot.data;
         return GridView.builder(
-          itemCount: snapshot.data.docs.length,
+          itemCount: servicesCategory.length,
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
           itemBuilder: (context, index) {
-            DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
             return OccupationButton(
-              imageUrl: documentSnapshot["Image URL"],
-              occupation: documentSnapshot["Occupation"],
+              imageUrl: servicesCategory[index].imageUrl,
+              occupation: servicesCategory[index].occupation,
             );
           },
         );
