@@ -13,7 +13,7 @@ import 'package:help4you/screens/cart_screen/cart.dart';
 class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Get User UID
+    // Get User
     final user = Provider.of<Help4YouUser>(context);
 
     // Key Variables

@@ -31,6 +31,7 @@ class EditProfileStreamBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get User
     final user = Provider.of<Help4YouUser>(context);
 
     return Padding(

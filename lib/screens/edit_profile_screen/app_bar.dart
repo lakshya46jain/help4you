@@ -33,7 +33,7 @@ class EditProfileAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get User from Provider Package
+    // Get User
     final user = Provider.of<Help4YouUser>(context);
 
     return AppBar(

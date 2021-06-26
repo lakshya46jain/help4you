@@ -17,7 +17,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    // Get User UID
+    // Get User
     final user = Provider.of<Help4YouUser>(context);
 
     return Padding(

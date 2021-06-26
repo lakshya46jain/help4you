@@ -12,7 +12,7 @@ import 'package:help4you/screens/home_screen/occupation_button.dart';
 class OccupationListBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Get User UID
+    // Get User
     final user = Provider.of<Help4YouUser>(context);
 
     return Column(
