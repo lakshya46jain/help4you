@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
+import 'package:help4you/models/announcement_model.dart';
 import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/models/service_category_model.dart';
 
@@ -16,6 +17,11 @@ class DatabaseService {
   // Collection Reference (User Database)
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('H4Y Users Database');
+
+  // Collection Reference (Announcements)
+  final CollectionReference announcementsCollection =
+      FirebaseFirestore.instance.collection("H4Y Announcements Database");
+
   // Collection Reference (Occupation Database)
   final CollectionReference occupationCollection =
       FirebaseFirestore.instance.collection('H4Y Occupation Database');
@@ -119,6 +125,21 @@ class DatabaseService {
     ).toList();
   }
 
+  // Announcements Data from Snapshot
+  List<Announcements> _help4youAnnoucementsFromSnapshot(
+      QuerySnapshot snapshot) {
+    return snapshot.docs.toList().map(
+      (document) {
+        Announcements help4youAnnouncements = Announcements(
+          imageUrl: document.data()["Image URL"],
+          websiteUrl: document.data()["Website URL"],
+          visibility: document.data()["Visibility"],
+        );
+        return help4youAnnouncements;
+      },
+    ).toList();
+  }
+
   // Service Category Data from Snapshot
   List<ServiceCategory> _help4YouServiceCategoryFromSnapshot(
       QuerySnapshot snapshot) {
@@ -145,6 +166,14 @@ class DatabaseService {
         .collection("Cart")
         .snapshots()
         .map(_help4youCartServicesFromSnapshot);
+  }
+
+  // Get Annoucements Document
+  Stream<List<Announcements>> get announcements {
+    return announcementsCollection
+        .where("Visibility", isEqualTo: true)
+        .snapshots()
+        .map(_help4youAnnoucementsFromSnapshot);
   }
 
   // Get Service Category Document

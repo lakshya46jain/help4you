@@ -1,11 +1,14 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
+import 'package:help4you/services/database.dart';
+import 'package:help4you/models/user_model.dart';
+import 'package:help4you/models/announcement_model.dart';
 
 class AnnouncementPageView extends StatelessWidget {
   // URL Launcher
@@ -24,27 +27,27 @@ class AnnouncementPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get User
+    final user = Provider.of<Help4YouUser>(context);
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.0),
       child: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection("H4Y Announcements Database")
-            .where("Start Date", isLessThanOrEqualTo: DateTime.now())
-            .snapshots(),
+        stream: DatabaseService(uid: user.uid).announcements,
         builder: (context, snapshot) {
+          List<Announcements> announcements = snapshot.data;
           return Swiper(
             scale: 0.9,
             autoplay: true,
             viewportFraction: 0.8,
             scrollDirection: Axis.horizontal,
-            itemCount: snapshot.data.docs.length,
+            itemCount: announcements.length,
             itemBuilder: (context, index) {
-              DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
               return GestureDetector(
                 onTap: () {
-                  if (documentSnapshot["Website URL"] != "") {
+                  if (announcements[index].websiteUrl != "") {
                     _launchInApp(
-                      documentSnapshot["Website URL"],
+                      announcements[index].websiteUrl,
                     );
                   }
                 },
@@ -59,7 +62,7 @@ class AnnouncementPageView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                     child: CachedNetworkImage(
                       fit: BoxFit.fill,
-                      imageUrl: documentSnapshot["Image URL"],
+                      imageUrl: announcements[index].imageUrl,
                     ),
                   ),
                 ),
