@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // File Imports
 import 'package:help4you/screens/home_screen/header.dart';
 import 'package:help4you/constants/custom_search_bar.dart';
-import 'package:help4you/screens/home_screen/announcement_page_view.dart';
 import 'package:help4you/screens/home_screen/occupation_list_builder.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,19 +27,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               HomeHeader(),
               SizedBox(
-                height: 5.0,
+                height: 15.0,
               ),
               SearchBar(
-                hintText: "Location",
+                hintText: "Search for location",
                 width: MediaQuery.of(context).size.width,
               ),
               SizedBox(
-                height: 15.0,
-              ),
-              SizedBox(
-                height: 220.0,
-                width: double.infinity,
-                child: AnnouncementPageView(),
+                height: 20.0,
               ),
               OccupationListBuilder(),
             ],

@@ -18,17 +18,17 @@ class OccupationListBuilder extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Services",
+                "Categories",
                 style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.black,
+                  fontSize: 25.0,
+                  color: Color(0xFF1C385A),
                   fontFamily: "BalooPaaji",
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               GestureDetector(
@@ -43,8 +43,8 @@ class OccupationListBuilder extends StatelessWidget {
                 child: Text(
                   "See All",
                   style: TextStyle(
-                    fontSize: 16.0,
-                    color: Color.fromRGBO(0, 147, 255, 1.0),
+                    fontSize: 19.0,
+                    color: Color(0xFFFEA700),
                     fontFamily: "BalooPaaji",
                     fontWeight: FontWeight.w600,
                   ),
@@ -52,6 +52,9 @@ class OccupationListBuilder extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        SizedBox(
+          height: 15.0,
         ),
         StreamBuilder(
           stream: DatabaseService(uid: user.uid).serviceCategoryData,
@@ -63,6 +66,9 @@ class OccupationListBuilder extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(
+                    width: 20.0,
+                  ),
                   ...List.generate(
                     servicesCategory.length,
                     (index) {
@@ -71,7 +77,10 @@ class OccupationListBuilder extends StatelessWidget {
                         occupation: servicesCategory[index].occupation,
                       );
                     },
-                  )
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
                 ],
               ),
             );
