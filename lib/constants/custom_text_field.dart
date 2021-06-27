@@ -33,7 +33,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: TextStyle(
-          color: Color(0xFF95989A),
+          color: Color(0xFF1C3857),
         ),
         hintText: hintText,
         hintStyle: TextStyle(
@@ -43,11 +43,15 @@ class CustomTextField extends StatelessWidget {
         contentPadding: EdgeInsets.all(20.0),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),
-          borderSide: BorderSide(color: Color(0xFF95989A)),
+          borderSide: BorderSide(
+            color: Color(0xFF1C3857),
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),
-          borderSide: BorderSide(color: Color(0xFF95989A)),
+          borderSide: BorderSide(
+            color: Color(0xFF1C3857),
+          ),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),

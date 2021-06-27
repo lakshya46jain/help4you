@@ -53,25 +53,23 @@ class EditProfileStreamBuilder extends StatelessWidget {
                   fit: StackFit.expand,
                   clipBehavior: Clip.none,
                   children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: SizedBox(
-                        child: ClipOval(
-                          child: (imageFile != null)
-                              ? Image.file(
-                                  imageFile,
-                                  fit: BoxFit.fill,
-                                )
-                              : CachedNetworkImage(
-                                  imageUrl: userData.profilePicture,
-                                  fit: BoxFit.fill,
-                                ),
-                        ),
+                    SizedBox(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: (imageFile != null)
+                            ? Image.file(
+                                imageFile,
+                                fit: BoxFit.fill,
+                              )
+                            : CachedNetworkImage(
+                                imageUrl: userData.profilePicture,
+                                fit: BoxFit.fill,
+                              ),
                       ),
                     ),
                     Positioned(
-                      right: -12,
-                      bottom: 0,
+                      right: -15,
+                      bottom: -10,
                       child: SizedBox(
                         height:
                             MediaQuery.of(context).size.height / (1792 / 92),
@@ -113,15 +111,21 @@ class EditProfileStreamBuilder extends StatelessWidget {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color(0xFFF5F6F9),
-                              border: Border.all(
-                                color: Colors.white,
-                              ),
-                            ),
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Color(0xFFF2F3F7),
+                                border: Border.all(
+                                  color: Colors.white,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 15),
+                                    blurRadius: 20.0,
+                                    color: Color(0xFFDADADA),
+                                  ),
+                                ]),
                             child: Icon(
                               FluentIcons.camera_24_regular,
-                              color: Colors.black,
+                              color: Color(0xFF1C3857),
                             ),
                           ),
                         ),
@@ -141,7 +145,7 @@ class EditProfileStreamBuilder extends StatelessWidget {
                 child: CustomTextField(
                   keyboardType: TextInputType.name,
                   labelText: "Full Name",
-                  hintText: "Enter full name",
+                  hintText: "Full Name",
                   initialValue: userData.fullName,
                   validator: (String value) {
                     if (value.isEmpty) {

@@ -12,7 +12,7 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/constants/back_button.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 
-class EditProfileAppBar extends StatelessWidget {
+class PersonalDataAppBar extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final String fullName;
   final String phoneNumber;
@@ -21,7 +21,7 @@ class EditProfileAppBar extends StatelessWidget {
   final String profilePicture;
   final File imageFile;
 
-  EditProfileAppBar({
+  PersonalDataAppBar({
     this.formKey,
     this.fullName,
     this.phoneNumber,
@@ -41,10 +41,12 @@ class EditProfileAppBar extends StatelessWidget {
       backgroundColor: Colors.transparent,
       leading: CustomBackButton(),
       title: Text(
-        "Edit Profile",
+        "Personal Data",
         style: TextStyle(
-          color: Colors.black,
-          fontSize: 20.0,
+          fontSize: 25.0,
+          color: Color(0xFF1C3857),
+          fontFamily: "BalooPaaji",
+          fontWeight: FontWeight.w600,
         ),
       ),
       actions: [
@@ -54,9 +56,9 @@ class EditProfileAppBar extends StatelessWidget {
             UserDataCustomer userData = snapshot.data;
             return IconButton(
               icon: Icon(
-                FluentIcons.checkmark_24_regular,
+                FluentIcons.checkmark_24_filled,
                 size: 24.0,
-                color: Colors.black,
+                color: Color(0xFFFEA700),
               ),
               onPressed: () async {
                 // Upload Picture to Firebase

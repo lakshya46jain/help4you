@@ -11,7 +11,7 @@ import 'package:help4you/constants/expanded_button.dart';
 import 'package:help4you/screens/about_us_screen/about_us.dart';
 import 'package:help4you/screens/settings_screen/admin_stream.dart';
 import 'package:help4you/screens/settings_screen/stream_builder.dart';
-import 'package:help4you/screens/edit_profile_screen/edit_profile_screen.dart';
+import 'package:help4you/screens/personal_data_screen/personal_data_screen.dart';
 
 class SettingsScreens extends StatefulWidget {
   @override
@@ -72,7 +72,7 @@ class _SettingsScreensState extends State<SettingsScreens> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => EditProfileScreen(),
+                        builder: (context) => PersonalDataScreen(),
                       ),
                     );
                   },
