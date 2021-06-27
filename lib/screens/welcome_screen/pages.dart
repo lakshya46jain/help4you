@@ -47,7 +47,7 @@ class Pages extends StatelessWidget {
               Text(
                 description,
                 style: TextStyle(
-                  color: Colors.grey[700],
+                  color: Color(0xFF95989A),
                   fontSize: 18.0,
                   height: 1.2,
                 ),

@@ -57,7 +57,7 @@ class MessagesBar extends StatelessWidget {
                 occupation,
                 style: TextStyle(
                   fontSize: 12.0,
-                  color: Colors.grey,
+                  color: Color(0xFF95989A),
                 ),
               ),
             ],

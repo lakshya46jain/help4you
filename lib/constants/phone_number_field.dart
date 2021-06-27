@@ -21,7 +21,7 @@ class PhoneNumberTextField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: 'Phone Number',
         labelStyle: TextStyle(
-          color: Colors.grey,
+          color: Color(0xFF95989A),
         ),
         hintText: 'Phone Number',
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -31,11 +31,11 @@ class PhoneNumberTextField extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(60.0),
-          borderSide: BorderSide(color: Colors.grey),
+          borderSide: BorderSide(color: Color(0xFF95989A)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(60.0),
-          borderSide: BorderSide(color: Colors.grey),
+          borderSide: BorderSide(color: Color(0xFF95989A)),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(60.0),

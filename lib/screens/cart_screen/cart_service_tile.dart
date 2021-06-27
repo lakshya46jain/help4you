@@ -38,7 +38,7 @@ class CartServiceTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(30.0),
           color: Colors.white,
           border: Border.all(
-            color: Colors.grey,
+            color: Color(0xFF95989A),
           ),
         ),
         child: Padding(
@@ -60,7 +60,7 @@ class CartServiceTile extends StatelessWidget {
                 serviceDescription,
                 style: TextStyle(
                   fontSize: 14.0,
-                  color: Colors.grey[600],
+                  color: Color(0xFF95989A),
                 ),
               ),
               SizedBox(

@@ -69,7 +69,7 @@ class ProfessionalCard extends StatelessWidget {
                       occupation,
                       style: TextStyle(
                         fontSize: 15.0,
-                        color: Colors.grey,
+                        color: Color(0xFF95989A),
                       ),
                     ),
                     SizedBox(

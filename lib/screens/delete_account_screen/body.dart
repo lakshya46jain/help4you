@@ -44,7 +44,7 @@ class Body extends StatelessWidget {
             Text(
               "We are sad to see you go.",
               style: TextStyle(
-                color: Colors.grey,
+                color: Color(0xFF95989A),
               ),
               textAlign: TextAlign.center,
             ),

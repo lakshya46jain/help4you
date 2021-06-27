@@ -64,7 +64,7 @@ class Body extends StatelessWidget {
               "Complete your details to continue",
               style: TextStyle(
                 fontSize: 15.0,
-                color: Colors.grey,
+                color: Color(0xFF95989A),
               ),
               textAlign: TextAlign.center,
             ),

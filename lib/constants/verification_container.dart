@@ -18,7 +18,7 @@ class VerificationContainer extends StatelessWidget {
   final _pinPutFocusNode = FocusNode();
   final _pinPutController = TextEditingController();
   final BoxDecoration pinPutDecoration = BoxDecoration(
-    border: Border.all(color: Colors.grey),
+    border: Border.all(color: Color(0xFF95989A)),
     borderRadius: BorderRadius.circular(15.0),
   );
 
@@ -60,7 +60,7 @@ class VerificationContainer extends StatelessWidget {
               Text(
                 text2,
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: Color(0xFF95989A),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -70,7 +70,7 @@ class VerificationContainer extends StatelessWidget {
                   Text(
                     "This code will expire in ",
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: Color(0xFF95989A),
                     ),
                   ),
                   TweenAnimationBuilder(

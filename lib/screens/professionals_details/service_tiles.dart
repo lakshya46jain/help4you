@@ -47,7 +47,7 @@ class _ServiceTilesState extends State<ServiceTiles> {
           borderRadius: BorderRadius.circular(30.0),
           color: Colors.white,
           border: Border.all(
-            color: Colors.grey,
+            color: Color(0xFF95989A),
           ),
         ),
         child: Column(
@@ -67,7 +67,7 @@ class _ServiceTilesState extends State<ServiceTiles> {
               widget.serviceDescription,
               style: TextStyle(
                 fontSize: 14.0,
-                color: Colors.grey[600],
+                color: Color(0xFF95989A),
               ),
             ),
             SizedBox(

@@ -104,7 +104,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     Text(
                                       'Next',
                                       style: TextStyle(
-                                        color: Colors.grey[700],
+                                        color: Color(0xFF95989A),
                                         fontSize: 22.0,
                                       ),
                                     ),
@@ -113,7 +113,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     ),
                                     Icon(
                                       FluentIcons.arrow_right_24_regular,
-                                      color: Colors.grey[700],
+                                      color: Color(0xFF95989A),
                                       size: 22.0,
                                     ),
                                   ],

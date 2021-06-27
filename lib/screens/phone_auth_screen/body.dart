@@ -47,7 +47,7 @@ class _BodyState extends State<Body> {
               "Call for desired day to day services in just a few clicks.",
               style: TextStyle(
                 fontSize: 15.0,
-                color: Colors.grey,
+                color: Color(0xFF95989A),
               ),
               textAlign: TextAlign.center,
             ),
@@ -124,7 +124,7 @@ class _BodyState extends State<Body> {
               child: Text(
                 "By continuing you confirm that you agree \nwith our Terms and Conditions",
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: Color(0xFF95989A),
                 ),
                 textAlign: TextAlign.center,
               ),

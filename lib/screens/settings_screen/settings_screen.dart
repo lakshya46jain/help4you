@@ -42,7 +42,7 @@ class _SettingsScreensState extends State<SettingsScreens> {
                       right: 20.0, bottom: 5.0, top: 15.0, left: 20.0),
                   child: Divider(
                     thickness: 1.0,
-                    color: Colors.grey[300],
+                    color: Color(0xFF95989A),
                   ),
                 ),
                 ExpandedButton(
@@ -62,7 +62,7 @@ class _SettingsScreensState extends State<SettingsScreens> {
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
                   child: Divider(
                     thickness: 1.0,
-                    color: Colors.grey[300],
+                    color: Color(0xFF95989A),
                   ),
                 ),
                 ExpandedButton(
@@ -90,7 +90,7 @@ class _SettingsScreensState extends State<SettingsScreens> {
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
                   child: Divider(
                     thickness: 1.0,
-                    color: Colors.grey[300],
+                    color: Color(0xFF95989A),
                   ),
                 ),
                 ExpandedButton(
