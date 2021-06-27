@@ -1,10 +1,12 @@
 // Services' Category Model
 class ServiceCategory {
-  final String imageUrl;
+  final String buttonLogo;
+  final String buttonBanner;
   final String occupation;
 
   ServiceCategory({
-    this.imageUrl,
+    this.buttonLogo,
+    this.buttonBanner,
     this.occupation,
   });
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // File Imports
 import 'package:help4you/constants/back_button.dart';
 
-class AllServicesAppBar extends StatelessWidget {
+class AllCategoriesAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(

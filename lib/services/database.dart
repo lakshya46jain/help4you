@@ -130,7 +130,8 @@ class DatabaseService {
     return snapshot.docs.toList().map(
       (document) {
         ServiceCategory help4youServiceCategory = ServiceCategory(
-          imageUrl: document.data()["Image URL"],
+          buttonLogo: document.data()["Button Logo"],
+          buttonBanner: document.data()["Button Banner"],
           occupation: document.data()["Occupation"],
         );
         return help4youServiceCategory;

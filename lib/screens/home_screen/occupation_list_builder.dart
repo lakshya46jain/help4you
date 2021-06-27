@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/models/service_category_model.dart';
-import 'package:help4you/screens/all_services/all_services.dart';
+import 'package:help4you/screens/all_categories/all_categories.dart';
 import 'package:help4you/screens/home_screen/occupation_button.dart';
 
 class OccupationListBuilder extends StatelessWidget {
@@ -73,7 +73,7 @@ class OccupationListBuilder extends StatelessWidget {
                     servicesCategory.length,
                     (index) {
                       return OccupationButton(
-                        imageUrl: servicesCategory[index].imageUrl,
+                        buttonLogo: servicesCategory[index].buttonLogo,
                         occupation: servicesCategory[index].occupation,
                       );
                     },

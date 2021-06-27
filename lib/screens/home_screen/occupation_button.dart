@@ -6,11 +6,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:help4you/screens/professional_listing/professional_listing.dart';
 
 class OccupationButton extends StatelessWidget {
-  final String imageUrl;
+  final String buttonLogo;
   final String occupation;
 
   OccupationButton({
-    this.imageUrl,
+    this.buttonLogo,
     this.occupation,
   });
 
@@ -37,7 +37,7 @@ class OccupationButton extends StatelessWidget {
               child: CachedNetworkImage(
                 height: 135,
                 width: 135,
-                imageUrl: imageUrl,
+                imageUrl: buttonLogo,
               ),
             ),
           ],

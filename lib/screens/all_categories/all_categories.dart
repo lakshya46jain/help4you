@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/screens/all_services/body.dart';
-import 'package:help4you/screens/all_services/app_bar.dart';
+import 'package:help4you/screens/all_categories/body.dart';
+import 'package:help4you/screens/all_categories/app_bar.dart';
 
 class AllServicesScreen extends StatefulWidget {
   @override
@@ -22,7 +22,7 @@ class _AllServicesScreenState extends State<AllServicesScreen> {
           preferredSize: Size.fromHeight(
             MediaQuery.of(context).size.height / (1792 / 100),
           ),
-          child: AllServicesAppBar(),
+          child: AllCategoriesAppBar(),
         ),
         body: Body(),
       ),
