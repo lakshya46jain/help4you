@@ -35,11 +35,11 @@ class MessageNavBar extends StatelessWidget {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide(color: Colors.grey),
+                    borderSide: BorderSide(color: Color(0xFF95989A)),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide(color: Colors.grey),
+                    borderSide: BorderSide(color: Color(0xFF95989A)),
                   ),
                 ),
                 controller: messageController,
