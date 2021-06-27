@@ -4,7 +4,18 @@ import 'package:flutter/material.dart';
 // File Imports
 import 'package:help4you/constants/back_button.dart';
 
-class AllCategoriesAppBar extends StatelessWidget {
+class AllCategoriesAppBar extends StatefulWidget {
+  final TextEditingController textController;
+
+  AllCategoriesAppBar({
+    this.textController,
+  });
+
+  @override
+  _AllCategoriesAppBarState createState() => _AllCategoriesAppBarState();
+}
+
+class _AllCategoriesAppBarState extends State<AllCategoriesAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -12,10 +23,12 @@ class AllCategoriesAppBar extends StatelessWidget {
       backgroundColor: Colors.transparent,
       leading: CustomBackButton(),
       title: Text(
-        "Services",
+        "Categories",
         style: TextStyle(
-          color: Colors.black,
-          fontSize: 20.0,
+          fontSize: 25.0,
+          color: Color(0xFF1C3857),
+          fontFamily: "BalooPaaji",
+          fontWeight: FontWeight.w600,
         ),
       ),
     );

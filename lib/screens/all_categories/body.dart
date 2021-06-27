@@ -1,5 +1,6 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:help4you/constants/custom_search_bar.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 // File Imports
@@ -14,20 +15,38 @@ class Body extends StatelessWidget {
     // Get User
     final user = Provider.of<Help4YouUser>(context);
 
-    return StreamBuilder(
-      stream: DatabaseService(uid: user.uid).serviceCategoryData,
-      builder: (context, snapshot) {
-        List<ServiceCategory> servicesCategory = snapshot.data;
-        return ListView.builder(
-          itemCount: servicesCategory.length,
-          itemBuilder: (context, index) {
-            return OccupationBanner(
-              buttonBanner: servicesCategory[index].buttonBanner,
-              occupation: servicesCategory[index].occupation,
-            );
-          },
-        );
-      },
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 15.0,
+          ),
+          SearchBar(
+            width: MediaQuery.of(context).size.width,
+            hintText: "Search for categories",
+          ),
+          SizedBox(
+            height: 25.0,
+          ),
+          StreamBuilder(
+            stream: DatabaseService(uid: user.uid).serviceCategoryData,
+            builder: (context, snapshot) {
+              List<ServiceCategory> servicesCategory = snapshot.data;
+              return ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: servicesCategory.length,
+                itemBuilder: (context, index) {
+                  return OccupationBanner(
+                    buttonBanner: servicesCategory[index].buttonBanner,
+                    occupation: servicesCategory[index].occupation,
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
