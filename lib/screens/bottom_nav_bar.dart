@@ -2,11 +2,10 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 // File Imports
 import 'package:help4you/screens/home_screen/home_screen.dart';
-import 'package:help4you/screens/settings_screen/settings_screen.dart';
 import 'package:help4you/screens/bookings_screen/bookings_screen.dart';
+import 'package:help4you/screens/settings_screen/settings_screen.dart';
 import 'package:help4you/screens/message_list_screen/message_list_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -51,61 +50,42 @@ class _BottomNavBarState extends State<BottomNavBar> {
       },
       child: Scaffold(
         body: tabs[selectedIndex],
-        bottomNavigationBar: SafeArea(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 3.0, vertical: 3.0),
-              child: GNav(
-                onTabChange: onTap,
-                tabs: [
-                  GButton(
-                    icon: FluentIcons.home_24_regular,
-                    text: 'Home',
-                    gap: gap,
-                    iconActiveColor: mainColor,
-                    iconColor: inactiveColor,
-                    textColor: mainColor,
-                    backgroundColor: backgroundColor,
-                    iconSize: iconSize,
-                    padding: padding,
-                  ),
-                  GButton(
-                    icon: FluentIcons.notebook_24_regular,
-                    text: 'Bookings',
-                    gap: gap,
-                    iconActiveColor: mainColor,
-                    iconColor: inactiveColor,
-                    textColor: mainColor,
-                    backgroundColor: backgroundColor,
-                    iconSize: iconSize,
-                    padding: padding,
-                  ),
-                  GButton(
-                    icon: FluentIcons.chat_24_regular,
-                    text: 'Messages',
-                    gap: gap,
-                    iconActiveColor: mainColor,
-                    iconColor: inactiveColor,
-                    textColor: mainColor,
-                    backgroundColor: backgroundColor,
-                    iconSize: iconSize,
-                    padding: padding,
-                  ),
-                  GButton(
-                    icon: FluentIcons.settings_24_regular,
-                    text: 'Settings',
-                    gap: gap,
-                    iconActiveColor: mainColor,
-                    iconColor: inactiveColor,
-                    textColor: mainColor,
-                    backgroundColor: backgroundColor,
-                    iconSize: iconSize,
-                    padding: padding,
-                  ),
-                ],
+        bottomNavigationBar: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(25.0),
+          ),
+          child: BottomNavigationBar(
+            onTap: onTap,
+            elevation: 0.0,
+            iconSize: 27.0,
+            selectedFontSize: 1.0,
+            unselectedFontSize: 1.0,
+            currentIndex: selectedIndex,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Color(0xFF1C3857),
+            unselectedItemColor: Color(0xFF1C3857),
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(FluentIcons.home_24_regular),
+                activeIcon: Icon(FluentIcons.home_24_filled),
+                label: "",
               ),
-            ),
+              BottomNavigationBarItem(
+                icon: Icon(FluentIcons.notebook_24_regular),
+                activeIcon: Icon(FluentIcons.notebook_24_filled),
+                label: "",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(FluentIcons.chat_24_regular),
+                activeIcon: Icon(FluentIcons.chat_24_filled),
+                label: "",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(FluentIcons.person_24_regular),
+                activeIcon: Icon(FluentIcons.person_24_filled),
+                label: "",
+              ),
+            ],
           ),
         ),
       ),
