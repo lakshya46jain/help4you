@@ -8,8 +8,8 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/expanded_button.dart';
-import 'package:help4you/screens/about_us_screen/about_us.dart';
-import 'package:help4you/screens/personal_data_screen/personal_data_screen.dart';
+import 'package:help4you/secondary_screens/handbook_screen/handbook_screen.dart';
+import 'package:help4you/secondary_screens/personal_data_screen/personal_data_screen.dart';
 import 'package:help4you/primary_screens/profile_screen/admin_stream.dart';
 import 'package:help4you/primary_screens/profile_screen/profile_stream.dart';
 
@@ -52,7 +52,7 @@ class _SettingsScreensState extends State<SettingsScreens> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AboutUs(),
+                        builder: (context) => HandbookScreen(),
                       ),
                     );
                   },

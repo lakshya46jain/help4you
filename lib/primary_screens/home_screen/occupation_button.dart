@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
-import 'package:help4you/screens/professional_listing/professional_listing.dart';
+import 'package:help4you/secondary_screens/professional_listing/professional_listing.dart';
 
 class OccupationButton extends StatelessWidget {
   final String buttonLogo;
