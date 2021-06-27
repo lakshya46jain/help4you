@@ -155,6 +155,7 @@ class DatabaseService {
   // Get Service Category Document
   Stream<List<ServiceCategory>> get serviceCategoryData {
     return occupationCollection
+        .orderBy("Occupation")
         .snapshots()
         .map(_help4YouServiceCategoryFromSnapshot);
   }
