@@ -7,7 +7,7 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/models/service_category_model.dart';
 import 'package:help4you/screens/all_categories/all_categories.dart';
-import 'package:help4you/screens/home_screen/occupation_button.dart';
+import 'package:help4you/primary_screens/home_screen/occupation_button.dart';
 
 class OccupationListBuilder extends StatelessWidget {
   @override

@@ -2,15 +2,15 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/screens/bookings_screen/body.dart';
-import 'package:help4you/screens/bookings_screen/app_bar.dart';
+import 'package:help4you/primary_screens/message_list_screen/body.dart';
+import 'package:help4you/primary_screens/message_list_screen/app_bar.dart';
 
-class BookingsScreen extends StatefulWidget {
+class MessageListScreen extends StatefulWidget {
   @override
-  _BookingsScreenState createState() => _BookingsScreenState();
+  _MessageListScreenState createState() => _MessageListScreenState();
 }
 
-class _BookingsScreenState extends State<BookingsScreen> {
+class _MessageListScreenState extends State<MessageListScreen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,7 +22,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
           preferredSize: Size.fromHeight(
             MediaQuery.of(context).size.height / (1792 / 100),
           ),
-          child: BookingsAppBar(),
+          child: MessageListAppBar(),
         ),
         body: Body(),
       ),

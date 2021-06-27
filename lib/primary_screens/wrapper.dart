@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
-import 'package:help4you/screens/bottom_nav_bar.dart';
-import 'package:help4you/screens/welcome_screen/welcome_screen.dart';
+import 'package:help4you/primary_screens/bottom_nav_bar.dart';
+import 'package:help4you/primary_screens/welcome_screen/welcome_screen.dart';
 
 class Wrapper extends StatelessWidget {
   @override

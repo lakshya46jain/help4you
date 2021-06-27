@@ -6,9 +6,9 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
-import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
+import 'package:help4you/primary_screens/wrapper.dart';
 import 'package:help4you/constants/verification_container.dart';
 import 'package:help4you/screens/register_profile_screen/register_profile_screen.dart';
 

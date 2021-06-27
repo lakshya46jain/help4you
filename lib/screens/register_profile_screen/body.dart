@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
-import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
+import 'package:help4you/primary_screens/wrapper.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/register_profile_screen/stream_builder.dart';

@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/screens/home_screen/header.dart';
 import 'package:help4you/constants/custom_search_bar.dart';
-import 'package:help4you/screens/home_screen/occupation_list_builder.dart';
+import 'package:help4you/primary_screens/home_screen/header.dart';
+import 'package:help4you/primary_screens/home_screen/occupation_list_builder.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

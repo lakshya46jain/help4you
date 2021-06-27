@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 // Dependency Imports
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
-import 'package:help4you/screens/welcome_screen/bottom_sheet.dart';
-import 'package:help4you/screens/welcome_screen/page_view_container.dart';
+import 'package:help4you/primary_screens/welcome_screen/bottom_sheet.dart';
+import 'package:help4you/primary_screens/welcome_screen/page_view_container.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
-import 'package:help4you/screens/home_screen/home_screen.dart';
-import 'package:help4you/screens/bookings_screen/bookings_screen.dart';
-import 'package:help4you/screens/profile_screen/profile_screen.dart';
-import 'package:help4you/screens/message_list_screen/message_list_screen.dart';
+import 'package:help4you/primary_screens/home_screen/home_screen.dart';
+import 'package:help4you/primary_screens/profile_screen/profile_screen.dart';
+import 'package:help4you/primary_screens/bookings_screen/bookings_screen.dart';
+import 'package:help4you/primary_screens/message_list_screen/message_list_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
