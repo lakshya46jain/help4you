@@ -7,7 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 
-class ProfileCardStreamBuilder extends StatelessWidget {
+class ProfileStreamBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Get User

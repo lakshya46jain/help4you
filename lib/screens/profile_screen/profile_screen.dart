@@ -9,8 +9,8 @@ import 'package:help4you/services/auth.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/expanded_button.dart';
 import 'package:help4you/screens/about_us_screen/about_us.dart';
-import 'package:help4you/screens/settings_screen/admin_stream.dart';
-import 'package:help4you/screens/settings_screen/stream_builder.dart';
+import 'package:help4you/screens/profile_screen/admin_stream.dart';
+import 'package:help4you/screens/profile_screen/profile_stream.dart';
 import 'package:help4you/screens/personal_data_screen/personal_data_screen.dart';
 
 class SettingsScreens extends StatefulWidget {
@@ -36,7 +36,7 @@ class _SettingsScreensState extends State<SettingsScreens> {
                 SizedBox(
                   height: 70.0,
                 ),
-                ProfileCardStreamBuilder(),
+                ProfileStreamBuilder(),
                 Padding(
                   padding: EdgeInsets.only(
                       right: 20.0, bottom: 5.0, top: 15.0, left: 20.0),

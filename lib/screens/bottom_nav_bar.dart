@@ -5,7 +5,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/screens/home_screen/home_screen.dart';
 import 'package:help4you/screens/bookings_screen/bookings_screen.dart';
-import 'package:help4you/screens/settings_screen/settings_screen.dart';
+import 'package:help4you/screens/profile_screen/profile_screen.dart';
 import 'package:help4you/screens/message_list_screen/message_list_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
