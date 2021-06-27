@@ -49,6 +49,7 @@ class ProfessionalsToggle extends StatelessWidget {
           fullName: fullName,
           occupation: occupation,
           phoneNumber: phoneNumber,
+          rating: rating,
         );
       },
     );

@@ -11,6 +11,7 @@ class ProfessionalsDetails extends StatelessWidget {
   final String fullName;
   final String occupation;
   final String phoneNumber;
+  final int rating;
 
   ProfessionalsDetails({
     @required this.uid,
@@ -18,6 +19,7 @@ class ProfessionalsDetails extends StatelessWidget {
     @required this.fullName,
     @required this.occupation,
     @required this.phoneNumber,
+    @required this.rating,
   });
 
   @override
@@ -27,12 +29,14 @@ class ProfessionalsDetails extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        backgroundColor: Colors.deepOrangeAccent,
+        backgroundColor: Color(0xFF1C3857),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(
             MediaQuery.of(context).size.height / (1792 / 100),
           ),
-          child: ProfessionalDetailBar(),
+          child: ProfessionalDetailAppBar(
+            rating: rating,
+          ),
         ),
         body: Body(
           uid: uid,

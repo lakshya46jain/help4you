@@ -34,7 +34,7 @@ class Body extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.296),
-                height: 500,
+                height: MediaQuery.of(context).size.height * 0.60,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -79,6 +79,23 @@ class Body extends StatelessWidget {
                     ),
                     Row(
                       children: [
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),
+                              child: CachedNetworkImage(
+                                imageUrl: profilePicture,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20.0,
+                        ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -110,30 +127,6 @@ class Body extends StatelessWidget {
                               text: "Message",
                             ),
                           ],
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(0, 15),
-                                  blurRadius: 20.0,
-                                  color: Color(0xFFDADADA),
-                                ),
-                              ],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),
-                              child: CachedNetworkImage(
-                                imageUrl: profilePicture,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
                         ),
                       ],
                     ),

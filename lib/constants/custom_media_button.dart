@@ -23,7 +23,6 @@ class CustomMediaButton extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: Colors.deepOrangeAccent,
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
@@ -38,14 +37,15 @@ class CustomMediaButton extends StatelessWidget {
                     size: 27.0,
                   ),
                 ),
-                SizedBox(width: 5),
+                SizedBox(width: 10.0),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     text,
                     style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: 25.0,
                       color: Colors.white,
+                      fontFamily: "BalooPaaji",
                       fontWeight: FontWeight.bold,
                     ),
                   ),
