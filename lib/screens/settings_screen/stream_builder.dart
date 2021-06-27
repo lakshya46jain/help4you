@@ -56,7 +56,7 @@ class ProfileCardStreamBuilder extends StatelessWidget {
                     style: TextStyle(
                       height: 1.5,
                       fontSize: 25.0,
-                      color: Colors.black,
+                      color: Color(0xFF1C3857),
                       fontFamily: "BalooPaaji",
                       fontWeight: FontWeight.w900,
                     ),
