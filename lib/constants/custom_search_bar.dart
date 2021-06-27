@@ -18,19 +18,23 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.0),
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Container(
         width: width,
         height: 55.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15.0),
-          border: Border.all(
-            color: Colors.grey[400],
-          ),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20.0,
+              color: Color(0xFFDADADA),
+            ),
+          ],
         ),
         child: TextField(
           controller: controller,
+          textAlign: TextAlign.center,
           decoration: InputDecoration(
             enabledBorder: InputBorder.none,
             focusedBorder: InputBorder.none,
@@ -38,9 +42,9 @@ class SearchBar extends StatelessWidget {
             hintStyle: TextStyle(
               fontSize: 20.0,
             ),
-            suffixIcon: Icon(
+            prefixIcon: Icon(
               FluentIcons.search_24_filled,
-              color: Colors.grey,
+              color: Color(0xFFFEA700),
               size: 25.0,
             ),
             contentPadding: EdgeInsets.symmetric(
