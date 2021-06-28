@@ -13,12 +13,12 @@ import 'package:help4you/secondary_screens/personal_data_screen/personal_data_sc
 import 'package:help4you/primary_screens/profile_screen/admin_stream.dart';
 import 'package:help4you/primary_screens/profile_screen/profile_stream.dart';
 
-class SettingsScreens extends StatefulWidget {
+class ProfileScreen extends StatefulWidget {
   @override
-  _SettingsScreensState createState() => _SettingsScreensState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _SettingsScreensState extends State<SettingsScreens> {
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     // Get User

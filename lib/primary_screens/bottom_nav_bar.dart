@@ -22,7 +22,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     HomeScreen(),
     BookingsScreen(),
     MessageListScreen(),
-    SettingsScreens(),
+    ProfileScreen(),
   ];
 
   // Current Index Tap
