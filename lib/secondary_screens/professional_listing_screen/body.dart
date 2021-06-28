@@ -33,14 +33,18 @@ class Body extends StatelessWidget {
                   "assets/graphics/Help4You_Illustration_6.svg",
                 ),
               ),
-              Text(
-                "No professionals are available",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text(
+                  "Oops! Looks like no professionals are available in your area",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Color(0xFF1C3857),
+                    fontFamily: "BalooPaaji",
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ],
           );

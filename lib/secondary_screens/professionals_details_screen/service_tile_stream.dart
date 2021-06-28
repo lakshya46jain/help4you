@@ -35,10 +35,11 @@ class ServiceTileBuilder extends StatelessWidget {
                 ),
               ),
               Text(
-                "No services are available",
+                "Oops! Looks like no services are available",
                 style: TextStyle(
-                  color: Colors.black,
                   fontSize: 20.0,
+                  color: Color(0xFF1C3857),
+                  fontFamily: "BalooPaaji",
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,

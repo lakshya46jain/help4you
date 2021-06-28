@@ -33,7 +33,8 @@ class Body extends StatelessWidget {
             children: [
               Container(
                 margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.296),
+                    top: MediaQuery.of(context).size.height * 0.293),
+                padding: EdgeInsets.all(20.0),
                 height: MediaQuery.of(context).size.height * 0.60,
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -43,15 +44,8 @@ class Body extends StatelessWidget {
                     topRight: Radius.circular(24.0),
                   ),
                 ),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: 20.0,
-                    top: 40.0,
-                    right: 20.0,
-                  ),
-                  child: ServiceTileBuilder(
-                    uid: uid,
-                  ),
+                child: ServiceTileBuilder(
+                  uid: uid,
                 ),
               ),
               Padding(

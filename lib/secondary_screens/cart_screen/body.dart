@@ -38,10 +38,11 @@ class _BodyState extends State<Body> {
                   ),
                 ),
                 Text(
-                  "No items in your cart",
+                  "Oops! Looks like your cart is empty",
                   style: TextStyle(
-                    color: Colors.black,
                     fontSize: 20.0,
+                    fontFamily: "BalooPaaji",
+                    color: Color(0xFF1C3857),
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
