@@ -7,7 +7,7 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 // File Imports
 import 'package:help4you/constants/custom_media_button.dart';
 import 'package:help4you/secondary_screens/message_screen/messages_screen.dart';
-import 'package:help4you/secondary_screens/professionals_details/service_stream_builder.dart';
+import 'package:help4you/secondary_screens/professionals_details_screen/service_tile_stream.dart';
 
 class Body extends StatelessWidget {
   final String uid;

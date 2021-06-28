@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
-import 'package:help4you/secondary_screens/professionals_details/service_tiles.dart';
+import 'package:help4you/secondary_screens/professionals_details_screen/service_tile.dart';
 
 class ServiceTileBuilder extends StatelessWidget {
   final String uid;
@@ -35,7 +35,7 @@ class ServiceTileBuilder extends StatelessWidget {
                 ),
               ),
               Text(
-                "Oops! Looks like no services are available",
+                "No services are available",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20.0,

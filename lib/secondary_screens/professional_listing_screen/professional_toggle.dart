@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:animations/animations.dart';
 // File Imports
-import 'package:help4you/secondary_screens/professional_listing/professional_card.dart';
-import 'package:help4you/secondary_screens/professionals_details/professionals_details.dart';
+import 'package:help4you/secondary_screens/professional_listing_screen/professional_card.dart';
+import 'package:help4you/secondary_screens/professionals_details_screen/professionals_details_screen.dart';
 
 class ProfessionalsToggle extends StatelessWidget {
   final String uid;
@@ -43,7 +43,7 @@ class ProfessionalsToggle extends StatelessWidget {
         );
       },
       openBuilder: (context, action) {
-        return ProfessionalsDetails(
+        return ProfessionalsDetailsScreen(
           uid: uid,
           profilePicture: profilePicture,
           fullName: fullName,

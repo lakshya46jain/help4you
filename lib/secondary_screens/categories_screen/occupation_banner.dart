@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
-import 'package:help4you/secondary_screens/professional_listing/professional_listing.dart';
+import 'package:help4you/secondary_screens/professional_listing_screen/professional_listing_screen.dart';
 
 class OccupationBanner extends StatelessWidget {
   final String buttonBanner;
@@ -26,7 +26,7 @@ class OccupationBanner extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProfessionalListing(
+              builder: (context) => ProfessionalListingScreen(
                 occupation: occupation,
               ),
             ),

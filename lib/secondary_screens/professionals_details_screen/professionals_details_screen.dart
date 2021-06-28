@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/secondary_screens/professionals_details/body.dart';
-import 'package:help4you/secondary_screens/professionals_details/app_bar.dart';
+import 'package:help4you/secondary_screens/professionals_details_screen/body.dart';
+import 'package:help4you/secondary_screens/professionals_details_screen/app_bar.dart';
 
-class ProfessionalsDetails extends StatelessWidget {
+class ProfessionalsDetailsScreen extends StatelessWidget {
   final String uid;
   final String profilePicture;
   final String fullName;
@@ -13,7 +13,7 @@ class ProfessionalsDetails extends StatelessWidget {
   final String phoneNumber;
   final int rating;
 
-  ProfessionalsDetails({
+  ProfessionalsDetailsScreen({
     @required this.uid,
     @required this.profilePicture,
     @required this.fullName,

@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/secondary_screens/professional_listing/body.dart';
-import 'package:help4you/secondary_screens/professional_listing/app_bar.dart';
+import 'package:help4you/secondary_screens/professional_listing_screen/body.dart';
+import 'package:help4you/secondary_screens/professional_listing_screen/app_bar.dart';
 
-class ProfessionalListing extends StatelessWidget {
+class ProfessionalListingScreen extends StatelessWidget {
   final String occupation;
 
-  ProfessionalListing({
+  ProfessionalListingScreen({
     @required this.occupation,
   });
 

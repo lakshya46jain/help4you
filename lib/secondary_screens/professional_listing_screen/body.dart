@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
-import 'package:help4you/secondary_screens/professional_listing/professional_toggle.dart';
+import 'package:help4you/secondary_screens/professional_listing_screen/professional_toggle.dart';
 
 class Body extends StatelessWidget {
   final String occupation;

@@ -38,7 +38,7 @@ class _BodyState extends State<Body> {
                   ),
                 ),
                 Text(
-                  "Oops! Looks like your cart is empty",
+                  "No items in your cart",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20.0,

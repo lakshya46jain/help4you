@@ -23,7 +23,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
           preferredSize: Size.fromHeight(
             MediaQuery.of(context).size.height / (1792 / 100),
           ),
-          child: AuthenticationBar(),
+          child: AuthenticationAppBar(),
         ),
         body: Body(),
       ),
