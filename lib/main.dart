@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_core/firebase_core.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
+import 'package:help4you/constants/loading.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/primary_screens/wrapper.dart';
 
@@ -110,9 +111,7 @@ class _MyAppState extends State<MyApp> {
         // Initialization
         return Container(
           child: Center(
-            child: CircularProgressIndicator(
-              color: Colors.deepOrangeAccent,
-            ),
+            child: DoubleBounceLoading(),
           ),
         );
       },
