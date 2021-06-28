@@ -35,11 +35,15 @@ class MessageNavBar extends StatelessWidget {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide(color: Color(0xFF95989A)),
+                    borderSide: BorderSide(
+                      color: Color(0xFF1C3857),
+                    ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide(color: Color(0xFF95989A)),
+                    borderSide: BorderSide(
+                      color: Color(0xFF1C3857),
+                    ),
                   ),
                 ),
                 controller: messageController,
@@ -49,7 +53,7 @@ class MessageNavBar extends StatelessWidget {
             IconButton(
               icon: Icon(
                 FluentIcons.send_16_filled,
-                color: Colors.deepOrangeAccent,
+                color: Color(0xFF1C3857),
               ),
               onPressed: onPressed,
             ),

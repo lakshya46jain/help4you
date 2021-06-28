@@ -41,7 +41,7 @@ class MessageAppBar extends StatelessWidget {
             radius: 21.0,
           ),
           SizedBox(
-            width: MediaQuery.of(context).size.width / (828 / 30),
+            width: 10.0,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,14 +49,19 @@ class MessageAppBar extends StatelessWidget {
               Text(
                 fullName,
                 style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.black,
+                  height: 1.0,
+                  fontSize: 20.0,
+                  fontFamily: "BalooPaaji",
+                  color: Color(0xFF1C3857),
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 occupation,
                 style: TextStyle(
-                  fontSize: 12.0,
+                  height: 1.0,
+                  fontSize: 16.0,
+                  fontFamily: "BalooPaaji",
                   color: Color(0xFF95989A),
                 ),
               ),
@@ -69,7 +74,7 @@ class MessageAppBar extends StatelessWidget {
           icon: Icon(
             FluentIcons.call_24_regular,
             size: 27.0,
-            color: Colors.black,
+            color: Color(0xFFFEA700),
           ),
           onPressed: () {
             FlutterPhoneDirectCaller.callNumber(phoneNumber);
