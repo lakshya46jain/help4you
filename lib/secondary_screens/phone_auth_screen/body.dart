@@ -103,8 +103,9 @@ class _BodyState extends State<Body> {
                   );
                 }
               },
-              text: "Continue",
-              icon: FluentIcons.arrow_right_24_regular,
+              withIcon: true,
+              text: "CONTINUE",
+              icon: FluentIcons.arrow_right_24_filled,
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / (1792 / 785),

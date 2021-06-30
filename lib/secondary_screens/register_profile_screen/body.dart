@@ -88,8 +88,9 @@ class Body extends StatelessWidget {
                     horizontal: 14.5,
                   ),
                   child: SignatureButton(
-                    text: "Continue",
-                    icon: FluentIcons.arrow_right_24_regular,
+                    withIcon: true,
+                    text: "CONTINUE",
+                    icon: FluentIcons.arrow_right_24_filled,
                     onTap: () async {
                       // Upload Picture to Firebase
                       Future setProfilePicture() async {

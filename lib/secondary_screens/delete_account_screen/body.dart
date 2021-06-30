@@ -61,8 +61,9 @@ class Body extends StatelessWidget {
             ),
             SignatureButton(
               onTap: () {},
-              text: "Continue",
-              icon: FluentIcons.arrow_right_24_regular,
+              withIcon: true,
+              text: "CONTINUE",
+              icon: FluentIcons.arrow_right_24_filled,
             ),
           ],
         ),
