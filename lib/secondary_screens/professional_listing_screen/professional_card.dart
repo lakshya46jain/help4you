@@ -127,7 +127,7 @@ class ProfessionalCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Services",
+                              "Jobs",
                               style: TextStyle(
                                 height: 1.0,
                                 fontSize: 17.0,

@@ -49,6 +49,11 @@ class ServiceTileBuilder extends StatelessWidget {
         } else {
           return ListView.builder(
             shrinkWrap: true,
+            padding: EdgeInsets.symmetric(
+              vertical: 10.0,
+              horizontal: 20.0,
+            ),
+            physics: NeverScrollableScrollPhysics(),
             itemCount: snapshot.data.docs.length,
             itemBuilder: (context, index) {
               DocumentSnapshot documentSnapshot = snapshot.data.docs[index];

@@ -29,7 +29,7 @@ class ProfessionalsDetailsScreen extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        backgroundColor: Color(0xFF1C3857),
+        backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(
             MediaQuery.of(context).size.height / (1792 / 100),
@@ -44,6 +44,7 @@ class ProfessionalsDetailsScreen extends StatelessWidget {
           fullName: fullName,
           occupation: occupation,
           phoneNumber: phoneNumber,
+          rating: rating,
         ),
       ),
     );
