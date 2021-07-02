@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // File Imports
 import 'package:help4you/secondary_screens/message_screen/body.dart';
 import 'package:help4you/secondary_screens/message_screen/app_bar.dart';
-import 'package:help4you/secondary_screens/message_screen/bottom_navigation_bar.dart';
 
 class MessageScreen extends StatefulWidget {
   final String uid;
@@ -28,6 +27,7 @@ class MessageScreen extends StatefulWidget {
 class _MessageScreenState extends State<MessageScreen> {
   // Text Field Variables
   String message;
+  bool isMessageEmpty;
 
   // Message Controller
   final TextEditingController _messageController = TextEditingController();
@@ -51,19 +51,24 @@ class _MessageScreenState extends State<MessageScreen> {
             phoneNumber: widget.phoneNumber,
           ),
         ),
-        body: Body(),
-        bottomNavigationBar: MessageNavBar(
-          onChanged: (value) {
-            setState(
-              () {
-                message = value;
-              },
-            );
-          },
-          onPressed: () {
-            // TODO: Implement Sending Messages and Recieving Messages
-          },
+        body: Body(
+          isMessageEmpty: isMessageEmpty,
           messageController: _messageController,
+          onChanged: (value) {
+            setState(() {
+              message = value;
+            });
+            if (value.isEmpty) {
+              setState(() {
+                isMessageEmpty = false;
+              });
+            } else {
+              setState(() {
+                isMessageEmpty = true;
+              });
+            }
+          },
+          onPressed: () {},
         ),
       ),
     );

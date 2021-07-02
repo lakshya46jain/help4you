@@ -10,7 +10,7 @@ import 'package:help4you/secondary_screens/professionals_details_screen/custom_m
 import 'package:help4you/secondary_screens/professionals_details_screen/service_tile_stream.dart';
 
 class Body extends StatelessWidget {
-  final String uid;
+  final String professionalUid;
   final String profilePicture;
   final String fullName;
   final String occupation;
@@ -18,7 +18,7 @@ class Body extends StatelessWidget {
   final int rating;
 
   Body({
-    @required this.uid,
+    @required this.professionalUid,
     @required this.profilePicture,
     @required this.fullName,
     @required this.occupation,
@@ -113,7 +113,7 @@ class Body extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => MessageScreen(
-                          uid: uid,
+                          uid: professionalUid,
                           fullName: fullName,
                           occupation: occupation,
                           phoneNumber: phoneNumber,
@@ -130,7 +130,7 @@ class Body extends StatelessWidget {
             ),
           ),
           ServiceTileBuilder(
-            uid: uid,
+            uid: professionalUid,
           ),
         ],
       ),

@@ -39,7 +39,7 @@ class ProfessionalsDetailsScreen extends StatelessWidget {
           ),
         ),
         body: Body(
-          uid: uid,
+          professionalUid: uid,
           profilePicture: profilePicture,
           fullName: fullName,
           occupation: occupation,
