@@ -21,7 +21,7 @@ class AdminStreamBuilder extends StatelessWidget {
         if (userData.adminLevel > 0) {
           return ExpandedButton(
             icon: FluentIcons.people_24_regular,
-            text: "Admin Acess",
+            text: "Admin Access",
             onPressed: () {},
           );
         } else {

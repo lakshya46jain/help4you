@@ -15,16 +15,16 @@ import 'package:help4you/constants/phone_number_field.dart';
 class ProfileStreamBuilder extends StatelessWidget {
   final File imageFile;
   final String fullName;
-  final Function onChanged;
-  final Function onPhoneNumberChange;
+  final Function onChanged1;
+  final Function onChanged2;
   final Function onPressed1;
   final Function onPressed2;
 
   ProfileStreamBuilder({
     this.imageFile,
     this.fullName,
-    this.onChanged,
-    this.onPhoneNumberChange,
+    this.onChanged1,
+    this.onChanged2,
     this.onPressed1,
     this.onPressed2,
   });
@@ -164,7 +164,7 @@ class ProfileStreamBuilder extends StatelessWidget {
                       return null;
                     }
                   },
-                  onChanged: onChanged,
+                  onChanged: onChanged1,
                 ),
               ),
               SizedBox(
@@ -177,7 +177,7 @@ class ProfileStreamBuilder extends StatelessWidget {
                 child: PhoneNumberTextField(
                   phoneIsoCode: userData.phoneIsoCode,
                   nonInternationalNumber: userData.nonInternationalNumber,
-                  onPhoneNumberChange: onPhoneNumberChange,
+                  onChanged: onChanged2,
                 ),
               ),
               SizedBox(

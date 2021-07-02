@@ -34,16 +34,12 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
           phoneNumber: phoneNumber,
           phoneIsoCode: phoneIsoCode,
           nonInternationalNumber: nonInternationalNumber,
-          onPhoneNumberChange: (
-            String number,
-            String internationalizedPhoneNumber,
-            String isoCode,
-          ) {
+          onChanged: (phone) {
             setState(
               () {
-                phoneNumber = internationalizedPhoneNumber;
-                phoneIsoCode = isoCode;
-                nonInternationalNumber = number;
+                phoneNumber = phone.completeNumber;
+                phoneIsoCode = phone.countryISOCode;
+                nonInternationalNumber = phone.number;
               },
             );
           },

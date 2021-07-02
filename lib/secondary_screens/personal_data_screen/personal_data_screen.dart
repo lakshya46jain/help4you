@@ -76,19 +76,15 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
           fullName: fullName,
           imageFile: _imageFile,
           formKey: _formKey,
-          onChanged: (val) {
+          onChanged1: (val) {
             setState(() => fullName = val);
           },
-          onPhoneNumberChange: (
-            String number,
-            String internationalizedPhoneNumber,
-            String isoCode,
-          ) {
+          onChanged2: (phone) {
             setState(
               () {
-                phoneNumber = internationalizedPhoneNumber;
-                phoneIsoCode = isoCode;
-                nonInternationalNumber = number;
+                phoneNumber = phone.completeNumber;
+                phoneIsoCode = phone.countryISOCode;
+                nonInternationalNumber = phone.number;
               },
             );
           },

@@ -57,16 +57,12 @@ class _BodyState extends State<Body> {
             PhoneNumberTextField(
               phoneIsoCode: "",
               nonInternationalNumber: "",
-              onPhoneNumberChange: (
-                String number,
-                String internationalizedPhoneNumber,
-                String isoCode,
-              ) {
+              onChanged: (phone) {
                 setState(
                   () {
-                    phoneNumber = internationalizedPhoneNumber;
-                    phoneIsoCode = isoCode;
-                    nonInternationalNumber = number;
+                    phoneNumber = phone.completeNumber;
+                    phoneIsoCode = phone.countryISOCode;
+                    nonInternationalNumber = phone.number;
                   },
                 );
               },

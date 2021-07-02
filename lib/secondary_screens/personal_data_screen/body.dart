@@ -13,8 +13,8 @@ class Body extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final File imageFile;
   final String fullName;
-  final Function onChanged;
-  final Function onPhoneNumberChange;
+  final Function onChanged1;
+  final Function onChanged2;
   final Function onPressed1;
   final Function onPressed2;
 
@@ -22,8 +22,8 @@ class Body extends StatelessWidget {
     this.formKey,
     this.imageFile,
     this.fullName,
-    this.onChanged,
-    this.onPhoneNumberChange,
+    this.onChanged1,
+    this.onChanged2,
     this.onPressed1,
     this.onPressed2,
   });
@@ -41,8 +41,8 @@ class Body extends StatelessWidget {
             EditProfileStreamBuilder(
               imageFile: imageFile,
               fullName: fullName,
-              onChanged: onChanged,
-              onPhoneNumberChange: onPhoneNumberChange,
+              onChanged1: onChanged1,
+              onChanged2: onChanged2,
               onPressed1: onPressed1,
               onPressed2: onPressed2,
             ),
