@@ -17,10 +17,6 @@ class DatabaseService {
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('H4Y Users Database');
 
-  // Collection Reference (Announcements)
-  final CollectionReference announcementsCollection =
-      FirebaseFirestore.instance.collection("H4Y Announcements Database");
-
   // Collection Reference (Occupation Database)
   final CollectionReference occupationCollection =
       FirebaseFirestore.instance.collection('H4Y Occupation Database');
