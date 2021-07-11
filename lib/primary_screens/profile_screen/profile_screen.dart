@@ -107,6 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       userId: user.uid,
                     );
                     Wiredash.of(context).setBuildProperties(
+                      buildNumber: "Help4You",
                       buildVersion: "",
                     );
                     Wiredash.of(context).show();
