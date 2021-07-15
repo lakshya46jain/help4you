@@ -58,7 +58,7 @@ class DatabaseService {
     String professionalId,
     String serviceTitle,
     String serviceDescription,
-    int servicePrice,
+    double servicePrice,
     int quantity,
   ) async {
     return await userCollection.doc(uid).collection("Cart").doc(serviceId).set(

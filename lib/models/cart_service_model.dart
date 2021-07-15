@@ -4,7 +4,7 @@ class Help4YouCartServices {
   final String serviceId;
   final String serviceTitle;
   final String serviceDescription;
-  final int servicePrice;
+  final double servicePrice;
   final int quantity;
 
   Help4YouCartServices({

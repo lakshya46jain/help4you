@@ -38,7 +38,7 @@ class CartNavBar extends StatelessWidget {
             child: StreamBuilder(
               stream: DatabaseService(uid: user.uid).cartServiceData,
               builder: (context, snapshot) {
-                int total = 0;
+                double total = 0;
                 List<Help4YouCartServices> cartServices = snapshot.data;
                 if (snapshot.connectionState == ConnectionState.active) {
                   for (Help4YouCartServices cartService in cartServices) {

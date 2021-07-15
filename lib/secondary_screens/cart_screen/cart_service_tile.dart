@@ -14,7 +14,7 @@ class CartServiceTile extends StatelessWidget {
   final String professionalId;
   final String serviceTitle;
   final String serviceDescription;
-  final int servicePrice;
+  final double servicePrice;
   final int quantity;
 
   CartServiceTile({
