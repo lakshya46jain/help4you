@@ -18,17 +18,24 @@ class AdminStreamBuilder extends StatelessWidget {
       stream: DatabaseService(uid: user.uid).userData,
       builder: (context, snapshot) {
         UserDataCustomer userData = snapshot.data;
-        if (userData.adminLevel > 0) {
-          return ExpandedButton(
-            icon: FluentIcons.people_24_regular,
-            text: "Admin Access",
-            onPressed: () {},
-          );
+        if (snapshot.hasData) {
+          if (userData.adminLevel > 0) {
+            return ExpandedButton(
+              icon: FluentIcons.people_24_regular,
+              text: "Admin Access",
+              onPressed: () {},
+            );
+          } else {
+            return Container(
+              width: 0.0,
+              height: 0.0,
+              color: Colors.transparent,
+            );
+          }
         } else {
           return Container(
-            width: 0.0,
             height: 0.0,
-            color: Colors.transparent,
+            width: 0.0,
           );
         }
       },

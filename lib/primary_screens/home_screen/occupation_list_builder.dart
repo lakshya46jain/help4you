@@ -5,9 +5,10 @@ import 'package:provider/provider.dart';
 // File Imports
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
+import 'package:help4you/constants/loading.dart';
 import 'package:help4you/models/service_category_model.dart';
-import 'package:help4you/secondary_screens/categories_screen/categories_screen.dart';
 import 'package:help4you/primary_screens/home_screen/occupation_button.dart';
+import 'package:help4you/secondary_screens/categories_screen/categories_screen.dart';
 
 class OccupationListBuilder extends StatelessWidget {
   @override
@@ -60,30 +61,34 @@ class OccupationListBuilder extends StatelessWidget {
           stream: DatabaseService(uid: user.uid).serviceCategoryData,
           builder: (context, snapshot) {
             List<ServiceCategory> servicesCategory = snapshot.data;
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 20.0,
-                  ),
-                  ...List.generate(
-                    servicesCategory.length,
-                    (index) {
-                      return OccupationButton(
-                        buttonLogo: servicesCategory[index].buttonLogo,
-                        occupation: servicesCategory[index].occupation,
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    width: 20.0,
-                  ),
-                ],
-              ),
-            );
+            if (snapshot.hasData) {
+              return SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 20.0,
+                    ),
+                    ...List.generate(
+                      servicesCategory.length,
+                      (index) {
+                        return OccupationButton(
+                          buttonLogo: servicesCategory[index].buttonLogo,
+                          occupation: servicesCategory[index].occupation,
+                        );
+                      },
+                    ),
+                    SizedBox(
+                      width: 20.0,
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return DoubleBounceLoading();
+            }
           },
         ),
       ],

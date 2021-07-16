@@ -1,11 +1,12 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
-import 'package:help4you/constants/custom_search_bar.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
+import 'package:help4you/constants/loading.dart';
+import 'package:help4you/constants/custom_search_bar.dart';
 import 'package:help4you/models/service_category_model.dart';
 import 'package:help4you/secondary_screens/categories_screen/occupation_banner.dart';
 
@@ -32,17 +33,21 @@ class Body extends StatelessWidget {
             stream: DatabaseService(uid: user.uid).serviceCategoryData,
             builder: (context, snapshot) {
               List<ServiceCategory> servicesCategory = snapshot.data;
-              return ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: servicesCategory.length,
-                itemBuilder: (context, index) {
-                  return OccupationBanner(
-                    buttonBanner: servicesCategory[index].buttonBanner,
-                    occupation: servicesCategory[index].occupation,
-                  );
-                },
-              );
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: servicesCategory.length,
+                  itemBuilder: (context, index) {
+                    return OccupationBanner(
+                      buttonBanner: servicesCategory[index].buttonBanner,
+                      occupation: servicesCategory[index].occupation,
+                    );
+                  },
+                );
+              } else {
+                return DoubleBounceLoading();
+              }
             },
           ),
         ],
