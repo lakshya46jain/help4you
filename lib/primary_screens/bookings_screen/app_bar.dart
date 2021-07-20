@@ -10,7 +10,7 @@ class BookingsAppBar extends StatelessWidget {
       elevation: 0.0,
       backgroundColor: Colors.transparent,
       title: Text(
-        "Bookings",
+        "Booking",
         style: TextStyle(
           fontSize: 25.0,
           color: Color(0xFF1C3857),

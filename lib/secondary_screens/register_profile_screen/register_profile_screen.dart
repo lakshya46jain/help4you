@@ -27,7 +27,7 @@ class _RegisterProfileScreenState extends State<RegisterProfileScreen> {
   File _imageFile;
 
   // Crop Selected Image
-  Future cropImage(PickedFile selectedFile) async {
+  Future cropImage(XFile selectedFile) async {
     File cropped = await ImageCropper.cropImage(
       sourcePath: selectedFile.path,
       aspectRatio: CropAspectRatio(
@@ -47,7 +47,7 @@ class _RegisterProfileScreenState extends State<RegisterProfileScreen> {
 
   // Select Image Via Image Picker
   Future getImage(ImageSource source) async {
-    final selected = await ImagePicker().getImage(source: source);
+    final selected = await ImagePicker().pickImage(source: source);
     if (selected != null) {
       cropImage(selected);
     }

@@ -93,12 +93,12 @@ class DatabaseService {
   UserDataCustomer _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserDataCustomer(
       uid: uid,
-      fullName: snapshot.data()['Full Name'],
-      phoneNumber: snapshot.data()['Phone Number'],
-      phoneIsoCode: snapshot.data()['Phone ISO Code'],
-      nonInternationalNumber: snapshot.data()['Non International Number'],
-      profilePicture: snapshot.data()['Profile Picture'],
-      adminLevel: snapshot.data()['Administrative Level'],
+      fullName: snapshot['Full Name'],
+      phoneNumber: snapshot['Phone Number'],
+      phoneIsoCode: snapshot['Phone ISO Code'],
+      nonInternationalNumber: snapshot['Non International Number'],
+      profilePicture: snapshot['Profile Picture'],
+      adminLevel: snapshot['Administrative Level'],
     );
   }
 
@@ -108,12 +108,12 @@ class DatabaseService {
     return snapshot.docs.toList().map(
       (document) {
         Help4YouCartServices help4youCartServices = Help4YouCartServices(
-          professionalId: document.data()["Professional UID"],
-          serviceId: document.data()["Service ID"],
-          serviceTitle: document.data()["Service Title"],
-          serviceDescription: document.data()["Service Description"],
-          servicePrice: document.data()["Service Price"],
-          quantity: document.data()["Quantity"],
+          professionalId: document["Professional UID"],
+          serviceId: document["Service ID"],
+          serviceTitle: document["Service Title"],
+          serviceDescription: document["Service Description"],
+          servicePrice: document["Service Price"],
+          quantity: document["Quantity"],
         );
         return help4youCartServices;
       },
@@ -126,9 +126,9 @@ class DatabaseService {
     return snapshot.docs.toList().map(
       (document) {
         ServiceCategory help4youServiceCategory = ServiceCategory(
-          buttonLogo: document.data()["Button Logo"],
-          buttonBanner: document.data()["Button Banner"],
-          occupation: document.data()["Occupation"],
+          buttonLogo: document["Button Logo"],
+          buttonBanner: document["Button Banner"],
+          occupation: document["Occupation"],
         );
         return help4youServiceCategory;
       },
