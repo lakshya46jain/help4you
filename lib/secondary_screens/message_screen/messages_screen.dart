@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/secondary_screens/message_screen/body.dart';
 import 'package:help4you/secondary_screens/message_screen/app_bar.dart';
+import 'package:help4you/secondary_screens/message_screen/bottom_navigation_bar.dart';
 
 class MessageScreen extends StatefulWidget {
   final String uid;
@@ -30,7 +30,7 @@ class _MessageScreenState extends State<MessageScreen> {
   bool isMessageEmpty;
 
   // Message Controller
-  final TextEditingController _messageController = TextEditingController();
+  final TextEditingController messageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,24 +51,35 @@ class _MessageScreenState extends State<MessageScreen> {
             phoneNumber: widget.phoneNumber,
           ),
         ),
-        body: Body(
-          isMessageEmpty: isMessageEmpty,
-          messageController: _messageController,
-          onChanged: (value) {
-            setState(() {
-              message = value;
-            });
-            if (value.isEmpty) {
-              setState(() {
-                isMessageEmpty = false;
-              });
-            } else {
-              setState(() {
-                isMessageEmpty = true;
-              });
-            }
-          },
-          onPressed: () {},
+        body: Container(
+          child: Stack(
+            children: [
+              Positioned(
+                bottom: 0.0,
+                right: 0.0,
+                left: 0.0,
+                child: MessageNavBar(
+                  onChanged: (value) {
+                    setState(() {
+                      message = value;
+                    });
+                    if (value.isEmpty) {
+                      setState(() {
+                        isMessageEmpty = false;
+                      });
+                    } else {
+                      setState(() {
+                        isMessageEmpty = true;
+                      });
+                    }
+                  },
+                  onPressed: () {},
+                  isMessageEmpty: isMessageEmpty,
+                  messageController: messageController,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

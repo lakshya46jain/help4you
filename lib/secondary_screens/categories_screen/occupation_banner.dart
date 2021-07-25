@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
-import 'package:help4you/secondary_screens/professional_listing_screen/professional_listing_screen.dart';
+import 'package:help4you/secondary_screens/professionals_screen/professional_listing_screen.dart';
 
 class OccupationBanner extends StatelessWidget {
   final String buttonBanner;

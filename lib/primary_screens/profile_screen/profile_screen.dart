@@ -7,12 +7,12 @@ import 'package:provider/provider.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
+import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/expanded_button.dart';
-import 'package:help4you/secondary_screens/handbook_screen/handbook_screen.dart';
-import 'package:help4you/secondary_screens/personal_data_screen/personal_data_screen.dart';
-import 'package:help4you/primary_screens/profile_screen/admin_stream.dart';
+import 'package:help4you/secondary_screens/handbook_screen.dart';
 import 'package:help4you/primary_screens/profile_screen/profile_stream.dart';
+import 'package:help4you/secondary_screens/personal_data_screen/personal_data_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -78,7 +78,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     );
                   },
                 ),
-                AdminStreamBuilder(),
+                StreamBuilder(
+                  stream: DatabaseService(uid: user.uid).userData,
+                  builder: (context, snapshot) {
+                    UserDataCustomer userData = snapshot.data;
+                    if (snapshot.hasData) {
+                      if (userData.adminLevel > 0) {
+                        return ExpandedButton(
+                          icon: FluentIcons.people_24_regular,
+                          text: "Admin Access",
+                          onPressed: () {},
+                        );
+                      } else {
+                        return Container(
+                          width: 0.0,
+                          height: 0.0,
+                          color: Colors.transparent,
+                        );
+                      }
+                    } else {
+                      return Container(
+                        height: 0.0,
+                        width: 0.0,
+                      );
+                    }
+                  },
+                ),
                 ExpandedButton(
                   icon: FluentIcons.sign_out_24_regular,
                   text: "Sign Out",

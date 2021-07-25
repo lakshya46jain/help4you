@@ -2,8 +2,6 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/primary_screens/bookings_screen/body.dart';
-import 'package:help4you/primary_screens/bookings_screen/app_bar.dart';
 
 class BookingsScreen extends StatefulWidget {
   @override
@@ -18,13 +16,20 @@ class _BookingsScreenState extends State<BookingsScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(
-            MediaQuery.of(context).size.height / (1792 / 100),
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          title: Text(
+            "Booking",
+            style: TextStyle(
+              fontSize: 25.0,
+              color: Color(0xFF1C3857),
+              fontFamily: "BalooPaaji",
+              fontWeight: FontWeight.w600,
+            ),
           ),
-          child: BookingsAppBar(),
         ),
-        body: Body(),
+        body: Container(),
       ),
     );
   }

@@ -8,7 +8,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
-import 'package:help4you/secondary_screens/cart_screen/cart.dart';
+import 'package:help4you/secondary_screens/cart_screen/cart_screen.dart';
 
 class HomeHeader extends StatelessWidget {
   @override

@@ -16,27 +16,26 @@ class Body extends StatelessWidget {
     // Get User
     final user = Provider.of<Help4YouUser>(context);
 
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 15.0,
-          ),
-          SearchBar(
-            width: MediaQuery.of(context).size.width,
-            hintText: "Search for categories",
-          ),
-          SizedBox(
-            height: 25.0,
-          ),
-          StreamBuilder(
+    return Column(
+      children: [
+        SizedBox(
+          height: 15.0,
+        ),
+        SearchBar(
+          width: MediaQuery.of(context).size.width,
+          hintText: "Search for categories",
+        ),
+        SizedBox(
+          height: 25.0,
+        ),
+        Expanded(
+          child: StreamBuilder(
             stream: DatabaseService(uid: user.uid).serviceCategoryData,
             builder: (context, snapshot) {
               List<ServiceCategory> servicesCategory = snapshot.data;
               if (snapshot.hasData) {
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
                   itemCount: servicesCategory.length,
                   itemBuilder: (context, index) {
                     return OccupationBanner(
@@ -50,8 +49,8 @@ class Body extends StatelessWidget {
               }
             },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
