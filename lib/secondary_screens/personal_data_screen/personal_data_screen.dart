@@ -1,12 +1,16 @@
 // Flutter Imports
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // Dependency Imports
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
-import 'package:help4you/secondary_screens/personal_data_screen/body.dart';
+import 'package:help4you/constants/expanded_button.dart';
+import 'package:help4you/secondary_screens/delete_account_screen.dart';
 import 'package:help4you/secondary_screens/personal_data_screen/app_bar.dart';
+import 'package:help4you/secondary_screens/personal_data_screen/edit_profile_stream.dart';
 
 class PersonalDataScreen extends StatefulWidget {
   @override
@@ -16,15 +20,15 @@ class PersonalDataScreen extends StatefulWidget {
 class _PersonalDataScreenState extends State<PersonalDataScreen> {
   // Text Field Variables
   String fullName;
-  String phoneNumber;
+  String countryCode;
   String phoneIsoCode;
   String nonInternationalNumber;
 
   // Global Key
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   // Active Image File
-  File _imageFile;
+  File imageFile;
 
   // Crop Selected Image
   Future cropImage(XFile selectedFile) async {
@@ -39,7 +43,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
     if (cropped != null) {
       setState(
         () {
-          _imageFile = cropped;
+          imageFile = cropped;
         },
       );
     }
@@ -64,35 +68,63 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(50.0),
           child: PersonalDataAppBar(
-            formKey: _formKey,
+            formKey: formKey,
             fullName: fullName,
-            phoneNumber: phoneNumber,
+            phoneNumber: "$countryCode$nonInternationalNumber",
             phoneIsoCode: phoneIsoCode,
             nonInternationalNumber: nonInternationalNumber,
-            imageFile: _imageFile,
+            imageFile: imageFile,
           ),
         ),
-        body: Body(
-          fullName: fullName,
-          imageFile: _imageFile,
-          formKey: _formKey,
-          onChanged1: (val) {
-            setState(() => fullName = val);
-          },
-          onChanged2: (phone) {
-            setState(
-              () {
-                phoneNumber = phone.completeNumber;
-                phoneIsoCode = phone.countryISOCode;
-                nonInternationalNumber = phone.number;
-              },
-            );
-          },
-          onPressed1: () => getImage(
-            ImageSource.camera,
-          ),
-          onPressed2: () => getImage(
-            ImageSource.gallery,
+        body: SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 25.0,
+                ),
+                EditProfileStreamBuilder(
+                  imageFile: imageFile,
+                  fullName: fullName,
+                  onChanged1: (val) {
+                    setState(() {
+                      fullName = val;
+                    });
+                  },
+                  onChanged2: (phone) {
+                    setState(() {
+                      nonInternationalNumber = phone.number;
+                    });
+                  },
+                  onPressed1: () => getImage(
+                    ImageSource.camera,
+                  ),
+                  onPressed2: () => getImage(
+                    ImageSource.gallery,
+                  ),
+                  onCountryChanged: (phone) {
+                    setState(() {
+                      countryCode = phone.countryCode;
+                      phoneIsoCode = phone.countryISOCode;
+                    });
+                  },
+                ),
+                ExpandedButton(
+                  icon: FluentIcons.delete_24_regular,
+                  text: "Delete Account",
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DeleteAccountScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

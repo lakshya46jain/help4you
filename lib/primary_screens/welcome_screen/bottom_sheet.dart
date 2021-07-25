@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/secondary_screens/phone_auth_screen/phone_authentication.dart';
+import 'package:help4you/secondary_screens/phone_authentication.dart';
 
 class WelcomeBottomSheet extends StatelessWidget {
   @override
