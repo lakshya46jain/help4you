@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/primary_screens/welcome_screen/pages.dart';
+import 'package:help4you/primary_screens/onboarding_screen/pages.dart';
 
 class PageViewContainer extends StatelessWidget {
   final PageController pageController;
@@ -15,8 +15,7 @@ class PageViewContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height / (1792 / 1400),
+    return Expanded(
       child: PageView(
         physics: ClampingScrollPhysics(),
         controller: pageController,
@@ -25,30 +24,30 @@ class PageViewContainer extends StatelessWidget {
           // Page 1
           Pages(
             graphicImage: "assets/graphics/Help4You_Illustration_1.svg",
-            title: "Connect with people in your local area",
+            title: "Connect With Professionals",
             description:
-                "Help4You allows you to contact various workers in your area according to your requirement.",
+                "Connect with professionals in your locality according to your requirement.",
           ),
           // Page 2
           Pages(
             graphicImage: "assets/graphics/Help4You_Illustration_2.svg",
-            title: "Live your life smarter with us!",
+            title: "Live Smarter!",
             description:
-                "Help4You gives the ability to book professionals for various skills & will be able to compare the prices of all the professionals and choose who you would like to do the job for you.",
+                "Compare prices of professionals and book them according to your convenience.",
           ),
           // Page 3
           Pages(
             graphicImage: "assets/graphics/Help4You_Illustration_3.svg",
-            title: "Get a new experience of getting tasks done",
+            title: "New Experiences",
             description:
-                "You will be able to chat with the professional to explain on ground situation of the problem being faced.",
+                "Explain on ground situation to professional through chat for easier diagnosis.",
           ),
           // Page 4
           Pages(
             graphicImage: "assets/graphics/Help4You_Illustration_4.svg",
-            title: "Note",
+            title: "Important Note",
             description:
-                "The PROFESSIONALS that are seen on the app are not associated with Help4You. Help4You is a platform which allows professionals to get notified about the work & reach you.",
+                "The PROFESSIONALS are not associated with Help4You in any way.",
           ),
         ],
       ),
