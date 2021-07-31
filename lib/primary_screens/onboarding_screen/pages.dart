@@ -17,7 +17,7 @@ class Pages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(30.0),
+      padding: EdgeInsets.symmetric(horizontal: 30.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
