@@ -1,16 +1,22 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:help4you/services/auth.dart';
 // Dependency Imports
 import 'package:pinput/pin_put/pin_put.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // File Imports
 import 'package:help4you/constants/back_button.dart';
 
 class VerificationScreen extends StatefulWidget {
+  final String phoneIsoCode;
+  final String nonInternationalNumber;
   final String phoneNumber;
   final Function submitOTP;
   final Function resendOTP;
 
   VerificationScreen({
+    @required this.phoneIsoCode,
+    @required this.nonInternationalNumber,
     @required this.phoneNumber,
     @required this.submitOTP,
     this.resendOTP,
@@ -107,7 +113,35 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   height: 30.0,
                 ),
                 GestureDetector(
-                  onTap: () async {},
+                  onTap: () async {
+                    FirebaseAuth.instance.verifyPhoneNumber(
+                      phoneNumber: widget.phoneNumber,
+                      timeout: Duration(seconds: 180),
+                      verificationCompleted:
+                          (PhoneAuthCredential credential) async {
+                        AuthService().verificationCompleted(
+                          credential,
+                          fullName,
+                          widget.phoneIsoCode,
+                          widget.nonInternationalNumber,
+                          widget.phoneNumber,
+                          context,
+                        );
+                      },
+                      verificationFailed:
+                          (FirebaseAuthException exception) async {
+                        AuthService().verificationFailed(
+                          exception,
+                          context,
+                        );
+                      },
+                      codeSent:
+                          (String verificationId, int resendToken) async {},
+                      codeAutoRetrievalTimeout: (String verificationId) async {
+                        verificationId = verificationId;
+                      },
+                    );
+                  },
                   child: Text.rich(
                     TextSpan(
                       text: "Didn't recieve the OTP?",

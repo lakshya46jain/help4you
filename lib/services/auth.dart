@@ -27,6 +27,76 @@ class AuthService {
     return auth.authStateChanges().map(_userFromFirebase);
   }
 
+  // Verification Completed Future Function
+  Future<void> verificationCompleted(
+    PhoneAuthCredential credential,
+    String fullName,
+    String phoneIsoCode,
+    String nonInternationalNumber,
+    String phoneNumber,
+    BuildContext context,
+  ) async {
+    await auth.signInWithCredential(credential).then(
+      (UserCredential result) async {
+        User user = result.user;
+        DocumentSnapshot ds = await FirebaseFirestore.instance
+            .collection("H4Y Users Database")
+            .doc(user.uid)
+            .get();
+        if (ds.exists) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Wrapper(),
+            ),
+            (route) => false,
+          );
+        } else {
+          await DatabaseService(uid: user.uid).updateUserData(
+            fullName,
+            phoneNumber,
+            phoneIsoCode,
+            nonInternationalNumber,
+          );
+          await DatabaseService(uid: user.uid).updateProfilePicture(
+            "https://drive.google.com/uc?export=view&id=1Fis4yJe7_d_RROY7JdSihM2--GH5aqbe",
+          );
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Wrapper(),
+            ),
+            (route) => false,
+          );
+        }
+      },
+    );
+  }
+
+  // Firebase Authentication Exception Future Function
+  Future<void> verificationFailed(
+    FirebaseAuthException exception,
+    BuildContext context,
+  ) async {
+    if (exception.code == 'invalid-phone-number') {
+      showCustomSnackBar(
+        context,
+        FluentIcons.error_circle_24_regular,
+        Colors.red,
+        "Error!",
+        "Please enter a valid phone number.",
+      );
+    } else if (exception.code == 'too-many-requests') {
+      showCustomSnackBar(
+        context,
+        FluentIcons.warning_24_regular,
+        Colors.orange,
+        "Warning!",
+        "We have recieved too many requests from this number. Please try again later.",
+      );
+    }
+  }
+
   // Phone Authentication
   Future phoneAuthentication(
     String fullName,
@@ -39,66 +109,28 @@ class AuthService {
       phoneNumber: phoneNumber,
       timeout: Duration(seconds: 180),
       verificationCompleted: (PhoneAuthCredential credential) async {
-        await auth.signInWithCredential(credential).then(
-          (UserCredential result) async {
-            User user = result.user;
-            DocumentSnapshot ds = await FirebaseFirestore.instance
-                .collection("H4Y Users Database")
-                .doc(user.uid)
-                .get();
-            if (ds.exists) {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Wrapper(),
-                ),
-                (route) => false,
-              );
-            } else {
-              await DatabaseService(uid: user.uid).updateUserData(
-                fullName,
-                phoneNumber,
-                phoneIsoCode,
-                nonInternationalNumber,
-              );
-              await DatabaseService(uid: user.uid).updateProfilePicture(
-                "https://drive.google.com/uc?export=view&id=1Fis4yJe7_d_RROY7JdSihM2--GH5aqbe",
-              );
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Wrapper(),
-                ),
-                (route) => false,
-              );
-            }
-          },
+        verificationCompleted(
+          credential,
+          fullName,
+          phoneIsoCode,
+          nonInternationalNumber,
+          phoneNumber,
+          context,
         );
       },
       verificationFailed: (FirebaseAuthException exception) async {
-        if (exception.code == 'invalid-phone-number') {
-          showCustomSnackBar(
-            context,
-            FluentIcons.error_circle_24_regular,
-            Colors.red,
-            "Error!",
-            "Please enter a valid phone number.",
-          );
-        } else if (exception.code == 'too-many-requests') {
-          showCustomSnackBar(
-            context,
-            FluentIcons.warning_24_regular,
-            Colors.orange,
-            "Warning!",
-            "We have recieved too many requests from this number. Please try again later.",
-          );
-        }
+        verificationFailed(
+          exception,
+          context,
+        );
       },
       codeSent: (String verificationId, int resendToken) async {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => VerificationScreen(
+              phoneIsoCode: phoneIsoCode,
+              nonInternationalNumber: nonInternationalNumber,
               phoneNumber: phoneNumber,
               submitOTP: (pin) {
                 HapticFeedback.heavyImpact();
