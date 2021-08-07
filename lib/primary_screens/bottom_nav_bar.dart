@@ -44,49 +44,44 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Scaffold(
-        body: tabs[selectedIndex],
-        bottomNavigationBar: ClipRRect(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(25.0),
-          ),
-          child: BottomNavigationBar(
-            onTap: onTap,
-            elevation: 0.0,
-            iconSize: 27.0,
-            selectedFontSize: 1.0,
-            unselectedFontSize: 1.0,
-            currentIndex: selectedIndex,
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: Color(0xFF1C3857),
-            unselectedItemColor: Color(0xFF1C3857),
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(FluentIcons.home_24_regular),
-                activeIcon: Icon(FluentIcons.home_24_filled),
-                label: "",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(FluentIcons.notebook_24_regular),
-                activeIcon: Icon(FluentIcons.notebook_24_filled),
-                label: "",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(FluentIcons.chat_24_regular),
-                activeIcon: Icon(FluentIcons.chat_24_filled),
-                label: "",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(FluentIcons.person_24_regular),
-                activeIcon: Icon(FluentIcons.person_24_filled),
-                label: "",
-              ),
-            ],
-          ),
+    return Scaffold(
+      body: tabs[selectedIndex],
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25.0),
+        ),
+        child: BottomNavigationBar(
+          onTap: onTap,
+          elevation: 0.0,
+          iconSize: 27.0,
+          selectedFontSize: 1.0,
+          unselectedFontSize: 1.0,
+          currentIndex: selectedIndex,
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Color(0xFF1C3857),
+          unselectedItemColor: Color(0xFF1C3857),
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(FluentIcons.home_24_regular),
+              activeIcon: Icon(FluentIcons.home_24_filled),
+              label: "",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FluentIcons.notebook_24_regular),
+              activeIcon: Icon(FluentIcons.notebook_24_filled),
+              label: "",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FluentIcons.chat_24_regular),
+              activeIcon: Icon(FluentIcons.chat_24_filled),
+              label: "",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FluentIcons.person_24_regular),
+              activeIcon: Icon(FluentIcons.person_24_filled),
+              label: "",
+            ),
+          ],
         ),
       ),
     );

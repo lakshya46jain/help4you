@@ -29,126 +29,121 @@ class ProfessionalsDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(
-            MediaQuery.of(context).size.height / (1792 / 100),
-          ),
-          child: ProfessionalDetailAppBar(
-            rating: rating,
-          ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(
+          MediaQuery.of(context).size.height / (1792 / 100),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.0,
-                  vertical: 10.0,
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 125.0,
-                      width: 125.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
+        child: ProfessionalDetailAppBar(
+          rating: rating,
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.0,
+                vertical: 10.0,
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    height: 125.0,
+                    width: 125.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: CachedNetworkImage(
+                        imageUrl: profilePicture,
+                        fit: BoxFit.fill,
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: CachedNetworkImage(
-                          imageUrl: profilePicture,
-                          fit: BoxFit.fill,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15.0,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        fullName,
+                        style: TextStyle(
+                          color: Color(0xFF1C3857),
+                          fontWeight: FontWeight.w800,
+                          fontSize: 24.0,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 15.0,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          fullName,
-                          style: TextStyle(
-                            color: Color(0xFF1C3857),
-                            fontWeight: FontWeight.w800,
-                            fontSize: 24.0,
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Text(
+                        occupation,
+                        style: TextStyle(
+                          color: Color(0xFF95989A),
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 20.0,
+                right: 20.0,
+                top: 5.0,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomMediaButton(
+                    onTap: () {
+                      FlutterPhoneDirectCaller.callNumber(
+                        phoneNumber,
+                      );
+                    },
+                    icon: FluentIcons.call_28_filled,
+                    color: Color(0xFF1C3857),
+                    title: "Contact",
+                  ),
+                  CustomMediaButton(
+                    onTap: () {},
+                    icon: FluentIcons.book_coins_24_filled,
+                    color: Color(0xFF1C3857),
+                    title: "Rate Card",
+                  ),
+                  CustomMediaButton(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MessageScreen(
+                            uid: professionalUID,
+                            fullName: fullName,
+                            occupation: occupation,
+                            phoneNumber: phoneNumber,
+                            profilePicture: profilePicture,
                           ),
                         ),
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        Text(
-                          occupation,
-                          style: TextStyle(
-                            color: Color(0xFF95989A),
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      );
+                    },
+                    icon: FluentIcons.chat_28_filled,
+                    color: Color(0xFF1C3857),
+                    title: "Message",
+                  ),
+                ],
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 20.0,
-                  right: 20.0,
-                  top: 5.0,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomMediaButton(
-                      onTap: () {
-                        FlutterPhoneDirectCaller.callNumber(
-                          phoneNumber,
-                        );
-                      },
-                      icon: FluentIcons.call_28_filled,
-                      color: Color(0xFF1C3857),
-                      title: "Contact",
-                    ),
-                    CustomMediaButton(
-                      onTap: () {},
-                      icon: FluentIcons.book_coins_24_filled,
-                      color: Color(0xFF1C3857),
-                      title: "Rate Card",
-                    ),
-                    CustomMediaButton(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MessageScreen(
-                              uid: professionalUID,
-                              fullName: fullName,
-                              occupation: occupation,
-                              phoneNumber: phoneNumber,
-                              profilePicture: profilePicture,
-                            ),
-                          ),
-                        );
-                      },
-                      icon: FluentIcons.chat_28_filled,
-                      color: Color(0xFF1C3857),
-                      title: "Message",
-                    ),
-                  ],
-                ),
-              ),
-              ServiceTileBuilder(
-                uid: professionalUID,
-              ),
-            ],
-          ),
+            ),
+            ServiceTileBuilder(
+              uid: professionalUID,
+            ),
+          ],
         ),
       ),
     );
