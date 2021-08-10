@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Scaffold(
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             children: [
               SizedBox(
@@ -30,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 15.0,
               ),
               SearchBar(
-                hintText: "Search for location",
+                hintText: "Search locations...",
                 width: MediaQuery.of(context).size.width,
               ),
               SizedBox(

@@ -6,7 +6,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:help4you/primary_screens/home_screen/home_screen.dart';
 import 'package:help4you/primary_screens/profile_screen/profile_screen.dart';
 import 'package:help4you/primary_screens/bookings_screen.dart';
-import 'package:help4you/primary_screens/message_list_screen.dart';
+import 'package:help4you/primary_screens/message_list/message_list_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override

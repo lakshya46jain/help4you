@@ -3,14 +3,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
+import 'package:help4you/models/messages_model.dart';
+import 'package:help4you/models/chat_room_model.dart';
 import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/models/service_category_model.dart';
 
 class DatabaseService {
   final String uid;
+  final String chatRoomId;
 
   DatabaseService({
     this.uid,
+    this.chatRoomId,
   });
 
   // Collection Reference (User Database)
@@ -21,6 +25,10 @@ class DatabaseService {
   final CollectionReference occupationCollection =
       FirebaseFirestore.instance.collection('H4Y Occupation Database');
 
+  // Collection Reference (Chat Room Database)
+  final CollectionReference chatRoomCollection =
+      FirebaseFirestore.instance.collection("H4Y Chat Rooms Database");
+
   // Update User Data
   Future updateUserData(
     String fullName,
@@ -28,7 +36,7 @@ class DatabaseService {
     String phoneIsoCode,
     String nonInternationalNumber,
   ) async {
-    return await userCollection.doc(uid).set(
+    await userCollection.doc(uid).set(
       {
         'Account Type': "Customer",
         'User UID': uid,
@@ -45,7 +53,7 @@ class DatabaseService {
   Future updateProfilePicture(
     String profilePicture,
   ) async {
-    return await userCollection.doc(uid).update(
+    await userCollection.doc(uid).update(
       {
         'Profile Picture': profilePicture,
       },
@@ -61,7 +69,7 @@ class DatabaseService {
     double servicePrice,
     int quantity,
   ) async {
-    return await userCollection.doc(uid).collection("Cart").doc(serviceId).set(
+    await userCollection.doc(uid).collection("Cart").doc(serviceId).set(
       {
         'Service ID': serviceId,
         'Professional UID': professionalId,
@@ -78,13 +86,42 @@ class DatabaseService {
     String serviceId,
     int quantity,
   ) async {
-    return await userCollection
-        .doc(uid)
-        .collection("Cart")
-        .doc(serviceId)
-        .update(
+    await userCollection.doc(uid).collection("Cart").doc(serviceId).update(
       {
         'Quantity': quantity,
+      },
+    );
+  }
+
+  // Create Chat Room
+  Future createChatRoom(
+    String customerUID,
+    String professionalUID,
+  ) async {
+    DocumentSnapshot ds = await chatRoomCollection.doc(chatRoomId).get();
+    if (!ds.exists) {
+      await chatRoomCollection.doc(chatRoomId).set(
+        {
+          "Connection Date": DateTime.now(),
+          "Chat Room ID": chatRoomId,
+          "Customer UID": customerUID,
+          "Professional UID": professionalUID,
+        },
+      );
+    }
+  }
+
+  // Add Chat Room Messageszzz
+  Future addMessageToChatRoom(
+    String chatRoomId,
+    String message,
+    String sender,
+  ) async {
+    await chatRoomCollection.doc(chatRoomId).collection("Messages").doc().set(
+      {
+        "Message": message,
+        "Sender": sender,
+        "Time Stamp": DateTime.now(),
       },
     );
   }
@@ -135,6 +172,33 @@ class DatabaseService {
     ).toList();
   }
 
+  // Chat Rooms from Snapshot
+  List<ChatRoom> _help4YouChatRoomFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.toList().map((document) {
+      ChatRoom help4YouChatRoom = ChatRoom(
+          chatRoomId: document["Chat Room ID"],
+          connectionDate: document["Connection Date"],
+          customerUID: document["Customer UID"],
+          professionalUID: document["Professional UID"]);
+      return help4YouChatRoom;
+    }).toList();
+  }
+
+  // Messages Data from Snapshot
+  List<Messages> _help4YouMessageFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.toList().map(
+      (document) {
+        Messages help4YouMessages = Messages(
+          messageId: document.id,
+          sender: document["Sender"],
+          message: document["Message"],
+          timeStamp: document["Time Stamp"],
+        );
+        return help4YouMessages;
+      },
+    ).toList();
+  }
+
   // Get User Document
   Stream<UserDataCustomer> get userData {
     return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
@@ -155,5 +219,23 @@ class DatabaseService {
         .orderBy("Occupation")
         .snapshots()
         .map(_help4YouServiceCategoryFromSnapshot);
+  }
+
+  // Get Chat Rooms Documents
+  Stream<List<ChatRoom>> get chatRoomsData {
+    return chatRoomCollection
+        .where("Customer UID", isEqualTo: uid)
+        .snapshots()
+        .map(_help4YouChatRoomFromSnapshot);
+  }
+
+  // Get Messages Documents
+  Stream<List<Messages>> get messagesData {
+    return chatRoomCollection
+        .doc(chatRoomId)
+        .collection("Messages")
+        .orderBy("Time Stamp", descending: true)
+        .snapshots()
+        .map(_help4YouMessageFromSnapshot);
   }
 }

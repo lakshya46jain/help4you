@@ -34,7 +34,9 @@ class SearchBar extends StatelessWidget {
         ),
         child: TextField(
           controller: controller,
-          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20.0,
+          ),
           decoration: InputDecoration(
             enabledBorder: InputBorder.none,
             focusedBorder: InputBorder.none,

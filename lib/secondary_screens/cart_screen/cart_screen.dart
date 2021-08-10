@@ -73,6 +73,7 @@ class _CartScreenState extends State<CartScreen> {
                 return ListView.builder(
                   shrinkWrap: true,
                   itemCount: cartServices.length,
+                  physics: BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return CartServiceTile(
                       serviceId: cartServices[index].serviceId,

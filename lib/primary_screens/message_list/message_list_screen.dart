@@ -6,17 +6,16 @@ import 'package:provider/provider.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/constants/loading.dart';
-import 'package:help4you/constants/back_button.dart';
+import 'package:help4you/models/chat_room_model.dart';
 import 'package:help4you/constants/custom_search_bar.dart';
-import 'package:help4you/models/service_category_model.dart';
-import 'package:help4you/secondary_screens/categories_screen/occupation_banner.dart';
+import 'package:help4you/primary_screens/message_list/message_tile.dart';
 
-class CategoriesScreen extends StatefulWidget {
+class MessageListScreen extends StatefulWidget {
   @override
-  _CategoriesScreenState createState() => _CategoriesScreenState();
+  _MessageListScreenState createState() => _MessageListScreenState();
 }
 
-class _CategoriesScreenState extends State<CategoriesScreen> {
+class _MessageListScreenState extends State<MessageListScreen> {
   // Search Controller
   TextEditingController searchController = TextEditingController();
 
@@ -33,9 +32,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: Colors.transparent,
-          leading: CustomBackButton(),
           title: Text(
-            "Categories",
+            "Messages",
             style: TextStyle(
               fontSize: 25.0,
               color: Color(0xFF1C3857),
@@ -47,11 +45,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         body: Column(
           children: [
             SizedBox(
-              height: 15.0,
+              height: 5.0,
             ),
             SearchBar(
               width: MediaQuery.of(context).size.width,
-              hintText: "Search categories...",
+              hintText: "Search messages...",
               controller: searchController,
             ),
             SizedBox(
@@ -59,18 +57,17 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             ),
             Expanded(
               child: StreamBuilder(
-                stream: DatabaseService(uid: user.uid).serviceCategoryData,
+                stream: DatabaseService(uid: user.uid).chatRoomsData,
                 builder: (context, snapshot) {
-                  List<ServiceCategory> servicesCategory = snapshot.data;
                   if (snapshot.hasData) {
+                    List<ChatRoom> chatRooms = snapshot.data;
                     return ListView.builder(
-                      shrinkWrap: true,
+                      itemCount: chatRooms.length,
                       physics: BouncingScrollPhysics(),
-                      itemCount: servicesCategory.length,
                       itemBuilder: (context, index) {
-                        return OccupationBanner(
-                          buttonBanner: servicesCategory[index].buttonBanner,
-                          occupation: servicesCategory[index].occupation,
+                        return MessageTile(
+                          uid: chatRooms[index].professionalUID,
+                          chatRoomId: chatRooms[index].chatRoomId,
                         );
                       },
                     );

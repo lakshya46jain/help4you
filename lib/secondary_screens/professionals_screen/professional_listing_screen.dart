@@ -70,6 +70,7 @@ class ProfessionalListingScreen extends StatelessWidget {
             } else {
               return ListView.builder(
                 shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot documentSnapshot = snapshot.data.docs[index];

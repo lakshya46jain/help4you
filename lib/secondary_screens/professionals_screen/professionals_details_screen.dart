@@ -1,12 +1,15 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 // File Imports
-import 'package:help4you/secondary_screens/message_screen/messages_screen.dart';
+import 'package:help4you/services/database.dart';
+import 'package:help4you/models/user_model.dart';
 import 'package:help4you/secondary_screens/professionals_screen/app_bar.dart';
+import 'package:help4you/secondary_screens/message_screen/messages_screen.dart';
 import 'package:help4you/secondary_screens/professionals_screen/custom_media_button.dart';
 import 'package:help4you/secondary_screens/professionals_screen/service_tile_stream.dart';
 
@@ -29,6 +32,9 @@ class ProfessionalsDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get User
+    final user = Provider.of<Help4YouUser>(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -40,6 +46,7 @@ class ProfessionalsDetailsScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             Padding(
@@ -120,6 +127,27 @@ class ProfessionalsDetailsScreen extends StatelessWidget {
                   ),
                   CustomMediaButton(
                     onTap: () {
+                      // Get Chat Room ID Function
+                      getChatRoomId(String a, String b) {
+                        if (a.substring(0, 1).codeUnitAt(0) >
+                            b.substring(0, 1).codeUnitAt(0)) {
+                          return "$b\_$a";
+                        } else {
+                          return "$a\_$b";
+                        }
+                      }
+
+                      // Store Chat Room ID
+                      String chatRoomId =
+                          getChatRoomId(user.uid, professionalUID);
+
+                      // Create Chat Room In Database
+                      DatabaseService(chatRoomId: chatRoomId).createChatRoom(
+                        user.uid,
+                        professionalUID,
+                      );
+
+                      // Navigate To Message Screen
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -129,6 +157,7 @@ class ProfessionalsDetailsScreen extends StatelessWidget {
                             occupation: occupation,
                             phoneNumber: phoneNumber,
                             profilePicture: profilePicture,
+                            chatRoomId: chatRoomId,
                           ),
                         ),
                       );

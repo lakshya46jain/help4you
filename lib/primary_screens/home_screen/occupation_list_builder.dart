@@ -63,6 +63,7 @@ class OccupationListBuilder extends StatelessWidget {
             List<ServiceCategory> servicesCategory = snapshot.data;
             if (snapshot.hasData) {
               return SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -87,6 +87,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
           ),
         ),
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Form(
             key: formKey,
             child: Column(
