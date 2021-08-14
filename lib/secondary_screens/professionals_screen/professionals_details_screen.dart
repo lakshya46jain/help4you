@@ -43,6 +43,7 @@ class ProfessionalsDetailsScreen extends StatelessWidget {
         ),
         child: ProfessionalDetailAppBar(
           rating: rating,
+          professionalUID: professionalUID,
         ),
       ),
       body: SingleChildScrollView(

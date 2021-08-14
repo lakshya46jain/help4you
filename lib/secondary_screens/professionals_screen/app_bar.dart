@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/constants/back_button.dart';
+import 'package:help4you/secondary_screens/reviews_screen.dart/reviews_screen.dart';
 
 class ProfessionalDetailAppBar extends StatelessWidget {
   final int rating;
+  final String professionalUID;
 
   ProfessionalDetailAppBar({
-    this.rating,
+    @required this.rating,
+    @required this.professionalUID,
   });
 
   @override
@@ -27,7 +30,16 @@ class ProfessionalDetailAppBar extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: 15.0),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ReviewsScreen(
+                        professionalUID: professionalUID,
+                      ),
+                    ),
+                  );
+                },
                 child: Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: 10.0,

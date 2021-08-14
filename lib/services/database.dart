@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
+import 'package:help4you/models/reviews_model.dart';
 import 'package:help4you/models/messages_model.dart';
 import 'package:help4you/models/chat_room_model.dart';
 import 'package:help4you/models/cart_service_model.dart';
@@ -10,10 +11,12 @@ import 'package:help4you/models/service_category_model.dart';
 
 class DatabaseService {
   final String uid;
+  final String professionalUID;
   final String chatRoomId;
 
   DatabaseService({
     this.uid,
+    this.professionalUID,
     this.chatRoomId,
   });
 
@@ -28,6 +31,10 @@ class DatabaseService {
   // Collection Reference (Chat Room Database)
   final CollectionReference chatRoomCollection =
       FirebaseFirestore.instance.collection("H4Y Chat Rooms Database");
+
+  // Collection Reference (Reviews Database)
+  final CollectionReference reviewsCollection =
+      FirebaseFirestore.instance.collection("H4Y Reviews Database");
 
   // Update User Data
   Future updateUserData(
@@ -111,7 +118,7 @@ class DatabaseService {
     }
   }
 
-  // Add Chat Room Messageszzz
+  // Add Chat Room Messages
   Future addMessageToChatRoom(
     String chatRoomId,
     String message,
@@ -122,6 +129,24 @@ class DatabaseService {
         "Message": message,
         "Sender": sender,
         "Time Stamp": DateTime.now(),
+      },
+    );
+  }
+
+  // Create Reviews
+  Future createReview(
+    double rating,
+    String review,
+    bool isRecommended,
+  ) async {
+    await reviewsCollection.doc().set(
+      {
+        "Professional UID": professionalUID,
+        "Customer UID": uid,
+        "Time Stamp": DateTime.now(),
+        "Rating": rating,
+        "Review": review,
+        "Recommended": isRecommended,
       },
     );
   }
@@ -199,6 +224,24 @@ class DatabaseService {
     ).toList();
   }
 
+  // Reviews Data from Snapshot
+  List<Reviews> _help4YouReviewsFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.toList().map(
+      (document) {
+        Reviews help4YouReviews = Reviews(
+          reviewId: document.id,
+          professionalUID: document["Professional UID"],
+          customerUID: document["Customer UID"],
+          timestamp: document["Time Stamp"],
+          rating: document["Rating"],
+          review: document["Review"],
+          isRecommended: document["Recommended"],
+        );
+        return help4YouReviews;
+      },
+    ).toList();
+  }
+
   // Get User Document
   Stream<UserDataCustomer> get userData {
     return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
@@ -237,5 +280,13 @@ class DatabaseService {
         .orderBy("Time Stamp", descending: true)
         .snapshots()
         .map(_help4YouMessageFromSnapshot);
+  }
+
+  // Get Reviews Documents
+  Stream<List<Reviews>> get reviewsData {
+    return reviewsCollection
+        .where("Professional UID", isEqualTo: professionalUID)
+        .snapshots()
+        .map(_help4YouReviewsFromSnapshot);
   }
 }
