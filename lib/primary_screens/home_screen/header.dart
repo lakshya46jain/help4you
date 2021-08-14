@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
+import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/secondary_screens/cart_screen/cart_screen.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -132,16 +132,14 @@ class HomeHeader extends StatelessWidget {
             },
           ),
           StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection("H4Y Users Database")
-                .doc(user.uid)
-                .collection("Cart")
-                .snapshots(),
+            stream: DatabaseService(uid: user.uid).cartServiceData,
             builder: (context, snapshot) {
               int totalItems = 0;
+              List<Help4YouCartServices> cartServices = snapshot.data;
               if (snapshot.connectionState == ConnectionState.active) {
-                List documents = snapshot.data.docs;
-                totalItems = documents.length;
+                for (Help4YouCartServices cartService in cartServices) {
+                  totalItems += cartService.quantity;
+                }
               }
               return GestureDetector(
                 onTap: () {
@@ -163,7 +161,7 @@ class HomeHeader extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      "$totalItems" ?? "0",
+                      "$totalItems",
                       style: TextStyle(
                         fontSize: 20.0,
                         fontFamily: "BalooPaaji",
