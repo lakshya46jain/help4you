@@ -1,6 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:flutter_svg/svg.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/constants/loading.dart';
@@ -47,24 +48,36 @@ class ReviewsScreen extends StatelessWidget {
       body: StreamBuilder(
         stream: DatabaseService(professionalUID: professionalUID).reviewsData,
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          } else if (snapshot.hasData) {
-            List<Reviews> reviews = snapshot.data;
-            return ListView.builder(
-              itemCount: reviews.length,
-              physics: BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
-                return ReviewTile(
-                  reviewId: reviews[index].reviewId,
-                  customerUID: reviews[index].customerUID,
-                  timeStamp: reviews[index].timestamp,
-                  rating: reviews[index].rating,
-                  review: reviews[index].review,
-                  isRecommended: reviews[index].isRecommended,
-                );
-              },
-            );
+          List<Reviews> reviews = snapshot.data;
+          if (snapshot.hasData) {
+            if (reviews.length == 0) {
+              return Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: SvgPicture.asset(
+                      "assets/graphics/Help4You_Illustration_6.svg",
+                    ),
+                  ),
+                ),
+              );
+            } else {
+              return ListView.builder(
+                itemCount: reviews.length,
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return ReviewTile(
+                    reviewId: reviews[index].reviewId,
+                    customerUID: reviews[index].customerUID,
+                    timeStamp: reviews[index].timestamp,
+                    rating: reviews[index].rating,
+                    review: reviews[index].review,
+                    isRecommended: reviews[index].isRecommended,
+                  );
+                },
+              );
+            }
           } else {
             return DoubleBounceLoading();
           }

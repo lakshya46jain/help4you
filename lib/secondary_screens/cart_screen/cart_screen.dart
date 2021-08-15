@@ -47,27 +47,16 @@ class _CartScreenState extends State<CartScreen> {
             List<Help4YouCartServices> cartServices = snapshot.data;
             if (snapshot.hasData) {
               if (cartServices.length == 0) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / (1792 / 600),
+                return Center(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: SizedBox(
+                      width: double.infinity,
                       child: SvgPicture.asset(
-                        "assets/graphics/Help4You_Illustration_6.svg",
+                        "assets/graphics/Help4You_Illustration_7.svg",
                       ),
                     ),
-                    Text(
-                      "Oops! Looks like your cart is empty",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontFamily: "BalooPaaji",
-                        color: Color(0xFF1C3857),
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+                  ),
                 );
               } else {
                 return ListView.builder(
