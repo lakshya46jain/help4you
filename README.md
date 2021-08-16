@@ -1,17 +1,16 @@
 # Help4You
 
-**Connect with people in your local area**
+A new Flutter project.
 
-Help4You allows you to contact various workers in your area according to your requirement.
+## Getting Started
 
-**Live your life smarter with us!**
+This project is a starting point for a Flutter application.
 
-Help4You gives the ability to book professionals for various skills & will be able to compare the prices of all the professionals and choose who you would like to do the job for you.
+A few resources to get you started if this is your first Flutter project:
 
-**Get a new experience of getting tasks done**
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-You will be able to chat with the professional to explain on ground situation of the problem being faced.
-
-**Note**
-
-The PROFESSIONALS that are seen on the app are not associated with Help4You. Help4You is a platform which allows professionals to get notified about the work & reach you.
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
