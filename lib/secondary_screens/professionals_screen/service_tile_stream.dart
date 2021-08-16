@@ -18,9 +18,8 @@ class ServiceTileBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
-          .collection("H4Y Users Database")
-          .doc(uid)
-          .collection("Services")
+          .collection("H4Y Services Database")
+          .where("Professional UID", isEqualTo: uid)
           .where("Visibility", isEqualTo: true)
           .snapshots(),
       builder: (context, snapshot) {
