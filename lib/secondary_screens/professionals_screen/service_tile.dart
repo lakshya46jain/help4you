@@ -151,15 +151,16 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                   ),
                                 ),
                                 onTap: () async {
-                                  if (quantity != 0) {
+                                  if (quantity - 1 == 0) {
                                     setState(() {
                                       quantity--;
                                     });
-                                    await DatabaseService(uid: user.uid)
-                                        .updateQuantity(
-                                      widget.serviceId,
-                                      quantity,
-                                    );
+                                    await FirebaseFirestore.instance
+                                        .collection("H4Y Users Database")
+                                        .doc(user.uid)
+                                        .collection("Cart")
+                                        .doc(widget.serviceId)
+                                        .delete();
                                     showCustomSnackBar(
                                       context,
                                       FluentIcons.warning_24_regular,
@@ -168,12 +169,14 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                       "Service has been removed from your cart.",
                                     );
                                   } else {
-                                    await FirebaseFirestore.instance
-                                        .collection("H4Y Users Database")
-                                        .doc(user.uid)
-                                        .collection("Cart")
-                                        .doc(widget.serviceId)
-                                        .delete();
+                                    setState(() {
+                                      quantity--;
+                                    });
+                                    await DatabaseService(uid: user.uid)
+                                        .updateQuantity(
+                                      widget.serviceId,
+                                      quantity,
+                                    );
                                     showCustomSnackBar(
                                       context,
                                       FluentIcons.warning_24_regular,
