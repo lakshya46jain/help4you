@@ -2,16 +2,19 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 // File Imports
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
+import 'package:help4you/constants/loading.dart';
 import 'package:help4you/secondary_screens/professionals_screen/app_bar.dart';
 import 'package:help4you/secondary_screens/message_screen/messages_screen.dart';
+import 'package:help4you/secondary_screens/professionals_screen/service_tile.dart';
 import 'package:help4you/secondary_screens/professionals_screen/custom_media_button.dart';
-import 'package:help4you/secondary_screens/professionals_screen/service_tile_stream.dart';
 
 class ProfessionalsDetailsScreen extends StatelessWidget {
   final String professionalUID;
@@ -106,6 +109,7 @@ class ProfessionalsDetailsScreen extends StatelessWidget {
                 left: 20.0,
                 right: 20.0,
                 top: 5.0,
+                bottom: 10.0,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -170,9 +174,49 @@ class ProfessionalsDetailsScreen extends StatelessWidget {
                 ],
               ),
             ),
-            ServiceTileBuilder(
-              uid: professionalUID,
-            ),
+            StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("H4Y Services Database")
+                  .where("Professional UID", isEqualTo: professionalUID)
+                  .where("Visibility", isEqualTo: true)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data.docs.length == 0) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height * 0.61,
+                        child: SvgPicture.asset(
+                          "assets/graphics/Help4You_Illustration_6.svg",
+                        ),
+                      ),
+                    );
+                  } else {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: snapshot.data.docs.length,
+                      itemBuilder: (context, index) {
+                        DocumentSnapshot documentSnapshot =
+                            snapshot.data.docs[index];
+                        return ServiceTiles(
+                          professionalId: professionalUID,
+                          serviceId: documentSnapshot.id,
+                          serviceTitle: documentSnapshot["Service Title"],
+                          serviceDescription:
+                              documentSnapshot["Service Description"],
+                          servicePrice: documentSnapshot["Service Price"],
+                        );
+                      },
+                    );
+                  }
+                } else {
+                  return DoubleBounceLoading();
+                }
+              },
+            )
           ],
         ),
       ),

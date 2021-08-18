@@ -28,21 +28,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   void initState() {
-    focusNode.addListener(() {
-      if (focusNode.hasFocus) {
-        Navigator.push(
-          context,
-          PageTransition(
-            child: PhoneAuthScreen(
-              countryCode: countryCode,
-              phoneIsoCode: phoneIsoCode,
-              nonInternationalNumber: nonInternationalNumber,
+    focusNode.addListener(
+      () {
+        if (focusNode.hasFocus) {
+          Navigator.push(
+            context,
+            PageTransition(
+              child: PhoneAuthScreen(
+                countryCode: countryCode,
+                phoneIsoCode: phoneIsoCode,
+                nonInternationalNumber: nonInternationalNumber,
+              ),
+              type: PageTransitionType.bottomToTop,
             ),
-            type: PageTransitionType.bottomToTop,
-          ),
-        );
-      }
-    });
+          );
+        }
+      },
+    );
     super.initState();
   }
 
