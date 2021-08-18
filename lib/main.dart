@@ -1,11 +1,13 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 // Dependency Imports
 import 'package:wiredash/wiredash.dart';
 import 'package:provider/provider.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/models/user_model.dart';
@@ -14,6 +16,13 @@ import 'package:help4you/primary_screens/wrapper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  if (kDebugMode || kProfileMode || kIsWeb) {
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
+  } else {
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  }
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  await FirebaseCrashlytics.instance.sendUnsentReports();
   runApp(MyApp());
 }
 
@@ -23,7 +32,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  RateMyApp _rateMyApp = RateMyApp(
+  RateMyApp rateMyApp = RateMyApp(
     minDays: 7,
     minLaunches: 10,
     remindDays: 7,
@@ -39,10 +48,10 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     // Rate My App Feature
-    _rateMyApp.init().then(
+    rateMyApp.init().then(
       (_) {
-        if (_rateMyApp.shouldOpenDialog) {
-          _rateMyApp.showStarRateDialog(
+        if (rateMyApp.shouldOpenDialog) {
+          rateMyApp.showStarRateDialog(
             context,
             title: 'Rate Help4You',
             message:
@@ -53,7 +62,7 @@ class _MyAppState extends State<MyApp> {
                   child: Text('Ok'),
                   onPressed: () async {
                     HapticFeedback.lightImpact();
-                    await _rateMyApp
+                    await rateMyApp
                         .callEvent(RateMyAppEventType.rateButtonPressed);
                     Navigator.pop<RateMyAppDialogButton>(
                       context,
@@ -69,7 +78,7 @@ class _MyAppState extends State<MyApp> {
               messagePadding: EdgeInsets.only(bottom: 20),
             ),
             starRatingOptions: StarRatingOptions(),
-            onDismissed: () => _rateMyApp.callEvent(
+            onDismissed: () => rateMyApp.callEvent(
               RateMyAppEventType.laterButtonPressed,
             ),
           );
