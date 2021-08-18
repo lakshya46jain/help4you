@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
-import 'package:help4you/constants/back_button.dart';
 import 'package:help4you/secondary_screens/reviews_screen.dart/reviews_screen.dart';
 
 class ProfessionalDetailAppBar extends StatelessWidget {
@@ -26,7 +25,16 @@ class ProfessionalDetailAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomBackButton(),
+            IconButton(
+              icon: Icon(
+                FluentIcons.dismiss_24_filled,
+                size: 25.0,
+                color: Color(0xFFFEA700),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             Padding(
               padding: EdgeInsets.only(right: 15.0),
               child: GestureDetector(
