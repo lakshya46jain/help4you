@@ -87,7 +87,10 @@ class OccupationListBuilder extends StatelessWidget {
                 ),
               );
             } else {
-              return Container();
+              return Container(
+                height: 135,
+                width: 135,
+              );
             }
           },
         ),
