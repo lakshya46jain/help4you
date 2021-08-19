@@ -16,7 +16,7 @@ class Wrapper extends StatelessWidget {
     final user = Provider.of<Help4YouUser>(context);
 
     // Firebase Crashlytics User Identifier
-    if (user == null) {
+    if (user != null) {
       FirebaseCrashlytics.instance.setUserIdentifier(user.uid);
     } else {
       FirebaseCrashlytics.instance.setUserIdentifier("Anonyomous User");
