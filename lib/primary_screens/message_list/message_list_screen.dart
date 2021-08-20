@@ -7,7 +7,7 @@ import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/constants/loading.dart';
 import 'package:help4you/models/chat_room_model.dart';
-import 'package:help4you/constants/custom_search_bar.dart';
+import 'package:help4you/constants/search_bar.dart';
 import 'package:help4you/primary_screens/message_list/message_tile.dart';
 
 class MessageListScreen extends StatefulWidget {
@@ -72,7 +72,7 @@ class _MessageListScreenState extends State<MessageListScreen> {
                       },
                     );
                   } else {
-                    return DoubleBounceLoading();
+                    return Container();
                   }
                 },
               ),

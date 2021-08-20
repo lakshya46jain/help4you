@@ -13,7 +13,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/constants/loading.dart';
-import 'package:help4you/constants/expanded_button.dart';
+import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 import 'package:help4you/constants/phone_number_field.dart';
 import 'package:help4you/secondary_screens/delete_account_screen.dart';
@@ -219,8 +219,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                               ),
                               child: CustomTextField(
                                 keyboardType: TextInputType.name,
-                                labelText: "Full Name",
-                                hintText: "Full Name",
+                                hintText: "Enter Full Name...",
                                 initialValue: userData.fullName,
                                 validator: (String value) {
                                   if (value.isEmpty) {
@@ -275,10 +274,11 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                     },
                   ),
                 ),
-                ExpandedButton(
+                SignatureButton(
+                  type: "Expanded",
                   icon: FluentIcons.delete_24_regular,
                   text: "Delete Account",
-                  onPressed: () {
+                  onTap: () {
                     HapticFeedback.lightImpact();
                     Navigator.push(
                       context,

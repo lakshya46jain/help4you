@@ -58,6 +58,7 @@ class MessageTile extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 30,
+                        backgroundColor: Color(0xFFF5F6F9),
                         backgroundImage: CachedNetworkImageProvider(
                           profilePicture,
                         ),

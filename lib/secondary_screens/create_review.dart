@@ -148,7 +148,6 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                   ),
                   CustomTextField(
                     maxLines: 10,
-                    labelText: "Review",
                     hintText: "Please write a review...",
                     keyboardType: TextInputType.multiline,
                     onChanged: (value) {

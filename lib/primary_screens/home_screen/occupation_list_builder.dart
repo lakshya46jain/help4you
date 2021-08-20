@@ -26,7 +26,7 @@ class OccupationListBuilder extends StatelessWidget {
                 "Categories",
                 style: TextStyle(
                   fontSize: 25.0,
-                  color: Color(0xFF1C385A),
+                  color: Color(0xFF1C3857),
                   fontFamily: "BalooPaaji",
                   fontWeight: FontWeight.w600,
                 ),

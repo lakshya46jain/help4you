@@ -9,7 +9,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
-import 'package:help4you/constants/expanded_button.dart';
+import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/secondary_screens/handbook_screen.dart';
 import 'package:help4you/primary_screens/profile_screen/profile_stream.dart';
 import 'package:help4you/secondary_screens/personal_data_screen/personal_data_screen.dart';
@@ -43,10 +43,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Color(0xFF95989A),
                 ),
               ),
-              ExpandedButton(
+              SignatureButton(
+                type: "Expanded",
                 icon: FluentIcons.info_24_regular,
                 text: "Our Handbook",
-                onPressed: () {
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -62,10 +63,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Color(0xFF95989A),
                 ),
               ),
-              ExpandedButton(
+              SignatureButton(
+                type: "Expanded",
                 icon: FluentIcons.person_24_regular,
                 text: "Personal Data",
-                onPressed: () {
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -80,10 +82,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   UserDataCustomer userData = snapshot.data;
                   if (snapshot.hasData) {
                     if (userData.adminLevel > 0) {
-                      return ExpandedButton(
+                      return SignatureButton(
+                        type: "Expanded",
                         icon: FluentIcons.people_24_regular,
                         text: "Admin Access",
-                        onPressed: () {},
+                        onTap: () {},
                       );
                     } else {
                       return Container(
@@ -100,10 +103,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }
                 },
               ),
-              ExpandedButton(
+              SignatureButton(
+                type: "Expanded",
                 icon: FluentIcons.sign_out_24_regular,
                 text: "Sign Out",
-                onPressed: () {
+                onTap: () {
                   return AuthService().signOut();
                 },
               ),
@@ -114,15 +118,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Color(0xFF95989A),
                 ),
               ),
-              ExpandedButton(
+              SignatureButton(
+                type: "Expanded",
                 icon: FluentIcons.star_24_regular,
                 text: "Rate Us",
-                onPressed: () {},
+                onTap: () {},
               ),
-              ExpandedButton(
+              SignatureButton(
+                type: "Expanded",
                 icon: FluentIcons.person_feedback_24_regular,
                 text: "Feedback",
-                onPressed: () {
+                onTap: () {
                   Wiredash.of(context).setUserProperties(
                     userId: user.uid,
                   );
@@ -133,10 +139,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Wiredash.of(context).show();
                 },
               ),
-              ExpandedButton(
+              SignatureButton(
+                type: "Expanded",
                 icon: FluentIcons.share_24_regular,
                 text: "Share Help4You",
-                onPressed: () {
+                onTap: () {
                   Share.share(
                     "Have you tried the Help4You app? It's simple to book services like appliance repair, electricians, gardeners & more...\nTo download our app please visit https://www.help4you.webflow.io/download",
                     subject: "Try Help4You",

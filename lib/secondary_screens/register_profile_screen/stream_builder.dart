@@ -157,8 +157,7 @@ class ProfileStreamBuilder extends StatelessWidget {
                   ),
                   child: CustomTextField(
                     keyboardType: TextInputType.name,
-                    labelText: "Full Name",
-                    hintText: "Enter full name",
+                    hintText: "Enter Full Name...",
                     initialValue: userData.fullName,
                     validator: (String value) {
                       if (value.isEmpty) {

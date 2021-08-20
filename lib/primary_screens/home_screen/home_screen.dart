@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/constants/custom_search_bar.dart';
+import 'package:help4you/constants/search_bar.dart';
 import 'package:help4you/primary_screens/home_screen/header.dart';
 import 'package:help4you/primary_screens/home_screen/occupation_list_builder.dart';
 
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 20.0,
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.42,
+              height: MediaQuery.of(context).size.height * 0.43,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Color(0xFF1C3857),
