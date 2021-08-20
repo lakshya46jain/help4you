@@ -116,6 +116,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                           mdFileName: 'terms_and_conditions.md',
                         );
                       },
+                      barrierDismissible: false,
                     );
                   },
                   child: Text(
