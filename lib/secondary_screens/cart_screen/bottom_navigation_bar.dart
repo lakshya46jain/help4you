@@ -7,6 +7,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/cart_service_model.dart';
+import 'package:help4you/secondary_screens/create_booking_screen/add_address_screen.dart';
 
 class CartNavBar extends StatelessWidget {
   @override
@@ -58,7 +59,14 @@ class CartNavBar extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddAddressScreen(),
+                ),
+              );
+            },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               height: MediaQuery.of(context).size.height * 0.13,

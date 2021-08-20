@@ -8,12 +8,14 @@ class SignatureButton extends StatelessWidget {
   final String text;
   final IconData icon;
   final bool withIcon;
+  final String type;
 
   SignatureButton({
     @required this.onTap,
     @required this.text,
     this.icon,
     @required this.withIcon,
+    this.type,
   });
 
   @override
@@ -23,11 +25,11 @@ class SignatureButton extends StatelessWidget {
       onPressed: onTap,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: Color(0xFF1C3857),
+          borderRadius: BorderRadius.circular(5.0),
+          color: (type == "Yellow") ? Color(0xFFFEA700) : Color(0xFF1C3857),
         ),
         width: double.infinity,
-        height: MediaQuery.of(context).size.height / (1792 / 120),
+        height: 60.0,
         child: Padding(
           padding: EdgeInsets.symmetric(
             vertical: 10.0,
@@ -44,12 +46,14 @@ class SignatureButton extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20.0,
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: (type == "Yellow")
+                              ? FontWeight.w600
+                              : FontWeight.bold,
                         ),
                       ),
                     ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width / (828 / 20),
+                      width: 10.0,
                     ),
                     Align(
                       alignment: Alignment.center,
@@ -68,7 +72,9 @@ class SignatureButton extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 22.0,
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: (type == "Yellow")
+                          ? FontWeight.w600
+                          : FontWeight.bold,
                     ),
                   ),
                 ),
