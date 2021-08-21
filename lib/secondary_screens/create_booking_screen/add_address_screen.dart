@@ -9,6 +9,7 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:help4you/constants/back_button.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:help4you/constants/signature_button.dart';
+import 'package:help4you/secondary_screens/create_booking_screen/timings_screens_screen.dart';
 
 class AddAddressScreen extends StatefulWidget {
   @override
@@ -228,7 +229,14 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                   height: 30.0,
                 ),
                 SignatureButton(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TimingsScreen(),
+                      ),
+                    );
+                  },
                   text: "Save and Proceed",
                   withIcon: false,
                   type: "Yellow",
