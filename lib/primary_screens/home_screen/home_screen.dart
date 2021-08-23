@@ -19,37 +19,40 @@ class _HomeScreenState extends State<HomeScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        body: Column(
-          children: [
-            SizedBox(
-              height: 50.0,
-            ),
-            HomeHeader(),
-            SizedBox(
-              height: 5.0,
-            ),
-            SearchBar(
-              hintText: "Search locations...",
-              width: MediaQuery.of(context).size.width,
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            OccupationListBuilder(),
-            SizedBox(
-              height: 20.0,
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.43,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Color(0xFF1C3857),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25.0),
+        body: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 50.0,
+              ),
+              HomeHeader(),
+              SizedBox(
+                height: 5.0,
+              ),
+              SearchBar(
+                hintText: "Search locations...",
+                width: MediaQuery.of(context).size.width,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              OccupationListBuilder(),
+              SizedBox(
+                height: 20.0,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.43,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color(0xFF1C3857),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(25.0),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
