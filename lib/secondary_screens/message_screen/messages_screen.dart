@@ -34,7 +34,7 @@ class MessageScreen extends StatefulWidget {
 
 class _MessageScreenState extends State<MessageScreen> {
   // Message Variables
-  bool isMessageEmpty;
+  bool isMessageEmpty = true;
 
   // Message Controller
   final TextEditingController messageController = TextEditingController();
@@ -114,6 +114,9 @@ class _MessageScreenState extends State<MessageScreen> {
                   user.uid,
                 );
                 messageController.clear();
+                setState(() {
+                  isMessageEmpty = true;
+                });
               },
               messageController: messageController,
             ),
