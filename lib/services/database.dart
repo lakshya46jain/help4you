@@ -13,11 +13,13 @@ class DatabaseService {
   final String uid;
   final String professionalUID;
   final String chatRoomId;
+  final String serviceId;
 
   DatabaseService({
     this.uid,
     this.professionalUID,
     this.chatRoomId,
+    this.serviceId,
   });
 
   // Collection Reference (User Database)
@@ -182,8 +184,8 @@ class DatabaseService {
     );
   }
 
-  // Service Data from Snapshot
-  List<Help4YouCartServices> _help4youCartServicesFromSnapshot(
+  // Service Data List from Snapshot
+  List<Help4YouCartServices> _help4youCartServicesListFromSnapshot(
       QuerySnapshot snapshot) {
     return snapshot.docs.toList().map(
       (document) {
@@ -198,6 +200,19 @@ class DatabaseService {
         return help4youCartServices;
       },
     ).toList();
+  }
+
+  // Service Data from Snapshot
+  Help4YouCartServices _help4youCartServicesFromSnapshot(
+      DocumentSnapshot snapshot) {
+    return Help4YouCartServices(
+      professionalId: snapshot["Professional UID"],
+      serviceId: snapshot["Service ID"],
+      serviceTitle: snapshot["Service Title"],
+      serviceDescription: snapshot["Service Description"],
+      servicePrice: snapshot["Service Price"],
+      quantity: snapshot["Quantity"],
+    );
   }
 
   // Service Category Data from Snapshot
@@ -265,11 +280,21 @@ class DatabaseService {
     return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
   }
 
-  // Get Service Document
-  Stream<List<Help4YouCartServices>> get cartServiceData {
+  // Get Service List Document
+  Stream<List<Help4YouCartServices>> get cartServiceListData {
     return userCollection
         .doc(uid)
         .collection("Cart")
+        .snapshots()
+        .map(_help4youCartServicesListFromSnapshot);
+  }
+
+  // Get Service Document
+  Stream<Help4YouCartServices> get cartServiceData {
+    return userCollection
+        .doc(uid)
+        .collection("Cart")
+        .doc(serviceId)
         .snapshots()
         .map(_help4youCartServicesFromSnapshot);
   }

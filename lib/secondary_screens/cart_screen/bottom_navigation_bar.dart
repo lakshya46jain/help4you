@@ -37,7 +37,7 @@ class CartNavBar extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: StreamBuilder(
-              stream: DatabaseService(uid: user.uid).cartServiceData,
+              stream: DatabaseService(uid: user.uid).cartServiceListData,
               builder: (context, snapshot) {
                 double total = 0;
                 List<Help4YouCartServices> cartServices = snapshot.data;

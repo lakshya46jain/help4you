@@ -132,7 +132,7 @@ class HomeHeader extends StatelessWidget {
             },
           ),
           StreamBuilder(
-            stream: DatabaseService(uid: user.uid).cartServiceData,
+            stream: DatabaseService(uid: user.uid).cartServiceListData,
             builder: (context, snapshot) {
               int totalItems = 0;
               List<Help4YouCartServices> cartServices = snapshot.data;

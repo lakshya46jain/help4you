@@ -40,7 +40,7 @@ class _CartScreenState extends State<CartScreen> {
         ),
       ),
       body: StreamBuilder(
-        stream: DatabaseService(uid: user.uid).cartServiceData,
+        stream: DatabaseService(uid: user.uid).cartServiceListData,
         builder: (context, snapshot) {
           List<Help4YouCartServices> cartServices = snapshot.data;
           if (snapshot.hasData) {
