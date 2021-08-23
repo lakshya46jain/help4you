@@ -151,6 +151,24 @@ class DatabaseService {
     );
   }
 
+  // Add Address
+  Future addAdress(
+    double latitude,
+    double longitude,
+    String addressName,
+    String completeAddress,
+    String addressType,
+  ) async {
+    await userCollection.doc(uid).collection("Saved Address").doc().set(
+      {
+        "Geo Point Location": GeoPoint(latitude, longitude),
+        "Address Name": addressName,
+        "Complete Address": completeAddress,
+        "Address Type": addressType,
+      },
+    );
+  }
+
   // User Data from Snapshot
   UserDataCustomer _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserDataCustomer(

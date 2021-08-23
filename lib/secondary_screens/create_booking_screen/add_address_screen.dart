@@ -1,11 +1,15 @@
 // Flutter Imports
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:help4you/constants/custom_snackbar.dart';
 // Dependency Imports
+import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
+import 'package:help4you/models/user_model.dart';
+import 'package:help4you/services/database.dart';
 import 'package:help4you/constants/back_button.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:help4you/constants/signature_button.dart';
@@ -18,6 +22,8 @@ class AddAddressScreen extends StatefulWidget {
 
 class _AddAddressScreenState extends State<AddAddressScreen> {
   // Google Maps Variables
+  double latitude;
+  double longitude;
   Position currentPosition;
   GoogleMapController newGoogleMapsController;
   Completer<GoogleMapController> googleMapsController = Completer();
@@ -31,6 +37,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         desiredAccuracy: LocationAccuracy.high);
     currentPosition = position;
     LatLng latLngPosition = LatLng(position.latitude, position.longitude);
+    latitude = position.latitude;
+    longitude = position.longitude;
     CameraPosition cameraPosition =
         CameraPosition(target: latLngPosition, zoom: 14);
     newGoogleMapsController.animateCamera(
@@ -48,6 +56,13 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
 
   // Custom Radio Button
   int selected = 0;
+
+  // Variables
+  String addressName;
+  String completeAddress;
+  String addressType;
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   Widget customRadioButton(int index, String text) {
     return Padding(
@@ -88,6 +103,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Get User
+    final user = Provider.of<Help4YouUser>(context);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -150,98 +168,140 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                 topRight: Radius.circular(25.0),
               ),
             ),
-            child: Column(
-              children: [
-                Container(
-                  width: 75.0,
-                  height: 4.0,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.55),
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                ),
-                SizedBox(
-                  height: 25.0,
-                ),
-                Text(
-                  "Add Address",
-                  style: TextStyle(
-                    height: 1.0,
-                    fontSize: 30.0,
-                    color: Colors.white,
-                    fontFamily: "BalooPaaji",
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: "Add a Name for the Address*",
-                    hintStyle: TextStyle(
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Container(
+                    width: 75.0,
+                    height: 4.0,
+                    decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.55),
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
+                  ),
+                  SizedBox(
+                    height: 25.0,
+                  ),
+                  Text(
+                    "Add Address",
+                    style: TextStyle(
+                      height: 1.0,
+                      fontSize: 30.0,
+                      color: Colors.white,
+                      fontFamily: "BalooPaaji",
+                      fontWeight: FontWeight.w600,
                     ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  TextFormField(
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: "Add a Name for the Address*",
+                      hintStyle: TextStyle(
                         color: Colors.white.withOpacity(0.55),
                       ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 35.0,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: "Complete Address*",
-                    hintStyle: TextStyle(
-                      color: Colors.white.withOpacity(0.55),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white.withOpacity(0.55),
+                        ),
                       ),
                     ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
+                    onChanged: (value) {
+                      setState(() {
+                        addressName = value;
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 35.0,
+                  ),
+                  TextFormField(
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: "Complete Address*",
+                      hintStyle: TextStyle(
                         color: Colors.white.withOpacity(0.55),
                       ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 35.0,
-                ),
-                Row(
-                  children: [
-                    customRadioButton(0, "Home"),
-                    customRadioButton(1, "Office"),
-                    customRadioButton(2, "Other"),
-                  ],
-                ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                SignatureButton(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TimingsScreen(),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
                       ),
-                    );
-                  },
-                  text: "Save and Proceed",
-                  withIcon: false,
-                  type: "Yellow",
-                ),
-              ],
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white.withOpacity(0.55),
+                        ),
+                      ),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        completeAddress = value;
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 35.0,
+                  ),
+                  Row(
+                    children: [
+                      customRadioButton(0, "Home"),
+                      customRadioButton(1, "Office"),
+                      customRadioButton(2, "Other"),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  SignatureButton(
+                    onTap: () async {
+                      if (formKey.currentState.validate()) {
+                        FocusScope.of(context).unfocus();
+                        if (selected == 0) {
+                          setState(() {
+                            addressType = "Home";
+                          });
+                        } else if (selected == 1) {
+                          setState(() {
+                            addressType = "Office";
+                          });
+                        } else if (selected == 2) {
+                          setState(() {
+                            addressType = "Other";
+                          });
+                        }
+                        await DatabaseService(uid: user.uid).addAdress(
+                          latitude,
+                          longitude,
+                          addressName,
+                          completeAddress,
+                          addressType,
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TimingsScreen(),
+                          ),
+                        );
+                      }
+                    },
+                    text: "Save and Proceed",
+                    withIcon: false,
+                    type: "Yellow",
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -249,13 +309,14 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
           markers: markers,
           mapType: MapType.normal,
           myLocationEnabled: true,
-          zoomGesturesEnabled: true,
-          zoomControlsEnabled: true,
+          zoomGesturesEnabled: false,
+          zoomControlsEnabled: false,
           myLocationButtonEnabled: false,
           initialCameraPosition: googlePlex,
           onMapCreated: (GoogleMapController controller) {
             googleMapsController.complete(controller);
             newGoogleMapsController = controller;
+            locatePosition();
           },
         ),
       ),
