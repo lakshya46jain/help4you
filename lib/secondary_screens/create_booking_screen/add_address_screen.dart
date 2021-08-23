@@ -1,7 +1,6 @@
 // Flutter Imports
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:help4you/constants/custom_snackbar.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
