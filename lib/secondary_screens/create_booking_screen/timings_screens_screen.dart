@@ -3,12 +3,21 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 // File Imports
 import 'package:help4you/constants/back_button.dart';
 import 'package:help4you/constants/signature_button.dart';
 
 class TimingsScreen extends StatefulWidget {
+  final String completeAddress;
+  final GeoPoint geoPointLocation;
+
+  TimingsScreen({
+    this.completeAddress,
+    this.geoPointLocation,
+  });
+
   @override
   _TimingsScreenState createState() => _TimingsScreenState();
 }

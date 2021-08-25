@@ -9,10 +9,19 @@ import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/loading.dart';
 import 'package:help4you/models/address_model.dart';
 import 'package:help4you/constants/back_button.dart';
+import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/secondary_screens/create_booking_screen/add_address_screen.dart';
 import 'package:help4you/secondary_screens/create_booking_screen/saved_address_tile.dart';
+import 'package:help4you/secondary_screens/create_booking_screen/timings_screens_screen.dart';
 
-class SavedAddressScreen extends StatelessWidget {
+class SavedAddressScreen extends StatefulWidget {
+  @override
+  _SavedAddressScreenState createState() => _SavedAddressScreenState();
+}
+
+class _SavedAddressScreenState extends State<SavedAddressScreen> {
+  int selected;
+
   @override
   Widget build(BuildContext context) {
     // Get User
@@ -55,20 +64,64 @@ class SavedAddressScreen extends StatelessWidget {
         builder: (context, snapshot) {
           List<Address> addressOptions = snapshot.data;
           if (snapshot.hasData) {
-            return ListView.builder(
-              padding: EdgeInsets.all(0.0),
-              physics: BouncingScrollPhysics(),
-              itemCount: addressOptions.length,
-              itemBuilder: (context, index) {
-                return SavedAddressTile(
-                  uid: user.uid,
-                  addressId: addressOptions[index].addressId,
-                  addressName: addressOptions[index].addressName,
-                  completeAddress: addressOptions[index].completeAddress,
-                  addressType: addressOptions[index].addressType,
-                  geoPointLocation: addressOptions[index].geoPoint,
-                );
-              },
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.all(0.0),
+                  physics: BouncingScrollPhysics(),
+                  itemCount: addressOptions.length,
+                  itemBuilder: (context, index) {
+                    return SavedAddressTile(
+                      uid: user.uid,
+                      addressId: addressOptions[index].addressId,
+                      addressName: addressOptions[index].addressName,
+                      completeAddress: addressOptions[index].completeAddress,
+                      addressType: addressOptions[index].addressType,
+                      geoPointLocation: addressOptions[index].geoPoint,
+                      onTap: () {
+                        setState(() {
+                          selected = index;
+                        });
+                      },
+                      index: index,
+                      selected: selected,
+                    );
+                  },
+                ),
+                (selected != null)
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                          left: 20.0,
+                          right: 20.0,
+                          bottom: 50.0,
+                        ),
+                        child: SafeArea(
+                          child: SignatureButton(
+                            type: "Yellow",
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TimingsScreen(
+                                    completeAddress: addressOptions[selected]
+                                        .completeAddress,
+                                    geoPointLocation:
+                                        addressOptions[selected].geoPoint,
+                                  ),
+                                ),
+                              );
+                            },
+                            text: "Select Address",
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 0.0,
+                        width: 0.0,
+                      ),
+              ],
             );
           } else {
             return DoubleBounceLoading();

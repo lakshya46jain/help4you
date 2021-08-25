@@ -14,7 +14,6 @@ import 'package:help4you/models/address_model.dart';
 import 'package:help4you/constants/back_button.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:help4you/constants/signature_button.dart';
-import 'package:help4you/secondary_screens/create_booking_screen/saved_address_screen.dart';
 
 class EditAddressScreen extends StatefulWidget {
   final String addressId;
@@ -315,12 +314,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                                 completeAddress ?? addressData.completeAddress,
                                 selected ?? addressData.addressType,
                               );
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SavedAddressScreen(),
-                                ),
-                              );
+                              Navigator.pop(context);
                             }
                           },
                           text: "Save and Proceed",
