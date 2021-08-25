@@ -29,6 +29,10 @@ class DatabaseService {
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('H4Y Users Database');
 
+  // Collection Reference (Saved Address Database)
+  final CollectionReference savedAddressCollection =
+      FirebaseFirestore.instance.collection("H4Y Saved Address Database");
+
   // Collection Reference (Occupation Database)
   final CollectionReference occupationCollection =
       FirebaseFirestore.instance.collection('H4Y Occupation Database');
@@ -163,8 +167,9 @@ class DatabaseService {
     String completeAddress,
     int addressType,
   ) async {
-    await userCollection.doc(uid).collection("Saved Address").doc().set(
+    await savedAddressCollection.doc().set(
       {
+        "Customer UID": uid,
         "Geo Point Location": geoPoint,
         "Address Name": addressName,
         "Complete Address": completeAddress,
@@ -180,11 +185,7 @@ class DatabaseService {
     String completeAddress,
     int addressType,
   ) async {
-    await userCollection
-        .doc(uid)
-        .collection("Saved Address")
-        .doc(addressId)
-        .update(
+    await savedAddressCollection.doc(addressId).update(
       {
         "Geo Point Location": geoPoint,
         "Address Name": addressName,
@@ -318,6 +319,7 @@ class DatabaseService {
   Address _help4YouAddressFromSnapshot(DocumentSnapshot snapshot) {
     return Address(
       addressId: snapshot.id,
+      customerUID: snapshot["Customer UID"],
       geoPoint: snapshot["Geo Point Location"],
       addressName: snapshot["Address Name"],
       completeAddress: snapshot["Complete Address"],
@@ -385,18 +387,15 @@ class DatabaseService {
 
   // Get Address List Documents
   Stream<List<Address>> get addressListData {
-    return userCollection
-        .doc(uid)
-        .collection("Saved Address")
+    return savedAddressCollection
+        .where("Customer UID", isEqualTo: uid)
         .snapshots()
         .map(_help4YouAddressListFromSnapshot);
   }
 
   // Get Address Documents
   Stream<Address> get addressData {
-    return userCollection
-        .doc(uid)
-        .collection("Saved Address")
+    return savedAddressCollection
         .doc(addressId)
         .snapshots()
         .map(_help4YouAddressFromSnapshot);
