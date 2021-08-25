@@ -114,7 +114,7 @@ class DatabaseService {
     if (!ds.exists) {
       await chatRoomCollection.doc(chatRoomId).set(
         {
-          "Connection Date": DateTime.now(),
+          "Connection Date": DateTime.now().toUtc(),
           "Chat Room ID": chatRoomId,
           "Customer UID": customerUID,
           "Professional UID": professionalUID,
@@ -133,7 +133,7 @@ class DatabaseService {
       {
         "Message": message,
         "Sender": sender,
-        "Time Stamp": DateTime.now(),
+        "Time Stamp": DateTime.now().toUtc(),
       },
     );
   }
@@ -148,7 +148,7 @@ class DatabaseService {
       {
         "Professional UID": professionalUID,
         "Customer UID": uid,
-        "Time Stamp": DateTime.now(),
+        "Time Stamp": DateTime.now().toUtc(),
         "Rating": rating,
         "Review": review,
         "Recommended": isRecommended,
