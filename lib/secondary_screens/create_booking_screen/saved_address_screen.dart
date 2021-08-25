@@ -51,7 +51,7 @@ class SavedAddressScreen extends StatelessWidget {
         ],
       ),
       body: StreamBuilder(
-        stream: DatabaseService(uid: user.uid).addressData,
+        stream: DatabaseService(uid: user.uid).addressListData,
         builder: (context, snapshot) {
           List<Address> addressOptions = snapshot.data;
           if (snapshot.hasData) {

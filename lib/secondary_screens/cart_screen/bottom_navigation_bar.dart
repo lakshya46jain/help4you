@@ -1,6 +1,5 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
-import 'package:help4you/secondary_screens/create_booking_screen/saved_address_screen.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -10,6 +9,7 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/models/address_model.dart';
 import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/secondary_screens/create_booking_screen/add_address_screen.dart';
+import 'package:help4you/secondary_screens/create_booking_screen/saved_address_screen.dart';
 
 class CartNavBar extends StatelessWidget {
   @override
@@ -61,7 +61,7 @@ class CartNavBar extends StatelessWidget {
             ),
           ),
           StreamBuilder(
-            stream: DatabaseService(uid: user.uid).addressData,
+            stream: DatabaseService(uid: user.uid).addressListData,
             builder: (context, snapshot) {
               List<Address> addressData = snapshot.data;
               return GestureDetector(

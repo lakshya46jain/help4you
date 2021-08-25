@@ -5,13 +5,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
+import 'package:help4you/secondary_screens/create_booking_screen/edit_address_screen.dart';
 
 class SavedAddressTile extends StatelessWidget {
   final String uid;
   final String addressId;
   final String addressName;
   final String completeAddress;
-  final String addressType;
+  final int addressType;
   final GeoPoint geoPointLocation;
 
   SavedAddressTile({
@@ -48,7 +49,11 @@ class SavedAddressTile extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                addressType,
+                (addressType == 0)
+                    ? "Home"
+                    : (addressType == 1)
+                        ? "Office"
+                        : "Other",
                 style: TextStyle(
                   color: Color(0xFF1C3857),
                   fontSize: 14.0,
@@ -100,7 +105,16 @@ class SavedAddressTile extends StatelessWidget {
               )
             ],
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditAddressScreen(
+                  addressId: addressId,
+                ),
+              ),
+            );
+          },
         ),
         IconSlideAction(
           color: Colors.red,

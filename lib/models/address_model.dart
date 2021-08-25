@@ -6,7 +6,7 @@ class Address {
   final GeoPoint geoPoint;
   final String addressName;
   final String completeAddress;
-  final String addressType;
+  final int addressType;
 
   Address({
     this.addressId,

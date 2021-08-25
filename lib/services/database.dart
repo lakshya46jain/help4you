@@ -15,12 +15,14 @@ class DatabaseService {
   final String professionalUID;
   final String chatRoomId;
   final String serviceId;
+  final String addressId;
 
   DatabaseService({
     this.uid,
     this.professionalUID,
     this.chatRoomId,
     this.serviceId,
+    this.addressId,
   });
 
   // Collection Reference (User Database)
@@ -156,15 +158,35 @@ class DatabaseService {
 
   // Add Address
   Future addAdress(
-    double latitude,
-    double longitude,
+    GeoPoint geoPoint,
     String addressName,
     String completeAddress,
-    String addressType,
+    int addressType,
   ) async {
     await userCollection.doc(uid).collection("Saved Address").doc().set(
       {
-        "Geo Point Location": GeoPoint(latitude, longitude),
+        "Geo Point Location": geoPoint,
+        "Address Name": addressName,
+        "Complete Address": completeAddress,
+        "Address Type": addressType,
+      },
+    );
+  }
+
+  // Add Address
+  Future updateAdress(
+    GeoPoint geoPoint,
+    String addressName,
+    String completeAddress,
+    int addressType,
+  ) async {
+    await userCollection
+        .doc(uid)
+        .collection("Saved Address")
+        .doc(addressId)
+        .update(
+      {
+        "Geo Point Location": geoPoint,
         "Address Name": addressName,
         "Complete Address": completeAddress,
         "Address Type": addressType,
@@ -277,7 +299,7 @@ class DatabaseService {
   }
 
   // Address Data from Snapshot
-  List<Address> _help4YouAddressFromSnapshot(QuerySnapshot snapshot) {
+  List<Address> _help4YouAddressListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.toList().map(
       (document) {
         Address help4YouAddress = Address(
@@ -290,6 +312,17 @@ class DatabaseService {
         return help4YouAddress;
       },
     ).toList();
+  }
+
+  // Address Data from Snapshot
+  Address _help4YouAddressFromSnapshot(DocumentSnapshot snapshot) {
+    return Address(
+      addressId: snapshot.id,
+      geoPoint: snapshot["Geo Point Location"],
+      addressName: snapshot["Address Name"],
+      completeAddress: snapshot["Complete Address"],
+      addressType: snapshot["Address Type"],
+    );
   }
 
   // Get User Document
@@ -350,11 +383,21 @@ class DatabaseService {
         .map(_help4YouReviewsFromSnapshot);
   }
 
-  // Get Address Documents
-  Stream<List<Address>> get addressData {
+  // Get Address List Documents
+  Stream<List<Address>> get addressListData {
     return userCollection
         .doc(uid)
         .collection("Saved Address")
+        .snapshots()
+        .map(_help4YouAddressListFromSnapshot);
+  }
+
+  // Get Address Documents
+  Stream<Address> get addressData {
+    return userCollection
+        .doc(uid)
+        .collection("Saved Address")
+        .doc(addressId)
         .snapshots()
         .map(_help4YouAddressFromSnapshot);
   }

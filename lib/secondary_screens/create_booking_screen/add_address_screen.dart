@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
@@ -59,7 +60,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   // Variables
   String addressName;
   String completeAddress;
-  String addressType;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -267,25 +267,12 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     onTap: () async {
                       if (formKey.currentState.validate()) {
                         FocusScope.of(context).unfocus();
-                        if (selected == 0) {
-                          setState(() {
-                            addressType = "Home";
-                          });
-                        } else if (selected == 1) {
-                          setState(() {
-                            addressType = "Office";
-                          });
-                        } else if (selected == 2) {
-                          setState(() {
-                            addressType = "Other";
-                          });
-                        }
+                        GeoPoint geoPoint = GeoPoint(latitude, longitude);
                         await DatabaseService(uid: user.uid).addAdress(
-                          latitude,
-                          longitude,
+                          geoPoint,
                           addressName,
                           completeAddress,
-                          addressType,
+                          selected,
                         );
                         Navigator.push(
                           context,
