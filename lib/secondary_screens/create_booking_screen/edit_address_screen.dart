@@ -180,8 +180,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
           if (snapshot.hasData) {
             return SlidingUpPanel(
               maxHeight: 425.0,
-              parallaxEnabled: true,
               parallaxOffset: 0.75,
+              parallaxEnabled: true,
+              color: Colors.transparent,
               panel: GestureDetector(
                 onTap: () {
                   FocusScope.of(context).unfocus();
