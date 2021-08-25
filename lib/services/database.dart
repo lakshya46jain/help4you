@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
+import 'package:help4you/models/address_model.dart';
 import 'package:help4you/models/reviews_model.dart';
 import 'package:help4you/models/messages_model.dart';
 import 'package:help4you/models/chat_room_model.dart';
@@ -275,6 +276,22 @@ class DatabaseService {
     ).toList();
   }
 
+  // Address Data from Snapshot
+  List<Address> _help4YouAddressFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.toList().map(
+      (document) {
+        Address help4YouAddress = Address(
+          addressId: document.id,
+          geoPoint: document["Geo Point Location"],
+          addressName: document["Address Name"],
+          completeAddress: document["Complete Address"],
+          addressType: document["Address Type"],
+        );
+        return help4YouAddress;
+      },
+    ).toList();
+  }
+
   // Get User Document
   Stream<UserDataCustomer> get userData {
     return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
@@ -331,5 +348,14 @@ class DatabaseService {
         .where("Professional UID", isEqualTo: professionalUID)
         .snapshots()
         .map(_help4YouReviewsFromSnapshot);
+  }
+
+  // Get Address Documents
+  Stream<List<Address>> get addressData {
+    return userCollection
+        .doc(uid)
+        .collection("Saved Address")
+        .snapshots()
+        .map(_help4YouAddressFromSnapshot);
   }
 }

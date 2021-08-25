@@ -12,7 +12,7 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/constants/back_button.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:help4you/constants/signature_button.dart';
-import 'package:help4you/secondary_screens/create_booking_screen/timings_screens_screen.dart';
+import 'package:help4you/secondary_screens/create_booking_screen/saved_address_screen.dart';
 
 class AddAddressScreen extends StatefulWidget {
   @override
@@ -290,7 +290,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TimingsScreen(),
+                            builder: (context) => SavedAddressScreen(),
                           ),
                         );
                       }
