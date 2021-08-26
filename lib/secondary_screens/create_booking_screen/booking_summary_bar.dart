@@ -7,7 +7,6 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
-import 'package:help4you/models/address_model.dart';
 import 'package:help4you/models/cart_service_model.dart';
 
 class BottomNavBar extends StatelessWidget {
