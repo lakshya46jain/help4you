@@ -23,63 +23,62 @@ class _CartScreenState extends State<CartScreen> {
     // Get User
     final user = Provider.of<Help4YouUser>(context);
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-        leading: CustomBackButton(),
-        title: Text(
-          "My Cart",
-          style: TextStyle(
-            fontSize: 25.0,
-            color: Color(0xFF1C3857),
-            fontFamily: "BalooPaaji",
-            fontWeight: FontWeight.w600,
+    return StreamBuilder(
+      stream: DatabaseService(uid: user.uid).cartServiceListData,
+      builder: (context, snapshot) {
+        List<Help4YouCartServices> cartServices = snapshot.data;
+        return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            elevation: 0.0,
+            backgroundColor: Colors.transparent,
+            leading: CustomBackButton(),
+            title: Text(
+              "My Cart",
+              style: TextStyle(
+                fontSize: 25.0,
+                color: Color(0xFF1C3857),
+                fontFamily: "BalooPaaji",
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
-        ),
-      ),
-      body: StreamBuilder(
-        stream: DatabaseService(uid: user.uid).cartServiceListData,
-        builder: (context, snapshot) {
-          List<Help4YouCartServices> cartServices = snapshot.data;
-          if (snapshot.hasData) {
-            if (cartServices.length == 0) {
-              return Center(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: SvgPicture.asset(
-                      "assets/graphics/Help4You_Illustration_7.svg",
-                    ),
-                  ),
-                ),
-              );
-            } else {
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: cartServices.length,
-                padding: EdgeInsets.all(0.0),
-                physics: BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return CartServiceTile(
-                    serviceId: cartServices[index].serviceId,
-                    professionalId: cartServices[index].professionalId,
-                    serviceTitle: cartServices[index].serviceTitle,
-                    serviceDescription: cartServices[index].serviceDescription,
-                    servicePrice: cartServices[index].servicePrice,
-                    quantity: cartServices[index].quantity,
-                  );
-                },
-              );
-            }
-          } else {
-            return DoubleBounceLoading();
-          }
-        },
-      ),
-      bottomNavigationBar: CartNavBar(),
+          body: (snapshot.hasData)
+              ? (cartServices.length == 0)
+                  ? Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: SvgPicture.asset(
+                            "assets/graphics/Help4You_Illustration_7.svg",
+                          ),
+                        ),
+                      ),
+                    )
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: cartServices.length,
+                      padding: EdgeInsets.all(0.0),
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return CartServiceTile(
+                          serviceId: cartServices[index].serviceId,
+                          professionalId: cartServices[index].professionalId,
+                          serviceTitle: cartServices[index].serviceTitle,
+                          serviceDescription:
+                              cartServices[index].serviceDescription,
+                          servicePrice: cartServices[index].servicePrice,
+                          quantity: cartServices[index].quantity,
+                        );
+                      },
+                    )
+              : DoubleBounceLoading(),
+          bottomNavigationBar: CartNavBar(
+            cartLength: cartServices.length,
+          ),
+        );
+      },
     );
   }
 }

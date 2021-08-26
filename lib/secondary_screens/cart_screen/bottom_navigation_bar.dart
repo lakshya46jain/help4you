@@ -1,5 +1,6 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:help4you/constants/custom_snackbar.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -12,6 +13,12 @@ import 'package:help4you/secondary_screens/create_booking_screen/add_address_scr
 import 'package:help4you/secondary_screens/create_booking_screen/saved_address_screen.dart';
 
 class CartNavBar extends StatelessWidget {
+  final int cartLength;
+
+  CartNavBar({
+    @required this.cartLength,
+  });
+
   @override
   Widget build(BuildContext context) {
     // Get User
@@ -49,7 +56,7 @@ class CartNavBar extends StatelessWidget {
                   }
                 }
                 return Text(
-                  "₹$total",
+                  "$total",
                   style: TextStyle(
                     fontSize: 28.0,
                     color: Color(0xFF1C3857),
@@ -66,22 +73,32 @@ class CartNavBar extends StatelessWidget {
               List<Address> addressData = snapshot.data;
               return GestureDetector(
                 onTap: () {
-                  if (snapshot.hasData) {
-                    if (addressData.length == 0) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AddAddressScreen(),
-                        ),
-                      );
-                    } else {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SavedAddressScreen(),
-                        ),
-                      );
+                  if (cartLength != 0) {
+                    if (snapshot.hasData) {
+                      if (addressData.length == 0) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddAddressScreen(),
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SavedAddressScreen(),
+                          ),
+                        );
+                      }
                     }
+                  } else {
+                    showCustomSnackBar(
+                      context,
+                      FluentIcons.warning_24_regular,
+                      Colors.orange,
+                      "Warning!",
+                      "You cannot create a booking with an empty cart.",
+                    );
                   }
                 },
                 child: Container(
@@ -98,7 +115,7 @@ class CartNavBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        "Make Booking",
+                        "Continue",
                         style: TextStyle(
                           fontSize: 28.0,
                           color: Colors.white,
