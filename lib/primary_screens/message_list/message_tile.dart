@@ -29,6 +29,7 @@ class MessageTile extends StatelessWidget {
           String fullName = snapshot.data["Full Name"];
           String phoneNumber = snapshot.data["Phone Number"];
           String occupation = snapshot.data["Occupation"];
+          String status = snapshot.data["Status"];
 
           // Message Tile
           return InkWell(
@@ -63,22 +64,27 @@ class MessageTile extends StatelessWidget {
                           profilePicture,
                         ),
                       ),
-                      Positioned(
-                        right: 0,
-                        bottom: 0,
-                        child: Container(
-                          height: 18,
-                          width: 18,
-                          decoration: BoxDecoration(
-                            color: Color(0xFF00BF6D),
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              width: 3,
-                              color: Colors.white,
+                      (status == "Online")
+                          ? Positioned(
+                              right: 0,
+                              bottom: 0,
+                              child: Container(
+                                height: 18,
+                                width: 18,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF00BF6D),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    width: 3,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container(
+                              height: 0.0,
+                              width: 0.0,
                             ),
-                          ),
-                        ),
-                      )
                     ],
                   ),
                   Expanded(

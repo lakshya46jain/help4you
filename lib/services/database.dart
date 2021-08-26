@@ -76,6 +76,17 @@ class DatabaseService {
     );
   }
 
+  // Update User Online Status
+  Future updateUserStatus(
+    String status,
+  ) async {
+    await userCollection.doc(uid).update(
+      {
+        'Status': status,
+      },
+    );
+  }
+
   // Add To Cart
   Future addToCart(
     String serviceId,
@@ -205,6 +216,7 @@ class DatabaseService {
       nonInternationalNumber: snapshot['Non International Number'],
       profilePicture: snapshot['Profile Picture'],
       adminLevel: snapshot['Administrative Level'],
+      status: snapshot["Status"],
     );
   }
 

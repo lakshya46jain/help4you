@@ -16,6 +16,7 @@ class UserDataCustomer {
   final String nonInternationalNumber;
   final String phoneNumber;
   final int adminLevel;
+  final String status;
 
   UserDataCustomer({
     this.uid,
@@ -25,5 +26,6 @@ class UserDataCustomer {
     this.nonInternationalNumber,
     this.phoneNumber,
     this.adminLevel,
+    this.status,
   });
 }
