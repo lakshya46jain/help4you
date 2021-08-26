@@ -1,5 +1,6 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:help4you/secondary_screens/create_booking_screen/booking_summary_screen.dart';
 // Dependency Imports
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -286,7 +287,25 @@ class _TimingsScreenState extends State<TimingsScreen> {
                   ),
                   child: SignatureButton(
                     type: "Yellow",
-                    onTap: () {},
+                    onTap: () {
+                      final DateTime mergedTime = DateTime(
+                        focusedDay.year,
+                        focusedDay.month,
+                        focusedDay.day,
+                        time.hour,
+                        time.minute,
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookingSummaryScreen(
+                            completeAddress: widget.completeAddress,
+                            geoPointLocation: widget.geoPointLocation,
+                            bookingTimings: mergedTime,
+                          ),
+                        ),
+                      );
+                    },
                     text: "Confirm Timings",
                   ),
                 ),
