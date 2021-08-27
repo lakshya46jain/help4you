@@ -43,7 +43,6 @@ class MessageTile extends StatelessWidget {
                     fullName: fullName,
                     phoneNumber: phoneNumber,
                     occupation: occupation,
-                    chatRoomId: chatRoomId,
                   ),
                 ),
               );

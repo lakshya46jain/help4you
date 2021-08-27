@@ -17,7 +17,6 @@ class MessageScreen extends StatefulWidget {
   final String fullName;
   final String occupation;
   final String phoneNumber;
-  final String chatRoomId;
 
   MessageScreen({
     @required this.uid,
@@ -25,7 +24,6 @@ class MessageScreen extends StatefulWidget {
     @required this.fullName,
     @required this.occupation,
     @required this.phoneNumber,
-    @required this.chatRoomId,
   });
 
   @override
@@ -66,7 +64,8 @@ class _MessageScreenState extends State<MessageScreen> {
             Expanded(
               child: StreamBuilder(
                 stream:
-                    DatabaseService(chatRoomId: widget.chatRoomId).messagesData,
+                    DatabaseService(uid: user.uid, professionalUID: widget.uid)
+                        .messagesData,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List<Messages> messages = snapshot.data;
@@ -107,11 +106,14 @@ class _MessageScreenState extends State<MessageScreen> {
                   });
                 }
               },
-              onPressed: () {
-                DatabaseService().addMessageToChatRoom(
-                  widget.chatRoomId,
+              onPressed: () async {
+                // Create Chat Room In Database
+                await DatabaseService(uid: user.uid, professionalUID: widget.uid)
+                    .createChatRoom();
+                // Add Message
+                await DatabaseService(uid: user.uid, professionalUID: widget.uid)
+                    .addMessageToChatRoom(
                   messageController.text.trim(),
-                  user.uid,
                 );
                 messageController.clear();
                 setState(() {

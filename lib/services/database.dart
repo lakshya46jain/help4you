@@ -13,14 +13,12 @@ import 'package:help4you/models/service_category_model.dart';
 class DatabaseService {
   final String uid;
   final String professionalUID;
-  final String chatRoomId;
   final String serviceId;
   final String addressId;
 
   DatabaseService({
     this.uid,
     this.professionalUID,
-    this.chatRoomId,
     this.serviceId,
     this.addressId,
   });
@@ -90,7 +88,6 @@ class DatabaseService {
   // Add To Cart
   Future addToCart(
     String serviceId,
-    String professionalId,
     String serviceTitle,
     String serviceDescription,
     double servicePrice,
@@ -99,7 +96,7 @@ class DatabaseService {
     await userCollection.doc(uid).collection("Cart").doc(serviceId).set(
       {
         'Service ID': serviceId,
-        'Professional UID': professionalId,
+        'Professional UID': professionalUID,
         'Service Title': serviceTitle,
         'Service Description': serviceDescription,
         'Service Price': servicePrice,
@@ -121,17 +118,15 @@ class DatabaseService {
   }
 
   // Create Chat Room
-  Future createChatRoom(
-    String customerUID,
-    String professionalUID,
-  ) async {
-    DocumentSnapshot ds = await chatRoomCollection.doc(chatRoomId).get();
+  Future createChatRoom() async {
+    DocumentSnapshot ds =
+        await chatRoomCollection.doc("$uid\_$professionalUID").get();
     if (!ds.exists) {
-      await chatRoomCollection.doc(chatRoomId).set(
+      await chatRoomCollection.doc("$uid\_$professionalUID").set(
         {
           "Connection Date": DateTime.now().toUtc(),
-          "Chat Room ID": chatRoomId,
-          "Customer UID": customerUID,
+          "Chat Room ID": "$uid\_$professionalUID",
+          "Customer UID": uid,
           "Professional UID": professionalUID,
         },
       );
@@ -140,14 +135,16 @@ class DatabaseService {
 
   // Add Chat Room Messages
   Future addMessageToChatRoom(
-    String chatRoomId,
     String message,
-    String sender,
   ) async {
-    await chatRoomCollection.doc(chatRoomId).collection("Messages").doc().set(
+    await chatRoomCollection
+        .doc("$uid\_$professionalUID")
+        .collection("Messages")
+        .doc()
+        .set(
       {
         "Message": message,
-        "Sender": sender,
+        "Sender": uid,
         "Time Stamp": DateTime.now().toUtc(),
       },
     );
@@ -382,7 +379,7 @@ class DatabaseService {
   // Get Messages Documents
   Stream<List<Messages>> get messagesData {
     return chatRoomCollection
-        .doc(chatRoomId)
+        .doc("$uid\_$professionalUID")
         .collection("Messages")
         .orderBy("Time Stamp", descending: true)
         .snapshots()
