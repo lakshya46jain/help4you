@@ -1,4 +1,4 @@
-// Services' Category Model
+// Services Category Model
 class ServiceCategory {
   final String buttonLogo;
   final String buttonBanner;
