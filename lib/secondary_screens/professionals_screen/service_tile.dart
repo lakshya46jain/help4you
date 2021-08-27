@@ -127,10 +127,12 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                   setState(() {
                                     quantity++;
                                   });
-                                  await DatabaseService(uid: user.uid)
+                                  await DatabaseService(
+                                          uid: user.uid,
+                                          professionalUID:
+                                              widget.professionalId)
                                       .addToCart(
                                     widget.serviceId,
-                                    widget.professionalId,
                                     widget.serviceTitle,
                                     widget.serviceDescription,
                                     widget.servicePrice,
