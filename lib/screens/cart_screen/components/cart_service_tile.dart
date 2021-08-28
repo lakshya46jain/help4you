@@ -38,6 +38,7 @@ class CartServiceTile extends StatelessWidget {
       child: Container(
         width: double.infinity,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
