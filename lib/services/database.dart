@@ -52,10 +52,10 @@ class DatabaseService {
   ) async {
     await userCollection.doc(uid).set(
       {
-        'Account Type': "Customer",
-        'User UID': uid,
+        'Status': 'Online',
         'Full Name': fullName,
         'Administrative Level': 0,
+        'Account Type': "Customer",
         'Phone Number': phoneNumber,
         'Phone ISO Code': phoneIsoCode,
         'Non International Number': nonInternationalNumber,
@@ -206,7 +206,7 @@ class DatabaseService {
   // User Data from Snapshot
   UserDataCustomer _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserDataCustomer(
-      uid: uid,
+      uid: snapshot.id,
       fullName: snapshot['Full Name'],
       phoneNumber: snapshot['Phone Number'],
       phoneIsoCode: snapshot['Phone ISO Code'],
@@ -224,7 +224,7 @@ class DatabaseService {
       (document) {
         Help4YouCartServices help4youCartServices = Help4YouCartServices(
           professionalId: document["Professional UID"],
-          serviceId: document["Service ID"],
+          serviceId: document.id,
           serviceTitle: document["Service Title"],
           serviceDescription: document["Service Description"],
           servicePrice: document["Service Price"],
@@ -240,7 +240,7 @@ class DatabaseService {
       DocumentSnapshot snapshot) {
     return Help4YouCartServices(
       professionalId: snapshot["Professional UID"],
-      serviceId: snapshot["Service ID"],
+      serviceId: snapshot.id,
       serviceTitle: snapshot["Service Title"],
       serviceDescription: snapshot["Service Description"],
       servicePrice: snapshot["Service Price"],
@@ -267,7 +267,7 @@ class DatabaseService {
   List<ChatRoom> _help4YouChatRoomFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.toList().map((document) {
       ChatRoom help4YouChatRoom = ChatRoom(
-          chatRoomId: document["Chat Room ID"],
+          chatRoomId: document.id,
           connectionDate: document["Connection Date"],
           customerUID: document["Customer UID"],
           professionalUID: document["Professional UID"]);
