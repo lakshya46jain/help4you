@@ -95,7 +95,6 @@ class DatabaseService {
   ) async {
     await userCollection.doc(uid).collection("Cart").doc(serviceId).set(
       {
-        'Service ID': serviceId,
         'Professional UID': professionalUID,
         'Service Title': serviceTitle,
         'Service Description': serviceDescription,
