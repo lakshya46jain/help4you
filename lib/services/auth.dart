@@ -10,7 +10,7 @@ import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
-import 'package:help4you/screens/registration_screen/registration_screen.dart';
+import 'package:help4you/screens/registration_screen.dart';
 import 'package:help4you/screens/onboarding_screen/components/verification_screen.dart';
 
 class AuthService {
