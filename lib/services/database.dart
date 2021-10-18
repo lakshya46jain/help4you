@@ -52,7 +52,7 @@ class DatabaseService {
   ) async {
     await userCollection.doc(uid).set(
       {
-        'Status': 'Online',
+        'Status': 'Offline',
         'Full Name': fullName,
         'Administrative Level': 0,
         'Account Type': "Customer",

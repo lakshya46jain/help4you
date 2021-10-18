@@ -24,7 +24,7 @@ class Pages extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.39,
+            height: MediaQuery.of(context).size.height * 0.35,
             child: SvgPicture.asset(graphicImage),
           ),
           SizedBox(
