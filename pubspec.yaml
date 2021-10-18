@@ -35,7 +35,6 @@ dependencies:
   
   # Widgets
   pinput: ^1.2.0
-  wiredash: ^0.7.0+1
   flutter_svg: ^0.23.0+1
   rate_my_app: ^1.1.0+1
   table_calendar: ^3.0.2

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:share/share.dart';
-import 'package:wiredash/wiredash.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
@@ -13,7 +13,7 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/personal_data_screen.dart';
 import 'package:help4you/screens/profile_screen/components/profile_stream.dart';
 
-class ProfileScreenBody extends StatelessWidget {
+class ProfileScreenBody extends StatefulWidget {
   final Help4YouUser user;
 
   ProfileScreenBody({
@@ -21,9 +21,27 @@ class ProfileScreenBody extends StatelessWidget {
   });
 
   @override
+  State<ProfileScreenBody> createState() => _ProfileScreenBodyState();
+}
+
+class _ProfileScreenBodyState extends State<ProfileScreenBody> {
+  Future<void> launchInApp(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: true,
+        forceWebView: false,
+        headers: <String, String>{'header_key': 'header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
-      children: (user != null)
+      children: (widget.user != null)
           ? [
               SizedBox(
                 height: 70.0,
@@ -71,7 +89,7 @@ class ProfileScreenBody extends StatelessWidget {
                 },
               ),
               StreamBuilder(
-                stream: DatabaseService(uid: user.uid).userData,
+                stream: DatabaseService(uid: widget.user.uid).userData,
                 builder: (context, snapshot) {
                   UserDataCustomer userData = snapshot.data;
                   if (snapshot.hasData) {
@@ -123,14 +141,9 @@ class ProfileScreenBody extends StatelessWidget {
                 icon: FluentIcons.person_feedback_24_regular,
                 text: "Feedback",
                 onTap: () {
-                  Wiredash.of(context).setUserProperties(
-                    userId: user.uid,
+                  launchInApp(
+                    "https://forms.monday.com/forms/59fb3ed6751002d5a4e1be3fb9a80ac0?r=use1",
                   );
-                  Wiredash.of(context).setBuildProperties(
-                    buildNumber: "Help4You",
-                    buildVersion: "",
-                  );
-                  Wiredash.of(context).show();
                 },
               ),
               SignatureButton(
