@@ -1,6 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:simple_star_rating/simple_star_rating.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -80,7 +81,7 @@ class ReviewTile extends StatelessWidget {
                                 Opacity(
                                   opacity: 0.64,
                                   child: Text(
-                                    "Date",
+                                    "${DateFormat('dd MMM yyyy').format(timeStamp.toDate().toLocal())}",
                                     style: TextStyle(
                                       fontSize: 16.0,
                                     ),
