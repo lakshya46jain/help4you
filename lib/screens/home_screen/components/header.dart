@@ -135,9 +135,9 @@ class Header extends StatelessWidget {
             stream: DatabaseService(uid: user.uid).cartServiceListData,
             builder: (context, snapshot) {
               int totalItems = 0;
-              List<Help4YouCartServices> cartServices = snapshot.data;
+              List<CartServices> cartServices = snapshot.data;
               if (snapshot.connectionState == ConnectionState.active) {
-                for (Help4YouCartServices cartService in cartServices) {
+                for (CartServices cartService in cartServices) {
                   totalItems += cartService.quantity;
                 }
               }

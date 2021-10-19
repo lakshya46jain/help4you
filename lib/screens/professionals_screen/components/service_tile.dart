@@ -42,7 +42,7 @@ class _ServiceTilesState extends State<ServiceTiles> {
       stream: DatabaseService(uid: user.uid, serviceId: widget.serviceId)
           .cartServiceData,
       builder: (context, snapshot) {
-        Help4YouCartServices cartServices = snapshot.data;
+        CartServices cartServices = snapshot.data;
         quantity = cartServices == null ? 0 : cartServices.quantity;
         return Padding(
           padding: EdgeInsets.symmetric(

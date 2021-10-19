@@ -1,18 +1,18 @@
 // Service Model
-class Help4YouCartServices {
-  final String professionalId;
+class CartServices {
   final String serviceId;
   final String serviceTitle;
   final String serviceDescription;
   final double servicePrice;
   final int quantity;
+  final String professionalId;
 
-  Help4YouCartServices({
-    this.professionalId,
+  CartServices({
     this.serviceId,
     this.serviceTitle,
     this.serviceDescription,
     this.servicePrice,
     this.quantity,
+    this.professionalId,
   });
 }

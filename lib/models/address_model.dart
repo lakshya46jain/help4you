@@ -2,19 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Address Model
 class Address {
-  final String addressId;
   final String customerUID;
-  final GeoPoint geoPoint;
+  final String addressId;
   final String addressName;
   final String completeAddress;
   final int addressType;
+  final GeoPoint geoPoint;
 
   Address({
-    this.addressId,
     this.customerUID,
-    this.geoPoint,
+    this.addressId,
     this.addressName,
     this.completeAddress,
     this.addressType,
+    this.geoPoint,
   });
 }

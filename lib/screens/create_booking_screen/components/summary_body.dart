@@ -25,7 +25,7 @@ class SummaryBody extends StatelessWidget {
     return StreamBuilder(
       stream: DatabaseService(uid: user.uid).cartServiceListData,
       builder: (context, snapshot) {
-        List<Help4YouCartServices> cartServices = snapshot.data;
+        List<CartServices> cartServices = snapshot.data;
         if (snapshot.hasData) {
           return SingleChildScrollView(
             physics: BouncingScrollPhysics(),

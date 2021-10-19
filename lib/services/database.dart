@@ -43,46 +43,44 @@ class DatabaseService {
   final CollectionReference reviewsCollection =
       FirebaseFirestore.instance.collection("H4Y Reviews Database");
 
+  // Collection Reference (Bookings Database)
+  final CollectionReference bookingsCollection =
+      FirebaseFirestore.instance.collection("H4Y Bookings Database");
+
   // Update User Data
   Future updateUserData(
     String fullName,
-    String phoneNumber,
     String phoneIsoCode,
     String nonInternationalNumber,
+    String phoneNumber,
   ) async {
-    await userCollection.doc(uid).set(
-      {
-        'Status': 'Offline',
-        'Full Name': fullName,
-        'Administrative Level': 0,
-        'Account Type': "Customer",
-        'Phone Number': phoneNumber,
-        'Phone ISO Code': phoneIsoCode,
-        'Non International Number': nonInternationalNumber,
-      },
-    );
+    await userCollection.doc(uid).set({
+      'Full Name': fullName,
+      'Administrative Level': 0,
+      'Account Type': "Customer",
+      'Phone ISO Code': phoneIsoCode,
+      'Non International Number': nonInternationalNumber,
+      'Phone Number': phoneNumber,
+      'Status': 'Offline',
+    });
   }
 
   // Update User Profile Picture
   Future updateProfilePicture(
     String profilePicture,
   ) async {
-    await userCollection.doc(uid).update(
-      {
-        'Profile Picture': profilePicture,
-      },
-    );
+    await userCollection.doc(uid).update({
+      'Profile Picture': profilePicture,
+    });
   }
 
   // Update User Online Status
   Future updateUserStatus(
     String status,
   ) async {
-    await userCollection.doc(uid).update(
-      {
-        'Status': status,
-      },
-    );
+    await userCollection.doc(uid).update({
+      'Status': status,
+    });
   }
 
   // Add To Cart
@@ -93,15 +91,13 @@ class DatabaseService {
     double servicePrice,
     int quantity,
   ) async {
-    await userCollection.doc(uid).collection("Cart").doc(serviceId).set(
-      {
-        'Professional UID': professionalUID,
-        'Service Title': serviceTitle,
-        'Service Description': serviceDescription,
-        'Service Price': servicePrice,
-        'Quantity': quantity,
-      },
-    );
+    await userCollection.doc(uid).collection("Cart").doc(serviceId).set({
+      'Service Title': serviceTitle,
+      'Service Description': serviceDescription,
+      'Service Price': servicePrice,
+      'Quantity': quantity,
+      'Professional UID': professionalUID,
+    });
   }
 
   // Update Cart Quantity
@@ -109,11 +105,9 @@ class DatabaseService {
     String serviceId,
     int quantity,
   ) async {
-    await userCollection.doc(uid).collection("Cart").doc(serviceId).update(
-      {
-        'Quantity': quantity,
-      },
-    );
+    await userCollection.doc(uid).collection("Cart").doc(serviceId).update({
+      'Quantity': quantity,
+    });
   }
 
   // Create Chat Room
@@ -121,14 +115,12 @@ class DatabaseService {
     DocumentSnapshot ds =
         await chatRoomCollection.doc("$uid\_$professionalUID").get();
     if (!ds.exists) {
-      await chatRoomCollection.doc("$uid\_$professionalUID").set(
-        {
-          "Connection Date": DateTime.now().toUtc(),
-          "Chat Room ID": "$uid\_$professionalUID",
-          "Customer UID": uid,
-          "Professional UID": professionalUID,
-        },
-      );
+      await chatRoomCollection.doc("$uid\_$professionalUID").set({
+        "Chat Room ID": "$uid\_$professionalUID",
+        "Connection Date": DateTime.now().toUtc(),
+        "Customer UID": uid,
+        "Professional UID": professionalUID,
+      });
     }
   }
 
@@ -140,13 +132,11 @@ class DatabaseService {
         .doc("$uid\_$professionalUID")
         .collection("Messages")
         .doc()
-        .set(
-      {
-        "Message": message,
-        "Sender": uid,
-        "Time Stamp": DateTime.now().toUtc(),
-      },
-    );
+        .set({
+      "Sender": uid,
+      "Message": message,
+      "Time Stamp": DateTime.now().toUtc(),
+    });
   }
 
   // Create Reviews
@@ -155,16 +145,14 @@ class DatabaseService {
     String review,
     bool isRecommended,
   ) async {
-    await reviewsCollection.doc().set(
-      {
-        "Professional UID": professionalUID,
-        "Customer UID": uid,
-        "Time Stamp": DateTime.now().toUtc(),
-        "Rating": rating,
-        "Review": review,
-        "Recommended": isRecommended,
-      },
-    );
+    await reviewsCollection.doc().set({
+      "Rating": rating,
+      "Review": review,
+      "Recommended": isRecommended,
+      "Time Stamp": DateTime.now().toUtc(),
+      "Customer UID": uid,
+      "Professional UID": professionalUID,
+    });
   }
 
   // Add Address
@@ -174,32 +162,28 @@ class DatabaseService {
     String completeAddress,
     int addressType,
   ) async {
-    await savedAddressCollection.doc().set(
-      {
-        "Customer UID": uid,
-        "Geo Point Location": geoPoint,
-        "Address Name": addressName,
-        "Complete Address": completeAddress,
-        "Address Type": addressType,
-      },
-    );
+    await savedAddressCollection.doc().set({
+      "Customer UID": uid,
+      "Address Name": addressName,
+      "Complete Address": completeAddress,
+      "Address Type": addressType,
+      "Geo Point Location": geoPoint,
+    });
   }
 
-  // Add Address
+  // Update Address
   Future updateAdress(
     GeoPoint geoPoint,
     String addressName,
     String completeAddress,
     int addressType,
   ) async {
-    await savedAddressCollection.doc(addressId).update(
-      {
-        "Geo Point Location": geoPoint,
-        "Address Name": addressName,
-        "Complete Address": completeAddress,
-        "Address Type": addressType,
-      },
-    );
+    await savedAddressCollection.doc(addressId).update({
+      "Address Name": addressName,
+      "Complete Address": completeAddress,
+      "Address Type": addressType,
+      "Geo Point Location": geoPoint,
+    });
   }
 
   // User Data from Snapshot
@@ -217,11 +201,11 @@ class DatabaseService {
   }
 
   // Service Data List from Snapshot
-  List<Help4YouCartServices> _help4youCartServicesListFromSnapshot(
+  List<CartServices> _help4youCartServicesListFromSnapshot(
       QuerySnapshot snapshot) {
     return snapshot.docs.toList().map(
       (document) {
-        Help4YouCartServices help4youCartServices = Help4YouCartServices(
+        CartServices help4youCartServices = CartServices(
           professionalId: document["Professional UID"],
           serviceId: document.id,
           serviceTitle: document["Service Title"],
@@ -235,9 +219,8 @@ class DatabaseService {
   }
 
   // Service Data from Snapshot
-  Help4YouCartServices _help4youCartServicesFromSnapshot(
-      DocumentSnapshot snapshot) {
-    return Help4YouCartServices(
+  CartServices _help4youCartServicesFromSnapshot(DocumentSnapshot snapshot) {
+    return CartServices(
       professionalId: snapshot["Professional UID"],
       serviceId: snapshot.id,
       serviceTitle: snapshot["Service Title"],
@@ -341,7 +324,7 @@ class DatabaseService {
   }
 
   // Get Service List Document
-  Stream<List<Help4YouCartServices>> get cartServiceListData {
+  Stream<List<CartServices>> get cartServiceListData {
     return userCollection
         .doc(uid)
         .collection("Cart")
@@ -350,7 +333,7 @@ class DatabaseService {
   }
 
   // Get Service Document
-  Stream<Help4YouCartServices> get cartServiceData {
+  Stream<CartServices> get cartServiceData {
     return userCollection
         .doc(uid)
         .collection("Cart")

@@ -6,7 +6,7 @@ import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/screens/cart_screen/components/cart_service_tile.dart';
 
 class CartListBuilder extends StatelessWidget {
-  final List<Help4YouCartServices> cartServices;
+  final List<CartServices> cartServices;
 
   CartListBuilder({
     @required this.cartServices,
