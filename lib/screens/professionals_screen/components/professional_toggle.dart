@@ -12,7 +12,7 @@ class ProfessionalsToggle extends StatelessWidget {
   final String fullName;
   final String occupation;
   final String phoneNumber;
-  final int rating;
+  final double rating;
 
   ProfessionalsToggle({
     @required this.professionalUID,
@@ -49,7 +49,6 @@ class ProfessionalsToggle extends StatelessWidget {
           fullName: fullName,
           occupation: occupation,
           phoneNumber: phoneNumber,
-          rating: rating,
         );
       },
     );

@@ -10,7 +10,7 @@ class ProfessionalCard extends StatelessWidget {
   final String uid;
   final String fullName;
   final String occupation;
-  final int rating;
+  final double rating;
   final String profilePicture;
 
   ProfessionalCard({

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
+import 'package:help4you/services/database.dart';
+import 'package:help4you/models/reviews_model.dart';
 import 'package:help4you/screens/reviews_screen.dart/reviews_screen.dart';
 import 'package:help4you/screens/professionals_screen/components/details_body.dart';
 
@@ -12,7 +14,6 @@ class DetailsScreen extends StatelessWidget {
   final String fullName;
   final String occupation;
   final String phoneNumber;
-  final int rating;
 
   DetailsScreen({
     @required this.professionalUID,
@@ -20,7 +21,6 @@ class DetailsScreen extends StatelessWidget {
     @required this.fullName,
     @required this.occupation,
     @required this.phoneNumber,
-    @required this.rating,
   });
 
   @override
@@ -82,15 +82,33 @@ class DetailsScreen extends StatelessWidget {
                       SizedBox(
                         width: 7.5,
                       ),
-                      Text(
-                        "$rating",
-                        style: TextStyle(
-                          height: 1.75,
-                          color: Color(0xFF1C3857),
-                          fontSize: 25.0,
-                          fontFamily: "BalooPaaji",
-                          fontWeight: FontWeight.w900,
-                        ),
+                      StreamBuilder(
+                        stream: DatabaseService(
+                          professionalUID: professionalUID,
+                        ).reviewsData,
+                        builder: (context, snapshot) {
+                          double ratingTotal = 0;
+                          double rating = 0;
+                          List<Reviews> professionalRatings = snapshot.data;
+                          if (snapshot.connectionState ==
+                              ConnectionState.active) {
+                            for (Reviews professionalRatings
+                                in professionalRatings) {
+                              ratingTotal += professionalRatings.rating;
+                              rating = ratingTotal / snapshot.data.length;
+                            }
+                          }
+                          return Text(
+                            "${rating.toStringAsFixed(1)}",
+                            style: TextStyle(
+                              height: 1.75,
+                              color: Color(0xFF1C3857),
+                              fontSize: 25.0,
+                              fontFamily: "BalooPaaji",
+                              fontWeight: FontWeight.w900,
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

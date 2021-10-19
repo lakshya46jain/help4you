@@ -1,8 +1,8 @@
-// Reviews Model
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// Reviews Model
 class Reviews {
-  final reviewId;
+  final String reviewId;
   final String professionalUID;
   final String customerUID;
   final Timestamp timestamp;
