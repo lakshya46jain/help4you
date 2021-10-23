@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
+import 'package:help4you/models/booking_model.dart';
 import 'package:help4you/models/address_model.dart';
 import 'package:help4you/models/reviews_model.dart';
 import 'package:help4you/models/messages_model.dart';
@@ -15,12 +16,14 @@ class DatabaseService {
   final String professionalUID;
   final String serviceId;
   final String addressId;
+  final String bookingId;
 
   DatabaseService({
     this.uid,
     this.professionalUID,
     this.serviceId,
     this.addressId,
+    this.bookingId,
   });
 
   // Collection Reference (User Database)
@@ -290,7 +293,7 @@ class DatabaseService {
     ).toList();
   }
 
-  // Address Data from Snapshot
+  // Address Data List from Snapshot
   List<Address> _help4YouAddressListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.toList().map(
       (document) {
@@ -315,6 +318,41 @@ class DatabaseService {
       addressName: snapshot["Address Name"],
       completeAddress: snapshot["Complete Address"],
       addressType: snapshot["Address Type"],
+    );
+  }
+
+  // Bookings List from Snapshot
+  List<Booking> _help4YouBookingsListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.toList().map(
+      (document) {
+        Booking help4YouBookings = Booking(
+          bookingId: document.id,
+          customerUID: document["Customer UID"],
+          professionalUID: document["Professional UID"],
+          bookingTime: document["Booking Time"],
+          address: document["Address"],
+          addressGeoPoint: document["Address GeoPoint"],
+          preferredTimings: document["Preferred Timings"],
+          bookingStatus: document["Booking Status"],
+          totalPrice: document["Total Price"],
+        );
+        return help4YouBookings;
+      },
+    ).toList();
+  }
+
+  // Bookings Data from Snapshot
+  Booking _help4YouBookingDataFromSnapshot(DocumentSnapshot snapshot) {
+    return Booking(
+      bookingId: snapshot.id,
+      customerUID: snapshot["Customer UID"],
+      professionalUID: snapshot["Professional UID"],
+      bookingTime: snapshot["Booking Time"],
+      address: snapshot["Address"],
+      addressGeoPoint: snapshot["Address GeoPoint"],
+      preferredTimings: snapshot["Preferred Timings"],
+      bookingStatus: snapshot["Booking Status"],
+      totalPrice: snapshot["Total Price"],
     );
   }
 
@@ -390,5 +428,21 @@ class DatabaseService {
         .doc(addressId)
         .snapshots()
         .map(_help4YouAddressFromSnapshot);
+  }
+
+  // Get Bookings List
+  Stream<List<Booking>> get bookingsListData {
+    return bookingsCollection
+        .where("Customer UID", isEqualTo: uid)
+        .snapshots()
+        .map(_help4YouBookingsListFromSnapshot);
+  }
+
+  // Get Booking Documents
+  Stream<Booking> get bookingsData {
+    return bookingsCollection
+        .doc(bookingId)
+        .snapshots()
+        .map(_help4YouBookingDataFromSnapshot);
   }
 }
