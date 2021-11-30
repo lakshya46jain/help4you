@@ -189,6 +189,28 @@ class DatabaseService {
     });
   }
 
+  // Create Booking
+  Future createBooking(
+    String bookingId,
+    String address,
+    GeoPoint addressGeoPoint,
+    DateTime preferredTimings,
+    String bookingStatus,
+    double totalPrice,
+  ) async {
+    await bookingsCollection.doc(bookingId).set({
+      "Customer UID": uid,
+      "Professional UID": professionalUID,
+      "Booking Time": DateTime.now().toUtc(),
+      "Address": address,
+      "Address GeoPoint": addressGeoPoint,
+      "Preferred Timings": preferredTimings,
+      "Booking Status": bookingStatus,
+      // CART ITEMS
+      "Total Price": totalPrice,
+    });
+  }
+
   // User Data from Snapshot
   UserDataCustomer _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserDataCustomer(

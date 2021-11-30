@@ -45,7 +45,12 @@ class SummaryScreen extends StatelessWidget {
         completeAddress: completeAddress,
         bookingTimings: bookingTimings,
       ),
-      bottomNavigationBar: SummaryBar(),
+      bottomNavigationBar: SummaryBar(
+        professionalUID: "",
+        completeAddress: completeAddress,
+        geoPointLocation: geoPointLocation,
+        bookingTimings: bookingTimings,
+      ),
     );
   }
 }
