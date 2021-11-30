@@ -52,7 +52,7 @@ class _ListingScreenBodyState extends State<ListingScreenBody> {
                 DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
                 return StreamBuilder(
                   stream: DatabaseService(
-                    professionalUID: documentSnapshot["User UID"],
+                    professionalUID: documentSnapshot.id,
                   ).reviewsData,
                   builder: (context, snapshot) {
                     double ratingTotal = 0;
@@ -66,7 +66,7 @@ class _ListingScreenBodyState extends State<ListingScreenBody> {
                       }
                     }
                     return ProfessionalsToggle(
-                      professionalUID: documentSnapshot["User UID"],
+                      professionalUID: documentSnapshot.id,
                       profilePicture: documentSnapshot["Profile Picture"],
                       fullName: documentSnapshot["Full Name"],
                       occupation: documentSnapshot["Occupation"],
