@@ -8,12 +8,16 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 class MessageNavBar extends StatelessWidget {
   final bool isMessageEmpty;
   final Function onChanged;
+  final Function cameraOnPressed;
+  final Function galleryOnPressed;
   final Function onPressed;
   final TextEditingController messageController;
 
   MessageNavBar({
     @required this.isMessageEmpty,
     @required this.onChanged,
+    @required this.cameraOnPressed,
+    @required this.galleryOnPressed,
     @required this.onPressed,
     @required this.messageController,
   });
@@ -78,7 +82,7 @@ class MessageNavBar extends StatelessWidget {
                           final pickerOptions = CupertinoActionSheet(
                             actions: [
                               CupertinoActionSheetAction(
-                                onPressed: () {},
+                                onPressed: cameraOnPressed,
                                 child: Row(
                                   children: [
                                     Icon(
@@ -94,7 +98,7 @@ class MessageNavBar extends StatelessWidget {
                                 ),
                               ),
                               CupertinoActionSheetAction(
-                                onPressed: () {},
+                                onPressed: galleryOnPressed,
                                 child: Row(
                                   children: [
                                     Icon(

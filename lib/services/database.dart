@@ -129,6 +129,7 @@ class DatabaseService {
 
   // Add Chat Room Messages
   Future addMessageToChatRoom(
+    String type,
     String message,
   ) async {
     await chatRoomCollection
@@ -137,6 +138,7 @@ class DatabaseService {
         .doc()
         .set({
       "Sender": uid,
+      "Type": type,
       "Message": message,
       "Time Stamp": DateTime.now().toUtc(),
     });
@@ -289,6 +291,7 @@ class DatabaseService {
         Messages help4YouMessages = Messages(
           messageId: document.id,
           sender: document["Sender"],
+          type: document["Type"],
           message: document["Message"],
           timeStamp: document["Time Stamp"],
         );
