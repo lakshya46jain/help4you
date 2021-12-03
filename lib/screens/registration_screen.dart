@@ -304,8 +304,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               } else {
                                 await DatabaseService(uid: user.uid)
                                     .updateProfilePicture(
-                                  userData.profilePicture,
-                                );
+                                        userData.profilePicture);
                               }
                             }
 
@@ -315,18 +314,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 await DatabaseService(uid: user.uid)
                                     .updateUserData(
                                   fullName ?? userData.fullName,
-                                  userData.phoneNumber,
                                   userData.phoneIsoCode,
                                   userData.nonInternationalNumber,
+                                  userData.phoneNumber,
                                 );
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Wrapper(),
+                                setProfilePicture().then(
+                                  (value) => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Wrapper(),
+                                    ),
                                   ),
                                 );
                               }
-                              setProfilePicture();
                             } catch (error) {
                               showCustomSnackBar(
                                 context,

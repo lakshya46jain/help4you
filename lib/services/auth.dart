@@ -54,9 +54,9 @@ class AuthService {
         } else {
           await DatabaseService(uid: user.uid).updateUserData(
             fullName,
-            phoneNumber,
             phoneIsoCode,
             nonInternationalNumber,
+            phoneNumber,
           );
           await DatabaseService(uid: user.uid).updateProfilePicture(
             "https://drive.google.com/uc?export=view&id=1Fis4yJe7_d_RROY7JdSihM2--GH5aqbe",
@@ -156,9 +156,9 @@ class AuthService {
                     } else {
                       await DatabaseService(uid: user.uid).updateUserData(
                         fullName,
-                        phoneNumber,
                         phoneIsoCode,
                         nonInternationalNumber,
+                        phoneNumber,
                       );
                       await DatabaseService(uid: user.uid).updateProfilePicture(
                         "https://drive.google.com/uc?export=view&id=1Fis4yJe7_d_RROY7JdSihM2--GH5aqbe",
