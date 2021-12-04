@@ -8,19 +8,23 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/models/booking_model.dart';
 import 'package:help4you/screens/bookings_screen/components/booking_tile.dart';
 
-class BookingsScreenBody extends StatefulWidget {
-  @override
-  State<BookingsScreenBody> createState() => _BookingsScreenBodyState();
-}
+class BookingsScreenBody extends StatelessWidget {
+  final String bookingStatus;
 
-class _BookingsScreenBodyState extends State<BookingsScreenBody> {
+  BookingsScreenBody({
+    this.bookingStatus,
+  });
+
   @override
   Widget build(BuildContext context) {
     // Get User
     final user = Provider.of<Help4YouUser>(context);
 
     return StreamBuilder(
-      stream: DatabaseService(uid: user.uid).bookingsListData,
+      stream: DatabaseService(
+        uid: user.uid,
+        bookingStatus: bookingStatus,
+      ).bookingsListData,
       builder: (context, snapshot) {
         List<Booking> bookingsList = snapshot.data;
         if (snapshot.hasData) {
