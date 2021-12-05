@@ -35,159 +35,124 @@ class SavedAddressTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Slidable(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 25.0,
-                width: 25.0,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Color(0xFF95989A).withOpacity(0.6),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  height: 25.0,
+                  width: 25.0,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Color(0xFF95989A).withOpacity(0.6),
+                    ),
+                    shape: BoxShape.circle,
                   ),
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Container(
-                    height: 15.0,
-                    width: 15.0,
-                    decoration: BoxDecoration(
-                      color: (selected == index)
-                          ? Color(0xFF1C3857)
-                          : Colors.white,
-                      shape: BoxShape.circle,
+                  child: Center(
+                    child: Container(
+                      height: 15.0,
+                      width: 15.0,
+                      decoration: BoxDecoration(
+                        color: (selected == index)
+                            ? Color(0xFF1C3857)
+                            : Colors.white,
+                        shape: BoxShape.circle,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 15.0,
-              ),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        addressName,
-                        style: TextStyle(
-                          fontSize: 21.0,
-                          color: Color(0xFF1C3857),
-                          fontWeight: FontWeight.bold,
+                SizedBox(
+                  width: 15.0,
+                ),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          addressName,
+                          style: TextStyle(
+                            fontSize: 21.0,
+                            color: Color(0xFF1C3857),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        (addressType == 0)
-                            ? "Home"
-                            : (addressType == 1)
-                                ? "Office"
-                                : "Other",
-                        style: TextStyle(
-                          color: Color(0xFF1C3857),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w600,
+                        SizedBox(
+                          height: 10,
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        completeAddress,
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          color: Color(0xFF95989A),
+                        Text(
+                          (addressType == 0)
+                              ? "Home"
+                              : (addressType == 1)
+                                  ? "Office"
+                                  : "Other",
+                          style: TextStyle(
+                            color: Color(0xFF1C3857),
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Divider(
-                        thickness: 3.0,
-                        color: Color(0xFF95989A).withOpacity(0.2),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          completeAddress,
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            color: Color(0xFF95989A),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Divider(
+                          thickness: 3.0,
+                          color: Color(0xFF95989A).withOpacity(0.2),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+              ],
+            ),
+          ),
+          endActionPane: ActionPane(
+            motion: const DrawerMotion(),
+            children: [
+              SlidableAction(
+                backgroundColor: Color(0xFF1C3857),
+                icon: FluentIcons.edit_24_regular,
+                label: "Update",
+                onPressed: (context) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UpdateAddressScreen(
+                        addressId: addressId,
+                      ),
+                    ),
+                  );
+                },
+              ),
+              SlidableAction(
+                backgroundColor: Colors.red,
+                icon: FluentIcons.delete_24_regular,
+                label: "Delete",
+                onPressed: (context) async {
+                  await FirebaseFirestore.instance
+                      .collection("H4Y Users Database")
+                      .doc(uid)
+                      .collection("Saved Address")
+                      .doc(addressId)
+                      .delete();
+                },
               ),
             ],
-          ),
-        ),
-        actionPane: SlidableDrawerActionPane(),
-        secondaryActions: [
-          IconSlideAction(
-            color: Color(0xFF1C3857),
-            iconWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  FluentIcons.edit_24_regular,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Text(
-                  "Update",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.white,
-                  ),
-                )
-              ],
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => UpdateAddressScreen(
-                    addressId: addressId,
-                  ),
-                ),
-              );
-            },
-          ),
-          IconSlideAction(
-            color: Colors.red,
-            iconWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  FluentIcons.delete_24_regular,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Text(
-                  "Delete",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.white,
-                  ),
-                )
-              ],
-            ),
-            onTap: () async {
-              await FirebaseFirestore.instance
-                  .collection("H4Y Users Database")
-                  .doc(uid)
-                  .collection("Saved Address")
-                  .doc(addressId)
-                  .delete();
-            },
-          ),
-        ],
-      ),
+          )),
     );
   }
 }
