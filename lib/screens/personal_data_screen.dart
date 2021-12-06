@@ -19,7 +19,7 @@ import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 import 'package:help4you/constants/phone_number_field.dart';
-import 'package:help4you/screens/delete_account_screen.dart';
+import 'package:help4you/screens/delete_phone_auth_screen.dart';
 
 class PersonalDataScreen extends StatefulWidget {
   @override
@@ -347,7 +347,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DeleteAccountScreen(),
+                        builder: (context) => DeleteAccPhoneAuthScreen(),
                       ),
                     );
                   },

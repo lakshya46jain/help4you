@@ -9,35 +9,17 @@ import 'package:help4you/constants/policy_dialog.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/phone_number_field.dart';
 
-class PhoneAuthScreen extends StatefulWidget {
-  final String countryCode;
-  final String phoneIsoCode;
-  final String nonInternationalNumber;
-
-  PhoneAuthScreen({
-    @required this.countryCode,
-    @required this.phoneIsoCode,
-    @required this.nonInternationalNumber,
-  });
-
+class DeleteAccPhoneAuthScreen extends StatefulWidget {
   @override
-  _PhoneAuthScreenState createState() => _PhoneAuthScreenState();
+  _DeleteAccPhoneAuthScreenState createState() =>
+      _DeleteAccPhoneAuthScreenState();
 }
 
-class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
+class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
   // Text Field Variables
-  String countryCode;
-  String phoneIsoCode;
+  String countryCode = "+1";
+  String phoneIsoCode = "US";
   String nonInternationalNumber;
-
-  @override
-  void initState() {
-    setState(() {
-      phoneIsoCode = widget.phoneIsoCode;
-      countryCode = widget.countryCode;
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,8 +63,8 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                 ),
                 PhoneNumberTextField(
                   autoFocus: true,
-                  phoneIsoCode: widget.phoneIsoCode,
-                  nonInternationalNumber: widget.nonInternationalNumber,
+                  phoneIsoCode: phoneIsoCode,
+                  nonInternationalNumber: nonInternationalNumber,
                   onChanged: (phone) {
                     setState(() {
                       nonInternationalNumber = phone.number;
@@ -142,7 +124,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     phoneIsoCode,
                     nonInternationalNumber,
                     "$countryCode$nonInternationalNumber",
-                    "Registration",
+                    "Delete Account",
                     context,
                   );
                 },

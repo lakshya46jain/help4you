@@ -7,13 +7,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 // File Imports
 import 'package:help4you/constants/back_button.dart';
 
-class VerificationScreen extends StatefulWidget {
+class DeleteAccVerificationScreen extends StatefulWidget {
   final String phoneIsoCode;
   final String nonInternationalNumber;
   final String phoneNumber;
   final Function submitOTP;
 
-  VerificationScreen({
+  DeleteAccVerificationScreen({
     @required this.phoneIsoCode,
     @required this.nonInternationalNumber,
     @required this.phoneNumber,
@@ -21,10 +21,12 @@ class VerificationScreen extends StatefulWidget {
   });
 
   @override
-  _VerificationScreenState createState() => _VerificationScreenState();
+  _DeleteAccVerificationScreenState createState() =>
+      _DeleteAccVerificationScreenState();
 }
 
-class _VerificationScreenState extends State<VerificationScreen> {
+class _DeleteAccVerificationScreenState
+    extends State<DeleteAccVerificationScreen> {
   // Text Field Variable
   String fullName;
   String phoneIsoCode;
@@ -123,7 +125,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           widget.phoneIsoCode,
                           widget.nonInternationalNumber,
                           widget.phoneNumber,
-                          "Registration",
+                          "Delete Account",
                           context,
                         );
                       },

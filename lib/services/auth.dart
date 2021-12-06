@@ -11,6 +11,7 @@ import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/screens/registration_screen.dart';
+import 'package:help4you/screens/delete_verification_screen.dart';
 import 'package:help4you/screens/onboarding_screen/components/verification_screen.dart';
 
 class AuthService {
@@ -34,33 +35,46 @@ class AuthService {
     String phoneIsoCode,
     String nonInternationalNumber,
     String phoneNumber,
+    String motive,
     BuildContext context,
   ) async {
     await auth.signInWithCredential(credential).then(
       (UserCredential result) async {
         User user = result.user;
-        DocumentSnapshot ds = await FirebaseFirestore.instance
-            .collection("H4Y Users Database")
-            .doc(user.uid)
-            .get();
-        if (ds.exists) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Wrapper(),
-            ),
-            (route) => false,
-          );
-        } else {
-          await DatabaseService(uid: user.uid).updateUserData(
-            fullName,
-            phoneIsoCode,
-            nonInternationalNumber,
-            phoneNumber,
-          );
-          await DatabaseService(uid: user.uid).updateProfilePicture(
-            "https://drive.google.com/uc?export=view&id=1Fis4yJe7_d_RROY7JdSihM2--GH5aqbe",
-          );
+        if (motive == "Registration") {
+          DocumentSnapshot ds = await FirebaseFirestore.instance
+              .collection("H4Y Users Database")
+              .doc(user.uid)
+              .get();
+          if (ds.exists) {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Wrapper(),
+              ),
+              (route) => false,
+            );
+          } else {
+            await DatabaseService(uid: user.uid).updateUserData(
+              fullName,
+              phoneIsoCode,
+              nonInternationalNumber,
+              phoneNumber,
+            );
+            await DatabaseService(uid: user.uid).updateProfilePicture(
+              "https://drive.google.com/uc?export=view&id=1Fis4yJe7_d_RROY7JdSihM2--GH5aqbe",
+            );
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Wrapper(),
+              ),
+              (route) => false,
+            );
+          }
+        } else if (motive == "Delete Account") {
+          auth.currentUser.delete();
+          signOut();
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -103,6 +117,7 @@ class AuthService {
     String phoneIsoCode,
     String nonInternationalNumber,
     String phoneNumber,
+    String motive,
     BuildContext context,
   ) async {
     auth.verifyPhoneNumber(
@@ -115,6 +130,7 @@ class AuthService {
           phoneIsoCode,
           nonInternationalNumber,
           phoneNumber,
+          motive,
           context,
         );
       },
@@ -125,70 +141,100 @@ class AuthService {
         );
       },
       codeSent: (String verificationId, int resendToken) async {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => VerificationScreen(
-              phoneIsoCode: phoneIsoCode,
-              nonInternationalNumber: nonInternationalNumber,
-              phoneNumber: phoneNumber,
-              submitOTP: (pin) {
-                HapticFeedback.heavyImpact();
-                var credential = PhoneAuthProvider.credential(
-                  verificationId: verificationId,
-                  smsCode: pin,
-                );
-                auth.signInWithCredential(credential).then(
-                  (UserCredential result) async {
-                    User user = result.user;
-                    DocumentSnapshot ds = await FirebaseFirestore.instance
-                        .collection("H4Y Users Database")
-                        .doc(user.uid)
-                        .get();
-                    if (ds.exists) {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Wrapper(),
-                        ),
-                        (route) => false,
-                      );
-                    } else {
-                      await DatabaseService(uid: user.uid).updateUserData(
-                        fullName,
-                        phoneIsoCode,
-                        nonInternationalNumber,
-                        phoneNumber,
-                      );
-                      await DatabaseService(uid: user.uid).updateProfilePicture(
-                        "https://drive.google.com/uc?export=view&id=1Fis4yJe7_d_RROY7JdSihM2--GH5aqbe",
-                      );
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RegistrationScreen(),
-                        ),
-                        (route) => false,
-                      );
-                    }
-                  },
-                ).catchError(
-                  (error) {
-                    if (error.code == 'invalid-verification-code') {
-                      showCustomSnackBar(
-                        context,
-                        FluentIcons.error_circle_24_regular,
-                        Colors.red,
-                        "Error!",
-                        "Invalid verification code entered. Please try again later.",
-                      );
-                    }
-                  },
-                );
-              },
+        if (motive == "Registration") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => VerificationScreen(
+                phoneIsoCode: phoneIsoCode,
+                nonInternationalNumber: nonInternationalNumber,
+                phoneNumber: phoneNumber,
+                submitOTP: (pin) {
+                  HapticFeedback.heavyImpact();
+                  var credential = PhoneAuthProvider.credential(
+                    verificationId: verificationId,
+                    smsCode: pin,
+                  );
+                  auth.signInWithCredential(credential).then(
+                    (UserCredential result) async {
+                      User user = result.user;
+                      DocumentSnapshot ds = await FirebaseFirestore.instance
+                          .collection("H4Y Users Database")
+                          .doc(user.uid)
+                          .get();
+                      if (ds.exists) {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Wrapper(),
+                          ),
+                          (route) => false,
+                        );
+                      } else {
+                        await DatabaseService(uid: user.uid).updateUserData(
+                          fullName,
+                          phoneIsoCode,
+                          nonInternationalNumber,
+                          phoneNumber,
+                        );
+                        await DatabaseService(uid: user.uid)
+                            .updateProfilePicture(
+                          "https://drive.google.com/uc?export=view&id=1Fis4yJe7_d_RROY7JdSihM2--GH5aqbe",
+                        );
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RegistrationScreen(),
+                          ),
+                          (route) => false,
+                        );
+                      }
+                    },
+                  ).catchError(
+                    (error) {
+                      if (error.code == 'invalid-verification-code') {
+                        showCustomSnackBar(
+                          context,
+                          FluentIcons.error_circle_24_regular,
+                          Colors.red,
+                          "Error!",
+                          "Invalid verification code entered. Please try again later.",
+                        );
+                      }
+                    },
+                  );
+                },
+              ),
             ),
-          ),
-        );
+          );
+        } else if (motive == "Delete Account") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DeleteAccVerificationScreen(
+                phoneNumber: phoneNumber,
+                phoneIsoCode: phoneIsoCode,
+                nonInternationalNumber: nonInternationalNumber,
+                submitOTP: (pin) {
+                  HapticFeedback.heavyImpact();
+                  PhoneAuthProvider.credential(
+                    verificationId: verificationId,
+                    smsCode: pin,
+                  );
+                  auth.currentUser.delete();
+                  signOut();
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Wrapper(),
+                    ),
+                    (route) => false,
+                  );
+                },
+              ),
+            ),
+          );
+        }
       },
       codeAutoRetrievalTimeout: (String verificationId) async {
         verificationId = verificationId;
