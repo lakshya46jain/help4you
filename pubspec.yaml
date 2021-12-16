@@ -31,7 +31,7 @@ dependencies:
   # Aesthetics
   animations: ^2.0.2
   page_transition: ^2.0.4
-  fluentui_system_icons: ^1.1.152
+  fluentui_system_icons: ^1.1.153
   
   # Widgets
   pinput: ^1.2.2

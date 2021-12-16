@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
@@ -97,7 +96,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                 UserDataCustomer userData = snapshot.data;
                 return IconButton(
                   icon: Icon(
-                    FluentIcons.checkmark_24_filled,
+                    CupertinoIcons.checkmark_alt,
                     size: 24.0,
                     color: Color(0xFFFEA700),
                   ),
@@ -138,7 +137,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                     } catch (error) {
                       showCustomSnackBar(
                         context,
-                        FluentIcons.error_circle_24_regular,
+                        CupertinoIcons.exclamationmark_circle,
                         Colors.red,
                         "Error!",
                         "Please try updating your profile later.",
@@ -262,7 +261,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                                                 ),
                                               ]),
                                           child: Icon(
-                                            FluentIcons.camera_24_regular,
+                                            CupertinoIcons.camera,
                                             color: Color(0xFF1C3857),
                                           ),
                                         ),
@@ -340,7 +339,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                 ),
                 SignatureButton(
                   type: "Expanded",
-                  icon: FluentIcons.delete_24_regular,
+                  icon: CupertinoIcons.delete,
                   text: "Delete Account",
                   onTap: () {
                     HapticFeedback.lightImpact();

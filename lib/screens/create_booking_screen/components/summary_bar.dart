@@ -1,9 +1,9 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:random_string_generator/random_string_generator.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
@@ -108,7 +108,7 @@ class SummaryBar extends StatelessWidget {
                     ),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Checkout",
@@ -120,7 +120,7 @@ class SummaryBar extends StatelessWidget {
                         ),
                       ),
                       Icon(
-                        FluentIcons.arrow_circle_right_24_filled,
+                        CupertinoIcons.chevron_right,
                         color: Colors.white,
                         size: 28.0,
                       )

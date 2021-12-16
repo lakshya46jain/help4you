@@ -1,8 +1,8 @@
 // Flutter Imports
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/screens/wrapper.dart';
 
@@ -46,7 +46,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                 ),
                 child: Center(
                   child: Icon(
-                    FluentIcons.checkmark_28_filled,
+                    CupertinoIcons.checkmark_alt,
                     size: MediaQuery.of(context).size.width * 0.3,
                     color: Colors.white,
                   ),

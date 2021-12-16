@@ -1,7 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/constants/back_button.dart';
 import 'package:help4you/screens/create_review.dart';
@@ -34,7 +34,7 @@ class ReviewsScreen extends StatelessWidget {
               );
             },
             icon: Icon(
-              FluentIcons.add_24_filled,
+              CupertinoIcons.add,
               size: 25.0,
               color: Color(0xFFFEA700),
             ),

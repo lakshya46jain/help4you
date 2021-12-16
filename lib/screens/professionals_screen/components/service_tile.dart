@@ -1,9 +1,9 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
@@ -117,7 +117,7 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                       width: 5.0,
                                     ),
                                     Icon(
-                                      FluentIcons.add_16_filled,
+                                      CupertinoIcons.add,
                                       color: Color(0xFFFEA700),
                                       size: 18.0,
                                     ),
@@ -140,7 +140,7 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                   );
                                   showCustomSnackBar(
                                     context,
-                                    FluentIcons.checkmark_circle_24_regular,
+                                    CupertinoIcons.checkmark_alt_circle,
                                     Colors.green,
                                     "Congratulations!",
                                     "Service was added to your cart",
@@ -160,7 +160,7 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                         color: Colors.white,
                                       ),
                                       child: Icon(
-                                        FluentIcons.subtract_16_filled,
+                                        CupertinoIcons.minus,
                                         color: Color(0xFF1C3857),
                                         size: 18.0,
                                       ),
@@ -178,7 +178,8 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                             .delete();
                                         showCustomSnackBar(
                                           context,
-                                          FluentIcons.warning_24_regular,
+                                          CupertinoIcons
+                                              .exclamationmark_triangle,
                                           Colors.orange,
                                           "Warning!",
                                           "Service has been removed from your cart.",
@@ -194,7 +195,8 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                         );
                                         showCustomSnackBar(
                                           context,
-                                          FluentIcons.warning_24_regular,
+                                          CupertinoIcons
+                                              .exclamationmark_triangle,
                                           Colors.orange,
                                           "Warning!",
                                           "Service has been removed from your cart.",
@@ -219,7 +221,7 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                         color: Colors.white,
                                       ),
                                       child: Icon(
-                                        FluentIcons.add_20_filled,
+                                        CupertinoIcons.add,
                                         color: Color(0xFFFEA700),
                                         size: 18.0,
                                       ),
@@ -236,8 +238,7 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                         );
                                         showCustomSnackBar(
                                           context,
-                                          FluentIcons
-                                              .checkmark_circle_24_regular,
+                                          CupertinoIcons.checkmark_alt_circle,
                                           Colors.green,
                                           "Congratulations!",
                                           "Service was added to your cart",
@@ -245,7 +246,8 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                       } else {
                                         showCustomSnackBar(
                                           context,
-                                          FluentIcons.warning_24_regular,
+                                          CupertinoIcons
+                                              .exclamationmark_triangle,
                                           Colors.orange,
                                           "Warning!",
                                           "You have recieved maximum limit for this service.",

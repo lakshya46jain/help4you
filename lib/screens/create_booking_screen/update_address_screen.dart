@@ -1,12 +1,12 @@
 // Flutter Imports
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
@@ -157,7 +157,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
               child: Center(
                 child: IconButton(
                   icon: Icon(
-                    FluentIcons.my_location_24_regular,
+                    CupertinoIcons.location,
                     size: 25.0,
                     color: Color(0xFFFEA700),
                   ),

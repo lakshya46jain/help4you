@@ -1,10 +1,10 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/models/user_model.dart';
@@ -95,7 +95,7 @@ class AuthService {
     if (exception.code == 'invalid-phone-number') {
       showCustomSnackBar(
         context,
-        FluentIcons.error_circle_24_regular,
+        CupertinoIcons.exclamationmark_circle,
         Colors.red,
         "Error!",
         "Please enter a valid phone number.",
@@ -103,7 +103,7 @@ class AuthService {
     } else if (exception.code == 'too-many-requests') {
       showCustomSnackBar(
         context,
-        FluentIcons.warning_24_regular,
+        CupertinoIcons.exclamationmark_triangle,
         Colors.orange,
         "Warning!",
         "We have recieved too many requests from this number. Please try again later.",
@@ -195,7 +195,7 @@ class AuthService {
                       if (error.code == 'invalid-verification-code') {
                         showCustomSnackBar(
                           context,
-                          FluentIcons.error_circle_24_regular,
+                          CupertinoIcons.exclamationmark_circle,
                           Colors.red,
                           "Error!",
                           "Invalid verification code entered. Please try again later.",

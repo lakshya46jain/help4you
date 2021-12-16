@@ -1,7 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/reviews_model.dart';
@@ -32,7 +32,7 @@ class DetailsScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: Icon(
-            FluentIcons.dismiss_24_filled,
+            CupertinoIcons.xmark,
             size: 25.0,
             color: Color(0xFFFEA700),
           ),
@@ -76,7 +76,7 @@ class DetailsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Icon(
-                        FluentIcons.star_20_filled,
+                        CupertinoIcons.star_fill,
                         color: Color(0xFFFEA700),
                       ),
                       SizedBox(

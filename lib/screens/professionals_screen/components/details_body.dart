@@ -1,10 +1,10 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 // File Imports
 import 'package:help4you/constants/loading.dart';
@@ -100,13 +100,13 @@ class DetailsScreenBody extends StatelessWidget {
                       phoneNumber,
                     );
                   },
-                  icon: FluentIcons.call_28_filled,
+                  icon: CupertinoIcons.phone_solid,
                   color: Color(0xFF1C3857),
                   title: "Contact",
                 ),
                 CustomMediaButton(
                   onTap: () {},
-                  icon: FluentIcons.book_coins_24_filled,
+                  icon: CupertinoIcons.book_fill,
                   color: Color(0xFF1C3857),
                   title: "Rate Card",
                 ),
@@ -126,7 +126,7 @@ class DetailsScreenBody extends StatelessWidget {
                       ),
                     );
                   },
-                  icon: FluentIcons.chat_28_filled,
+                  icon: CupertinoIcons.chat_bubble_fill,
                   color: Color(0xFF1C3857),
                   title: "Message",
                 ),

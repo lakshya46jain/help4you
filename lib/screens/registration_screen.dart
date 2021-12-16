@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/services/database.dart';
@@ -190,7 +189,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                           ),
                                         ]),
                                     child: Icon(
-                                      FluentIcons.camera_24_regular,
+                                      CupertinoIcons.camera,
                                       color: Color(0xFF1C3857),
                                     ),
                                   ),
@@ -286,7 +285,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         child: SignatureButton(
                           withIcon: true,
                           text: "CONTINUE",
-                          icon: FluentIcons.arrow_right_24_filled,
+                          icon: CupertinoIcons.chevron_right,
                           onTap: () async {
                             // Upload Picture to Firebase
                             Future setProfilePicture() async {
@@ -330,7 +329,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             } catch (error) {
                               showCustomSnackBar(
                                 context,
-                                FluentIcons.error_circle_24_regular,
+                                CupertinoIcons.exclamationmark_circle,
                                 Colors.red,
                                 "Error!",
                                 "Please try updating your profile later.",

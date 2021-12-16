@@ -1,9 +1,9 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:simple_star_rating/simple_star_rating.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
@@ -121,14 +121,14 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                   SimpleStarRating(
                     isReadOnly: false,
                     filledIcon: Icon(
-                      FluentIcons.star_24_filled,
+                      CupertinoIcons.star_fill,
                       size: 35.0,
                       color: Color(0xFFFEA700),
                     ),
                     nonFilledIcon: Icon(
-                      FluentIcons.star_24_filled,
+                      CupertinoIcons.star,
                       size: 35.0,
-                      color: Color(0xFF95989A).withOpacity(0.3),
+                      color: Color(0xFF95989A).withOpacity(0.4),
                     ),
                     onRated: (value) {
                       setState(() {

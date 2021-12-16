@@ -1,11 +1,11 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:simple_star_rating/simple_star_rating.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 
 class ReviewTile extends StatelessWidget {
@@ -93,12 +93,12 @@ class ReviewTile extends StatelessWidget {
                             SimpleStarRating(
                               rating: rating,
                               filledIcon: Icon(
-                                FluentIcons.star_24_filled,
+                                CupertinoIcons.star_fill,
                                 size: 25.0,
                                 color: Color(0xFFFEA700),
                               ),
                               nonFilledIcon: Icon(
-                                FluentIcons.star_24_filled,
+                                CupertinoIcons.star_fill,
                                 size: 25.0,
                                 color: Color(0xFF95989A).withOpacity(0.3),
                               ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 import 'package:help4you/screens/bookings_screen/components/body.dart';
 
@@ -113,7 +112,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                 );
               },
               icon: Icon(
-                FluentIcons.filter_16_filled,
+                CupertinoIcons.line_horizontal_3_decrease,
                 color: Color(0xFF1C3857),
               ),
             ),

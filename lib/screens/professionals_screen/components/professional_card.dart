@@ -1,9 +1,9 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 // File Imports
 
 class ProfessionalCard extends StatelessWidget {
@@ -101,8 +101,8 @@ class ProfessionalCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Icon(
-                                  FluentIcons.star_12_filled,
-                                  color: Colors.yellow[600],
+                                  CupertinoIcons.star_fill,
+                                  color: Color(0xFFFEA700),
                                   size: 18.0,
                                 ),
                                 SizedBox(
@@ -111,7 +111,6 @@ class ProfessionalCard extends StatelessWidget {
                                 Text(
                                   "$rating",
                                   style: TextStyle(
-                                    height: 1.75,
                                     fontSize: 16.0,
                                     fontFamily: "BalooPaaji",
                                   ),
@@ -154,7 +153,6 @@ class ProfessionalCard extends StatelessWidget {
                                 return Text(
                                   "$totalServices" ?? "0",
                                   style: TextStyle(
-                                    height: 1.75,
                                     fontFamily: "BalooPaaji",
                                     fontSize: 16.0,
                                   ),
