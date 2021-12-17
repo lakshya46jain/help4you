@@ -313,6 +313,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 await DatabaseService(uid: user.uid)
                                     .updateUserData(
                                   fullName ?? userData.fullName,
+                                  userData.countryCode,
                                   userData.phoneIsoCode,
                                   userData.nonInternationalNumber,
                                   userData.phoneNumber,

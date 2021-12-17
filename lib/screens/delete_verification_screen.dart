@@ -1,10 +1,10 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
-import 'package:help4you/services/auth.dart';
 // Dependency Imports
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // File Imports
+import 'package:help4you/services/auth.dart';
 import 'package:help4you/constants/back_button.dart';
 
 class DeleteAccVerificationScreen extends StatefulWidget {
@@ -118,17 +118,7 @@ class _DeleteAccVerificationScreenState
                       phoneNumber: widget.phoneNumber,
                       timeout: Duration(seconds: 180),
                       verificationCompleted:
-                          (PhoneAuthCredential credential) async {
-                        AuthService().verificationCompleted(
-                          credential,
-                          fullName,
-                          widget.phoneIsoCode,
-                          widget.nonInternationalNumber,
-                          widget.phoneNumber,
-                          "Delete Account",
-                          context,
-                        );
-                      },
+                          (PhoneAuthCredential credential) async {},
                       verificationFailed:
                           (FirebaseAuthException exception) async {
                         AuthService().verificationFailed(

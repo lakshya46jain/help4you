@@ -1,19 +1,19 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
-import 'package:help4you/services/auth.dart';
 // Dependency Imports
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // File Imports
+import 'package:help4you/services/auth.dart';
 import 'package:help4you/constants/back_button.dart';
 
-class VerificationScreen extends StatefulWidget {
+class UpdateNumVerificationScreen extends StatefulWidget {
   final String phoneIsoCode;
   final String nonInternationalNumber;
   final String phoneNumber;
   final Function submitOTP;
 
-  VerificationScreen({
+  UpdateNumVerificationScreen({
     @required this.phoneIsoCode,
     @required this.nonInternationalNumber,
     @required this.phoneNumber,
@@ -21,10 +21,12 @@ class VerificationScreen extends StatefulWidget {
   });
 
   @override
-  _VerificationScreenState createState() => _VerificationScreenState();
+  _UpdateNumVerificationScreenState createState() =>
+      _UpdateNumVerificationScreenState();
 }
 
-class _VerificationScreenState extends State<VerificationScreen> {
+class _UpdateNumVerificationScreenState
+    extends State<UpdateNumVerificationScreen> {
   // Text Field Variable
   String fullName;
   String phoneIsoCode;

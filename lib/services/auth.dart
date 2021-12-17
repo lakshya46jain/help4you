@@ -9,8 +9,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
+import 'package:help4you/screens/bottom_nav_bar.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/screens/registration_screen.dart';
+import 'package:help4you/screens/update_num_verification.dart';
 import 'package:help4you/screens/delete_verification_screen.dart';
 import 'package:help4you/screens/onboarding_screen/components/verification_screen.dart';
 
@@ -26,65 +28,6 @@ class AuthService {
   // Authenticate User
   Stream<Help4YouUser> get user {
     return auth.authStateChanges().map(_userFromFirebase);
-  }
-
-  // Verification Completed Future Function
-  Future<void> verificationCompleted(
-    PhoneAuthCredential credential,
-    String fullName,
-    String phoneIsoCode,
-    String nonInternationalNumber,
-    String phoneNumber,
-    String motive,
-    BuildContext context,
-  ) async {
-    await auth.signInWithCredential(credential).then(
-      (UserCredential result) async {
-        User user = result.user;
-        if (motive == "Registration") {
-          DocumentSnapshot ds = await FirebaseFirestore.instance
-              .collection("H4Y Users Database")
-              .doc(user.uid)
-              .get();
-          if (ds.exists) {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Wrapper(),
-              ),
-              (route) => false,
-            );
-          } else {
-            await DatabaseService(uid: user.uid).updateUserData(
-              fullName,
-              phoneIsoCode,
-              nonInternationalNumber,
-              phoneNumber,
-            );
-            await DatabaseService(uid: user.uid).updateProfilePicture(
-              "https://drive.google.com/uc?export=view&id=1Fis4yJe7_d_RROY7JdSihM2--GH5aqbe",
-            );
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Wrapper(),
-              ),
-              (route) => false,
-            );
-          }
-        } else if (motive == "Delete Account") {
-          auth.currentUser.delete();
-          signOut();
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Wrapper(),
-            ),
-            (route) => false,
-          );
-        }
-      },
-    );
   }
 
   // Firebase Authentication Exception Future Function
@@ -114,6 +57,7 @@ class AuthService {
   // Phone Authentication
   Future phoneAuthentication(
     String fullName,
+    String countryCode,
     String phoneIsoCode,
     String nonInternationalNumber,
     String phoneNumber,
@@ -123,17 +67,7 @@ class AuthService {
     auth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       timeout: Duration(seconds: 180),
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        verificationCompleted(
-          credential,
-          fullName,
-          phoneIsoCode,
-          nonInternationalNumber,
-          phoneNumber,
-          motive,
-          context,
-        );
-      },
+      verificationCompleted: (PhoneAuthCredential credential) async {},
       verificationFailed: (FirebaseAuthException exception) async {
         verificationFailed(
           exception,
@@ -173,6 +107,7 @@ class AuthService {
                       } else {
                         await DatabaseService(uid: user.uid).updateUserData(
                           fullName,
+                          countryCode,
                           phoneIsoCode,
                           nonInternationalNumber,
                           phoneNumber,
@@ -227,6 +162,45 @@ class AuthService {
                     context,
                     MaterialPageRoute(
                       builder: (context) => Wrapper(),
+                    ),
+                    (route) => false,
+                  );
+                },
+              ),
+            ),
+          );
+        } else if (motive == "Update Phone Number") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => UpdateNumVerificationScreen(
+                phoneNumber: phoneNumber,
+                phoneIsoCode: phoneIsoCode,
+                nonInternationalNumber: nonInternationalNumber,
+                submitOTP: (pin) async {
+                  var phoneCredential = PhoneAuthProvider.credential(
+                    verificationId: verificationId,
+                    smsCode: pin,
+                  );
+                  await auth.currentUser
+                      .updatePhoneNumber(phoneCredential)
+                      .catchError(
+                    (error) {
+                      if (error.code == 'invalid-verification-code') {
+                        showCustomSnackBar(
+                          context,
+                          CupertinoIcons.exclamationmark_circle,
+                          Colors.red,
+                          "Error!",
+                          "Invalid verification code entered. Please try again later.",
+                        );
+                      }
+                    },
+                  );
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BottomNavBar(),
                     ),
                     (route) => false,
                   );

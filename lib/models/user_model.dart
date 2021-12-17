@@ -12,6 +12,7 @@ class UserDataCustomer {
   final String uid;
   final String fullName;
   final String profilePicture;
+  final String countryCode;
   final String phoneIsoCode;
   final String nonInternationalNumber;
   final String phoneNumber;
@@ -22,6 +23,7 @@ class UserDataCustomer {
     this.uid,
     this.fullName,
     this.profilePicture,
+    this.countryCode,
     this.phoneIsoCode,
     this.nonInternationalNumber,
     this.phoneNumber,

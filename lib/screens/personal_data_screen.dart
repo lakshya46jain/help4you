@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:help4you/services/auth.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
@@ -124,14 +125,37 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                     FocusScope.of(context).unfocus();
                     try {
                       if (formKey.currentState.validate()) {
-                        await DatabaseService(uid: user.uid).updateUserData(
-                          fullName ?? userData.fullName,
-                          userData.phoneIsoCode ?? userData.phoneIsoCode,
-                          userData.nonInternationalNumber ??
-                              userData.nonInternationalNumber,
-                          userData.phoneNumber ?? userData.phoneNumber,
-                        );
-                        Navigator.pop(context);
+                        if (userData.phoneNumber !=
+                            '$countryCode$nonInternationalNumber') {
+                          await AuthService().phoneAuthentication(
+                            fullName,
+                            countryCode,
+                            phoneIsoCode,
+                            nonInternationalNumber,
+                            '$countryCode$nonInternationalNumber',
+                            "Update Phone Number",
+                            context,
+                          );
+                          await DatabaseService(uid: user.uid).updateUserData(
+                            fullName ?? userData.fullName,
+                            countryCode ?? userData.countryCode,
+                            phoneIsoCode ?? userData.phoneIsoCode,
+                            nonInternationalNumber ??
+                                userData.nonInternationalNumber,
+                            '$countryCode$nonInternationalNumber' ??
+                                userData.phoneNumber,
+                          );
+                        } else {
+                          await DatabaseService(uid: user.uid).updateUserData(
+                            fullName ?? userData.fullName,
+                            userData.countryCode ?? userData.countryCode,
+                            userData.phoneIsoCode ?? userData.phoneIsoCode,
+                            userData.nonInternationalNumber ??
+                                userData.nonInternationalNumber,
+                            userData.phoneNumber ?? userData.phoneNumber,
+                          );
+                          Navigator.pop(context);
+                        }
                       }
                       setProfilePicture();
                     } catch (error) {
@@ -305,9 +329,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                                   (1792 / 30),
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 15.0,
-                              ),
+                              padding: EdgeInsets.symmetric(horizontal: 15.0),
                               child: PhoneNumberTextField(
                                 phoneIsoCode: userData.phoneIsoCode,
                                 nonInternationalNumber:

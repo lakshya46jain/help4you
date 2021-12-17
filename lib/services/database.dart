@@ -55,6 +55,7 @@ class DatabaseService {
   // Update User Data
   Future updateUserData(
     String fullName,
+    String countryCode,
     String phoneIsoCode,
     String nonInternationalNumber,
     String phoneNumber,
@@ -63,6 +64,7 @@ class DatabaseService {
       'Full Name': fullName,
       'Administrative Level': 0,
       'Account Type': "Customer",
+      'Country Code': countryCode,
       'Phone ISO Code': phoneIsoCode,
       'Non International Number': nonInternationalNumber,
       'Phone Number': phoneNumber,
@@ -221,6 +223,7 @@ class DatabaseService {
       uid: snapshot.id,
       fullName: snapshot['Full Name'],
       phoneNumber: snapshot['Phone Number'],
+      countryCode: snapshot['Country Code'],
       phoneIsoCode: snapshot['Phone ISO Code'],
       nonInternationalNumber: snapshot['Non International Number'],
       profilePicture: snapshot['Profile Picture'],

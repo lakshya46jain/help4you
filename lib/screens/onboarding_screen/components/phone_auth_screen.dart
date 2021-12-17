@@ -139,6 +139,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   HapticFeedback.heavyImpact();
                   await AuthService().phoneAuthentication(
                     "",
+                    countryCode,
                     phoneIsoCode,
                     nonInternationalNumber,
                     "$countryCode$nonInternationalNumber",

@@ -121,6 +121,7 @@ class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
                   HapticFeedback.heavyImpact();
                   await AuthService().phoneAuthentication(
                     "",
+                    countryCode,
                     phoneIsoCode,
                     nonInternationalNumber,
                     "$countryCode$nonInternationalNumber",
