@@ -272,6 +272,13 @@ class AuthService {
         );
   }
 
+  // Reset Password
+  Future resetPassword(
+    String emailAddress,
+  ) async {
+    await auth.sendPasswordResetEmail(email: emailAddress);
+  }
+
   // Updating Email Address
   Future updateEmailAddress(
     String uid,
