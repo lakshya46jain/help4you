@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:help4you/screens/update_password_screen.dart';
 // File Imports
 import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/models/user_model.dart';
@@ -175,7 +176,8 @@ class AuthService {
           );
         } else if (motive == "Update Phone Number" ||
             motive == "Link Email Address" ||
-            motive == "Update Email Address") {
+            motive == "Update Email Address" ||
+            motive == "Update Password") {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -213,6 +215,8 @@ class AuthService {
                           return LinkEmailAddressScreen();
                         } else if (motive == "Update Email Address") {
                           return UpdateEmailAddressScreen();
+                        } else if (motive == "Update Password") {
+                          return UpdatePasswordScreen();
                         } else {
                           return null;
                         }
@@ -255,6 +259,13 @@ class AuthService {
     await auth.currentUser.updateEmail(emailAddress).then(
           (value) => DatabaseService(uid: uid).updateEmailAddress(emailAddress),
         );
+  }
+
+  // Updating Password
+  Future updatePassword(
+    String password,
+  ) async {
+    await auth.currentUser.updatePassword(password);
   }
 
   // Sign Out

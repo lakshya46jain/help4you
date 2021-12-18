@@ -2,33 +2,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
-import 'package:provider/provider.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
-import 'package:help4you/models/user_model.dart';
 import 'package:help4you/screens/bottom_nav_bar.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
-class UpdateEmailAddressScreen extends StatefulWidget {
+class UpdatePasswordScreen extends StatefulWidget {
   @override
-  State<UpdateEmailAddressScreen> createState() =>
-      _UpdateEmailAddressScreenState();
+  State<UpdatePasswordScreen> createState() => _UpdatePasswordScreenState();
 }
 
-class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
+class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   // Text Field Variables
-  String emailAddress;
+  String password;
+
+  RegExp regex = new RegExp(
+    r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
+  );
 
   // Global Key
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    // Get User
-    final user = Provider.of<Help4YouUser>(context);
-
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -63,21 +61,44 @@ class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
                         vertical: 10.0,
                       ),
                       child: CustomTextField(
-                        keyboardType: TextInputType.name,
-                        hintText: "Enter Email Address...",
+                        maxLines: 1,
+                        obscureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        hintText: "Enter Password...",
                         validator: (String value) {
                           if (value.isEmpty) {
-                            return "Email address field cannot be empty";
-                          } else if (!value.contains("@")) {
-                            return "Please enter a valid email address";
+                            return "Password field cannot be empty";
+                          } else if (!regex.hasMatch(value)) {
+                            return "Please include atleast one (a-z), (0-9) & special symbol";
                           } else {
                             return null;
                           }
                         },
                         onChanged: (val) {
                           setState(() {
-                            emailAddress = val;
+                            password = val;
                           });
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15.0,
+                        vertical: 10.0,
+                      ),
+                      child: CustomTextField(
+                        maxLines: 1,
+                        obscureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        hintText: "Confirm Password...",
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return "Confirm Password field cannot be empty";
+                          } else if (value != password) {
+                            return "The password entered does not match";
+                          } else {
+                            return null;
+                          }
                         },
                       ),
                     ),
@@ -95,10 +116,7 @@ class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
                     onTap: () async {
                       try {
                         if (formKey.currentState.validate()) {
-                          await AuthService().updateEmailAddress(
-                            user.uid,
-                            emailAddress,
-                          );
+                          await AuthService().updatePassword(password);
                           Navigator.push(
                             context,
                             MaterialPageRoute(

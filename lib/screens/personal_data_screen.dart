@@ -418,22 +418,43 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                           },
                         );
                       } else {
-                        return SignatureButton(
-                          type: "Expanded",
-                          icon: CupertinoIcons.refresh,
-                          text: "Update Email Address",
-                          onTap: () {
-                            AuthService().phoneAuthentication(
-                              fullName,
-                              countryCode,
-                              phoneIsoCode,
-                              nonInternationalNumber,
-                              "${userData.countryCode}${userData.nonInternationalNumber}",
-                              "",
-                              "Update Email Address",
-                              context,
-                            );
-                          },
+                        return Column(
+                          children: [
+                            SignatureButton(
+                              type: "Expanded",
+                              icon: CupertinoIcons.refresh,
+                              text: "Update Password",
+                              onTap: () {
+                                AuthService().phoneAuthentication(
+                                  fullName,
+                                  countryCode,
+                                  phoneIsoCode,
+                                  nonInternationalNumber,
+                                  "${userData.countryCode}${userData.nonInternationalNumber}",
+                                  "",
+                                  "Update Password",
+                                  context,
+                                );
+                              },
+                            ),
+                            SignatureButton(
+                              type: "Expanded",
+                              icon: CupertinoIcons.refresh,
+                              text: "Update Email Address",
+                              onTap: () {
+                                AuthService().phoneAuthentication(
+                                  fullName,
+                                  countryCode,
+                                  phoneIsoCode,
+                                  nonInternationalNumber,
+                                  "${userData.countryCode}${userData.nonInternationalNumber}",
+                                  "",
+                                  "Update Email Address",
+                                  context,
+                                );
+                              },
+                            ),
+                          ],
                         );
                       }
                     } else {

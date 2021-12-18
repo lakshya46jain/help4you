@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/models/user_model.dart';
-import 'package:help4you/constants/back_button.dart';
 import 'package:help4you/screens/bottom_nav_bar.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/constants/signature_button.dart';
@@ -42,7 +41,7 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0.0,
-          leading: CustomBackButton(),
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           title: Text(
             "Link Email Address",
