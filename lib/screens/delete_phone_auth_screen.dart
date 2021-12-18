@@ -20,6 +20,7 @@ class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
   String countryCode = "+1";
   String phoneIsoCode = "US";
   String nonInternationalNumber;
+  String emailAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -125,6 +126,7 @@ class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
                     phoneIsoCode,
                     nonInternationalNumber,
                     "$countryCode$nonInternationalNumber",
+                    emailAddress,
                     "Delete Account",
                     context,
                   );

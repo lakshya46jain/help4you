@@ -143,6 +143,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     phoneIsoCode,
                     nonInternationalNumber,
                     "$countryCode$nonInternationalNumber",
+                    "",
                     "Registration",
                     context,
                   );

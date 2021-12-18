@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:help4you/services/auth.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
@@ -310,6 +311,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             HapticFeedback.heavyImpact();
                             try {
                               if (formKey.currentState.validate()) {
+                                await AuthService().linkPhoneAndEmailCredential(
+                                  user.uid,
+                                  emailAddress,
+                                  password,
+                                  context,
+                                );
                                 await DatabaseService(uid: user.uid)
                                     .updateUserData(
                                   fullName ?? userData.fullName,
@@ -317,6 +324,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   userData.phoneIsoCode,
                                   userData.nonInternationalNumber,
                                   userData.phoneNumber,
+                                  emailAddress,
                                 );
                                 setProfilePicture().then(
                                   (value) => Navigator.push(

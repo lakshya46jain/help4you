@@ -59,6 +59,7 @@ class DatabaseService {
     String phoneIsoCode,
     String nonInternationalNumber,
     String phoneNumber,
+    String emailAddress,
   ) async {
     await userCollection.doc(uid).set({
       'Full Name': fullName,
@@ -68,6 +69,7 @@ class DatabaseService {
       'Phone ISO Code': phoneIsoCode,
       'Non International Number': nonInternationalNumber,
       'Phone Number': phoneNumber,
+      'Email Address': emailAddress,
       'Status': 'Offline',
     });
   }
@@ -78,6 +80,15 @@ class DatabaseService {
   ) async {
     await userCollection.doc(uid).update({
       'Profile Picture': profilePicture,
+    });
+  }
+
+  // Update User Email Address
+  Future updateEmailAddress(
+    String emailAddress,
+  ) async {
+    await userCollection.doc(uid).update({
+      'Email Address': emailAddress,
     });
   }
 
@@ -226,6 +237,7 @@ class DatabaseService {
       countryCode: snapshot['Country Code'],
       phoneIsoCode: snapshot['Phone ISO Code'],
       nonInternationalNumber: snapshot['Non International Number'],
+      emailAddress: snapshot["Email Address"],
       profilePicture: snapshot['Profile Picture'],
       adminLevel: snapshot['Administrative Level'],
       status: snapshot["Status"],

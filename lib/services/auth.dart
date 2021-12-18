@@ -61,6 +61,7 @@ class AuthService {
     String phoneIsoCode,
     String nonInternationalNumber,
     String phoneNumber,
+    String emailAddress,
     String motive,
     BuildContext context,
   ) async {
@@ -111,6 +112,7 @@ class AuthService {
                           phoneIsoCode,
                           nonInternationalNumber,
                           phoneNumber,
+                          emailAddress,
                         );
                         await DatabaseService(uid: user.uid)
                             .updateProfilePicture(
@@ -212,6 +214,37 @@ class AuthService {
       },
       codeAutoRetrievalTimeout: (String verificationId) async {
         verificationId = verificationId;
+      },
+    );
+  }
+
+  // Linking Phone & Email Credential
+  Future linkPhoneAndEmailCredential(
+    String uid,
+    String emailAddress,
+    String password,
+    BuildContext context,
+  ) async {
+    var credential = EmailAuthProvider.credential(
+      email: emailAddress,
+      password: password,
+    );
+    await auth.currentUser
+        .linkWithCredential(credential)
+        .then(
+          (value) => DatabaseService(uid: uid).updateEmailAddress(emailAddress),
+        )
+        .catchError(
+      (error) {
+        if (error.code == "email-already-in-use") {
+          showCustomSnackBar(
+            context,
+            CupertinoIcons.exclamationmark_circle,
+            Colors.red,
+            "Error!",
+            "Email is already in use. Please try again later.",
+          );
+        }
       },
     );
   }

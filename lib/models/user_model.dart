@@ -16,6 +16,7 @@ class UserDataCustomer {
   final String phoneIsoCode;
   final String nonInternationalNumber;
   final String phoneNumber;
+  final String emailAddress;
   final int adminLevel;
   final String status;
 
@@ -27,6 +28,7 @@ class UserDataCustomer {
     this.phoneIsoCode,
     this.nonInternationalNumber,
     this.phoneNumber,
+    this.emailAddress,
     this.adminLevel,
     this.status,
   });

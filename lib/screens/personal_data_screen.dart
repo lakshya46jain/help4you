@@ -1,5 +1,6 @@
 // Flutter Imports
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
@@ -133,6 +134,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                             phoneIsoCode,
                             nonInternationalNumber,
                             '$countryCode$nonInternationalNumber',
+                            userData.emailAddress,
                             "Update Phone Number",
                             context,
                           );
@@ -144,6 +146,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                                 userData.nonInternationalNumber,
                             '$countryCode$nonInternationalNumber' ??
                                 userData.phoneNumber,
+                            userData.emailAddress ?? userData.emailAddress,
                           );
                         } else {
                           await DatabaseService(uid: user.uid).updateUserData(
@@ -153,6 +156,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                             userData.nonInternationalNumber ??
                                 userData.nonInternationalNumber,
                             userData.phoneNumber ?? userData.phoneNumber,
+                            userData.emailAddress ?? userData.emailAddress,
                           );
                           Navigator.pop(context);
                         }
@@ -373,6 +377,19 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                     );
                   },
                 ),
+                (FirebaseAuth.instance.currentUser.email == null)
+                    ? SignatureButton(
+                        type: "Expanded",
+                        icon: CupertinoIcons.delete,
+                        text: "Link Email Address",
+                        onTap: () {},
+                      )
+                    : SignatureButton(
+                        type: "Expanded",
+                        icon: CupertinoIcons.delete,
+                        text: "Update Email Address",
+                        onTap: () {},
+                      ),
               ],
             ),
           ),
