@@ -229,24 +229,9 @@ class AuthService {
       email: emailAddress,
       password: password,
     );
-    await auth.currentUser
-        .linkWithCredential(credential)
-        .then(
+    await auth.currentUser.linkWithCredential(credential).then(
           (value) => DatabaseService(uid: uid).updateEmailAddress(emailAddress),
-        )
-        .catchError(
-      (error) {
-        if (error.code == "email-already-in-use") {
-          showCustomSnackBar(
-            context,
-            CupertinoIcons.exclamationmark_circle,
-            Colors.red,
-            "Error!",
-            "Email is already in use. Please try again later.",
-          );
-        }
-      },
-    );
+        );
   }
 
   // Sign Out

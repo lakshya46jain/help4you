@@ -336,13 +336,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 );
                               }
                             } catch (error) {
-                              showCustomSnackBar(
-                                context,
-                                CupertinoIcons.exclamationmark_circle,
-                                Colors.red,
-                                "Error!",
-                                "Please try updating your profile later.",
-                              );
+                              if (error.code == "email-already-in-use") {
+                                showCustomSnackBar(
+                                  context,
+                                  CupertinoIcons.exclamationmark_circle,
+                                  Colors.red,
+                                  "Error!",
+                                  "Email is already in use. Please try again later.",
+                                );
+                              } else {
+                                showCustomSnackBar(
+                                  context,
+                                  CupertinoIcons.exclamationmark_circle,
+                                  Colors.red,
+                                  "Error!",
+                                  "Please try registering your profile later.",
+                                );
+                              }
                             }
                           },
                         ),
