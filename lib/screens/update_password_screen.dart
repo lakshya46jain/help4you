@@ -104,38 +104,37 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 15.0,
-                    vertical: 10.0,
-                  ),
-                  child: SignatureButton(
-                    withIcon: true,
-                    text: "CONTINUE",
-                    icon: CupertinoIcons.chevron_right,
-                    onTap: () async {
-                      try {
-                        if (formKey.currentState.validate()) {
-                          await AuthService().updatePassword(password);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BottomNavBar(),
-                            ),
-                          );
+                SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.0),
+                    child: SignatureButton(
+                      withIcon: true,
+                      text: "CONTINUE",
+                      icon: CupertinoIcons.chevron_right,
+                      onTap: () async {
+                        try {
+                          if (formKey.currentState.validate()) {
+                            await AuthService().updatePassword(password);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BottomNavBar(),
+                              ),
+                            );
+                          }
+                        } catch (error) {
+                          if (error.code == "email-already-in-use") {
+                            showCustomSnackBar(
+                              context,
+                              CupertinoIcons.exclamationmark_circle,
+                              Colors.red,
+                              "Error!",
+                              "Email is already in use. Please try again later.",
+                            );
+                          }
                         }
-                      } catch (error) {
-                        if (error.code == "email-already-in-use") {
-                          showCustomSnackBar(
-                            context,
-                            CupertinoIcons.exclamationmark_circle,
-                            Colors.red,
-                            "Error!",
-                            "Email is already in use. Please try again later.",
-                          );
-                        }
-                      }
-                    },
+                      },
+                    ),
                   ),
                 ),
               ],

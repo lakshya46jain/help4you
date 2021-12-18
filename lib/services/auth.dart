@@ -251,6 +251,27 @@ class AuthService {
         );
   }
 
+  // Login With Email Address & Password
+  Future loginWithEmailAddressAndPassword(
+    String emailAddress,
+    String password,
+    BuildContext context,
+  ) async {
+    await auth
+        .signInWithEmailAndPassword(
+          email: emailAddress,
+          password: password,
+        )
+        .then(
+          (value) => Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Wrapper(),
+              ),
+              (route) => false),
+        );
+  }
+
   // Updating Email Address
   Future updateEmailAddress(
     String uid,

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:help4you/screens/onboarding_screen/components/email_address_auth_screen.dart';
 // Dependency Imports
 // File Imports
 import 'package:help4you/services/auth.dart';
@@ -56,6 +57,26 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
             FocusScope.of(context).unfocus();
           },
         ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 5.0),
+            child: IconButton(
+              icon: Icon(
+                CupertinoIcons.question_circle,
+                size: 25.0,
+                color: Color(0xFFFEA700),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EmailAddressAuthScreen(),
+                  ),
+                );
+              },
+            ),
+          )
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
