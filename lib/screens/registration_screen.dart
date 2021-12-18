@@ -236,7 +236,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         child: CustomTextField(
                           keyboardType: TextInputType.name,
                           hintText: "Enter Email Address...",
-                          initialValue: userData.fullName,
+                          initialValue: userData.emailAddress,
                           validator: (String value) {
                             if (value.isEmpty) {
                               return "Email address field cannot be empty";
@@ -263,7 +263,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           obscureText: true,
                           keyboardType: TextInputType.visiblePassword,
                           hintText: "Enter Password...",
-                          initialValue: userData.fullName,
                           validator: (String value) {
                             if (value.isEmpty) {
                               return "Password field cannot be empty";
@@ -298,11 +297,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             } else {
                               return null;
                             }
-                          },
-                          onChanged: (val) {
-                            setState(() {
-                              password = val;
-                            });
                           },
                         ),
                       ),

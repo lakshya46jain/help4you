@@ -31,7 +31,9 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Get User
     final user = Provider.of<Help4YouUser>(context);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -53,126 +55,126 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
           ),
         ),
         body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 15.0,
-                      vertical: 10.0,
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15.0,
+                        vertical: 10.0,
+                      ),
+                      child: CustomTextField(
+                        keyboardType: TextInputType.name,
+                        hintText: "Enter Email Address...",
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return "Email address field cannot be empty";
+                          } else if (!value.contains("@")) {
+                            return "Please enter a valid email address";
+                          } else {
+                            return null;
+                          }
+                        },
+                        onChanged: (val) {
+                          setState(() {
+                            emailAddress = val;
+                          });
+                        },
+                      ),
                     ),
-                    child: CustomTextField(
-                      keyboardType: TextInputType.name,
-                      hintText: "Enter Email Address...",
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return "Email address field cannot be empty";
-                        } else if (!value.contains("@")) {
-                          return "Please enter a valid email address";
-                        } else {
-                          return null;
-                        }
-                      },
-                      onChanged: (val) {
-                        setState(() {
-                          emailAddress = val;
-                        });
-                      },
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15.0,
+                        vertical: 10.0,
+                      ),
+                      child: CustomTextField(
+                        maxLines: 1,
+                        obscureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        hintText: "Enter Password...",
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return "Password field cannot be empty";
+                          } else if (!regex.hasMatch(value)) {
+                            return "Please include atleast one (a-z), (0-9) & special symbol";
+                          } else {
+                            return null;
+                          }
+                        },
+                        onChanged: (val) {
+                          setState(() {
+                            password = val;
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 15.0,
-                      vertical: 10.0,
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15.0,
+                        vertical: 10.0,
+                      ),
+                      child: CustomTextField(
+                        maxLines: 1,
+                        obscureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        hintText: "Confirm Password...",
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return "Confirm Password field cannot be empty";
+                          } else if (value != password) {
+                            return "The password entered does not match";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
                     ),
-                    child: CustomTextField(
-                      maxLines: 1,
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      hintText: "Enter Password...",
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return "Password field cannot be empty";
-                        } else if (!regex.hasMatch(value)) {
-                          return "Please include atleast one (a-z), (0-9) & special symbol";
-                        } else {
-                          return null;
-                        }
-                      },
-                      onChanged: (val) {
-                        setState(() {
-                          password = val;
-                        });
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 15.0,
-                      vertical: 10.0,
-                    ),
-                    child: CustomTextField(
-                      maxLines: 1,
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      hintText: "Confirm Password...",
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return "Confirm Password field cannot be empty";
-                        } else if (value != password) {
-                          return "The password entered does not match";
-                        } else {
-                          return null;
-                        }
-                      },
-                      onChanged: (val) {
-                        setState(() {
-                          password = val;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 15.0,
-                  vertical: 10.0,
+                  ],
                 ),
-                child: SignatureButton(
-                  withIcon: true,
-                  text: "CONTINUE",
-                  icon: CupertinoIcons.chevron_right,
-                  onTap: () async {
-                    try {
-                      await AuthService().linkPhoneAndEmailCredential(
-                        user.uid,
-                        emailAddress,
-                        password,
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BottomNavBar(),
-                        ),
-                      );
-                    } catch (error) {
-                      if (error.code == "email-already-in-use") {
-                        showCustomSnackBar(
-                          context,
-                          CupertinoIcons.exclamationmark_circle,
-                          Colors.red,
-                          "Error!",
-                          "Email is already in use. Please try again later.",
-                        );
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 15.0,
+                    vertical: 10.0,
+                  ),
+                  child: SignatureButton(
+                    withIcon: true,
+                    text: "CONTINUE",
+                    icon: CupertinoIcons.chevron_right,
+                    onTap: () async {
+                      try {
+                        if (formKey.currentState.validate()) {
+                          await AuthService().linkPhoneAndEmailCredential(
+                            user.uid,
+                            emailAddress,
+                            password,
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BottomNavBar(),
+                            ),
+                          );
+                        }
+                      } catch (error) {
+                        if (error.code == "email-already-in-use") {
+                          showCustomSnackBar(
+                            context,
+                            CupertinoIcons.exclamationmark_circle,
+                            Colors.red,
+                            "Error!",
+                            "Email is already in use. Please try again later.",
+                          );
+                        }
                       }
-                    }
-                  },
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
