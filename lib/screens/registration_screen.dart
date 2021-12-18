@@ -343,7 +343,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   user.uid,
                                   emailAddress,
                                   password,
-                                  context,
                                 );
                                 await DatabaseService(uid: user.uid)
                                     .updateUserData(

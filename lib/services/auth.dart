@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:help4you/screens/link_email_address_screen.dart';
 // File Imports
 import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/models/user_model.dart';
@@ -13,7 +12,9 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/screens/bottom_nav_bar.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/screens/registration_screen.dart';
+import 'package:help4you/screens/update_email_address_screen.dart';
 import 'package:help4you/screens/update_num_verification.dart';
+import 'package:help4you/screens/link_email_address_screen.dart';
 import 'package:help4you/screens/delete_verification_screen.dart';
 import 'package:help4you/screens/onboarding_screen/components/verification_screen.dart';
 
@@ -173,7 +174,8 @@ class AuthService {
             ),
           );
         } else if (motive == "Update Phone Number" ||
-            motive == "Link Email Address") {
+            motive == "Link Email Address" ||
+            motive == "Update Email Address") {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -209,6 +211,8 @@ class AuthService {
                           return BottomNavBar();
                         } else if (motive == "Link Email Address") {
                           return LinkEmailAddressScreen();
+                        } else if (motive == "Update Email Address") {
+                          return UpdateEmailAddressScreen();
                         } else {
                           return null;
                         }
@@ -233,13 +237,22 @@ class AuthService {
     String uid,
     String emailAddress,
     String password,
-    BuildContext context,
   ) async {
     var credential = EmailAuthProvider.credential(
       email: emailAddress,
       password: password,
     );
     await auth.currentUser.linkWithCredential(credential).then(
+          (value) => DatabaseService(uid: uid).updateEmailAddress(emailAddress),
+        );
+  }
+
+  // Updating Email Address
+  Future updateEmailAddress(
+    String uid,
+    String emailAddress,
+  ) async {
+    await auth.currentUser.updateEmail(emailAddress).then(
           (value) => DatabaseService(uid: uid).updateEmailAddress(emailAddress),
         );
   }

@@ -12,19 +12,15 @@ import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
-class LinkEmailAddressScreen extends StatefulWidget {
+class UpdateEmailAddressScreen extends StatefulWidget {
   @override
-  State<LinkEmailAddressScreen> createState() => _LinkEmailAddressScreenState();
+  State<UpdateEmailAddressScreen> createState() =>
+      _UpdateEmailAddressScreenState();
 }
 
-class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
+class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
   // Text Field Variables
   String emailAddress;
-  String password;
-
-  RegExp regex = new RegExp(
-    r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
-  );
 
   // Global Key
   final formKey = GlobalKey<FormState>();
@@ -43,7 +39,7 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
           leading: CustomBackButton(),
           backgroundColor: Colors.transparent,
           title: Text(
-            "Link Email Address",
+            "Update Email Address",
             style: TextStyle(
               fontSize: 25.0,
               color: Color(0xFF1C3857),
@@ -82,58 +78,6 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                       },
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 15.0,
-                      vertical: 10.0,
-                    ),
-                    child: CustomTextField(
-                      maxLines: 1,
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      hintText: "Enter Password...",
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return "Password field cannot be empty";
-                        } else if (!regex.hasMatch(value)) {
-                          return "Please include atleast one (a-z), (0-9) & special symbol";
-                        } else {
-                          return null;
-                        }
-                      },
-                      onChanged: (val) {
-                        setState(() {
-                          password = val;
-                        });
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 15.0,
-                      vertical: 10.0,
-                    ),
-                    child: CustomTextField(
-                      maxLines: 1,
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      hintText: "Confirm Password...",
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return "Confirm Password field cannot be empty";
-                        } else if (value != password) {
-                          return "The password entered does not match";
-                        } else {
-                          return null;
-                        }
-                      },
-                      onChanged: (val) {
-                        setState(() {
-                          password = val;
-                        });
-                      },
-                    ),
-                  ),
                 ],
               ),
               Padding(
@@ -147,10 +91,9 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                   icon: CupertinoIcons.chevron_right,
                   onTap: () async {
                     try {
-                      await AuthService().linkPhoneAndEmailCredential(
+                      await AuthService().updateEmailAddress(
                         user.uid,
                         emailAddress,
-                        password,
                       );
                       Navigator.push(
                         context,

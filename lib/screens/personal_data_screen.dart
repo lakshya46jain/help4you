@@ -21,7 +21,6 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 import 'package:help4you/constants/phone_number_field.dart';
 import 'package:help4you/screens/delete_phone_auth_screen.dart';
-import 'package:help4you/screens/link_email_address_screen.dart';
 
 class PersonalDataScreen extends StatefulWidget {
   @override
@@ -329,9 +328,26 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                                 },
                               ),
                             ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 15.0,
+                                vertical: 10.0,
+                              ),
+                              child: CustomTextField(
+                                readOnly: true,
+                                hintText: "Please link your email address...",
+                                keyboardType: TextInputType.emailAddress,
+                                initialValue: userData.emailAddress,
+                                onChanged: (val) {
+                                  setState(() {
+                                    fullName = val;
+                                  });
+                                },
+                              ),
+                            ),
                             SizedBox(
                               height: MediaQuery.of(context).size.height /
-                                  (1792 / 30),
+                                  (1792 / 20),
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 15.0),
@@ -406,7 +422,18 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                           type: "Expanded",
                           icon: CupertinoIcons.refresh,
                           text: "Update Email Address",
-                          onTap: () {},
+                          onTap: () {
+                            AuthService().phoneAuthentication(
+                              fullName,
+                              countryCode,
+                              phoneIsoCode,
+                              nonInternationalNumber,
+                              "${userData.countryCode}${userData.nonInternationalNumber}",
+                              "",
+                              "Update Email Address",
+                              context,
+                            );
+                          },
                         );
                       }
                     } else {
