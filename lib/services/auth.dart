@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:help4you/screens/link_email_address_screen.dart';
 // File Imports
 import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/models/user_model.dart';
@@ -171,7 +172,8 @@ class AuthService {
               ),
             ),
           );
-        } else if (motive == "Update Phone Number") {
+        } else if (motive == "Update Phone Number" ||
+            motive == "Link Email Address") {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -202,7 +204,15 @@ class AuthService {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BottomNavBar(),
+                      builder: (context) {
+                        if (motive == "Update Phone Number") {
+                          return BottomNavBar();
+                        } else if (motive == "Link Email Address") {
+                          return LinkEmailAddressScreen();
+                        } else {
+                          return null;
+                        }
+                      },
                     ),
                     (route) => false,
                   );

@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final Function onChanged;
   final dynamic initialValue;
   final String hintText;
+  final bool obscureText;
 
   CustomTextField({
     @required this.keyboardType,
@@ -18,11 +19,13 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     this.initialValue,
     this.hintText,
+    this.obscureText,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: obscureText ?? false,
       keyboardType: keyboardType,
       maxLines: maxLines,
       validator: validator,

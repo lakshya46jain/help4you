@@ -1,17 +1,17 @@
 // Flutter Imports
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:help4you/services/auth.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
+import 'package:help4you/services/auth.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/loading.dart';
@@ -21,6 +21,7 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 import 'package:help4you/constants/phone_number_field.dart';
 import 'package:help4you/screens/delete_phone_auth_screen.dart';
+import 'package:help4you/screens/link_email_address_screen.dart';
 
 class PersonalDataScreen extends StatefulWidget {
   @override
@@ -80,8 +81,8 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: Colors.transparent,
           leading: CustomBackButton(),
+          backgroundColor: Colors.transparent,
           title: Text(
             "Personal Data",
             style: TextStyle(
@@ -377,19 +378,42 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                     );
                   },
                 ),
-                (FirebaseAuth.instance.currentUser.email == null)
-                    ? SignatureButton(
-                        type: "Expanded",
-                        icon: CupertinoIcons.delete,
-                        text: "Link Email Address",
-                        onTap: () {},
-                      )
-                    : SignatureButton(
-                        type: "Expanded",
-                        icon: CupertinoIcons.delete,
-                        text: "Update Email Address",
-                        onTap: () {},
-                      ),
+                StreamBuilder(
+                  stream: DatabaseService(uid: user.uid).userData,
+                  builder: (context, snapshot) {
+                    UserDataCustomer userData = snapshot.data;
+                    if (snapshot.hasData) {
+                      if (FirebaseAuth.instance.currentUser.email == null) {
+                        return SignatureButton(
+                          type: "Expanded",
+                          icon: CupertinoIcons.link,
+                          text: "Link Email Address",
+                          onTap: () {
+                            AuthService().phoneAuthentication(
+                              fullName,
+                              countryCode,
+                              phoneIsoCode,
+                              nonInternationalNumber,
+                              "${userData.countryCode}${userData.nonInternationalNumber}",
+                              "",
+                              "Link Email Address",
+                              context,
+                            );
+                          },
+                        );
+                      } else {
+                        return SignatureButton(
+                          type: "Expanded",
+                          icon: CupertinoIcons.refresh,
+                          text: "Update Email Address",
+                          onTap: () {},
+                        );
+                      }
+                    } else {
+                      return Container(height: 0.0, width: 0.0);
+                    }
+                  },
+                ),
               ],
             ),
           ),

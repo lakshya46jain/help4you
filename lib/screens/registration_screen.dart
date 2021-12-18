@@ -259,7 +259,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           vertical: 10.0,
                         ),
                         child: CustomTextField(
-                          keyboardType: TextInputType.name,
+                          maxLines: 1,
+                          obscureText: true,
+                          keyboardType: TextInputType.visiblePassword,
                           hintText: "Enter Password...",
                           initialValue: userData.fullName,
                           validator: (String value) {
@@ -267,6 +269,32 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               return "Password field cannot be empty";
                             } else if (!regex.hasMatch(value)) {
                               return "Please include atleast one (a-z), (0-9) & special symbol";
+                            } else {
+                              return null;
+                            }
+                          },
+                          onChanged: (val) {
+                            setState(() {
+                              password = val;
+                            });
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 15.0,
+                          vertical: 10.0,
+                        ),
+                        child: CustomTextField(
+                          maxLines: 1,
+                          obscureText: true,
+                          keyboardType: TextInputType.visiblePassword,
+                          hintText: "Confirm Password...",
+                          validator: (String value) {
+                            if (value.isEmpty) {
+                              return "Confirm Password field cannot be empty";
+                            } else if (value != password) {
+                              return "The password entered does not match";
                             } else {
                               return null;
                             }
