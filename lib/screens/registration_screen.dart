@@ -234,7 +234,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           vertical: 10.0,
                         ),
                         child: CustomTextField(
-                          keyboardType: TextInputType.name,
+                          keyboardType: TextInputType.emailAddress,
                           hintText: "Enter Email Address...",
                           initialValue: userData.emailAddress,
                           validator: (String value) {
