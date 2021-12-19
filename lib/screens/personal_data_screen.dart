@@ -200,10 +200,8 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                         return Column(
                           children: [
                             SizedBox(
-                              height: MediaQuery.of(context).size.height /
-                                  (1792 / 230),
-                              width: MediaQuery.of(context).size.width /
-                                  (828 / 230),
+                              width: 108.0,
+                              height: 108.0,
                               child: Stack(
                                 fit: StackFit.expand,
                                 clipBehavior: Clip.none,
@@ -226,11 +224,8 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                                     right: -15,
                                     bottom: -10,
                                     child: SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              (1792 / 92),
-                                      width: MediaQuery.of(context).size.width /
-                                          (828 / 92),
+                                      width: 45.0,
+                                      height: 45.0,
                                       child: GestureDetector(
                                         onTap: () {
                                           final pickerOptions =
@@ -299,10 +294,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height /
-                                  (1792 / 75),
-                            ),
+                            SizedBox(height: 35.0),
                             Padding(
                               padding: EdgeInsets.symmetric(
                                 horizontal: 15.0,
@@ -345,10 +337,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                                 },
                               ),
                             ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height /
-                                  (1792 / 20),
-                            ),
+                            SizedBox(height: 10.0),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 15.0),
                               child: PhoneNumberTextField(
@@ -368,10 +357,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                                 },
                               ),
                             ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height /
-                                  (1792 / 30),
-                            ),
+                            SizedBox(height: 13.0),
                           ],
                         );
                       } else {
