@@ -1,12 +1,38 @@
 // Flutter Imports
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
+import 'package:url_launcher/url_launcher.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 // File Imports
 import 'package:help4you/screens/onboarding_screen/components/help_container.dart';
 import 'package:help4you/screens/onboarding_screen/components/email_address_auth_screen.dart';
 
-class HelpScreen extends StatelessWidget {
+class HelpScreen extends StatefulWidget {
+  @override
+  State<HelpScreen> createState() => _HelpScreenState();
+}
+
+class _HelpScreenState extends State<HelpScreen> {
+  // Device Details Variables
+  String platform;
+  String deviceType;
+  String osDetails;
+
+  // Send Email Function
+  Future launchEmail(
+    String toEmail,
+    String subject,
+    String message,
+  ) async {
+    final url =
+        'mailto:$toEmail?subject=${Uri.encodeFull(subject)}&body=${Uri.encodeFull(message)}';
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +102,31 @@ class HelpScreen extends StatelessWidget {
                 title: "Can't sign in?",
                 description:
                     "Get instant answers to your queries from our support team",
-                onTap: () {},
+                onTap: () async {
+                  if (Platform.isIOS) {
+                    final iosDeviceInfo = await DeviceInfoPlugin().iosInfo;
+                    setState(() {
+                      platform = "iOS";
+                      deviceType =
+                          "${iosDeviceInfo.model} (${iosDeviceInfo.name})";
+                      osDetails =
+                          "${iosDeviceInfo.systemName} ${iosDeviceInfo.systemVersion}";
+                    });
+                  } else if (Platform.isAndroid) {
+                    final androidDeviceInfo =
+                        await DeviceInfoPlugin().androidInfo;
+                    setState(() {
+                      platform = "Android";
+                      deviceType = androidDeviceInfo.model;
+                      osDetails = androidDeviceInfo.version.toString();
+                    });
+                  }
+                  await launchEmail(
+                    "lakshyaj465@gmail.com",
+                    "[Help4You-$platform]: Issue in logging in Help4You App",
+                    "Full Name: \n\nPhone Number: \n\nIssue: \n\n| The Below Information Must Not Be Edited |\n\nApp Version: Alpha 1\nDevice Type: $deviceType\nOS Details: $osDetails",
+                  );
+                },
                 buttonText: "Contact Customer Support >",
               ),
             ],
