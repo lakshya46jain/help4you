@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:help4you/screens/onboarding_screen/components/email_address_auth_screen.dart';
 // Dependency Imports
 // File Imports
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/constants/policy_dialog.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/phone_number_field.dart';
+import 'package:help4you/screens/onboarding_screen/components/help_screen.dart';
 
 class PhoneAuthScreen extends StatefulWidget {
   final String countryCode;
@@ -59,23 +59,37 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 5.0),
-            child: IconButton(
-              icon: Icon(
-                CupertinoIcons.question_circle,
-                size: 25.0,
-                color: Color(0xFFFEA700),
+            padding: EdgeInsets.only(right: 10.0),
+            child: GestureDetector(
+              child: Row(
+                children: [
+                  Icon(
+                    CupertinoIcons.question_circle,
+                    size: 25.0,
+                    color: Color(0xFFFEA700),
+                  ),
+                  SizedBox(width: 5.0),
+                  Center(
+                    child: Text(
+                      "Help",
+                      style: TextStyle(
+                        color: Color(0xFFFEA700),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              onPressed: () {
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => EmailAddressAuthScreen(),
+                    builder: (context) => HelpScreen(),
                   ),
                 );
               },
             ),
-          )
+          ),
         ],
       ),
       body: Padding(

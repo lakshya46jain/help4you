@@ -53,7 +53,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Enter your email address",
+                    "Forgot Password",
                     style: TextStyle(
                       height: 1.3,
                       fontSize: 24.0,
@@ -62,9 +62,18 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
-                    height: 30.0,
+                  SizedBox(height: 5.0),
+                  Text(
+                    "Provide us the email address of your Help4You account and we will send you an email with instructions to reset your password.",
+                    style: TextStyle(
+                      height: 1.3,
+                      fontSize: 14.0,
+                      color: Colors.black.withOpacity(0.5),
+                      fontFamily: "BalooPaaji",
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
+                  SizedBox(height: 20.0),
                   CustomTextField(
                     keyboardType: TextInputType.name,
                     hintText: "Enter Email Address...",

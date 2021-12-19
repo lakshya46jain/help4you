@@ -40,6 +40,60 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
             FocusScope.of(context).unfocus();
           },
         ),
+        actions: [
+          GestureDetector(
+            child: Padding(
+              padding: EdgeInsets.only(right: 15.0),
+              child: Center(
+                child: Text(
+                  "Help",
+                  style: TextStyle(
+                    color: Color(0xFFFEA700),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            onTap: () {
+              final pickerOptions = CupertinoActionSheet(
+                actions: [
+                  CupertinoActionSheetAction(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PasswordResetScreen(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "Forgot Password",
+                    ),
+                  ),
+                  CupertinoActionSheetAction(
+                    onPressed: () {},
+                    child: Text(
+                      "Contact Customer Support",
+                    ),
+                  ),
+                ],
+                cancelButton: CupertinoActionSheetAction(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Cancel",
+                  ),
+                ),
+              );
+              showCupertinoModalPopup(
+                context: context,
+                builder: (context) => pickerOptions,
+              );
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
@@ -53,10 +107,10 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Enter your credentials",
+                    "Sign in with your email address",
                     style: TextStyle(
                       height: 1.3,
-                      fontSize: 24.0,
+                      fontSize: 22.0,
                       color: Colors.black,
                       fontFamily: "BalooPaaji",
                       fontWeight: FontWeight.bold,
@@ -103,29 +157,6 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                         password = val;
                       });
                     },
-                  ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PasswordResetScreen(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "Forgot your password? Click here to reset it.",
-                      style: TextStyle(
-                        height: 1.3,
-                        fontSize: 16.0,
-                        color: Color(0xFF1C3857),
-                        fontFamily: "BalooPaaji",
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
                   ),
                 ],
               ),
