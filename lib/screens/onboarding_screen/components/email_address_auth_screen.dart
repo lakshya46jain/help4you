@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:help4you/screens/onboarding_screen/components/password_reset_screen.dart';
 // Dependency Imports
 // File Imports
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
+import 'package:help4you/screens/onboarding_screen/components/password_reset_screen.dart';
 
 class EmailAddressAuthScreen extends StatefulWidget {
   @override

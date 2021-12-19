@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:help4you/screens/update_password_screen.dart';
 // File Imports
 import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/models/user_model.dart';
@@ -13,10 +12,11 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/screens/bottom_nav_bar.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/screens/registration_screen.dart';
-import 'package:help4you/screens/update_email_address_screen.dart';
+import 'package:help4you/screens/update_password_screen.dart';
 import 'package:help4you/screens/update_num_verification.dart';
 import 'package:help4you/screens/link_email_address_screen.dart';
 import 'package:help4you/screens/delete_verification_screen.dart';
+import 'package:help4you/screens/update_email_address_screen.dart';
 import 'package:help4you/screens/onboarding_screen/components/verification_screen.dart';
 
 class AuthService {
