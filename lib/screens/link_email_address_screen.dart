@@ -67,7 +67,7 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                         vertical: 10.0,
                       ),
                       child: CustomTextField(
-                        keyboardType: TextInputType.name,
+                        keyboardType: TextInputType.emailAddress,
                         hintText: "Enter Email Address...",
                         validator: (String value) {
                           if (value.isEmpty) {
