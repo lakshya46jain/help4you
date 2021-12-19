@@ -165,7 +165,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                     height: 30.0,
                   ),
                   CustomTextField(
-                    keyboardType: TextInputType.name,
+                    keyboardType: TextInputType.emailAddress,
                     hintText: "Enter Email Address...",
                     validator: (String value) {
                       if (value.isEmpty) {
