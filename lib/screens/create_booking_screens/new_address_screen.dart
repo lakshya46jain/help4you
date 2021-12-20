@@ -10,7 +10,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
-import 'package:help4you/constants/back_button.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:help4you/constants/signature_button.dart';
 
@@ -117,7 +116,7 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
               shape: BoxShape.circle,
             ),
             child: Center(
-              child: CustomBackButton(),
+              child: SignatureButton(type: "Back Button"),
             ),
           ),
         ),

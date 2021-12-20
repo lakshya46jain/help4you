@@ -5,7 +5,7 @@ import 'package:help4you/services/auth.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // File Imports
-import 'package:help4you/constants/back_button.dart';
+import 'package:help4you/constants/signature_button.dart';
 
 class VerificationScreen extends StatefulWidget {
   final String phoneIsoCode;
@@ -51,7 +51,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        leading: CustomBackButton(),
+        leading: SignatureButton(type: "Back Button"),
         backgroundColor: Colors.transparent,
       ),
       body: Padding(

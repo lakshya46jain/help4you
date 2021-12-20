@@ -9,7 +9,7 @@ import 'package:random_string_generator/random_string_generator.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/cart_service_model.dart';
-import 'package:help4you/screens/create_booking_screen/confirmation_screen.dart';
+import 'package:help4you/screens/create_booking_screens/confirmation_screen.dart';
 
 class SummaryBar extends StatelessWidget {
   final String professionalUID;

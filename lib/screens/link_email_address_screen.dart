@@ -66,7 +66,8 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                         horizontal: 15.0,
                         vertical: 10.0,
                       ),
-                      child: CustomTextField(
+                      child: CustomFields(
+                        type: "Normal",
                         keyboardType: TextInputType.emailAddress,
                         hintText: "Enter Email Address...",
                         validator: (String value) {
@@ -90,7 +91,8 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                         horizontal: 15.0,
                         vertical: 10.0,
                       ),
-                      child: CustomTextField(
+                      child: CustomFields(
+                        type: "Normal",
                         maxLines: 1,
                         obscureText: true,
                         keyboardType: TextInputType.visiblePassword,
@@ -116,7 +118,8 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                         horizontal: 15.0,
                         vertical: 10.0,
                       ),
-                      child: CustomTextField(
+                      child: CustomFields(
+                        type: "Normal",
                         maxLines: 1,
                         obscureText: true,
                         keyboardType: TextInputType.visiblePassword,

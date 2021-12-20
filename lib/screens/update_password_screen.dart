@@ -60,7 +60,8 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                         horizontal: 15.0,
                         vertical: 10.0,
                       ),
-                      child: CustomTextField(
+                      child: CustomFields(
+                        type: "Normal",
                         maxLines: 1,
                         obscureText: true,
                         keyboardType: TextInputType.visiblePassword,
@@ -86,7 +87,8 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                         horizontal: 15.0,
                         vertical: 10.0,
                       ),
-                      child: CustomTextField(
+                      child: CustomFields(
+                        type: "Normal",
                         maxLines: 1,
                         obscureText: true,
                         keyboardType: TextInputType.visiblePassword,

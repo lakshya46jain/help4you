@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // File Imports
 import 'package:help4you/constants/signature_button.dart';
-import 'package:help4you/screens/create_booking_screen/summary_screen.dart';
-import 'package:help4you/screens/create_booking_screen/timings_selection_screen.dart';
+import 'package:help4you/screens/create_booking_screens/summary_screen.dart';
+import 'package:help4you/screens/create_booking_screens/timings_selection_screen.dart';
 
 class TimingsFooter extends StatelessWidget {
   final DateTime time;

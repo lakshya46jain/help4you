@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
-import 'package:help4you/constants/back_button.dart';
-import 'package:help4you/screens/create_booking_screen/components/summary_bar.dart';
-import 'package:help4you/screens/create_booking_screen/components/summary_body.dart';
+import 'package:help4you/constants/signature_button.dart';
+import 'package:help4you/screens/create_booking_screens/components/summary_bar.dart';
+import 'package:help4you/screens/create_booking_screens/components/summary_body.dart';
 
 class SummaryScreen extends StatelessWidget {
   final String completeAddress;
@@ -29,7 +29,7 @@ class SummaryScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: CustomBackButton(),
+        leading: SignatureButton(type: "Back Button"),
         title: Text(
           "Booking Summary",
           style: TextStyle(

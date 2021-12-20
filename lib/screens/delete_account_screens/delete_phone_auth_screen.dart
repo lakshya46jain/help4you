@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/constants/policy_dialog.dart';
 import 'package:help4you/constants/signature_button.dart';
-import 'package:help4you/constants/phone_number_field.dart';
+import 'package:help4you/constants/custom_text_field.dart';
 
 class DeleteAccPhoneAuthScreen extends StatefulWidget {
   @override
@@ -62,7 +62,8 @@ class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
                 SizedBox(
                   height: 30.0,
                 ),
-                PhoneNumberTextField(
+                CustomFields(
+                  type: "Phone",
                   autoFocus: true,
                   phoneIsoCode: phoneIsoCode,
                   nonInternationalNumber: nonInternationalNumber,

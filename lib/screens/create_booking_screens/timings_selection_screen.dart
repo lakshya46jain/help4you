@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
-import 'package:help4you/constants/back_button.dart';
-import 'package:help4you/screens/create_booking_screen/components/time_picker.dart';
-import 'package:help4you/screens/create_booking_screen/components/timings_footer.dart';
+import 'package:help4you/constants/signature_button.dart';
+import 'package:help4you/screens/create_booking_screens/components/time_picker.dart';
+import 'package:help4you/screens/create_booking_screens/components/timings_footer.dart';
 
 class TimingsSelectionScreen extends StatefulWidget {
   final String completeAddress;
@@ -46,7 +46,7 @@ class _TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: CustomBackButton(),
+        leading: SignatureButton(type: "Back Button"),
         title: Text(
           "Select Timings",
           style: TextStyle(

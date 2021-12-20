@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 // File Imports
-import 'package:help4you/screens/create_booking_screen/update_address_screen.dart';
+import 'package:help4you/screens/create_booking_screens/update_address_screen.dart';
 
 class SavedAddressTile extends StatelessWidget {
   final String uid;

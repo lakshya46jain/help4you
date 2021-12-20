@@ -164,7 +164,8 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                   SizedBox(
                     height: 30.0,
                   ),
-                  CustomTextField(
+                  CustomFields(
+                    type: "Normal",
                     keyboardType: TextInputType.emailAddress,
                     hintText: "Enter Email Address...",
                     validator: (String value) {
@@ -185,7 +186,8 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  CustomTextField(
+                  CustomFields(
+                    type: "Normal",
                     maxLines: 1,
                     obscureText: true,
                     keyboardType: TextInputType.visiblePassword,

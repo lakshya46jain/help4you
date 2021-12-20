@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 // File Imports
-import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
-import 'package:help4you/models/service_category_model.dart';
 import 'package:help4you/screens/categories_screen/categories_screen.dart';
-import 'package:help4you/screens/home_screen/components/occupation_button.dart';
+import 'package:help4you/screens/home_screen/components/category_horizontal_list.dart';
 
 class OccupationListBuilder extends StatelessWidget {
   @override
@@ -56,43 +54,8 @@ class OccupationListBuilder extends StatelessWidget {
         SizedBox(
           height: 15.0,
         ),
-        StreamBuilder(
-          stream: DatabaseService(uid: user.uid).serviceCategoryData,
-          builder: (context, snapshot) {
-            List<ServiceCategory> servicesCategory = snapshot.data;
-            if (snapshot.hasData) {
-              return SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 20.0,
-                    ),
-                    ...List.generate(
-                      servicesCategory.length,
-                      (index) {
-                        return OccupationButton(
-                          buttonLogo: servicesCategory[index].buttonLogo,
-                          occupation: servicesCategory[index].occupation,
-                        );
-                      },
-                    ),
-                    SizedBox(
-                      width: 20.0,
-                    ),
-                  ],
-                ),
-              );
-            } else {
-              return Container(
-                height: 135,
-                width: 135,
-              );
-            }
-          },
+        CategoryHorizontalList(
+          user: user,
         ),
       ],
     );

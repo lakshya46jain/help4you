@@ -74,8 +74,9 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                     ),
                   ),
                   SizedBox(height: 20.0),
-                  CustomTextField(
-                    keyboardType: TextInputType.name,
+                  CustomFields(
+                    type: "Normal",
+                    keyboardType: TextInputType.emailAddress,
                     hintText: "Enter Email Address...",
                     validator: (String value) {
                       if (value.isEmpty) {

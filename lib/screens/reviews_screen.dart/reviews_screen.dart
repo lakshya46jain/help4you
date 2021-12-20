@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/constants/back_button.dart';
 import 'package:help4you/screens/create_review.dart';
+import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/reviews_screen.dart/components/body.dart';
 
 class ReviewsScreen extends StatelessWidget {
@@ -20,7 +20,7 @@ class ReviewsScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: CustomBackButton(),
+        leading: SignatureButton(type: "Back Button"),
         actions: [
           IconButton(
             onPressed: () {

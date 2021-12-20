@@ -8,19 +8,16 @@ import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/loading.dart';
-import 'package:help4you/constants/back_button.dart';
-import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
-import 'package:help4you/constants/phone_number_field.dart';
-import 'package:help4you/screens/delete_phone_auth_screen.dart';
+import 'package:help4you/screens/delete_account_screens/delete_phone_auth_screen.dart';
+import 'package:help4you/screens/personal_data_screen/components/icon_button_stream.dart';
 
 class PersonalDataScreen extends StatefulWidget {
   @override
@@ -80,7 +77,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0.0,
-          leading: CustomBackButton(),
+          leading: SignatureButton(type: "Back Button"),
           backgroundColor: Colors.transparent,
           title: Text(
             "Personal Data",
@@ -92,88 +89,14 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
             ),
           ),
           actions: [
-            StreamBuilder(
-              stream: DatabaseService(uid: user.uid).userData,
-              builder: (context, snapshot) {
-                UserDataCustomer userData = snapshot.data;
-                return IconButton(
-                  icon: Icon(
-                    CupertinoIcons.checkmark_alt,
-                    size: 24.0,
-                    color: Color(0xFFFEA700),
-                  ),
-                  onPressed: () async {
-                    // Upload Picture to Firebase
-                    Future setProfilePicture() async {
-                      if (imageFile != null) {
-                        Reference firebaseStorageRef = FirebaseStorage.instance
-                            .ref()
-                            .child(("H4Y Profile Pictures/" + user.uid));
-                        UploadTask uploadTask =
-                            firebaseStorageRef.putFile(imageFile);
-                        await uploadTask;
-                        String downloadAddress =
-                            await firebaseStorageRef.getDownloadURL();
-                        await DatabaseService(uid: user.uid)
-                            .updateProfilePicture(downloadAddress);
-                      } else {
-                        await DatabaseService(uid: user.uid)
-                            .updateProfilePicture(userData.profilePicture);
-                      }
-                    }
-
-                    HapticFeedback.heavyImpact();
-                    FocusScope.of(context).unfocus();
-                    try {
-                      if (formKey.currentState.validate()) {
-                        if (userData.phoneNumber !=
-                            '$countryCode$nonInternationalNumber') {
-                          await AuthService().phoneAuthentication(
-                            fullName,
-                            countryCode,
-                            phoneIsoCode,
-                            nonInternationalNumber,
-                            '$countryCode$nonInternationalNumber',
-                            userData.emailAddress,
-                            "Update Phone Number",
-                            context,
-                          );
-                          await DatabaseService(uid: user.uid).updateUserData(
-                            fullName ?? userData.fullName,
-                            countryCode ?? userData.countryCode,
-                            phoneIsoCode ?? userData.phoneIsoCode,
-                            nonInternationalNumber ??
-                                userData.nonInternationalNumber,
-                            '$countryCode$nonInternationalNumber' ??
-                                userData.phoneNumber,
-                            userData.emailAddress ?? userData.emailAddress,
-                          );
-                        } else {
-                          await DatabaseService(uid: user.uid).updateUserData(
-                            fullName ?? userData.fullName,
-                            userData.countryCode ?? userData.countryCode,
-                            userData.phoneIsoCode ?? userData.phoneIsoCode,
-                            userData.nonInternationalNumber ??
-                                userData.nonInternationalNumber,
-                            userData.phoneNumber ?? userData.phoneNumber,
-                            userData.emailAddress ?? userData.emailAddress,
-                          );
-                          Navigator.pop(context);
-                        }
-                      }
-                      setProfilePicture();
-                    } catch (error) {
-                      showCustomSnackBar(
-                        context,
-                        CupertinoIcons.exclamationmark_circle,
-                        Colors.red,
-                        "Error!",
-                        "Please try updating your profile later.",
-                      );
-                    }
-                  },
-                );
-              },
+            IconButtonStream(
+              user: user,
+              imageFile: imageFile,
+              formKey: formKey,
+              countryCode: countryCode,
+              nonInternationalNumber: nonInternationalNumber,
+              fullName: fullName,
+              phoneIsoCode: phoneIsoCode,
             ),
           ],
         ),
@@ -300,7 +223,8 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                                 horizontal: 15.0,
                                 vertical: 10.0,
                               ),
-                              child: CustomTextField(
+                              child: CustomFields(
+                                type: "Normal",
                                 keyboardType: TextInputType.name,
                                 hintText: "Enter Full Name...",
                                 initialValue: userData.fullName,
@@ -325,7 +249,8 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                                 horizontal: 15.0,
                                 vertical: 10.0,
                               ),
-                              child: CustomTextField(
+                              child: CustomFields(
+                                type: "Normal",
                                 readOnly: true,
                                 hintText: "Please link your email address...",
                                 keyboardType: TextInputType.emailAddress,
@@ -340,7 +265,8 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                             SizedBox(height: 10.0),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 15.0),
-                              child: PhoneNumberTextField(
+                              child: CustomFields(
+                                type: "Phone",
                                 phoneIsoCode: userData.phoneIsoCode,
                                 nonInternationalNumber:
                                     userData.nonInternationalNumber,

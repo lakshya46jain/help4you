@@ -7,8 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/constants/loading.dart';
-import 'package:help4you/constants/back_button.dart';
 import 'package:help4you/models/cart_service_model.dart';
+import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/cart_screen/components/bottom_nav_bar.dart';
 import 'package:help4you/screens/cart_screen/components/cart_list_builder.dart';
 
@@ -28,7 +28,7 @@ class _CartScreenState extends State<CartScreen> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: CustomBackButton(),
+        leading: SignatureButton(type: "Back Button"),
         title: Text(
           "My Cart",
           style: TextStyle(

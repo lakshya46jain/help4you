@@ -3,21 +3,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:help4you/services/auth.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
-import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/constants/loading.dart';
 import 'package:help4you/models/user_model.dart';
-import 'package:help4you/constants/custom_snackbar.dart';
-import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
+import 'package:help4you/screens/registration_screen/components/registration_continue_button.dart';
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -208,7 +204,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           horizontal: 15.0,
                           vertical: 10.0,
                         ),
-                        child: CustomTextField(
+                        child: CustomFields(
+                          type: "Normal",
                           keyboardType: TextInputType.name,
                           hintText: "Enter Full Name...",
                           initialValue: userData.fullName,
@@ -233,7 +230,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           horizontal: 15.0,
                           vertical: 10.0,
                         ),
-                        child: CustomTextField(
+                        child: CustomFields(
+                          type: "Normal",
                           keyboardType: TextInputType.emailAddress,
                           hintText: "Enter Email Address...",
                           initialValue: userData.emailAddress,
@@ -258,7 +256,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           horizontal: 15.0,
                           vertical: 10.0,
                         ),
-                        child: CustomTextField(
+                        child: CustomFields(
+                          type: "Normal",
                           maxLines: 1,
                           obscureText: true,
                           keyboardType: TextInputType.visiblePassword,
@@ -284,7 +283,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           horizontal: 15.0,
                           vertical: 10.0,
                         ),
-                        child: CustomTextField(
+                        child: CustomFields(
+                          type: "Normal",
                           maxLines: 1,
                           obscureText: true,
                           keyboardType: TextInputType.visiblePassword,
@@ -300,83 +300,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           },
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20.0,
-                          vertical: 15.0,
-                        ),
-                        child: SignatureButton(
-                          withIcon: true,
-                          text: "CONTINUE",
-                          icon: CupertinoIcons.chevron_right,
-                          onTap: () async {
-                            // Upload Picture to Firebase
-                            Future setProfilePicture() async {
-                              if (imageFile != null) {
-                                Reference firebaseStorageRef =
-                                    FirebaseStorage.instance.ref().child(
-                                        ("H4Y Profile Pictures/" + user.uid));
-                                UploadTask uploadTask =
-                                    firebaseStorageRef.putFile(imageFile);
-                                await uploadTask;
-                                String downloadAddress =
-                                    await firebaseStorageRef.getDownloadURL();
-                                await DatabaseService(uid: user.uid)
-                                    .updateProfilePicture(downloadAddress);
-                              } else {
-                                await DatabaseService(uid: user.uid)
-                                    .updateProfilePicture(
-                                        userData.profilePicture);
-                              }
-                            }
-
-                            HapticFeedback.heavyImpact();
-                            try {
-                              if (formKey.currentState.validate()) {
-                                await AuthService().linkPhoneAndEmailCredential(
-                                  user.uid,
-                                  emailAddress,
-                                  password,
-                                );
-                                await DatabaseService(uid: user.uid)
-                                    .updateUserData(
-                                  fullName ?? userData.fullName,
-                                  userData.countryCode,
-                                  userData.phoneIsoCode,
-                                  userData.nonInternationalNumber,
-                                  userData.phoneNumber,
-                                  emailAddress,
-                                );
-                                setProfilePicture().then(
-                                  (value) => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Wrapper(),
-                                    ),
-                                  ),
-                                );
-                              }
-                            } catch (error) {
-                              if (error.code == "email-already-in-use") {
-                                showCustomSnackBar(
-                                  context,
-                                  CupertinoIcons.exclamationmark_circle,
-                                  Colors.red,
-                                  "Error!",
-                                  "Email is already in use. Please try again later.",
-                                );
-                              } else {
-                                showCustomSnackBar(
-                                  context,
-                                  CupertinoIcons.exclamationmark_circle,
-                                  Colors.red,
-                                  "Error!",
-                                  "Please try registering your profile later.",
-                                );
-                              }
-                            }
-                          },
-                        ),
+                      RegistrationContinueButton(
+                        imageFile: imageFile,
+                        user: user,
+                        userData: userData,
+                        formKey: formKey,
+                        emailAddress: emailAddress,
+                        password: password,
+                        fullName: fullName,
                       ),
                     ],
                   ),

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/constants/back_button.dart';
+import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/professionals_screen/components/listing_body.dart';
 
 class ProfessionalListingScreen extends StatelessWidget {
@@ -19,7 +19,7 @@ class ProfessionalListingScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: CustomBackButton(),
+        leading: SignatureButton(type: "Back Button"),
         title: Text(
           occupation,
           style: TextStyle(

@@ -7,7 +7,6 @@ import 'package:simple_star_rating/simple_star_rating.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
-import 'package:help4you/constants/back_button.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
@@ -88,7 +87,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: Colors.transparent,
-          leading: CustomBackButton(),
+          leading: SignatureButton(type: "Back Button"),
           title: Text(
             "Create Review",
             style: TextStyle(
@@ -146,7 +145,8 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                   SizedBox(
                     height: 25.0,
                   ),
-                  CustomTextField(
+                  CustomFields(
+                    type: "Normal",
                     maxLines: 10,
                     hintText: "Please write a review...",
                     keyboardType: TextInputType.multiline,

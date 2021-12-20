@@ -62,7 +62,8 @@ class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
                         horizontal: 15.0,
                         vertical: 10.0,
                       ),
-                      child: CustomTextField(
+                      child: CustomFields(
+                        type: "Normal",
                         keyboardType: TextInputType.emailAddress,
                         hintText: "Enter Email Address...",
                         validator: (String value) {

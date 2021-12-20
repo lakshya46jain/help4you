@@ -10,7 +10,7 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/screens/handbook_screen.dart';
 import 'package:help4you/constants/signature_button.dart';
-import 'package:help4you/screens/personal_data_screen.dart';
+import 'package:help4you/screens/personal_data_screen/personal_data_screen.dart';
 import 'package:help4you/screens/profile_screen/components/profile_stream.dart';
 
 class ProfileScreenBody extends StatefulWidget {

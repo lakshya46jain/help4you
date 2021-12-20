@@ -12,11 +12,9 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
-import 'package:help4you/constants/loading.dart';
-import 'package:help4you/constants/back_button.dart';
-import 'package:help4you/models/messages_model.dart';
-import 'package:help4you/screens/message_screen/components/message_bubble.dart';
+import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/message_screen/components/bottom_nav_bar.dart';
+import 'package:help4you/screens/message_screen/components/message_bubble_stream.dart';
 
 class MessageScreen extends StatefulWidget {
   final String uid;
@@ -97,7 +95,7 @@ class _MessageScreenState extends State<MessageScreen> {
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: Colors.white.withOpacity(0.5),
-          leading: CustomBackButton(),
+          leading: SignatureButton(type: "Back Button"),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -157,38 +155,9 @@ class _MessageScreenState extends State<MessageScreen> {
         body: Column(
           children: [
             Expanded(
-              child: StreamBuilder(
-                stream:
-                    DatabaseService(uid: user.uid, professionalUID: widget.uid)
-                        .messagesData,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<Messages> messages = snapshot.data;
-                    return ListView.builder(
-                      reverse: true,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 0.0,
-                        horizontal: 20.0,
-                      ),
-                      physics: BouncingScrollPhysics(),
-                      itemCount: messages.length,
-                      itemBuilder: (context, index) {
-                        return MessageBubble(
-                          chatRoomId: "${user.uid}\_${widget.uid}",
-                          messageId: messages[index].messageId,
-                          type: messages[index].type,
-                          profilePicture: widget.profilePicture,
-                          message: messages[index].message,
-                          isSentByMe: (messages[index].sender == user.uid)
-                              ? true
-                              : false,
-                        );
-                      },
-                    );
-                  } else {
-                    return DoubleBounceLoading();
-                  }
-                },
+              child: MessageBubbleStream(
+                user: user,
+                widget: widget,
               ),
             ),
             MessageNavBar(
