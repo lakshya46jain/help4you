@@ -10,11 +10,13 @@ import 'package:help4you/screens/create_booking_screens/components/summary_bar.d
 import 'package:help4you/screens/create_booking_screens/components/summary_body.dart';
 
 class SummaryScreen extends StatelessWidget {
+  final String professionalUID;
   final String completeAddress;
   final GeoPoint geoPointLocation;
   final DateTime bookingTimings;
 
   SummaryScreen({
+    @required this.professionalUID,
     @required this.completeAddress,
     @required this.geoPointLocation,
     @required this.bookingTimings,
@@ -41,12 +43,13 @@ class SummaryScreen extends StatelessWidget {
         ),
       ),
       body: SummaryBody(
+        professionalUID: professionalUID,
         user: user,
         completeAddress: completeAddress,
         bookingTimings: bookingTimings,
       ),
       bottomNavigationBar: SummaryBar(
-        professionalUID: "",
+        professionalUID: professionalUID,
         completeAddress: completeAddress,
         geoPointLocation: geoPointLocation,
         bookingTimings: bookingTimings,

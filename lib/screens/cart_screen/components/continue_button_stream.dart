@@ -8,6 +8,7 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/models/address_model.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/models/cart_service_model.dart';
+import 'package:help4you/screens/unique_users_screen/unique_users_screen.dart';
 import 'package:help4you/screens/create_booking_screens/new_address_screen.dart';
 import 'package:help4you/screens/create_booking_screens/saved_address_screen.dart';
 
@@ -29,19 +30,36 @@ class ContinueButtonStream extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             if (cartServices.length != 0) {
-              if (snapshot.hasData) {
+              Set<String> uniqueUsers = {};
+              for (CartServices cartService in cartServices) {
+                uniqueUsers.add(cartService.professionalId);
+              }
+              if (uniqueUsers.length != 1) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UniqueUsersScreen(
+                      uniqueUsers: uniqueUsers,
+                    ),
+                  ),
+                );
+              } else {
                 if (addressData.length == 0) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => NewAddressScreen(),
+                      builder: (context) => NewAddressScreen(
+                        professionalUID: uniqueUsers.elementAt(0),
+                      ),
                     ),
                   );
                 } else {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SavedAddressScreen(),
+                      builder: (context) => SavedAddressScreen(
+                        professionalUID: uniqueUsers.elementAt(0),
+                      ),
                     ),
                   );
                 }

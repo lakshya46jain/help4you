@@ -60,6 +60,7 @@ class TimingsFooter extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SummaryScreen(
+                      professionalUID: widget.professionalUID,
                       completeAddress: widget.completeAddress,
                       geoPointLocation: widget.geoPointLocation,
                       bookingTimings: mergedTime,

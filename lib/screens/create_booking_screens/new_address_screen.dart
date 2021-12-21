@@ -14,6 +14,12 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:help4you/constants/signature_button.dart';
 
 class NewAddressScreen extends StatefulWidget {
+  final String professionalUID;
+
+  NewAddressScreen({
+    @required this.professionalUID,
+  });
+
   @override
   _NewAddressScreenState createState() => _NewAddressScreenState();
 }

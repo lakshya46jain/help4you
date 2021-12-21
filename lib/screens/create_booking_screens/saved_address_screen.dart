@@ -14,6 +14,12 @@ import 'package:help4you/screens/create_booking_screens/timings_selection_screen
 import 'package:help4you/screens/create_booking_screens/components/saved_address_tile.dart';
 
 class SavedAddressScreen extends StatefulWidget {
+  final String professionalUID;
+
+  SavedAddressScreen({
+    @required this.professionalUID,
+  });
+
   @override
   _SavedAddressScreenState createState() => _SavedAddressScreenState();
 }
@@ -51,7 +57,9 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => NewAddressScreen(),
+                  builder: (context) => NewAddressScreen(
+                    professionalUID: widget.professionalUID,
+                  ),
                 ),
               );
             },
@@ -104,6 +112,7 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => TimingsSelectionScreen(
+                                    professionalUID: widget.professionalUID,
                                     completeAddress: addressOptions[selected]
                                         .completeAddress,
                                     geoPointLocation:

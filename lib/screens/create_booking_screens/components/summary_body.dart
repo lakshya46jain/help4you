@@ -10,11 +10,13 @@ import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/screens/create_booking_screens/components/booking_service_tile.dart';
 
 class SummaryBody extends StatelessWidget {
+  final String professionalUID;
   final Help4YouUser user;
   final String completeAddress;
   final DateTime bookingTimings;
 
   SummaryBody({
+    @required this.professionalUID,
     @required this.user,
     @required this.completeAddress,
     @required this.bookingTimings,
@@ -23,7 +25,8 @@ class SummaryBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: DatabaseService(uid: user.uid).cartServiceListData,
+      stream: DatabaseService(uid: user.uid, professionalUID: professionalUID)
+          .filteredCartServiceListData,
       builder: (context, snapshot) {
         List<CartServices> cartServices = snapshot.data;
         if (snapshot.hasData) {

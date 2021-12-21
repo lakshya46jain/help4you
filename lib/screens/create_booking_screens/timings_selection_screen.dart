@@ -9,10 +9,12 @@ import 'package:help4you/screens/create_booking_screens/components/time_picker.d
 import 'package:help4you/screens/create_booking_screens/components/timings_footer.dart';
 
 class TimingsSelectionScreen extends StatefulWidget {
+  final String professionalUID;
   final String completeAddress;
   final GeoPoint geoPointLocation;
 
   TimingsSelectionScreen({
+    @required this.professionalUID,
     this.completeAddress,
     this.geoPointLocation,
   });

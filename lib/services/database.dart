@@ -403,11 +403,21 @@ class DatabaseService {
     return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
   }
 
-  // Get Service List Document
+  // Get Cart Service List Document
   Stream<List<CartServices>> get cartServiceListData {
     return userCollection
         .doc(uid)
         .collection("Cart")
+        .snapshots()
+        .map(_help4youCartServicesListFromSnapshot);
+  }
+
+  // Get Filtered Cart Service List Document
+  Stream<List<CartServices>> get filteredCartServiceListData {
+    return userCollection
+        .doc(uid)
+        .collection("Cart")
+        .where("Professional UID", isEqualTo: professionalUID)
         .snapshots()
         .map(_help4youCartServicesListFromSnapshot);
   }

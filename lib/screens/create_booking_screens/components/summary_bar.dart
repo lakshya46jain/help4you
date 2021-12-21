@@ -45,7 +45,8 @@ class SummaryBar extends StatelessWidget {
         ],
       ),
       child: StreamBuilder(
-        stream: DatabaseService(uid: user.uid).cartServiceListData,
+        stream: DatabaseService(uid: user.uid, professionalUID: professionalUID)
+            .filteredCartServiceListData,
         builder: (context, snapshot) {
           double total = 0;
           List<CartServices> cartServices = snapshot.data;
