@@ -77,6 +77,9 @@ dev_dependencies:
   # Launcher Icon
   flutter_launcher_icons: ^0.9.2
 
+  # Native Launch Screen
+  flutter_native_splash: ^1.3.2
+
 flutter_icons:
   ios: true
   android: true
@@ -85,6 +88,12 @@ flutter_icons:
   image_path_android: 'assets/images/Help4You_App_Logo_v02.png'
   adaptive_icon_background: 'assets/images/Help4You_App_Logo_v02_Android_Adaptive_Background.png'
   adaptive_icon_foreground: 'assets/images/Help4You_App_Logo_v02_Android_Adaptive_Foreground.png'
+
+flutter_native_splash:
+  ios: true
+  android: true
+  color: "#FFFFFF"
+  image: "assets/images/Help4You_App_Logo_v02_Transparent.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -112,6 +121,7 @@ flutter:
     - assets/graphics/Help4You_Illustration_7.svg
     # Images
     - assets/images/Help4You_App_Logo_v02.png
+    - assets/images/Help4You_App_Logo_v02_Transparent.png
     - assets/images/Help4You_App_Logo_v02_Android_Adaptive_Foreground.png
     - assets/images/Help4You_App_Logo_v02_Android_Adaptive_Background.png
 
