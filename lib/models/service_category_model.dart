@@ -1,12 +1,26 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 // Services Category Model
-class ServiceCategory {
+class ServiceCategoryLogo {
   final String occupation;
   final String buttonLogo;
-  final String buttonBanner;
 
-  ServiceCategory({
+  ServiceCategoryLogo({
     this.occupation,
     this.buttonLogo,
-    this.buttonBanner,
   });
+}
+
+class ServiceCategoryBanner {
+  final String occupation;
+  final String buttonBanner;
+
+  ServiceCategoryBanner(
+    this.occupation,
+    this.buttonBanner,
+  );
+
+  ServiceCategoryBanner.fromSnapshot(DocumentSnapshot snapshot)
+      : occupation = snapshot["Occupation"],
+        buttonBanner = snapshot["Button Banner"];
 }

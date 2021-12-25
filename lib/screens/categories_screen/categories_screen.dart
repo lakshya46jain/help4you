@@ -1,9 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
-import 'package:provider/provider.dart';
 // File Imports
-import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/categories_screen/components/category_banner_stream.dart';
 
@@ -13,14 +11,8 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
-  // Search Controller
-  TextEditingController searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    // Get User
-    final user = Provider.of<Help4YouUser>(context);
-
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -40,10 +32,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             ),
           ),
         ),
-        body: CategoryBannerStream(
-          user: user,
-          searchController: searchController,
-        ),
+        body: CategoryBannerStream(),
       ),
     );
   }

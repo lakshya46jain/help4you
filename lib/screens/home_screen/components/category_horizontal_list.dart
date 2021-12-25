@@ -19,7 +19,7 @@ class CategoryHorizontalList extends StatelessWidget {
     return StreamBuilder(
       stream: DatabaseService(uid: user.uid).serviceCategoryData,
       builder: (context, snapshot) {
-        List<ServiceCategory> servicesCategory = snapshot.data;
+        List<ServiceCategoryLogo> servicesCategory = snapshot.data;
         if (snapshot.hasData) {
           return SingleChildScrollView(
             physics: BouncingScrollPhysics(),

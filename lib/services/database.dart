@@ -275,13 +275,12 @@ class DatabaseService {
   }
 
   // Service Category Data from Snapshot
-  List<ServiceCategory> _help4YouServiceCategoryFromSnapshot(
+  List<ServiceCategoryLogo> _help4YouServiceCategoryFromSnapshot(
       QuerySnapshot snapshot) {
     return snapshot.docs.toList().map(
       (document) {
-        ServiceCategory help4youServiceCategory = ServiceCategory(
+        ServiceCategoryLogo help4youServiceCategory = ServiceCategoryLogo(
           buttonLogo: document["Button Logo"],
-          buttonBanner: document["Button Banner"],
           occupation: document["Occupation"],
         );
         return help4youServiceCategory;
@@ -433,7 +432,7 @@ class DatabaseService {
   }
 
   // Get Service Category Document
-  Stream<List<ServiceCategory>> get serviceCategoryData {
+  Stream<List<ServiceCategoryLogo>> get serviceCategoryData {
     return occupationCollection
         .orderBy("Occupation")
         .snapshots()
