@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
-import 'package:help4you/constants/loading.dart';
 import 'package:help4you/models/messages_model.dart';
 import 'package:help4you/screens/message_screen/messages_screen.dart';
 import 'package:help4you/screens/message_screen/components/message_bubble.dart';
@@ -46,7 +45,7 @@ class MessageBubbleStream extends StatelessWidget {
             },
           );
         } else {
-          return DoubleBounceLoading();
+          return Container(width: 0.0, height: 0.0);
         }
       },
     );

@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
-import 'package:help4you/constants/loading.dart';
 import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/screens/create_booking_screens/components/booking_service_tile.dart';
 
@@ -134,7 +133,7 @@ class SummaryBody extends StatelessWidget {
             ),
           );
         } else {
-          return DoubleBounceLoading();
+          return Container(width: 0.0, height: 0.0);
         }
       },
     );

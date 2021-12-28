@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
-import 'package:help4you/constants/loading.dart';
 import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/cart_screen/components/bottom_nav_bar.dart';
@@ -60,7 +59,7 @@ class _CartScreenState extends State<CartScreen> {
               return CartListBuilder(cartServices: cartServices);
             }
           } else {
-            return DoubleBounceLoading();
+            return Container(width: 0.0, height: 0.0);
           }
         },
       ),

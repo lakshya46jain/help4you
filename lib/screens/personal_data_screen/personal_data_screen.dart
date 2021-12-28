@@ -13,7 +13,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
-import 'package:help4you/constants/loading.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 import 'package:help4you/screens/delete_account_screens/delete_phone_auth_screen.dart';
@@ -287,7 +286,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                           ],
                         );
                       } else {
-                        return DoubleBounceLoading();
+                        return Container(width: 0.0, height: 0.0);
                       }
                     },
                   ),

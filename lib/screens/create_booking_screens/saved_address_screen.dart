@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 // File Imports
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
-import 'package:help4you/constants/loading.dart';
 import 'package:help4you/models/address_model.dart';
 import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/create_booking_screens/new_address_screen.dart';
@@ -132,7 +131,7 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
               ],
             );
           } else {
-            return DoubleBounceLoading();
+            return Container(width: 0.0, height: 0.0);
           }
         },
       ),

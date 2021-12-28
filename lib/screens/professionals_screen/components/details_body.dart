@@ -7,7 +7,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 // File Imports
-import 'package:help4you/constants/loading.dart';
 import 'package:help4you/screens/message_screen/messages_screen.dart';
 import 'package:help4you/screens/professionals_screen/components/service_tile.dart';
 import 'package:help4you/screens/professionals_screen/components/custom_media_button.dart';
@@ -172,7 +171,7 @@ class DetailsScreenBody extends StatelessWidget {
                   );
                 }
               } else {
-                return DoubleBounceLoading();
+                return Container(width: 0.0, height: 0.0);
               }
             },
           )

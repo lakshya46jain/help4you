@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/services/database.dart';
-import 'package:help4you/constants/loading.dart';
 import 'package:help4you/models/reviews_model.dart';
 import 'package:help4you/screens/professionals_screen/components/professional_toggle.dart';
 
@@ -79,7 +78,7 @@ class _ListingScreenBodyState extends State<ListingScreenBody> {
             );
           }
         } else {
-          return DoubleBounceLoading();
+          return Container(width: 0.0, height: 0.0);
         }
       },
     );

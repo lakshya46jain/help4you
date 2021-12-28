@@ -9,7 +9,6 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
 import 'package:help4you/services/database.dart';
-import 'package:help4you/constants/loading.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 import 'package:help4you/screens/registration_screen/components/registration_continue_button.dart';
@@ -312,7 +311,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                 );
               } else {
-                return DoubleBounceLoading();
+                return Container(width: 0.0, height: 0.0);
               }
             },
           ),

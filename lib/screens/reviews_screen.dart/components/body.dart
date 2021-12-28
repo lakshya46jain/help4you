@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:flutter_svg/svg.dart';
 // File Imports
-import 'package:help4you/constants/loading.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/reviews_model.dart';
 import 'package:help4you/screens/reviews_screen.dart/components/review_tile.dart';
@@ -51,7 +50,7 @@ class ReviewsBody extends StatelessWidget {
             );
           }
         } else {
-          return DoubleBounceLoading();
+          return Container(width: 0.0, height: 0.0);
         }
       },
     );
