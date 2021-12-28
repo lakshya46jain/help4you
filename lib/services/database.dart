@@ -213,6 +213,7 @@ class DatabaseService {
     GeoPoint addressGeoPoint,
     DateTime preferredTimings,
     String bookingStatus,
+    List<Map> bookedItems,
     double totalPrice,
   ) async {
     await bookingsCollection.doc(bookingId).set({
@@ -223,7 +224,7 @@ class DatabaseService {
       "Address GeoPoint": addressGeoPoint,
       "Preferred Timings": preferredTimings,
       "Booking Status": bookingStatus,
-      // CART ITEMS
+      "Booked Items": bookedItems,
       "Total Price": totalPrice,
     });
   }

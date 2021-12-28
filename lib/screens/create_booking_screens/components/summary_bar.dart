@@ -73,12 +73,27 @@ class SummaryBar extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () async {
-                  var bookingId = RandomStringGenerator(
+                  String bookingId = RandomStringGenerator(
                     fixedLength: 10,
                     hasAlpha: false,
                     hasDigits: true,
                     hasSymbols: false,
                   ).generate();
+                  List<Map> bookedItems = [];
+                  for (CartServices cartService in cartServices) {
+                    bookedItems.add({
+                      "Title": cartService.serviceTitle,
+                      "Description": cartService.serviceDescription,
+                      "Price": cartService.servicePrice,
+                      "Quantity": cartService.quantity,
+                    });
+                    FirebaseFirestore.instance
+                        .collection("H4Y Users Database")
+                        .doc(user.uid)
+                        .collection("Cart")
+                        .doc(cartService.serviceId)
+                        .delete();
+                  }
                   await DatabaseService(
                     uid: user.uid,
                     professionalUID: professionalUID,
@@ -88,6 +103,7 @@ class SummaryBar extends StatelessWidget {
                     geoPointLocation,
                     bookingTimings,
                     "Booking Pending",
+                    bookedItems,
                     total,
                   );
                   Navigator.pushAndRemoveUntil(
