@@ -229,6 +229,15 @@ class DatabaseService {
     });
   }
 
+  // Update Booking Status
+  Future updateBookingStatus(
+    String bookingStatus,
+  ) async {
+    await bookingsCollection.doc(bookingId).update({
+      "Booking Status": bookingStatus,
+    });
+  }
+
   // User Data from Snapshot
   UserDataCustomer _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserDataCustomer(
@@ -367,6 +376,18 @@ class DatabaseService {
   List<Booking> _help4YouBookingsListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.toList().map(
       (document) {
+        List<CartServices> bookedItems = [];
+        List<dynamic> bookedItemsMap = document["Booked Items"];
+        bookedItemsMap.forEach((element) {
+          bookedItems.add(
+            CartServices(
+              serviceTitle: element["Title"],
+              serviceDescription: element["Description"],
+              servicePrice: element["Price"],
+              quantity: element["Quantity"],
+            ),
+          );
+        });
         Booking help4YouBookings = Booking(
           bookingId: document.id,
           customerUID: document["Customer UID"],
@@ -376,26 +397,12 @@ class DatabaseService {
           addressGeoPoint: document["Address GeoPoint"],
           preferredTimings: document["Preferred Timings"],
           bookingStatus: document["Booking Status"],
+          bookedItems: bookedItems,
           totalPrice: document["Total Price"],
         );
         return help4YouBookings;
       },
     ).toList();
-  }
-
-  // Bookings Data from Snapshot
-  Booking _help4YouBookingDataFromSnapshot(DocumentSnapshot snapshot) {
-    return Booking(
-      bookingId: snapshot.id,
-      customerUID: snapshot["Customer UID"],
-      professionalUID: snapshot["Professional UID"],
-      bookingTime: snapshot["Booking Time"],
-      address: snapshot["Address"],
-      addressGeoPoint: snapshot["Address GeoPoint"],
-      preferredTimings: snapshot["Preferred Timings"],
-      bookingStatus: snapshot["Booking Status"],
-      totalPrice: snapshot["Total Price"],
-    );
   }
 
   // Get User Document
@@ -489,13 +496,5 @@ class DatabaseService {
         .where("Booking Status", isEqualTo: bookingStatus)
         .snapshots()
         .map(_help4YouBookingsListFromSnapshot);
-  }
-
-  // Get Booking Documents
-  Stream<Booking> get bookingsData {
-    return bookingsCollection
-        .doc(bookingId)
-        .snapshots()
-        .map(_help4YouBookingDataFromSnapshot);
   }
 }

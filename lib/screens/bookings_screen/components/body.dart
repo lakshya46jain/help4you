@@ -40,10 +40,13 @@ class BookingsScreenBody extends StatelessWidget {
             itemCount: bookingsList.length,
             itemBuilder: (context, index) {
               return BookingTile(
+                address: bookingsList[index].address,
                 bookingId: bookingsList[index].bookingId,
                 professionalUID: bookingsList[index].professionalUID,
                 preferredTimings: bookingsList[index].preferredTimings,
+                totalPrice: bookingsList[index].totalPrice,
                 bookingStatus: bookingsList[index].bookingStatus,
+                bookedItemsList: bookingsList[index].bookedItems,
               );
             },
           );

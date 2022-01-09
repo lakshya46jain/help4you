@@ -5,18 +5,26 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
+import 'package:help4you/models/cart_service_model.dart';
+import 'package:help4you/screens/project_details_screen/project_details_screen.dart';
 
 class BookingTile extends StatelessWidget {
+  final String address;
   final String bookingId;
+  final double totalPrice;
   final String professionalUID;
   final Timestamp preferredTimings;
   final String bookingStatus;
+  final List<CartServices> bookedItemsList;
 
   BookingTile({
-    this.bookingId,
-    this.professionalUID,
-    this.preferredTimings,
-    this.bookingStatus,
+    @required this.address,
+    @required this.bookingId,
+    @required this.totalPrice,
+    @required this.professionalUID,
+    @required this.preferredTimings,
+    @required this.bookingStatus,
+    @required this.bookedItemsList,
   });
 
   @override
@@ -164,13 +172,30 @@ class BookingTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Center(
-                      child: Text(
-                        "View Project Details",
-                        style: TextStyle(
-                          fontSize: 19.0,
-                          color: Color(0xFF1C3857),
-                          fontWeight: FontWeight.bold,
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProjectDetailsScreen(
+                            address: address,
+                            bookingId: bookingId,
+                            totalPrice: totalPrice,
+                            occupation: occupation,
+                            thumbnailURL: profilePicture,
+                            bookingStatus: bookingStatus,
+                            preferredTimings: preferredTimings,
+                            bookedItemsList: bookedItemsList,
+                          ),
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "View Project Details",
+                          style: TextStyle(
+                            fontSize: 19.0,
+                            color: Color(0xFF1C3857),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
