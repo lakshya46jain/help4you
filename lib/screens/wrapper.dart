@@ -7,8 +7,8 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
-import 'package:help4you/screens/server_error_screen.dart';
 import 'package:help4you/screens/bottom_nav_bar.dart';
+import 'package:help4you/screens/server_error_screen.dart';
 import 'package:help4you/screens/onboarding_screen/onboarding_screen.dart';
 
 class Wrapper extends StatefulWidget {

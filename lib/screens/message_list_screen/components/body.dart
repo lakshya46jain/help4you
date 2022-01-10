@@ -8,11 +8,9 @@ import 'package:help4you/models/chat_room_model.dart';
 import 'package:help4you/screens/message_list_screen/components/message_tile.dart';
 
 class MessageListBody extends StatelessWidget {
-  final TextEditingController searchController;
   final Help4YouUser user;
 
   MessageListBody({
-    @required this.searchController,
     @required this.user,
   });
 

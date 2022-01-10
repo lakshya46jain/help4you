@@ -1,7 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 // Dependency Imports
+import 'package:flutter_svg/svg.dart';
 // File Imports
 
 class ServerErrorScreen extends StatelessWidget {
