@@ -22,7 +22,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
     "Job Completed",
     "Accepted",
     "Rejected",
-    "Cancelled",
+    "Customer Cancelled",
   ];
 
   @override
@@ -90,7 +90,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                         });
                       } else if (index == 5) {
                         setState(() {
-                          bookingStatus = "Cancelled";
+                          bookingStatus = "Customer Cancelled";
                         });
                       }
                     },
