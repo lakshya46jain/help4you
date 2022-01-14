@@ -1,6 +1,7 @@
 // Flutter Imports
 // Dependency Imports
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:random_string_generator/random_string_generator.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/models/booking_model.dart';
@@ -226,6 +227,13 @@ class DatabaseService {
       "Booking Status": bookingStatus,
       "Booked Items": bookedItems,
       "Payment Method": 2,
+      "One Time Password": RandomStringGenerator(
+        hasDigits: true,
+        hasAlpha: false,
+        hasSymbols: false,
+        mustHaveAtLeastOneOfEach: false,
+        fixedLength: 6,
+      ).generate(),
       "Total Price": totalPrice,
     });
   }
@@ -400,6 +408,7 @@ class DatabaseService {
           bookingStatus: document["Booking Status"],
           bookedItems: bookedItems,
           paymentMethod: document["Payment Method"],
+          otp: document["One Time Password"],
           totalPrice: document["Total Price"],
         );
         return help4YouBookings;

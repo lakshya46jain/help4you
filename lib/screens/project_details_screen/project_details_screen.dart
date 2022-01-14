@@ -1,7 +1,9 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:intl/intl.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/models/cart_service_model.dart';
@@ -17,6 +19,7 @@ class ProjectDetailsScreen extends StatelessWidget {
   final String bookingStatus;
   final Timestamp preferredTimings;
   final String paymentMethod;
+  final String otp;
   final List<CartServices> bookedItemsList;
 
   ProjectDetailsScreen({
@@ -28,11 +31,36 @@ class ProjectDetailsScreen extends StatelessWidget {
     @required this.bookingStatus,
     @required this.preferredTimings,
     @required this.paymentMethod,
+    @required this.otp,
     @required this.bookedItemsList,
   });
 
   @override
   Widget build(BuildContext context) {
+    Widget otpRow(int index) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 2.5),
+        child: Container(
+          width: 40.0,
+          height: 50.0,
+          decoration: BoxDecoration(
+            border: Border.all(color: Color(0xFF95989A)),
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: Center(
+            child: Text(
+              otp[index],
+              style: TextStyle(
+                fontSize: 25.0,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -47,6 +75,46 @@ class ProjectDetailsScreen extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        actions: [
+          (bookingStatus == "Accepted")
+              ? IconButton(
+                  onPressed: () => AwesomeDialog(
+                    context: context,
+                    dialogType: DialogType.SUCCES,
+                    body: Column(
+                      children: [
+                        SizedBox(height: 5.0),
+                        Text(
+                          "COMPLETION CODE",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 15.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            otpRow(0),
+                            otpRow(1),
+                            otpRow(2),
+                            otpRow(3),
+                            otpRow(4),
+                            otpRow(5),
+                          ],
+                        ),
+                        SizedBox(height: 25.0),
+                      ],
+                    ),
+                  ).show(),
+                  icon: Icon(
+                    CupertinoIcons.barcode,
+                    size: 25.0,
+                    color: Color(0xFFFEA700),
+                  ),
+                )
+              : Container(width: 0.0, height: 0.0),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),

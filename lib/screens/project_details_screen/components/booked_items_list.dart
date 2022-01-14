@@ -80,7 +80,7 @@ class BookedItemsList extends StatelessWidget {
                       fontSize: 13.0,
                       color: Colors.grey,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

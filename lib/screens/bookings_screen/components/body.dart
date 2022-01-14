@@ -55,6 +55,7 @@ class BookingsScreenBody extends StatelessWidget {
                         : (paymentMethod == 2)
                             ? "Payment Incomplete"
                             : "",
+                otp: bookingsList[index].otp,
               );
             },
           );

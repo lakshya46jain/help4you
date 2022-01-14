@@ -16,6 +16,7 @@ class BookingTile extends StatelessWidget {
   final Timestamp preferredTimings;
   final String bookingStatus;
   final List<CartServices> bookedItemsList;
+  final String otp;
   final String paymentMethod;
 
   BookingTile({
@@ -26,6 +27,7 @@ class BookingTile extends StatelessWidget {
     @required this.preferredTimings,
     @required this.bookingStatus,
     @required this.bookedItemsList,
+    @required this.otp,
     @required this.paymentMethod,
   });
 
@@ -186,8 +188,9 @@ class BookingTile extends StatelessWidget {
                             thumbnailURL: profilePicture,
                             bookingStatus: bookingStatus,
                             preferredTimings: preferredTimings,
-                            paymentMethod: paymentMethod,
                             bookedItemsList: bookedItemsList,
+                            otp: otp,
+                            paymentMethod: paymentMethod,
                           ),
                         ),
                       ),
