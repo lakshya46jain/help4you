@@ -225,6 +225,7 @@ class DatabaseService {
       "Preferred Timings": preferredTimings,
       "Booking Status": bookingStatus,
       "Booked Items": bookedItems,
+      "Payment Method": 2,
       "Total Price": totalPrice,
     });
   }
@@ -398,6 +399,7 @@ class DatabaseService {
           preferredTimings: document["Preferred Timings"],
           bookingStatus: document["Booking Status"],
           bookedItems: bookedItems,
+          paymentMethod: document["Payment Method"],
           totalPrice: document["Total Price"],
         );
         return help4YouBookings;

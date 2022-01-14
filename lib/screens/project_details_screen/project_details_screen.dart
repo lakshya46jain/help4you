@@ -16,6 +16,7 @@ class ProjectDetailsScreen extends StatelessWidget {
   final String thumbnailURL;
   final String bookingStatus;
   final Timestamp preferredTimings;
+  final String paymentMethod;
   final List<CartServices> bookedItemsList;
 
   ProjectDetailsScreen({
@@ -26,6 +27,7 @@ class ProjectDetailsScreen extends StatelessWidget {
     @required this.thumbnailURL,
     @required this.bookingStatus,
     @required this.preferredTimings,
+    @required this.paymentMethod,
     @required this.bookedItemsList,
   });
 
@@ -90,6 +92,12 @@ class ProjectDetailsScreen extends StatelessWidget {
                 "Location: $address (${DateFormat("d MMMM yyyy").format(preferredTimings.toDate().toLocal())} ${DateFormat.jm().format(preferredTimings.toDate().toLocal())})",
                 style: TextStyle(fontSize: 15.0),
               ),
+              SizedBox(height: 10.0),
+              Text(
+                "Payment Method: $paymentMethod",
+                style: TextStyle(fontSize: 15.0),
+              ),
+              SizedBox(height: 50.0),
             ],
           ),
         ),
