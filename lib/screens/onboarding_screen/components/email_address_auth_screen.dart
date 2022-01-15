@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:url_launcher/url_launcher.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
@@ -76,66 +77,89 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
               ),
             ),
             onTap: () {
-              final pickerOptions = CupertinoActionSheet(
-                actions: [
-                  CupertinoActionSheetAction(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PasswordResetScreen(),
+              Widget dialogButton(String title, Color color, Function onTap) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 15.0,
+                    vertical: 7.5,
+                  ),
+                  child: GestureDetector(
+                    onTap: onTap,
+                    child: Container(
+                      padding: EdgeInsets.all(15.0),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: color,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Center(
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      );
-                    },
-                    child: Text(
-                      "Forgot Password",
+                      ),
                     ),
                   ),
-                  CupertinoActionSheetAction(
-                    onPressed: () async {
-                      if (Platform.isIOS) {
-                        final iosDeviceInfo = await DeviceInfoPlugin().iosInfo;
-                        setState(() {
-                          platform = "iOS";
-                          deviceType =
-                              "${iosDeviceInfo.model} (${iosDeviceInfo.name})";
-                          osDetails =
-                              "${iosDeviceInfo.systemName} ${iosDeviceInfo.systemVersion}";
-                        });
-                      } else if (Platform.isAndroid) {
-                        final androidDeviceInfo =
-                            await DeviceInfoPlugin().androidInfo;
-                        setState(() {
-                          platform = "Android";
-                          deviceType = androidDeviceInfo.model;
-                          osDetails = androidDeviceInfo.version.toString();
-                        });
-                      }
-                      await launchEmail(
-                        "lakshyaj465@gmail.com",
-                        "[Help4You-$platform]: Issue in logging in Help4You App",
-                        "Full Name: \n\nPhone Number: \n\nIssue: \n\n| The Below Information Must Not Be Edited |\n\nApp Version: Alpha 1\nDevice Type: $deviceType\nOS Details: $osDetails",
-                      );
-                    },
-                    child: Text(
-                      "Contact Customer Support",
-                    ),
-                  ),
-                ],
-                cancelButton: CupertinoActionSheetAction(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    "Cancel",
-                  ),
-                ),
-              );
-              showCupertinoModalPopup(
+                );
+              }
+
+              AwesomeDialog(
                 context: context,
-                builder: (context) => pickerOptions,
-              );
+                headerAnimationLoop: false,
+                dialogType: DialogType.WARNING,
+                body: Column(
+                  children: [
+                    dialogButton(
+                      "Forgot Password",
+                      Color(0xFFFEA700),
+                      () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PasswordResetScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    dialogButton(
+                      "Contact Support",
+                      Color(0xFF1C3857),
+                      () async {
+                        if (Platform.isIOS) {
+                          final iosDeviceInfo =
+                              await DeviceInfoPlugin().iosInfo;
+                          setState(() {
+                            platform = "iOS";
+                            deviceType =
+                                "${iosDeviceInfo.model} (${iosDeviceInfo.name})";
+                            osDetails =
+                                "${iosDeviceInfo.systemName} ${iosDeviceInfo.systemVersion}";
+                          });
+                        } else if (Platform.isAndroid) {
+                          final androidDeviceInfo =
+                              await DeviceInfoPlugin().androidInfo;
+                          setState(() {
+                            platform = "Android";
+                            deviceType = androidDeviceInfo.model;
+                            osDetails = androidDeviceInfo.version.toString();
+                          });
+                        }
+                        await launchEmail(
+                          "lakshyaj465@gmail.com",
+                          "[Help4You-$platform]: Issue in logging in Help4You App",
+                          "Full Name: \n\nPhone Number: \n\nIssue: \n\n| The Below Information Must Not Be Edited |\n\nApp Version: Alpha 1\nDevice Type: $deviceType\nOS Details: $osDetails",
+                        );
+                      },
+                    ),
+                    SizedBox(height: 7.5),
+                  ],
+                ),
+              ).show();
             },
           ),
         ],
