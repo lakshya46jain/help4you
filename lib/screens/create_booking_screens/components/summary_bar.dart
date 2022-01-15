@@ -1,6 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:page_transition/page_transition.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -94,6 +95,14 @@ class SummaryBar extends StatelessWidget {
                         .doc(cartService.serviceId)
                         .delete();
                   }
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    PageTransition(
+                      child: ConfirmationScreen(),
+                      type: PageTransitionType.fade,
+                    ),
+                    (route) => false,
+                  );
                   await DatabaseService(
                     uid: user.uid,
                     professionalUID: professionalUID,
@@ -105,13 +114,6 @@ class SummaryBar extends StatelessWidget {
                     "Booking Pending",
                     bookedItems,
                     total,
-                  );
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ConfirmationScreen(),
-                    ),
-                    (route) => false,
                   );
                 },
                 child: Container(

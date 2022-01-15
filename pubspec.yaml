@@ -26,6 +26,7 @@ dependencies:
 
   # Aesthetics
   animations: ^2.0.2
+  flare_flutter: ^3.0.2
   awesome_dialog: ^2.1.2
   cupertino_icons: ^1.0.4
   page_transition: ^2.0.4
@@ -116,6 +117,8 @@ flutter:
     - assets/files/terms_and_conditions.md 
     - assets/files/privacy_policy.md
     - assets/files/about_help4you.md
+    # Flares
+    - assets/flares/Success_Flare_Without_Loop.flr
     # Graphics
     - assets/graphics/Help4You_Illustration_1.svg
     - assets/graphics/Help4You_Illustration_2.svg

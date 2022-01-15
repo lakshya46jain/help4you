@@ -1,8 +1,9 @@
 // Flutter Imports
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 // Dependency Imports
+import 'package:flare_flutter/flare_actor.dart';
+import 'package:page_transition/page_transition.dart';
 // File Imports
 import 'package:help4you/screens/wrapper.dart';
 
@@ -26,42 +27,38 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
       ),
-      backgroundColor: Color(0xFF1C3857),
-      body: Center(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsets.all(10.0),
               width: MediaQuery.of(context).size.width * 0.5,
               height: MediaQuery.of(context).size.width * 0.5,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFFFEA700),
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Icon(
-                    CupertinoIcons.checkmark_alt,
-                    size: MediaQuery.of(context).size.width * 0.3,
-                    color: Colors.white,
-                  ),
-                ),
+              child: FlareActor(
+                "assets/flares/Success_Flare_Without_Loop.flr",
+                alignment: Alignment.center,
+                fit: BoxFit.fill,
+                animation: 'Untitled',
               ),
             ),
-            SizedBox(
-              height: 40.0,
-            ),
+            SizedBox(height: 25.0),
             Text(
               "Booking Confirmed",
               style: TextStyle(
-                fontSize: 30.0,
-                color: Colors.white,
+                fontSize: 25.0,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 10.0),
+            Text(
+              "Thank you for booking your services from Help4You. We hope to provide you an unforgettable experience.",
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Color(0xFF95989A).withOpacity(0.5),
               ),
               textAlign: TextAlign.center,
             ),
@@ -72,15 +69,16 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
   }
 
   startTime() async {
-    var duration = Duration(seconds: 1);
+    var duration = Duration(seconds: 2);
     return Timer(duration, route);
   }
 
   route() {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(
-        builder: (context) => Wrapper(),
+      PageTransition(
+        child: Wrapper(),
+        type: PageTransitionType.fade,
       ),
       (route) => false,
     );
