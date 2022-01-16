@@ -8,6 +8,14 @@ import 'package:page_transition/page_transition.dart';
 import 'package:help4you/screens/wrapper.dart';
 
 class ConfirmationScreen extends StatefulWidget {
+  final String title;
+  final String description;
+
+  ConfirmationScreen({
+    this.title,
+    this.description,
+  });
+
   @override
   _ConfirmationScreenState createState() => _ConfirmationScreenState();
 }
@@ -45,7 +53,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
             ),
             SizedBox(height: 25.0),
             Text(
-              "Booking Confirmed",
+              widget.title ?? "Booking Confirmed",
               style: TextStyle(
                 fontSize: 25.0,
                 color: Colors.black,
@@ -55,7 +63,8 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
             ),
             SizedBox(height: 10.0),
             Text(
-              "Thank you for booking your services from Help4You. We hope to provide you an unforgettable experience.",
+              widget.description ??
+                  "Thank you for booking your services from Help4You. We hope to provide you an unforgettable experience.",
               style: TextStyle(
                 fontSize: 16.0,
                 color: Color(0xFF95989A).withOpacity(0.5),

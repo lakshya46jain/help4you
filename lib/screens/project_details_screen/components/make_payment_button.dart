@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 // File Imports
-import 'package:help4you/services/database.dart';
+import 'package:help4you/screens/project_details_screen/payment_method_screen.dart';
 
 class MakePaymentButton extends StatelessWidget {
   final String bookingId;
@@ -22,11 +22,14 @@ class MakePaymentButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(25.0),
       ),
       onPressed: () async {
-        Navigator.pop(context);
-        await DatabaseService(bookingId: bookingId)
-            .updateBookingStatus("Payment Completed");
-        await DatabaseService(bookingId: bookingId)
-            .updatePaymentMethod(0.toInt());
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PaymentMethodScreen(
+              bookingId: bookingId,
+            ),
+          ),
+        );
       },
       color: Colors.green,
       child: Text(
