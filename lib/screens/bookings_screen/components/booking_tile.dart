@@ -74,36 +74,34 @@ class BookingTile extends StatelessWidget {
                         Text(
                           occupation,
                           style: TextStyle(
-                            fontSize: 19.0,
+                            fontSize: 18.0,
                             color: Color(0xFF1C3857),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Container(
                           padding: EdgeInsets.all(7.5),
-                          color: (bookingStatus == "Job Completed")
+                          color: (bookingStatus == "Job Completed" ||
+                                  bookingStatus == "Accepted" ||
+                                  bookingStatus == "Payment Completed")
                               ? Colors.green.withOpacity(0.15)
-                              : (bookingStatus == "Accepted")
-                                  ? Colors.green.withOpacity(0.15)
-                                  : (bookingStatus == "Customer Cancelled")
-                                      ? Colors.red.withOpacity(0.15)
-                                      : (bookingStatus == "Rejected")
-                                          ? Colors.red.withOpacity(0.15)
-                                          : Color(0xFFFEA700).withOpacity(0.15),
+                              : (bookingStatus == "Rejected" ||
+                                      bookingStatus == "Customer Cancelled")
+                                  ? Colors.red.withOpacity(0.15)
+                                  : Color(0xFFFEA700).withOpacity(0.15),
                           child: Text(
                             bookingStatus,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 13.0,
-                              color: (bookingStatus == "Job Completed")
+                              color: (bookingStatus == "Job Completed" ||
+                                      bookingStatus == "Accepted" ||
+                                      bookingStatus == "Payment Completed")
                                   ? Colors.green
-                                  : (bookingStatus == "Accepted")
-                                      ? Colors.green
-                                      : (bookingStatus == "Customer Cancelled")
-                                          ? Colors.red
-                                          : (bookingStatus == "Rejected")
-                                              ? Colors.red
-                                              : Color(0xFFFEA700),
+                                  : (bookingStatus == "Rejected" ||
+                                          bookingStatus == "Customer Cancelled")
+                                      ? Colors.red
+                                      : Color(0xFFFEA700),
                             ),
                           ),
                         ),

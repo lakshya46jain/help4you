@@ -247,6 +247,15 @@ class DatabaseService {
     });
   }
 
+  // Update Booking Status
+  Future updatePaymentMethod(
+    int paymentMethod,
+  ) async {
+    await bookingsCollection.doc(bookingId).update({
+      "Payment Method": paymentMethod,
+    });
+  }
+
   // User Data from Snapshot
   UserDataCustomer _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserDataCustomer(

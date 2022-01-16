@@ -8,7 +8,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/constants/signature_button.dart';
+import 'package:help4you/screens/project_details_screen/components/cancel_button.dart';
 import 'package:help4you/screens/project_details_screen/components/booked_items_list.dart';
+import 'package:help4you/screens/project_details_screen/components/make_payment_button.dart';
 
 class ProjectDetailsScreen extends StatelessWidget {
   final String address;
@@ -170,6 +172,14 @@ class ProjectDetailsScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton:
+          (bookingStatus == "Booking Pending" || bookingStatus == "Accepted")
+              ? CancelButton(bookingId: bookingId)
+              : (bookingStatus == "Job Completed" &&
+                      paymentMethod == "Payment Incomplete")
+                  ? MakePaymentButton(bookingId: bookingId)
+                  : Container(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
