@@ -78,44 +78,42 @@ class ProjectDetailsScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          (bookingStatus == "Accepted")
-              ? IconButton(
-                  onPressed: () => AwesomeDialog(
-                    context: context,
-                    dialogType: DialogType.SUCCES,
-                    body: Column(
-                      children: [
-                        SizedBox(height: 5.0),
-                        Text(
-                          "COMPLETION CODE",
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 15.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            otpRow(0),
-                            otpRow(1),
-                            otpRow(2),
-                            otpRow(3),
-                            otpRow(4),
-                            otpRow(5),
-                          ],
-                        ),
-                        SizedBox(height: 25.0),
-                      ],
+          IconButton(
+            onPressed: () => AwesomeDialog(
+              context: context,
+              dialogType: DialogType.SUCCES,
+              body: Column(
+                children: [
+                  SizedBox(height: 5.0),
+                  Text(
+                    "COMPLETION CODE",
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ).show(),
-                  icon: Icon(
-                    CupertinoIcons.barcode,
-                    size: 25.0,
-                    color: Color(0xFFFEA700),
                   ),
-                )
-              : Container(width: 0.0, height: 0.0),
+                  SizedBox(height: 15.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      otpRow(0),
+                      otpRow(1),
+                      otpRow(2),
+                      otpRow(3),
+                      otpRow(4),
+                      otpRow(5),
+                    ],
+                  ),
+                  SizedBox(height: 25.0),
+                ],
+              ),
+            ).show(),
+            icon: Icon(
+              CupertinoIcons.barcode,
+              size: 25.0,
+              color: Color(0xFFFEA700),
+            ),
+          )
         ],
       ),
       body: Padding(
