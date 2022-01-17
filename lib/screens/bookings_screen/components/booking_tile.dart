@@ -1,11 +1,13 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
 import 'package:help4you/models/cart_service_model.dart';
+import 'package:help4you/screens/message_screen/messages_screen.dart';
 import 'package:help4you/screens/project_details_screen/project_details_screen.dart';
 
 class BookingTile extends StatelessWidget {
@@ -122,43 +124,75 @@ class BookingTile extends StatelessWidget {
                       height: 15.0,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: 75.0,
-                          width: 75.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            image: DecorationImage(
-                              image: CachedNetworkImageProvider(profilePicture),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
                           children: [
-                            Text(
-                              fullName,
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Color(0xFF1C3857),
-                                fontWeight: FontWeight.bold,
+                            Container(
+                              height: 75.0,
+                              width: 75.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                image: DecorationImage(
+                                  image: CachedNetworkImageProvider(
+                                      profilePicture),
+                                ),
                               ),
                             ),
                             SizedBox(
-                              height: 5.0,
+                              width: 10.0,
                             ),
-                            Text(
-                              phoneNumber,
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black.withOpacity(0.64),
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  fullName,
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    color: Color(0xFF1C3857),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Text(
+                                  phoneNumber,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black.withOpacity(0.64),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xFF1C3857),
+                          ),
+                          child: Center(
+                            child: IconButton(
+                              color: Colors.white,
+                              icon: Icon(CupertinoIcons.chat_bubble_fill),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MessageScreen(
+                                      uid: professionalUID,
+                                      profilePicture: profilePicture,
+                                      fullName: fullName,
+                                      occupation: occupation,
+                                      phoneNumber: phoneNumber,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                         ),
                       ],
                     ),
