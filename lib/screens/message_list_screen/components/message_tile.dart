@@ -1,18 +1,24 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
+import 'package:help4you/models/user_model.dart';
+import 'package:help4you/services/database.dart';
+import 'package:help4you/models/messages_model.dart';
 import 'package:help4you/screens/message_screen/messages_screen.dart';
 
 class MessageTile extends StatelessWidget {
-  final String uid;
+  final Help4YouUser user;
   final String chatRoomId;
+  final String professionalUID;
 
   MessageTile({
-    @required this.uid,
+    @required this.user,
     @required this.chatRoomId,
+    @required this.professionalUID,
   });
 
   @override
@@ -20,7 +26,7 @@ class MessageTile extends StatelessWidget {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection("H4Y Users Database")
-          .doc(uid)
+          .doc(professionalUID)
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
@@ -38,7 +44,7 @@ class MessageTile extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => MessageScreen(
-                    uid: uid,
+                    uid: professionalUID,
                     profilePicture: profilePicture,
                     fullName: fullName,
                     phoneNumber: phoneNumber,
@@ -49,10 +55,11 @@ class MessageTile extends StatelessWidget {
             },
             child: Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: 20.0,
+                horizontal: 15.0,
                 vertical: 10.0,
               ),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Stack(
                     children: [
@@ -86,52 +93,89 @@ class MessageTile extends StatelessWidget {
                             ),
                     ],
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20.0,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            fullName,
-                            style: TextStyle(
-                              height: 1.0,
-                              fontSize: 20.0,
-                              fontFamily: "BalooPaaji",
-                              color: Color(0xFF1C3857),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Opacity(
-                            opacity: 0.64,
-                            child: Text(
-                              "Last Message",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                height: 1.0,
-                                fontSize: 16.0,
-                                fontFamily: "BalooPaaji",
+                  StreamBuilder(
+                    stream: DatabaseService(
+                      uid: user.uid,
+                      professionalUID: professionalUID,
+                    ).lastMessageData,
+                    builder: (context, snapshot) {
+                      List<Messages> messages = snapshot.data;
+                      return Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 15.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      fullName,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        color: Color(0xFF1C3857),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Opacity(
+                                    opacity: 0.5,
+                                    child: Text(
+                                      (snapshot.hasData)
+                                          ? "${DateFormat('dd/MM/yy').format(messages[0].timeStamp.toDate().toLocal())}"
+                                          : "Date",
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
+                              SizedBox(height: 5.0),
+                              Opacity(
+                                opacity: 0.5,
+                                child: (snapshot.hasData)
+                                    ? Text(
+                                        (messages[0].type == "Media" &&
+                                                messages[0].sender == user.uid)
+                                            ? "You: Sent a photo\n"
+                                            : (messages[0].type == "Media" &&
+                                                    messages[0].sender !=
+                                                        user.uid)
+                                                ? "Sent a photo\n"
+                                                : (messages[0].sender ==
+                                                        user.uid)
+                                                    ? "You: ${messages[0].message}\n"
+                                                    : "${messages[0].message}\n",
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                        ),
+                                      )
+                                    : Text(
+                                        "Last Message\n",
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                              ),
+                              SizedBox(height: 5.0),
+                              Divider(
+                                thickness: 1.5,
+                                color: Color(0xFF95989A).withOpacity(0.2),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Opacity(
-                    opacity: 0.64,
-                    child: Text(
-                      "Time",
-                      style: TextStyle(
-                        height: 1.0,
-                        fontSize: 16.0,
-                        fontFamily: "BalooPaaji",
-                      ),
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

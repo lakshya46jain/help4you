@@ -485,6 +485,17 @@ class DatabaseService {
         .map(_help4YouMessageFromSnapshot);
   }
 
+  // Get Last Message Document
+  Stream<List<Messages>> get lastMessageData {
+    return chatRoomCollection
+        .doc("$uid\_$professionalUID")
+        .collection("Messages")
+        .orderBy("Time Stamp", descending: true)
+        .limit(1)
+        .snapshots()
+        .map(_help4YouMessageFromSnapshot);
+  }
+
   // Get Reviews Documents
   Stream<List<Reviews>> get reviewsData {
     return reviewsCollection
