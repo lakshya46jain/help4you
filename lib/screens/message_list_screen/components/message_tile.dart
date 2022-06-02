@@ -125,9 +125,9 @@ class MessageTile extends StatelessWidget {
                                   Opacity(
                                     opacity: 0.5,
                                     child: Text(
-                                      (snapshot.hasData)
+                                      (snapshot.hasData && messages.length != 0)
                                           ? "${DateFormat('dd/MM/yy').format(messages[0].timeStamp.toDate().toLocal())}"
-                                          : "Date",
+                                          : "",
                                       style: TextStyle(
                                         fontSize: 15.0,
                                       ),
@@ -138,7 +138,8 @@ class MessageTile extends StatelessWidget {
                               SizedBox(height: 5.0),
                               Opacity(
                                 opacity: 0.5,
-                                child: (snapshot.hasData)
+                                child: (snapshot.hasData &&
+                                        messages.length != 0)
                                     ? Text(
                                         (messages[0].type == "Media" &&
                                                 messages[0].sender == user.uid)
@@ -158,7 +159,7 @@ class MessageTile extends StatelessWidget {
                                         ),
                                       )
                                     : Text(
-                                        "Last Message\n",
+                                        "\n\n",
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
