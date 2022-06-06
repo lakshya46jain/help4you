@@ -13,6 +13,7 @@ import 'package:help4you/screens/project_details_screen/components/booked_items_
 import 'package:help4you/screens/project_details_screen/components/make_payment_button.dart';
 
 class ProjectDetailsScreen extends StatelessWidget {
+  final String uid;
   final String address;
   final String bookingId;
   final double totalPrice;
@@ -25,6 +26,7 @@ class ProjectDetailsScreen extends StatelessWidget {
   final List<CartServices> bookedItemsList;
 
   ProjectDetailsScreen({
+    @required this.uid,
     @required this.address,
     @required this.bookingId,
     @required this.totalPrice,
@@ -172,10 +174,10 @@ class ProjectDetailsScreen extends StatelessWidget {
       ),
       floatingActionButton:
           (bookingStatus == "Booking Pending" || bookingStatus == "Accepted")
-              ? CancelButton(bookingId: bookingId)
+              ? CancelButton(uid: uid, bookingId: bookingId)
               : (bookingStatus == "Job Completed" &&
                       paymentMethod == "Payment Incomplete")
-                  ? MakePaymentButton(bookingId: bookingId)
+                  ? MakePaymentButton(uid: uid, bookingId: bookingId)
                   : Container(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

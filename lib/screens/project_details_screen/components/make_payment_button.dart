@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:help4you/screens/project_details_screen/payment_method_screen.dart';
 
 class MakePaymentButton extends StatelessWidget {
+  final String uid;
   final String bookingId;
 
   MakePaymentButton({
+    @required this.uid,
     @required this.bookingId,
   });
 
@@ -26,6 +28,7 @@ class MakePaymentButton extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => PaymentMethodScreen(
+              uid: uid,
               bookingId: bookingId,
             ),
           ),

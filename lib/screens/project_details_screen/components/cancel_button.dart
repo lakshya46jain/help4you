@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 // File Imports
 import 'package:help4you/services/database.dart';
+import 'package:help4you/services/onesignal_configuration.dart';
 
 class CancelButton extends StatelessWidget {
+  final String uid;
   final String bookingId;
 
   CancelButton({
+    @required this.uid,
     @required this.bookingId,
   });
 
@@ -35,8 +38,12 @@ class CancelButton extends StatelessWidget {
             Navigator.pop(context);
             await DatabaseService(bookingId: bookingId)
                 .updateBookingStatus("Customer Cancelled");
+            sendNotification(
+              uid,
+              "Booking Status Update",
+              "There's an update in the booking status by the customer. Have a look at it!",
+            );
           },
-          btnCancelOnPress: () => Navigator.pop(context),
         ).show();
       },
       color: Colors.red,

@@ -10,6 +10,7 @@ import 'package:random_string_generator/random_string_generator.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/cart_service_model.dart';
+import 'package:help4you/services/onesignal_configuration.dart';
 import 'package:help4you/screens/create_booking_screens/confirmation_screen.dart';
 
 class SummaryBar extends StatelessWidget {
@@ -114,6 +115,11 @@ class SummaryBar extends StatelessWidget {
                     "Booking Pending",
                     bookedItems,
                     total,
+                  );
+                  sendNotification(
+                    professionalUID,
+                    "You have a new booking!",
+                    "Please check the details and update the user as soon as possible.",
                   );
                 },
                 child: Container(

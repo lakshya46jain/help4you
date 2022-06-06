@@ -6,12 +6,15 @@ import 'package:page_transition/page_transition.dart';
 // File Imports
 import 'package:help4you/services/database.dart';
 import 'package:help4you/constants/signature_button.dart';
+import 'package:help4you/services/onesignal_configuration.dart';
 import 'package:help4you/screens/create_booking_screens/confirmation_screen.dart';
 
 class PaymentMethodScreen extends StatefulWidget {
+  final String uid;
   final String bookingId;
 
   PaymentMethodScreen({
+    @required this.uid,
     @required this.bookingId,
   });
 
@@ -162,6 +165,11 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                               await DatabaseService(bookingId: widget.bookingId)
                                   .updatePaymentMethod(1);
                             }
+                            sendNotification(
+                              widget.uid,
+                              "Congratulations",
+                              "Your payment was successfully completed.",
+                            );
                           },
                           text: "Continue",
                           withIcon: false,

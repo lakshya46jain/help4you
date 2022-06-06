@@ -1,6 +1,7 @@
 // Flutter Imports
 // Dependency Imports
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:random_string_generator/random_string_generator.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
@@ -71,7 +72,25 @@ class DatabaseService {
       'Non International Number': nonInternationalNumber,
       'Phone Number': phoneNumber,
       'Email Address': emailAddress,
-      'Status': 'Offline',
+      'Status': 'Online',
+    });
+  }
+
+  // Add OneSignal Token ID
+  Future addOneSignalTokenID() async {
+    var status = await OneSignal.shared.getDeviceState();
+    String tokenId = status.userId;
+    await userCollection.doc(uid).update({
+      'OneSignal Token IDs': FieldValue.arrayUnion([tokenId]),
+    });
+  }
+
+  // Remove OneSignal Token ID
+  Future removeOneSignalTokenID() async {
+    var status = await OneSignal.shared.getDeviceState();
+    String tokenId = status.userId;
+    await userCollection.doc(uid).update({
+      'OneSignal Token IDs': FieldValue.arrayRemove([tokenId]),
     });
   }
 

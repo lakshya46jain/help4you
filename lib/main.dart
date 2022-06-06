@@ -6,11 +6,13 @@ import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/screens/wrapper.dart';
 import 'package:help4you/models/user_model.dart';
+import 'package:help4you/services/onesignal_configuration.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +48,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    // OneSignal Configuration
+    configOneSignal();
     // Rate My App Feature
     rateMyApp.init().then(
       (_) {
@@ -84,6 +88,10 @@ class _MyAppState extends State<MyApp> {
         }
       },
     );
+  }
+
+  Future<void> configOneSignal() async {
+    OneSignal.shared.setAppId(oneSignalAppID);
   }
 
   @override

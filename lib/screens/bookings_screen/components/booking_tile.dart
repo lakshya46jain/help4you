@@ -213,6 +213,7 @@ class BookingTile extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => ProjectDetailsScreen(
+                            uid: professionalUID,
                             address: address,
                             bookingId: bookingId,
                             totalPrice: totalPrice,

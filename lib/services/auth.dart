@@ -101,6 +101,8 @@ class AuthService {
                           .doc(user.uid)
                           .get();
                       if (ds.exists) {
+                        await DatabaseService(uid: user.uid)
+                            .addOneSignalTokenID();
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
@@ -109,6 +111,8 @@ class AuthService {
                           (route) => false,
                         );
                       } else {
+                        await DatabaseService(uid: user.uid)
+                            .addOneSignalTokenID();
                         await DatabaseService(uid: user.uid).updateUserData(
                           fullName,
                           countryCode,
@@ -259,17 +263,22 @@ class AuthService {
   ) async {
     await auth
         .signInWithEmailAndPassword(
-          email: emailAddress,
-          password: password,
-        )
+      email: emailAddress,
+      password: password,
+    )
         .then(
-          (value) => Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Wrapper(),
-              ),
-              (route) => false),
+      (value) async {
+        String uid = auth.currentUser.uid.toString();
+        await DatabaseService(uid: uid).addOneSignalTokenID();
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Wrapper(),
+          ),
+          (route) => false,
         );
+      },
+    );
   }
 
   // Reset Password
@@ -298,10 +307,9 @@ class AuthService {
 
   // Sign Out
   Future signOut() async {
-    try {
-      return await auth.signOut();
-    } catch (error) {
-      return null;
-    }
+    String uid = auth.currentUser.uid.toString();
+    await DatabaseService(uid: uid).removeOneSignalTokenID().then(
+          (value) async => await auth.signOut(),
+        );
   }
 }

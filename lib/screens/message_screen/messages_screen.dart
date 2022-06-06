@@ -17,6 +17,7 @@ import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/messages_model.dart';
 import 'package:help4you/constants/signature_button.dart';
+import 'package:help4you/services/onesignal_configuration.dart';
 import 'package:help4you/screens/message_screen/components/message_bubble.dart';
 import 'package:help4you/screens/message_screen/components/bottom_nav_bar.dart';
 
@@ -67,6 +68,11 @@ class _MessageScreenState extends State<MessageScreen> {
       hasDigits: true,
       hasSymbols: false,
     ).generate();
+    final userData = await FirebaseFirestore.instance
+        .collection("H4Y Users Database")
+        .doc(user.uid)
+        .get();
+    final String fullName = userData.data()["Full Name"];
     String fileName = fileNameGenerator.toString();
     Reference firebaseStorageRef = FirebaseStorage.instance
         .ref()
@@ -82,6 +88,11 @@ class _MessageScreenState extends State<MessageScreen> {
         .addMessageToChatRoom(
       "Media",
       downloadAddress,
+    );
+    sendNotification(
+      widget.uid,
+      fullName,
+      "Sent a photo",
     );
   }
 
@@ -245,6 +256,11 @@ class _MessageScreenState extends State<MessageScreen> {
                       setState(() {
                         isLongPress = false;
                       });
+                      sendNotification(
+                        widget.uid,
+                        "",
+                        "This message is no longer available because it was unsent by the sender.",
+                      );
                     },
                     copySaveOnTap: () async {
                       if (messageType != "Media") {
@@ -260,6 +276,11 @@ class _MessageScreenState extends State<MessageScreen> {
                       }
                     },
                     onPressed: () async {
+                      final userData = await FirebaseFirestore.instance
+                          .collection("H4Y Users Database")
+                          .doc(user.uid)
+                          .get();
+                      final String fullName = userData.data()["Full Name"];
                       // Create Chat Room In Database
                       await DatabaseService(
                               uid: user.uid, professionalUID: widget.uid)
@@ -270,15 +291,16 @@ class _MessageScreenState extends State<MessageScreen> {
                           .addMessageToChatRoom(
                         "Text",
                         messageController.text.trim(),
-                      )
-                          .then(
-                        (value) {
-                          messageController.clear();
-                          setState(() {
-                            isMessageEmpty = true;
-                          });
-                        },
                       );
+                      sendNotification(
+                        widget.uid,
+                        fullName,
+                        messageController.text.trim(),
+                      );
+                      messageController.clear();
+                      setState(() {
+                        isMessageEmpty = true;
+                      });
                     },
                     cameraOnPressed: () => getMedia(ImageSource.camera, user),
                     galleryOnPressed: () => getMedia(ImageSource.gallery, user),

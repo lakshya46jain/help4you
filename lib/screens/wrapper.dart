@@ -36,10 +36,10 @@ class _WrapperState extends State<Wrapper> {
     final user = Provider.of<Help4YouUser>(context);
 
     // Firebase Crashlytics User Identifier
-    if (user != null) {
-      FirebaseCrashlytics.instance.setUserIdentifier(user.uid);
-    } else {
+    if (user == null) {
       FirebaseCrashlytics.instance.setUserIdentifier("Anonyomous User");
+    } else {
+      FirebaseCrashlytics.instance.setUserIdentifier(user.uid);
     }
 
     return PageTransitionSwitcher(
@@ -54,9 +54,9 @@ class _WrapperState extends State<Wrapper> {
           ? ServerErrorScreen(
               onPressed: () => checkInternetConnectivity(),
             )
-          : (user != null)
-              ? BottomNavBar()
-              : OnboardingScreen(),
+          : (user == null)
+              ? OnboardingScreen()
+              : BottomNavBar(),
     );
   }
 }
