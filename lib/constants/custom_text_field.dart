@@ -58,23 +58,23 @@ class CustomFields extends StatelessWidget {
               floatingLabelBehavior: FloatingLabelBehavior.always,
               contentPadding: EdgeInsets.all(20.0),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30.0),
+                borderRadius: BorderRadius.circular(15.0),
                 borderSide: BorderSide(
                   color: Color(0xFF1C3857).withOpacity(0.5),
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30.0),
+                borderRadius: BorderRadius.circular(15.0),
                 borderSide: BorderSide(
                   color: Color(0xFF1C3857),
                 ),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30.0),
+                borderRadius: BorderRadius.circular(15.0),
                 borderSide: BorderSide(color: Colors.red),
               ),
               errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30.0),
+                borderRadius: BorderRadius.circular(15.0),
                 borderSide: BorderSide(color: Colors.red),
               ),
             ),
@@ -83,39 +83,33 @@ class CustomFields extends StatelessWidget {
             ? IntlPhoneField(
                 autofocus: autoFocus ?? false,
                 focusNode: focusNode ?? FocusNode(),
-                searchText: "Search Country Name",
-                countryCodeTextColor: Color(0xFF1C3857),
-                dropDownIcon: Icon(
-                  Icons.arrow_drop_down,
-                  color: Color(0xFF1C3857),
-                ),
                 decoration: InputDecoration(
                   hintText: 'Enter Phone Number...',
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   contentPadding: EdgeInsets.symmetric(
-                    horizontal: 20.0,
+                    horizontal: 0.0,
                     vertical: 20.0,
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(60.0),
+                    borderRadius: BorderRadius.circular(15.0),
                     borderSide: BorderSide(
                       color: Color(0xFF1C3857).withOpacity(0.5),
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(60.0),
+                    borderRadius: BorderRadius.circular(15.0),
                     borderSide: BorderSide(
                       color: Color(0xFF1C3857),
                     ),
                   ),
                   focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(60.0),
+                    borderRadius: BorderRadius.circular(15.0),
                     borderSide: BorderSide(
                       color: Colors.red,
                     ),
                   ),
                   errorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(60.0),
+                    borderRadius: BorderRadius.circular(15.0),
                     borderSide: BorderSide(
                       color: Colors.red,
                     ),

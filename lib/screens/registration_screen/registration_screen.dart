@@ -37,20 +37,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   // Crop Selected Image
   Future cropImage(XFile selectedFile) async {
-    File cropped = await ImageCropper.cropImage(
-      sourcePath: selectedFile.path,
-      aspectRatio: CropAspectRatio(
-        ratioX: 1.0,
-        ratioY: 1.0,
-      ),
-      cropStyle: CropStyle.circle,
-    );
+    File cropped = await ImageCropper()
+        .cropImage(
+          sourcePath: selectedFile.path,
+          aspectRatio: CropAspectRatio(
+            ratioX: 1.0,
+            ratioY: 1.0,
+          ),
+          cropStyle: CropStyle.circle,
+        )
+        .then((value) => null);
     if (cropped != null) {
-      setState(
-        () {
-          imageFile = cropped;
-        },
-      );
+      setState(() {
+        imageFile = cropped;
+      });
     }
   }
 

@@ -74,8 +74,8 @@ class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
                   },
                   onCountryChanged: (phone) {
                     setState(() {
-                      countryCode = phone.countryCode;
-                      phoneIsoCode = phone.countryISOCode;
+                      countryCode = phone.dialCode;
+                      phoneIsoCode = phone.code;
                     });
                   },
                 ),
@@ -126,7 +126,7 @@ class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
                     countryCode,
                     phoneIsoCode,
                     nonInternationalNumber,
-                    "$countryCode$nonInternationalNumber",
+                    "+$countryCode$nonInternationalNumber",
                     emailAddress,
                     "Delete Account",
                     context,

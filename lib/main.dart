@@ -1,13 +1,11 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/foundation.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/screens/wrapper.dart';
@@ -17,13 +15,6 @@ import 'package:help4you/services/onesignal_configuration.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  if (kDebugMode || kProfileMode || kIsWeb) {
-    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
-  } else {
-    await FirebaseCrashlytics.instance.sendUnsentReports();
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-  }
   runApp(MyApp());
 }
 

@@ -48,16 +48,17 @@ class ProjectDetailsScreen extends StatelessWidget {
           width: 40.0,
           height: 50.0,
           decoration: BoxDecoration(
-            border: Border.all(color: Color(0xFF95989A)),
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(8),
+            color: Color.fromRGBO(222, 231, 240, .57),
+            border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
           ),
           child: Center(
             child: Text(
               otp[index],
               style: TextStyle(
-                fontSize: 25.0,
-                color: Colors.black,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(30, 60, 87, 1),
               ),
             ),
           ),

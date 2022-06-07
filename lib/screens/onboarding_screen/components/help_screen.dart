@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 // File Imports
 import 'package:help4you/screens/onboarding_screen/components/help_container.dart';
@@ -28,8 +28,8 @@ class _HelpScreenState extends State<HelpScreen> {
   ) async {
     final url =
         'mailto:$toEmail?subject=${Uri.encodeFull(subject)}&body=${Uri.encodeFull(message)}';
-    if (await canLaunch(url)) {
-      await launch(url);
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
     }
   }
 

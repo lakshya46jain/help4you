@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:animations/animations.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
@@ -34,13 +33,6 @@ class _WrapperState extends State<Wrapper> {
   Widget build(BuildContext context) {
     // Get User
     final user = Provider.of<Help4YouUser>(context);
-
-    // Firebase Crashlytics User Identifier
-    if (user == null) {
-      FirebaseCrashlytics.instance.setUserIdentifier("Anonyomous User");
-    } else {
-      FirebaseCrashlytics.instance.setUserIdentifier(user.uid);
-    }
 
     return PageTransitionSwitcher(
       transitionBuilder: (child, primaryAnimation, secondaryAnimation) {

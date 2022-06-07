@@ -1,7 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
-import 'package:pinput/pin_put/pin_put.dart';
+import 'package:pinput/pinput.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
@@ -32,20 +32,21 @@ class _DeleteAccVerificationScreenState
   String phoneIsoCode;
   String nonInternationalNumber;
 
-  // Pin Input Declarations
-  final _pinPutFocusNode = FocusNode();
-  final _pinPutController = TextEditingController();
-  final BoxDecoration pinPutDecoration = BoxDecoration(
-    border: Border.all(
-      color: Color(0xFF95989A),
+  // Pin Put Declarations
+  Color borderColor = Color.fromRGBO(114, 178, 238, 1);
+
+  final defaultPinTheme = PinTheme(
+    width: 55,
+    height: 60,
+    textStyle: TextStyle(
+      fontSize: 22,
+      color: Color.fromRGBO(30, 60, 87, 1),
     ),
-    borderRadius: BorderRadius.circular(15.0),
-  );
-  final BoxDecoration pinPutSelectedDecoration = BoxDecoration(
-    border: Border.all(
-      color: Color(0xFF1C3857),
+    decoration: BoxDecoration(
+      color: Color.fromRGBO(222, 231, 240, .57),
+      borderRadius: BorderRadius.circular(8),
+      border: Border.all(color: Colors.transparent),
     ),
-    borderRadius: BorderRadius.circular(15.0),
   );
 
   @override
@@ -92,22 +93,18 @@ class _DeleteAccVerificationScreenState
                 SizedBox(
                   height: 30.0,
                 ),
-                PinPut(
+                Pinput(
+                  length: 6,
                   autofocus: true,
-                  fieldsCount: 6,
-                  textStyle: TextStyle(
-                    fontSize: 25.0,
-                    color: Colors.black,
+                  defaultPinTheme: defaultPinTheme,
+                  focusedPinTheme: defaultPinTheme.copyWith(
+                    width: 63,
+                    height: 68,
+                    decoration: defaultPinTheme.decoration.copyWith(
+                      border: Border.all(color: borderColor),
+                    ),
                   ),
-                  eachFieldWidth: 55,
-                  eachFieldHeight: 60,
-                  focusNode: _pinPutFocusNode,
-                  controller: _pinPutController,
-                  submittedFieldDecoration: pinPutDecoration,
-                  followingFieldDecoration: pinPutDecoration,
-                  selectedFieldDecoration: pinPutSelectedDecoration,
-                  pinAnimationType: PinAnimationType.fade,
-                  onSubmit: widget.submitOTP,
+                  onCompleted: widget.submitOTP,
                 ),
                 SizedBox(
                   height: 30.0,

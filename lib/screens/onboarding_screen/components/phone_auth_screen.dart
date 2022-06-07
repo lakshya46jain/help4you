@@ -126,8 +126,8 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   },
                   onCountryChanged: (phone) {
                     setState(() {
-                      countryCode = phone.countryCode;
-                      phoneIsoCode = phone.countryISOCode;
+                      countryCode = phone.dialCode;
+                      phoneIsoCode = phone.code;
                     });
                   },
                 ),
@@ -178,7 +178,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     countryCode,
                     phoneIsoCode,
                     nonInternationalNumber,
-                    "$countryCode$nonInternationalNumber",
+                    "+$countryCode$nonInternationalNumber",
                     "",
                     "Registration",
                     context,

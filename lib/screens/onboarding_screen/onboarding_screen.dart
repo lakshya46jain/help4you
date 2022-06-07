@@ -152,8 +152,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       onChanged: (phone) {},
                       onCountryChanged: (phone) {
                         setState(() {
-                          countryCode = phone.countryCode;
-                          phoneIsoCode = phone.countryISOCode;
+                          countryCode = phone.dialCode;
+                          phoneIsoCode = phone.code;
                         });
                       },
                     ),
