@@ -206,7 +206,7 @@ class _MessageScreenState extends State<MessageScreen> {
                           isSentByMe: (messages[index].sender == user.uid)
                               ? true
                               : false,
-                          isRead: false,
+                          isRead: messages[index].isRead,
                           onLongPress: () {
                             setState(() {
                               message = messages[index].message;

@@ -136,36 +136,100 @@ class MessageTile extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(height: 5.0),
-                              Opacity(
-                                opacity: 0.5,
-                                child: (snapshot.hasData &&
-                                        messages.length != 0)
-                                    ? Text(
-                                        (messages[0].type == "Media" &&
-                                                messages[0].sender == user.uid)
-                                            ? "You: Sent a photo\n"
-                                            : (messages[0].type == "Media" &&
-                                                    messages[0].sender !=
-                                                        user.uid)
-                                                ? "Sent a photo\n"
-                                                : (messages[0].sender ==
-                                                        user.uid)
-                                                    ? "You: ${messages[0].message}\n"
-                                                    : "${messages[0].message}\n",
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 15.0,
-                                        ),
-                                      )
-                                    : Text(
-                                        "\n\n",
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 15,
+                              StreamBuilder(
+                                stream: FirebaseFirestore.instance
+                                    .collection("H4Y Chat Rooms Database")
+                                    .doc(chatRoomId)
+                                    .collection("Messages")
+                                    .where("Is Read", isEqualTo: false)
+                                    .where(
+                                      "Sender",
+                                      isEqualTo: professionalUID,
+                                    )
+                                    .snapshots(),
+                                builder: (context, snapshot) {
+                                  int unreadLength = snapshot.data.docs.length;
+                                  return Row(
+                                    children: [
+                                      Expanded(
+                                        child: Opacity(
+                                          opacity: 0.5,
+                                          child: (snapshot.hasData &&
+                                                  messages.length != 0)
+                                              ? Text(
+                                                  (messages[0].type ==
+                                                              "Media" &&
+                                                          messages[0].sender ==
+                                                              user.uid)
+                                                      ? "You: Sent a photo\n"
+                                                      : (messages[0].type ==
+                                                                  "Media" &&
+                                                              messages[0]
+                                                                      .sender !=
+                                                                  user.uid)
+                                                          ? "Sent a photo\n"
+                                                          : (messages[0]
+                                                                      .sender ==
+                                                                  user.uid)
+                                                              ? "You: ${messages[0].message}\n"
+                                                              : "${messages[0].message}\n",
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 15.0,
+                                                  ),
+                                                )
+                                              : Text(
+                                                  "\n\n",
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                  ),
+                                                ),
                                         ),
                                       ),
+                                      SizedBox(
+                                        width: (unreadLength != 0) ? 10.0 : 0.0,
+                                      ),
+                                      (unreadLength != 0)
+                                          ? ConstrainedBox(
+                                              constraints: BoxConstraints(
+                                                minWidth: 20.0,
+                                                maxWidth: 50.0,
+                                              ),
+                                              child: Container(
+                                                padding: EdgeInsets.all(3.5),
+                                                decoration: BoxDecoration(
+                                                  color: Color(0xFF1C3857),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          25.0),
+                                                ),
+                                                child: Center(
+                                                  widthFactor: 2.0,
+                                                  child: Text(
+                                                    (unreadLength > 99)
+                                                        ? "99+"
+                                                        : snapshot.data.docs
+                                                                .length >
+                                                            99.toString(),
+                                                    style: TextStyle(
+                                                      fontSize: 14.0,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          : Container(),
+                                    ],
+                                  );
+                                },
                               ),
                               SizedBox(height: 5.0),
                               Divider(

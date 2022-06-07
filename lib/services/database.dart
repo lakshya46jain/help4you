@@ -175,7 +175,22 @@ class DatabaseService {
       "Sender": uid,
       "Type": type,
       "Message": message,
+      "Is Read": false,
       "Time Stamp": DateTime.now().toUtc(),
+    });
+  }
+
+  // Update Message Read Status
+  Future updateMessageReadStatus(
+    String chatRoomId,
+    String messageId,
+  ) async {
+    await chatRoomCollection
+        .doc(chatRoomId)
+        .collection("Messages")
+        .doc(messageId)
+        .update({
+      "Is Read": true,
     });
   }
 
@@ -356,6 +371,7 @@ class DatabaseService {
           sender: document["Sender"],
           type: document["Type"],
           message: document["Message"],
+          isRead: document["Is Read"],
           timeStamp: document["Time Stamp"],
         );
         return help4YouMessages;
