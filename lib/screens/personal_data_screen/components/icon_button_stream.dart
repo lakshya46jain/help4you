@@ -66,13 +66,13 @@ class IconButtonStream extends StatelessWidget {
             try {
               if (formKey.currentState.validate()) {
                 if (userData.phoneNumber !=
-                    '$countryCode$nonInternationalNumber') {
+                    '+$countryCode$nonInternationalNumber') {
                   await AuthService().phoneAuthentication(
                     fullName,
                     countryCode,
                     phoneIsoCode,
                     nonInternationalNumber,
-                    '$countryCode$nonInternationalNumber',
+                    '+$countryCode$nonInternationalNumber',
                     userData.emailAddress,
                     "Update Phone Number",
                     context,
@@ -82,7 +82,7 @@ class IconButtonStream extends StatelessWidget {
                     countryCode ?? userData.countryCode,
                     phoneIsoCode ?? userData.phoneIsoCode,
                     nonInternationalNumber ?? userData.nonInternationalNumber,
-                    '$countryCode$nonInternationalNumber' ??
+                    '+$countryCode$nonInternationalNumber' ??
                         userData.phoneNumber,
                     userData.emailAddress ?? userData.emailAddress,
                   );
