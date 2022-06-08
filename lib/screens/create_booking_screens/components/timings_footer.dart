@@ -12,11 +12,11 @@ class TimingsFooter extends StatelessWidget {
   final DateTime focusedDay;
   final TimingsSelectionScreen widget;
 
-  TimingsFooter({
+  const TimingsFooter({Key key, 
     @required this.time,
     @required this.focusedDay,
     @required this.widget,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,25 +25,23 @@ class TimingsFooter extends StatelessWidget {
         children: [
           Text.rich(
             TextSpan(
-              text: "${DateFormat.jm().format(time)}",
+              text: DateFormat.jm().format(time),
               children: [
                 TextSpan(
                   text: "\non ${DateFormat("d MMMM yyyy").format(focusedDay)}",
                 ),
               ],
             ),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20.0,
               color: Color(0xFF1C3857),
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(
-            height: 20.0,
-          ),
+          const SizedBox(height: 20.0),
           Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 20.0,
             ),
             child: SignatureButton(
@@ -71,9 +69,7 @@ class TimingsFooter extends StatelessWidget {
               text: "Confirm Timings",
             ),
           ),
-          SizedBox(
-            height: 50.0,
-          ),
+          const SizedBox(height: 50.0),
         ],
       ),
     );

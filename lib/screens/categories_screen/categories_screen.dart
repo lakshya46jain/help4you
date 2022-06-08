@@ -6,11 +6,13 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/categories_screen/components/category_banner_stream.dart';
 
 class CategoriesScreen extends StatefulWidget {
+  const CategoriesScreen({Key key}) : super(key: key);
+
   @override
-  _CategoriesScreenState createState() => _CategoriesScreenState();
+  CategoriesScreenState createState() => CategoriesScreenState();
 }
 
-class _CategoriesScreenState extends State<CategoriesScreen> {
+class CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -21,8 +23,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: Colors.transparent,
-          leading: SignatureButton(type: "Back Button"),
-          title: Text(
+          leading: const SignatureButton(type: "Back Button"),
+          title: const Text(
             "Categories",
             style: TextStyle(
               fontSize: 25.0,
@@ -32,7 +34,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             ),
           ),
         ),
-        body: CategoryBannerStream(),
+        body: const CategoryBannerStream(),
       ),
     );
   }

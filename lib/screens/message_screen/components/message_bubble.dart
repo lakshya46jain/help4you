@@ -18,7 +18,8 @@ class MessageBubble extends StatelessWidget {
   final bool isRead;
   final Function onLongPress;
 
-  MessageBubble({
+  const MessageBubble({
+    Key key,
     @required this.chatRoomId,
     @required this.messageId,
     @required this.message,
@@ -27,7 +28,7 @@ class MessageBubble extends StatelessWidget {
     @required this.profilePicture,
     @required this.isRead,
     @required this.onLongPress,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,19 +64,19 @@ class MessageBubble extends StatelessWidget {
                       ),
                 (isSentByMe == true)
                     ? Padding(
-                        padding: EdgeInsets.only(left: 10.0),
+                        padding: const EdgeInsets.only(left: 10.0),
                         child: Icon(
                           (isRead == true)
                               ? CupertinoIcons.checkmark_alt_circle_fill
                               : CupertinoIcons.checkmark_alt_circle,
                           size: 18.0,
-                          color: Color(0xFF00BF6D),
+                          color: const Color(0xFF00BF6D),
                         ),
                       )
-                    : Container(height: 0.0, width: 0.0),
+                    : Container(),
               ],
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
           ],
         ),
       ],
@@ -85,11 +86,12 @@ class MessageBubble extends StatelessWidget {
 
 class MessageBubbleCore extends StatelessWidget {
   const MessageBubbleCore({
+    Key key,
     @required this.onLongPress,
     @required this.type,
     @required this.isSentByMe,
     @required this.message,
-  });
+  }) : super(key: key);
 
   final Function onLongPress;
   final String type;
@@ -108,12 +110,13 @@ class MessageBubbleCore extends StatelessWidget {
           padding: EdgeInsets.all((type == "Media") ? 5.0 : 15.0),
           decoration: BoxDecoration(
             color: (isSentByMe == true)
-                ? Color(0xFF5DD3B0).withOpacity(0.12)
-                : Color(0xFFA6A6A6).withOpacity(0.2),
+                ? const Color(0xFF5DD3B0).withOpacity(0.12)
+                : const Color(0xFFA6A6A6).withOpacity(0.2),
             borderRadius: BorderRadius.circular(22.0),
           ),
           child: (type == "Media")
               ? FullScreenWidget(
+                  disposeLevel: DisposeLevel.High,
                   child: Center(
                     child: Hero(
                       tag: "Message Media",
@@ -126,11 +129,10 @@ class MessageBubbleCore extends StatelessWidget {
                       ),
                     ),
                   ),
-                  disposeLevel: DisposeLevel.High,
                 )
               : Text(
                   message,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Colors.black,

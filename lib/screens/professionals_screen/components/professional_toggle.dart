@@ -14,20 +14,21 @@ class ProfessionalsToggle extends StatelessWidget {
   final String phoneNumber;
   final double rating;
 
-  ProfessionalsToggle({
+  const ProfessionalsToggle({
+    Key key,
     @required this.professionalUID,
     @required this.profilePicture,
     @required this.fullName,
     @required this.occupation,
     @required this.phoneNumber,
     @required this.rating,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return OpenContainer(
       clipBehavior: Clip.none,
-      transitionDuration: Duration(milliseconds: 750),
+      transitionDuration: const Duration(milliseconds: 750),
       openElevation: 0.0,
       closedElevation: 0.0,
       closedColor: Colors.transparent,

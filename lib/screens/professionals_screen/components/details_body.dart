@@ -18,22 +18,23 @@ class DetailsScreenBody extends StatelessWidget {
   final String phoneNumber;
   final String professionalUID;
 
-  DetailsScreenBody({
+  const DetailsScreenBody({
+    Key key,
     @required this.profilePicture,
     @required this.fullName,
     @required this.occupation,
     @required this.phoneNumber,
     @required this.professionalUID,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 20.0,
               vertical: 10.0,
             ),
@@ -53,27 +54,23 @@ class DetailsScreenBody extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 15.0,
-                ),
+                const SizedBox(width: 15.0),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       fullName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF1C3857),
                         fontWeight: FontWeight.w800,
                         fontSize: 24.0,
                       ),
                     ),
-                    SizedBox(
-                      height: 5.0,
-                    ),
+                    const SizedBox(height: 5.0),
                     Text(
                       occupation,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF95989A),
                         fontSize: 18.0,
                       ),
@@ -84,7 +81,7 @@ class DetailsScreenBody extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               left: 20.0,
               right: 20.0,
               top: 5.0,
@@ -100,13 +97,13 @@ class DetailsScreenBody extends StatelessWidget {
                     );
                   },
                   icon: CupertinoIcons.phone_solid,
-                  color: Color(0xFF1C3857),
+                  color: const Color(0xFF1C3857),
                   title: "Contact",
                 ),
                 CustomMediaButton(
                   onTap: () {},
                   icon: CupertinoIcons.book_fill,
-                  color: Color(0xFF1C3857),
+                  color: const Color(0xFF1C3857),
                   title: "Rate Card",
                 ),
                 CustomMediaButton(
@@ -126,7 +123,7 @@ class DetailsScreenBody extends StatelessWidget {
                     );
                   },
                   icon: CupertinoIcons.chat_bubble_fill,
-                  color: Color(0xFF1C3857),
+                  color: const Color(0xFF1C3857),
                   title: "Message",
                 ),
               ],
@@ -142,7 +139,7 @@ class DetailsScreenBody extends StatelessWidget {
               if (snapshot.hasData) {
                 if (snapshot.data.docs.length == 0) {
                   return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: SizedBox(
                       width: double.infinity,
                       height: MediaQuery.of(context).size.height * 0.61,
@@ -154,7 +151,7 @@ class DetailsScreenBody extends StatelessWidget {
                 } else {
                   return ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: snapshot.data.docs.length,
                     itemBuilder: (context, index) {
                       DocumentSnapshot documentSnapshot =
@@ -171,7 +168,7 @@ class DetailsScreenBody extends StatelessWidget {
                   );
                 }
               } else {
-                return Container(width: 0.0, height: 0.0);
+                return Container();
               }
             },
           )

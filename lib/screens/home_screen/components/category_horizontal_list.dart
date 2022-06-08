@@ -10,9 +10,10 @@ import 'package:help4you/screens/home_screen/components/occupation_button.dart';
 class CategoryHorizontalList extends StatelessWidget {
   final Help4YouUser user;
 
-  CategoryHorizontalList({
+  const CategoryHorizontalList({
+    Key key,
     @required this.user,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +23,13 @@ class CategoryHorizontalList extends StatelessWidget {
         List<ServiceCategoryLogo> servicesCategory = snapshot.data;
         if (snapshot.hasData) {
           return SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: 20.0,
-                ),
+                const SizedBox(width: 20.0),
                 ...List.generate(
                   servicesCategory.length,
                   (index) {
@@ -40,14 +39,12 @@ class CategoryHorizontalList extends StatelessWidget {
                     );
                   },
                 ),
-                SizedBox(
-                  width: 20.0,
-                ),
+                const SizedBox(width: 20.0),
               ],
             ),
           );
         } else {
-          return Container(
+          return const SizedBox(
             height: 135,
             width: 135,
           );

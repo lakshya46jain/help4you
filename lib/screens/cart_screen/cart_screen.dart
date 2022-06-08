@@ -12,11 +12,13 @@ import 'package:help4you/screens/cart_screen/components/bottom_nav_bar.dart';
 import 'package:help4you/screens/cart_screen/components/cart_list_builder.dart';
 
 class CartScreen extends StatefulWidget {
+  const CartScreen({Key key}) : super(key: key);
+
   @override
-  _CartScreenState createState() => _CartScreenState();
+  CartScreenState createState() => CartScreenState();
 }
 
-class _CartScreenState extends State<CartScreen> {
+class CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     // Get User
@@ -27,8 +29,8 @@ class _CartScreenState extends State<CartScreen> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: SignatureButton(type: "Back Button"),
-        title: Text(
+        leading: const SignatureButton(type: "Back Button"),
+        title: const Text(
           "My Cart",
           style: TextStyle(
             fontSize: 25.0,
@@ -43,10 +45,10 @@ class _CartScreenState extends State<CartScreen> {
         builder: (context, snapshot) {
           List<CartServices> cartServices = snapshot.data;
           if (snapshot.hasData) {
-            if (cartServices.length == 0) {
+            if (cartServices.isEmpty) {
               return Center(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: SizedBox(
                     width: double.infinity,
                     child: SvgPicture.asset(
@@ -59,11 +61,11 @@ class _CartScreenState extends State<CartScreen> {
               return CartListBuilder(cartServices: cartServices);
             }
           } else {
-            return Container(width: 0.0, height: 0.0);
+            return Container();
           }
         },
       ),
-      bottomNavigationBar: CartNavBar(),
+      bottomNavigationBar: const CartNavBar(),
     );
   }
 }

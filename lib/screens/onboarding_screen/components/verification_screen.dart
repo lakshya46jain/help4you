@@ -13,35 +13,36 @@ class VerificationScreen extends StatefulWidget {
   final String phoneNumber;
   final Function submitOTP;
 
-  VerificationScreen({
+  const VerificationScreen({
+    Key key,
     @required this.phoneIsoCode,
     @required this.nonInternationalNumber,
     @required this.phoneNumber,
     @required this.submitOTP,
-  });
+  }) : super(key: key);
 
   @override
-  _VerificationScreenState createState() => _VerificationScreenState();
+  VerificationScreenState createState() => VerificationScreenState();
 }
 
-class _VerificationScreenState extends State<VerificationScreen> {
+class VerificationScreenState extends State<VerificationScreen> {
   // Text Field Variable
   String fullName;
   String phoneIsoCode;
   String nonInternationalNumber;
 
   // Pin Put Declarations
-  Color borderColor = Color.fromRGBO(114, 178, 238, 1);
+  Color borderColor = const Color.fromRGBO(114, 178, 238, 1);
 
   final defaultPinTheme = PinTheme(
     width: 55,
     height: 60,
-    textStyle: TextStyle(
+    textStyle: const TextStyle(
       fontSize: 22,
       color: Color.fromRGBO(30, 60, 87, 1),
     ),
     decoration: BoxDecoration(
-      color: Color.fromRGBO(222, 231, 240, .57),
+      color: const Color.fromRGBO(222, 231, 240, .57),
       borderRadius: BorderRadius.circular(8),
       border: Border.all(color: Colors.transparent),
     ),
@@ -52,11 +53,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        leading: SignatureButton(type: "Back Button"),
+        leading: const SignatureButton(type: "Back Button"),
         backgroundColor: Colors.transparent,
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +68,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 Text.rich(
                   TextSpan(
                     text: "Enter the 6-digit OTP sent to",
-                    style: TextStyle(
+                    style: const TextStyle(
                       height: 1.0,
                       fontSize: 24.0,
                       color: Colors.black,
@@ -77,7 +78,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     children: [
                       TextSpan(
                         text: "\n${widget.phoneNumber}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           height: 1.3,
                           fontSize: 24.0,
                           color: Colors.black,
@@ -88,9 +89,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 30.0,
-                ),
+                const SizedBox(height: 30.0),
                 Pinput(
                   length: 6,
                   autofocus: true,
@@ -104,14 +103,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   ),
                   onCompleted: widget.submitOTP,
                 ),
-                SizedBox(
-                  height: 30.0,
-                ),
+                const SizedBox(height: 30.0),
                 GestureDetector(
                   onTap: () async {
                     FirebaseAuth.instance.verifyPhoneNumber(
                       phoneNumber: widget.phoneNumber,
-                      timeout: Duration(seconds: 120),
+                      timeout: const Duration(seconds: 120),
                       verificationCompleted:
                           (PhoneAuthCredential credential) async {},
                       verificationFailed:
@@ -128,7 +125,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       },
                     );
                   },
-                  child: Text.rich(
+                  child: const Text.rich(
                     TextSpan(
                       text: "Didn't recieve the OTP?",
                       style: TextStyle(

@@ -10,6 +10,8 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/screens/home_screen/components/cart_button_stream.dart';
 
 class Header extends StatelessWidget {
+  const Header({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // Get User
@@ -35,7 +37,7 @@ class Header extends StatelessWidget {
     }
 
     return Padding(
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,16 +57,14 @@ class Header extends StatelessWidget {
                         imageUrl: userData.profilePicture,
                       ),
                     ),
-                    SizedBox(
-                      width: 15.0,
-                    ),
+                    const SizedBox(width: 15.0),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           message,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18.0,
                             color: Color(0xFF95989A),
                             fontFamily: "BalooPaaji",
@@ -73,7 +73,7 @@ class Header extends StatelessWidget {
                         ),
                         Text(
                           userData.fullName,
-                          style: TextStyle(
+                          style: const TextStyle(
                             height: 1.0,
                             fontSize: 23.0,
                             color: Color(0xFF1C3857),
@@ -97,23 +97,21 @@ class Header extends StatelessWidget {
                             "https://drive.google.com/uc?export=view&id=1Fis4yJe7_d_RROY7JdSihM2--GH5aqbe",
                       ),
                     ),
-                    SizedBox(
-                      width: 15.0,
-                    ),
+                    const SizedBox(width: 15.0),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           message,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18.0,
                             color: Color(0xFF95989A),
                             fontFamily: "BalooPaaji",
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        Text(
+                        const Text(
                           "Full Name",
                           style: TextStyle(
                             height: 1.0,

@@ -16,14 +16,15 @@ class ReviewTile extends StatelessWidget {
   final String review;
   final bool isRecommended;
 
-  ReviewTile({
+  const ReviewTile({
+    Key key,
     @required this.reviewId,
     @required this.customerUID,
     @required this.timeStamp,
     @required this.rating,
     @required this.review,
     @required this.isRecommended,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class ReviewTile extends StatelessWidget {
           return Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 10.0,
                   vertical: 15.0,
                 ),
@@ -57,7 +58,7 @@ class ReviewTile extends StatelessWidget {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: 5.0,
                           left: 20.0,
                           right: 20.0,
@@ -71,7 +72,7 @@ class ReviewTile extends StatelessWidget {
                               children: [
                                 Text(
                                   fullName,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     height: 1.0,
                                     fontSize: 20.0,
                                     color: Color(0xFF1C3857),
@@ -81,18 +82,19 @@ class ReviewTile extends StatelessWidget {
                                 Opacity(
                                   opacity: 0.64,
                                   child: Text(
-                                    "${DateFormat('dd MMM yyyy').format(timeStamp.toDate().toLocal())}",
-                                    style: TextStyle(
+                                    DateFormat('dd MMM yyyy')
+                                        .format(timeStamp.toDate().toLocal()),
+                                    style: const TextStyle(
                                       fontSize: 16.0,
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 7.5),
+                            const SizedBox(height: 7.5),
                             SimpleStarRating(
                               rating: rating,
-                              filledIcon: Icon(
+                              filledIcon: const Icon(
                                 CupertinoIcons.star_fill,
                                 size: 25.0,
                                 color: Color(0xFFFEA700),
@@ -100,30 +102,29 @@ class ReviewTile extends StatelessWidget {
                               nonFilledIcon: Icon(
                                 CupertinoIcons.star_fill,
                                 size: 25.0,
-                                color: Color(0xFF95989A).withOpacity(0.3),
+                                color: const Color(0xFF95989A).withOpacity(0.3),
                               ),
                             ),
-                            SizedBox(height: 7.5),
+                            const SizedBox(height: 7.5),
                             Opacity(
                               opacity: 0.64,
                               child: Text(
                                 review,
                                 maxLines: null,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15.0,
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
+                            const SizedBox(height: 10.0),
                             Container(
-                              padding: EdgeInsets.all(8.5),
+                              padding: const EdgeInsets.all(8.5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25.0),
                                 border: Border.all(
                                   width: 3,
-                                  color: Color(0xFF95989A).withOpacity(0.2),
+                                  color:
+                                      const Color(0xFF95989A).withOpacity(0.2),
                                 ),
                               ),
                               width: (isRecommended == true) ? 175.5 : 215.5,
@@ -138,16 +139,12 @@ class ReviewTile extends StatelessWidget {
                                           ? Colors.lightGreen
                                           : Colors.red,
                                     ),
-                                    SizedBox(
-                                      width: 7.5,
-                                    ),
+                                    const SizedBox(width: 7.5),
                                     Text(
                                       (isRecommended == true)
                                           ? "Recommended"
                                           : "Do Not Recommend",
-                                      style: TextStyle(
-                                        fontSize: 17.0,
-                                      ),
+                                      style: const TextStyle(fontSize: 17.0),
                                     ),
                                   ],
                                 ),
@@ -161,12 +158,12 @@ class ReviewTile extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Container(
                   height: 4.0,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Color(0xFF95989A).withOpacity(0.2),
+                    color: const Color(0xFF95989A).withOpacity(0.2),
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                 ),

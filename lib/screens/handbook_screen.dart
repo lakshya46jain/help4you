@@ -7,11 +7,13 @@ import 'package:help4you/constants/policy_dialog.dart';
 import 'package:help4you/constants/signature_button.dart';
 
 class HandbookScreen extends StatefulWidget {
+  const HandbookScreen({Key key}) : super(key: key);
+
   @override
-  _HandbookScreenState createState() => _HandbookScreenState();
+  HandbookScreenState createState() => HandbookScreenState();
 }
 
-class _HandbookScreenState extends State<HandbookScreen> {
+class HandbookScreenState extends State<HandbookScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,8 +21,8 @@ class _HandbookScreenState extends State<HandbookScreen> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: SignatureButton(type: "Back Button"),
-        title: Text(
+        leading: const SignatureButton(type: "Back Button"),
+        title: const Text(
           "Our Handbook",
           style: TextStyle(
             fontSize: 25.0,
@@ -31,7 +33,7 @@ class _HandbookScreenState extends State<HandbookScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             SignatureButton(
@@ -42,7 +44,7 @@ class _HandbookScreenState extends State<HandbookScreen> {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return PolicyDialog(
+                    return const PolicyDialog(
                       mdFileName: 'about_help4you.md',
                     );
                   },
@@ -58,7 +60,7 @@ class _HandbookScreenState extends State<HandbookScreen> {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return PolicyDialog(
+                    return const PolicyDialog(
                       mdFileName: 'terms_and_conditions.md',
                     );
                   },
@@ -74,7 +76,7 @@ class _HandbookScreenState extends State<HandbookScreen> {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return PolicyDialog(
+                    return const PolicyDialog(
                       mdFileName: 'privacy_policy.md',
                     );
                   },

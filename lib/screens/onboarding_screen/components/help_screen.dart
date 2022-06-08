@@ -10,6 +10,8 @@ import 'package:help4you/screens/onboarding_screen/components/help_container.dar
 import 'package:help4you/screens/onboarding_screen/components/email_address_auth_screen.dart';
 
 class HelpScreen extends StatefulWidget {
+  const HelpScreen({Key key}) : super(key: key);
+
   @override
   State<HelpScreen> createState() => _HelpScreenState();
 }
@@ -40,7 +42,7 @@ class _HelpScreenState extends State<HelpScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             CupertinoIcons.xmark,
             size: 25.0,
             color: Color(0xFFFEA700),
@@ -53,11 +55,11 @@ class _HelpScreenState extends State<HelpScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Need help logging in?",
                 style: TextStyle(
                   height: 1.3,
@@ -67,7 +69,7 @@ class _HelpScreenState extends State<HelpScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 5.0),
+              const SizedBox(height: 5.0),
               Text(
                 "Try the following",
                 style: TextStyle(
@@ -78,9 +80,7 @@ class _HelpScreenState extends State<HelpScreen> {
                   fontWeight: FontWeight.normal,
                 ),
               ),
-              SizedBox(
-                height: 30.0,
-              ),
+              const SizedBox(height: 30.0),
               HelpContainer(
                 icon: CupertinoIcons.mail_solid,
                 title: "Already have an account?",
@@ -90,13 +90,13 @@ class _HelpScreenState extends State<HelpScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => EmailAddressAuthScreen(),
+                      builder: (context) => const EmailAddressAuthScreen(),
                     ),
                   );
                 },
                 buttonText: "Sign in with email address >",
               ),
-              SizedBox(height: 30.0),
+              const SizedBox(height: 30.0),
               HelpContainer(
                 icon: CupertinoIcons.chat_bubble_text_fill,
                 title: "Can't sign in?",

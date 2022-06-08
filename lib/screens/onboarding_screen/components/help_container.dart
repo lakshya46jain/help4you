@@ -10,18 +10,19 @@ class HelpContainer extends StatelessWidget {
   final Function onTap;
   final String buttonText;
 
-  HelpContainer({
+  const HelpContainer({
+    Key key,
     this.icon,
     this.title,
     this.description,
     this.onTap,
     this.buttonText,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(
@@ -38,10 +39,10 @@ class HelpContainer extends StatelessWidget {
             size: 24.0,
             color: Colors.black,
           ),
-          SizedBox(height: 15.0),
+          const SizedBox(height: 15.0),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               height: 1.3,
               fontSize: 19.0,
               color: Colors.black,
@@ -49,7 +50,7 @@ class HelpContainer extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Text(
             description,
             style: TextStyle(
@@ -68,7 +69,7 @@ class HelpContainer extends StatelessWidget {
             onTap: onTap,
             child: Text(
               buttonText,
-              style: TextStyle(
+              style: const TextStyle(
                 height: 1.3,
                 fontSize: 16.0,
                 color: Colors.blueAccent,

@@ -74,6 +74,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Flutter Lint
+  flutter_lints: ^2.0.1
+
   # Launcher Icon
   flutter_launcher_icons: ^0.9.3
 

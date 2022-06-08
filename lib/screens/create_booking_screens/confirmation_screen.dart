@@ -11,16 +11,17 @@ class ConfirmationScreen extends StatefulWidget {
   final String title;
   final String description;
 
-  ConfirmationScreen({
+  const ConfirmationScreen({
+    Key key,
     this.title,
     this.description,
-  });
+  }) : super(key: key);
 
   @override
-  _ConfirmationScreenState createState() => _ConfirmationScreenState();
+  ConfirmationScreenState createState() => ConfirmationScreenState();
 }
 
-class _ConfirmationScreenState extends State<ConfirmationScreen> {
+class ConfirmationScreenState extends State<ConfirmationScreen> {
   @override
   void initState() {
     super.initState();
@@ -37,37 +38,37 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.5,
               height: MediaQuery.of(context).size.width * 0.5,
-              child: FlareActor(
+              child: const FlareActor(
                 "assets/flares/Success_Flare_Without_Loop.flr",
                 alignment: Alignment.center,
                 fit: BoxFit.fill,
                 animation: 'Untitled',
               ),
             ),
-            SizedBox(height: 25.0),
+            const SizedBox(height: 25.0),
             Text(
               widget.title ?? "Booking Confirmed",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 25.0,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Text(
               widget.description ??
                   "Thank you for booking your services from Help4You. We hope to provide you an unforgettable experience.",
               style: TextStyle(
                 fontSize: 16.0,
-                color: Color(0xFF95989A).withOpacity(0.5),
+                color: const Color(0xFF95989A).withOpacity(0.5),
               ),
               textAlign: TextAlign.center,
             ),
@@ -78,7 +79,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
   }
 
   startTime() async {
-    var duration = Duration(seconds: 2);
+    var duration = const Duration(seconds: 2);
     return Timer(duration, route);
   }
 
@@ -86,7 +87,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
     Navigator.pushAndRemoveUntil(
       context,
       PageTransition(
-        child: Wrapper(),
+        child: const Wrapper(),
         type: PageTransitionType.fade,
       ),
       (route) => false,

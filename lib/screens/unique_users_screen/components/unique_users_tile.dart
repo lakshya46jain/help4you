@@ -11,19 +11,20 @@ class UniqueUsersTile extends StatelessWidget {
   final int index;
   final int selected;
 
-  UniqueUsersTile({
+  const UniqueUsersTile({
+    Key key,
     @required this.uid,
     @required this.onTap,
     @required this.index,
     @required this.selected,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection("H4Y Users Database")
@@ -42,7 +43,7 @@ class UniqueUsersTile extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(
-                        color: Color(0xFF95989A).withOpacity(0.6),
+                        color: const Color(0xFF95989A).withOpacity(0.6),
                       ),
                       shape: BoxShape.circle,
                     ),
@@ -52,14 +53,14 @@ class UniqueUsersTile extends StatelessWidget {
                         width: 15.0,
                         decoration: BoxDecoration(
                           color: (selected == index)
-                              ? Color(0xFF1C3857)
+                              ? const Color(0xFF1C3857)
                               : Colors.white,
                           shape: BoxShape.circle,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 15.0),
+                  const SizedBox(width: 15.0),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,34 +79,34 @@ class UniqueUsersTile extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(width: 10.0),
+                            const SizedBox(width: 10.0),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   fullName,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 21.0,
                                     color: Color(0xFF1C3857),
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(height: 5.0),
+                                const SizedBox(height: 5.0),
                                 Text(
                                   occupation,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 14.0,
                                     color: Color(0xFF95989A),
                                   ),
                                 ),
-                                SizedBox(height: 5.0),
+                                const SizedBox(height: 5.0),
                               ],
                             ),
                           ],
                         ),
                         Divider(
                           thickness: 3.0,
-                          color: Color(0xFF95989A).withOpacity(0.2),
+                          color: const Color(0xFF95989A).withOpacity(0.2),
                         ),
                       ],
                     ),

@@ -15,17 +15,18 @@ class PhoneAuthScreen extends StatefulWidget {
   final String phoneIsoCode;
   final String nonInternationalNumber;
 
-  PhoneAuthScreen({
+  const PhoneAuthScreen({
+    Key key,
     @required this.countryCode,
     @required this.phoneIsoCode,
     @required this.nonInternationalNumber,
-  });
+  }) : super(key: key);
 
   @override
-  _PhoneAuthScreenState createState() => _PhoneAuthScreenState();
+  PhoneAuthScreenState createState() => PhoneAuthScreenState();
 }
 
-class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
+class PhoneAuthScreenState extends State<PhoneAuthScreen> {
   // Text Field Variables
   String countryCode;
   String phoneIsoCode;
@@ -47,7 +48,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             CupertinoIcons.chevron_left,
             size: 25.0,
             color: Color(0xFFFEA700),
@@ -59,10 +60,10 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 10.0),
+            padding: const EdgeInsets.only(right: 10.0),
             child: GestureDetector(
               child: Row(
-                children: [
+                children: const [
                   Icon(
                     CupertinoIcons.question_circle,
                     size: 25.0,
@@ -84,7 +85,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => HelpScreen(),
+                    builder: (context) => const HelpScreen(),
                   ),
                 );
               },
@@ -93,7 +94,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,7 +102,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Enter your mobile number",
                   style: TextStyle(
                     height: 1.3,
@@ -111,9 +112,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
-                  height: 30.0,
-                ),
+                const SizedBox(height: 30.0),
                 CustomFields(
                   type: "Phone",
                   autoFocus: true,
@@ -131,10 +130,8 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     });
                   },
                 ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                Text(
+                const SizedBox(height: 30.0),
+                const Text(
                   "By continuing, you agree to our",
                   style: TextStyle(
                     height: 1.0,
@@ -149,14 +146,14 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return PolicyDialog(
+                        return const PolicyDialog(
                           mdFileName: 'terms_and_conditions.md',
                         );
                       },
                       barrierDismissible: false,
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "Terms & Conditions",
                     style: TextStyle(
                       height: 1.3,

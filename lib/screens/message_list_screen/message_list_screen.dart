@@ -7,6 +7,8 @@ import 'package:help4you/models/user_model.dart';
 import 'package:help4you/screens/message_list_screen/components/body.dart';
 
 class MessageListScreen extends StatelessWidget {
+  const MessageListScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // Get User
@@ -20,7 +22,7 @@ class MessageListScreen extends StatelessWidget {
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: Colors.transparent,
-          title: Text(
+          title: const Text(
             "Messages",
             style: TextStyle(
               fontSize: 25.0,

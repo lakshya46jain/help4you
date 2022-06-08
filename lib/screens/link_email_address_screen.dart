@@ -12,6 +12,8 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
 class LinkEmailAddressScreen extends StatefulWidget {
+  const LinkEmailAddressScreen({Key key}) : super(key: key);
+
   @override
   State<LinkEmailAddressScreen> createState() => _LinkEmailAddressScreenState();
 }
@@ -21,7 +23,7 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
   String emailAddress;
   String password;
 
-  RegExp regex = new RegExp(
+  RegExp regex = RegExp(
     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
   );
 
@@ -43,7 +45,7 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
           elevation: 0.0,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
-          title: Text(
+          title: const Text(
             "Link Email Address",
             style: TextStyle(
               fontSize: 25.0,
@@ -62,7 +64,7 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                 Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 15.0,
                         vertical: 10.0,
                       ),
@@ -87,7 +89,7 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 15.0,
                         vertical: 10.0,
                       ),
@@ -114,7 +116,7 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 15.0,
                         vertical: 10.0,
                       ),
@@ -139,7 +141,7 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                 ),
                 SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: SignatureButton(
                       withIcon: true,
                       text: "CONTINUE",
@@ -147,17 +149,21 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                       onTap: () async {
                         try {
                           if (formKey.currentState.validate()) {
-                            await AuthService().linkPhoneAndEmailCredential(
-                              user.uid,
-                              emailAddress,
-                              password,
-                            );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BottomNavBar(),
-                              ),
-                            );
+                            await AuthService()
+                                .linkPhoneAndEmailCredential(
+                                  user.uid,
+                                  emailAddress,
+                                  password,
+                                )
+                                .then(
+                                  (value) => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const BottomNavBar(),
+                                    ),
+                                  ),
+                                );
                           }
                         } catch (error) {
                           if (error.code == "email-already-in-use") {

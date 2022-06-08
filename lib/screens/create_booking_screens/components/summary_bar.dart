@@ -19,12 +19,13 @@ class SummaryBar extends StatelessWidget {
   final GeoPoint geoPointLocation;
   final DateTime bookingTimings;
 
-  SummaryBar({
+  const SummaryBar({
+    Key key,
     @required this.professionalUID,
     @required this.completeAddress,
     @required this.geoPointLocation,
     @required this.bookingTimings,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +35,15 @@ class SummaryBar extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height * 0.13,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(30.0),
         ),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, -15),
+            offset: const Offset(0, -15),
             blurRadius: 20.0,
-            color: Color(0xFFDADADA).withOpacity(0.5),
+            color: const Color(0xFFDADADA).withOpacity(0.5),
           ),
         ],
       ),
@@ -62,10 +63,10 @@ class SummaryBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(
                   "$total",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 28.0,
                     color: Color(0xFF1C3857),
                     fontFamily: "BalooPaaji",
@@ -99,7 +100,7 @@ class SummaryBar extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                     context,
                     PageTransition(
-                      child: ConfirmationScreen(),
+                      child: const ConfirmationScreen(),
                       type: PageTransitionType.fade,
                     ),
                     (route) => false,
@@ -123,10 +124,10 @@ class SummaryBar extends StatelessWidget {
                   );
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   height: MediaQuery.of(context).size.height * 0.13,
                   width: MediaQuery.of(context).size.width * 0.6,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color(0xFF1C3857),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30.0),
@@ -134,7 +135,7 @@ class SummaryBar extends StatelessWidget {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Text(
                         "Checkout",
                         style: TextStyle(

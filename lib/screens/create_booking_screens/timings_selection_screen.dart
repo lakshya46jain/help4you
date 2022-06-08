@@ -13,17 +13,18 @@ class TimingsSelectionScreen extends StatefulWidget {
   final String completeAddress;
   final GeoPoint geoPointLocation;
 
-  TimingsSelectionScreen({
+  const TimingsSelectionScreen({
+    Key key,
     @required this.professionalUID,
     this.completeAddress,
     this.geoPointLocation,
-  });
+  }) : super(key: key);
 
   @override
-  _TimingsSelectionScreenState createState() => _TimingsSelectionScreenState();
+  TimingsSelectionScreenState createState() => TimingsSelectionScreenState();
 }
 
-class _TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
+class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
   // Calendar Variables
   DateTime focusedDay = DateTime.now();
 
@@ -48,8 +49,8 @@ class _TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: SignatureButton(type: "Back Button"),
-        title: Text(
+        leading: const SignatureButton(type: "Back Button"),
+        title: const Text(
           "Select Timings",
           style: TextStyle(
             fontSize: 25.0,
@@ -66,7 +67,7 @@ class _TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(
                   top: 20.0,
                   bottom: 10.0,
@@ -83,16 +84,16 @@ class _TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TableCalendar(
                   firstDay: firstDay,
                   lastDay: lastDay,
                   focusedDay: focusedDay,
                   calendarFormat: CalendarFormat.week,
-                  availableCalendarFormats: {
+                  availableCalendarFormats: const {
                     CalendarFormat.week: "Week",
                   },
-                  daysOfWeekStyle: DaysOfWeekStyle(
+                  daysOfWeekStyle: const DaysOfWeekStyle(
                     weekdayStyle: TextStyle(
                       fontSize: 16.0,
                       color: Color(0xFF95989A),
@@ -114,69 +115,69 @@ class _TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
                   },
                   calendarStyle: CalendarStyle(
                     isTodayHighlighted: true,
-                    selectedDecoration: BoxDecoration(
+                    selectedDecoration: const BoxDecoration(
                       color: Color(0xFF1C3857),
                       shape: BoxShape.circle,
                     ),
-                    selectedTextStyle: TextStyle(
+                    selectedTextStyle: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                     ),
-                    todayDecoration: BoxDecoration(
+                    todayDecoration: const BoxDecoration(
                       color: Color(0xFFFEA700),
                       shape: BoxShape.circle,
                     ),
-                    todayTextStyle: TextStyle(
+                    todayTextStyle: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                     ),
                     outsideTextStyle: TextStyle(
-                      color: Color(0xFF1C3857).withOpacity(0.65),
+                      color: const Color(0xFF1C3857).withOpacity(0.65),
                       fontWeight: FontWeight.w600,
                     ),
-                    weekendTextStyle: TextStyle(
+                    weekendTextStyle: const TextStyle(
                       color: Color(0xFF1C3857),
                       fontWeight: FontWeight.w600,
                     ),
-                    defaultTextStyle: TextStyle(
+                    defaultTextStyle: const TextStyle(
                       color: Color(0xFF1C3857),
                       fontWeight: FontWeight.w600,
                     ),
                     disabledTextStyle: TextStyle(
-                      color: Color(0xFF1C3857).withOpacity(0.65),
+                      color: const Color(0xFF1C3857).withOpacity(0.65),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   headerStyle: HeaderStyle(
                     titleCentered: true,
-                    titleTextStyle: TextStyle(
+                    titleTextStyle: const TextStyle(
                       fontSize: 18.0,
                       color: Color(0xFF1C3857),
                       fontWeight: FontWeight.bold,
                     ),
                     leftChevronIcon: Container(
-                      padding: EdgeInsets.all(1.0),
+                      padding: const EdgeInsets.all(1.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
-                          color: Color(0xFF95989A).withOpacity(0.3),
+                          color: const Color(0xFF95989A).withOpacity(0.3),
                         ),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.chevron_left_rounded,
                         size: 35.0,
                         color: Color(0xFF1C3857),
                       ),
                     ),
                     rightChevronIcon: Container(
-                      padding: EdgeInsets.all(1.0),
+                      padding: const EdgeInsets.all(1.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(
-                          color: Color(0xFF95989A).withOpacity(0.3),
+                          color: const Color(0xFF95989A).withOpacity(0.3),
                         ),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.chevron_right_rounded,
                         size: 35.0,
                         color: Color(0xFF1C3857),
@@ -185,7 +186,7 @@ class _TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
                   ),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(
                   top: 30.0,
                   bottom: 10.0,

@@ -16,22 +16,23 @@ import 'package:help4you/constants/signature_button.dart';
 class NewAddressScreen extends StatefulWidget {
   final String professionalUID;
 
-  NewAddressScreen({
+  const NewAddressScreen({
+    Key key,
     @required this.professionalUID,
-  });
+  }) : super(key: key);
 
   @override
-  _NewAddressScreenState createState() => _NewAddressScreenState();
+  NewAddressScreenState createState() => NewAddressScreenState();
 }
 
-class _NewAddressScreenState extends State<NewAddressScreen> {
+class NewAddressScreenState extends State<NewAddressScreen> {
   // Google Maps Variables
   double latitude;
   double longitude;
   Position currentPosition;
   GoogleMapController newGoogleMapsController;
   Completer<GoogleMapController> googleMapsController = Completer();
-  static final CameraPosition googlePlex = CameraPosition(
+  static const CameraPosition googlePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
@@ -50,7 +51,7 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
       CameraUpdate.newCameraPosition(cameraPosition),
     );
     Marker myLocationMarker = Marker(
-      markerId: MarkerId("My Location"),
+      markerId: const MarkerId("My Location"),
       position: latLngPosition,
       icon: BitmapDescriptor.defaultMarker,
     );
@@ -70,7 +71,7 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
 
   Widget customRadioButton(int index, String text) {
     return Padding(
-      padding: EdgeInsets.only(right: 15.0),
+      padding: const EdgeInsets.only(right: 15.0),
       child: GestureDetector(
         onTap: () {
           setState(() {
@@ -78,7 +79,7 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
           });
         },
         child: Container(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: 15.0,
             vertical: 7.0,
           ),
@@ -88,7 +89,7 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
               width: 2,
               color: Colors.white,
             ),
-            color: (index == selected) ? Colors.white : Color(0xFF1C3857),
+            color: (index == selected) ? Colors.white : const Color(0xFF1C3857),
           ),
           child: Center(
             child: Text(
@@ -96,7 +97,9 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
               style: TextStyle(
                 fontSize: 17.0,
                 fontWeight: FontWeight.w700,
-                color: (index == selected) ? Color(0xFF1C3857) : Colors.white,
+                color: (index == selected)
+                    ? const Color(0xFF1C3857)
+                    : Colors.white,
               ),
             ),
           ),
@@ -115,28 +118,28 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         leading: Padding(
-          padding: EdgeInsets.only(left: 15.0),
+          padding: const EdgeInsets.only(left: 15.0),
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
             ),
-            child: Center(
+            child: const Center(
               child: SignatureButton(type: "Back Button"),
             ),
           ),
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 15.0),
+            padding: const EdgeInsets.only(right: 15.0),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
               ),
               child: Center(
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     CupertinoIcons.location,
                     size: 25.0,
                     color: Color(0xFFFEA700),
@@ -161,12 +164,12 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
             FocusScope.of(context).unfocus();
           },
           child: Container(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               top: 15.0,
               left: 25.0,
               right: 25.0,
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFF1C3857),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(25.0),
@@ -185,10 +188,8 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
                       borderRadius: BorderRadius.circular(25.0),
                     ),
                   ),
-                  SizedBox(
-                    height: 25.0,
-                  ),
-                  Text(
+                  const SizedBox(height: 25.0),
+                  const Text(
                     "Add Address",
                     style: TextStyle(
                       height: 1.0,
@@ -198,11 +199,9 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
+                  const SizedBox(height: 20.0),
                   TextFormField(
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                     decoration: InputDecoration(
@@ -210,7 +209,7 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
                       hintStyle: TextStyle(
                         color: Colors.white.withOpacity(0.55),
                       ),
-                      focusedBorder: UnderlineInputBorder(
+                      focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.white,
                         ),
@@ -227,11 +226,9 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
                       });
                     },
                   ),
-                  SizedBox(
-                    height: 35.0,
-                  ),
+                  const SizedBox(height: 35.0),
                   TextFormField(
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                     decoration: InputDecoration(
@@ -239,7 +236,7 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
                       hintStyle: TextStyle(
                         color: Colors.white.withOpacity(0.55),
                       ),
-                      focusedBorder: UnderlineInputBorder(
+                      focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.white,
                         ),
@@ -256,9 +253,7 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
                       });
                     },
                   ),
-                  SizedBox(
-                    height: 35.0,
-                  ),
+                  const SizedBox(height: 35.0),
                   Row(
                     children: [
                       customRadioButton(0, "Home"),
@@ -266,21 +261,22 @@ class _NewAddressScreenState extends State<NewAddressScreen> {
                       customRadioButton(2, "Other"),
                     ],
                   ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
+                  const SizedBox(height: 30.0),
                   SignatureButton(
                     onTap: () async {
                       if (formKey.currentState.validate()) {
                         FocusScope.of(context).unfocus();
                         GeoPoint geoPoint = GeoPoint(latitude, longitude);
-                        await DatabaseService(uid: user.uid).addAdress(
-                          geoPoint,
-                          addressName,
-                          completeAddress,
-                          selected,
-                        );
-                        Navigator.pop(context);
+                        await DatabaseService(uid: user.uid)
+                            .addAdress(
+                              geoPoint,
+                              addressName,
+                              completeAddress,
+                              selected,
+                            )
+                            .then(
+                              (value) => Navigator.pop(context),
+                            );
                       }
                     },
                     text: "Save and Proceed",

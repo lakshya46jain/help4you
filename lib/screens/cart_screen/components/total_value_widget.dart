@@ -10,9 +10,10 @@ import 'package:help4you/screens/cart_screen/components/continue_button_stream.d
 class TotalValueWidget extends StatelessWidget {
   final Help4YouUser user;
 
-  TotalValueWidget({
+  const TotalValueWidget({
+    Key key,
     @required this.user,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +32,10 @@ class TotalValueWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 "$total",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 28.0,
                   color: Color(0xFF1C3857),
                   fontFamily: "BalooPaaji",

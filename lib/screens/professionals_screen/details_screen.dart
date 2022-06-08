@@ -15,13 +15,14 @@ class DetailsScreen extends StatelessWidget {
   final String occupation;
   final String phoneNumber;
 
-  DetailsScreen({
+  const DetailsScreen({
+    Key key,
     @required this.professionalUID,
     @required this.profilePicture,
     @required this.fullName,
     @required this.occupation,
     @required this.phoneNumber,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class DetailsScreen extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             CupertinoIcons.xmark,
             size: 25.0,
             color: Color(0xFFFEA700),
@@ -42,7 +43,7 @@ class DetailsScreen extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 15.0),
+            padding: const EdgeInsets.only(right: 15.0),
             child: GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -54,17 +55,17 @@ class DetailsScreen extends StatelessWidget {
                   ),
                 );
               },
-              child: FractionallySizedBox(
-                heightFactor: 0.75,
+              child: SizedBox(
+                height: 0.75,
                 child: Container(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 10.0,
                     vertical: 0.0,
                   ),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15.0),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         blurRadius: 10.0,
                         color: Color(0xFFDADADA),
@@ -75,13 +76,11 @@ class DetailsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         CupertinoIcons.star_fill,
                         color: Color(0xFFFEA700),
                       ),
-                      SizedBox(
-                        width: 7.5,
-                      ),
+                      const SizedBox(width: 7.5),
                       StreamBuilder(
                         stream: DatabaseService(
                           professionalUID: professionalUID,
@@ -99,8 +98,8 @@ class DetailsScreen extends StatelessWidget {
                             }
                           }
                           return Text(
-                            "${rating.toStringAsFixed(1)}",
-                            style: TextStyle(
+                            rating.toStringAsFixed(1),
+                            style: const TextStyle(
                               height: 1.75,
                               color: Color(0xFF1C3857),
                               fontSize: 25.0,

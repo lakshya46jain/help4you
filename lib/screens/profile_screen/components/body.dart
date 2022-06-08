@@ -16,9 +16,10 @@ import 'package:help4you/screens/personal_data_screen/personal_data_screen.dart'
 class ProfileScreenBody extends StatefulWidget {
   final Help4YouUser user;
 
-  ProfileScreenBody({
+  const ProfileScreenBody({
+    Key key,
     @required this.user,
-  });
+  }) : super(key: key);
 
   @override
   State<ProfileScreenBody> createState() => _ProfileScreenBodyState();
@@ -38,11 +39,9 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
     return Column(
       children: (widget.user != null)
           ? [
-              SizedBox(
-                height: 70.0,
-              ),
-              ProfileStream(),
-              Padding(
+              const SizedBox(height: 70.0),
+              const ProfileStream(),
+              const Padding(
                 padding: EdgeInsets.only(
                     right: 20.0, bottom: 5.0, top: 15.0, left: 20.0),
                 child: Divider(
@@ -58,12 +57,12 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HandbookScreen(),
+                      builder: (context) => const HandbookScreen(),
                     ),
                   );
                 },
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
                 child: Divider(
                   thickness: 1.0,
@@ -78,7 +77,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PersonalDataScreen(),
+                      builder: (context) => const PersonalDataScreen(),
                     ),
                   );
                 },
@@ -103,10 +102,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
                       );
                     }
                   } else {
-                    return Container(
-                      height: 0.0,
-                      width: 0.0,
-                    );
+                    return Container();
                   }
                 },
               ),
@@ -118,7 +114,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
                   return AuthService().signOut();
                 },
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
                 child: Divider(
                   thickness: 1.0,

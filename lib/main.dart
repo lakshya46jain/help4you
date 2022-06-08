@@ -15,15 +15,17 @@ import 'package:help4you/services/onesignal_configuration.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   RateMyApp rateMyApp = RateMyApp(
     minDays: 7,
     minLaunches: 10,
@@ -53,25 +55,27 @@ class _MyAppState extends State<MyApp> {
             actionsBuilder: (context, stars) {
               return [
                 TextButton(
-                  child: Text('Ok'),
+                  child: const Text('Ok'),
                   onPressed: () async {
                     HapticFeedback.lightImpact();
                     await rateMyApp
-                        .callEvent(RateMyAppEventType.rateButtonPressed);
-                    Navigator.pop<RateMyAppDialogButton>(
-                      context,
-                      RateMyAppDialogButton.rate,
-                    );
+                        .callEvent(RateMyAppEventType.rateButtonPressed)
+                        .then(
+                          (value) => Navigator.pop<RateMyAppDialogButton>(
+                            context,
+                            RateMyAppDialogButton.rate,
+                          ),
+                        );
                   },
                 ),
               ];
             },
-            dialogStyle: DialogStyle(
+            dialogStyle: const DialogStyle(
               titleAlign: TextAlign.center,
               messageAlign: TextAlign.center,
               messagePadding: EdgeInsets.only(bottom: 20),
             ),
-            starRatingOptions: StarRatingOptions(),
+            starRatingOptions: const StarRatingOptions(),
             onDismissed: () => rateMyApp.callEvent(
               RateMyAppEventType.laterButtonPressed,
             ),
@@ -93,7 +97,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
-        home: Wrapper(),
+        home: const Wrapper(),
       ),
     );
   }

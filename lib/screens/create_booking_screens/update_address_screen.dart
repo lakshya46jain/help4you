@@ -17,22 +17,23 @@ import 'package:help4you/constants/signature_button.dart';
 class UpdateAddressScreen extends StatefulWidget {
   final String addressId;
 
-  UpdateAddressScreen({
+  const UpdateAddressScreen({
+    Key key,
     @required this.addressId,
-  });
+  }) : super(key: key);
 
   @override
-  _UpdateAddressScreenState createState() => _UpdateAddressScreenState();
+  UpdateAddressScreenState createState() => UpdateAddressScreenState();
 }
 
-class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
+class UpdateAddressScreenState extends State<UpdateAddressScreen> {
   // Google Maps Variables
   double latitude;
   double longitude;
   Position currentPosition;
   GoogleMapController newGoogleMapsController;
   Completer<GoogleMapController> googleMapsController = Completer();
-  static final CameraPosition googlePlex = CameraPosition(
+  static const CameraPosition googlePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
@@ -47,7 +48,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
       CameraUpdate.newCameraPosition(cameraPosition),
     );
     Marker myLocationMarker = Marker(
-      markerId: MarkerId("My Location"),
+      markerId: const MarkerId("My Location"),
       position: latLngPosition,
       icon: BitmapDescriptor.defaultMarker,
     );
@@ -69,7 +70,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
       CameraUpdate.newCameraPosition(cameraPosition),
     );
     Marker myLocationMarker = Marker(
-      markerId: MarkerId("My Location"),
+      markerId: const MarkerId("My Location"),
       position: latLngPosition,
       icon: BitmapDescriptor.defaultMarker,
     );
@@ -89,7 +90,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
 
   Widget customRadioButton(int index, String text, int addressType) {
     return Padding(
-      padding: EdgeInsets.only(right: 15.0),
+      padding: const EdgeInsets.only(right: 15.0),
       child: GestureDetector(
         onTap: () {
           setState(() {
@@ -97,7 +98,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
           });
         },
         child: Container(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: 15.0,
             vertical: 7.0,
           ),
@@ -107,7 +108,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
               width: 2,
               color: Colors.white,
             ),
-            color: (index == selected) ? Colors.white : Color(0xFF1C3857),
+            color: (index == selected) ? Colors.white : const Color(0xFF1C3857),
           ),
           child: Center(
             child: Text(
@@ -115,7 +116,9 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
               style: TextStyle(
                 fontSize: 17.0,
                 fontWeight: FontWeight.w700,
-                color: (index == selected) ? Color(0xFF1C3857) : Colors.white,
+                color: (index == selected)
+                    ? const Color(0xFF1C3857)
+                    : Colors.white,
               ),
             ),
           ),
@@ -134,28 +137,28 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         leading: Padding(
-          padding: EdgeInsets.only(left: 15.0),
+          padding: const EdgeInsets.only(left: 15.0),
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
             ),
-            child: Center(
+            child: const Center(
               child: SignatureButton(type: "Back Button"),
             ),
           ),
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 15.0),
+            padding: const EdgeInsets.only(right: 15.0),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
               ),
               child: Center(
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     CupertinoIcons.location,
                     size: 25.0,
                     color: Color(0xFFFEA700),
@@ -186,12 +189,12 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
                   FocusScope.of(context).unfocus();
                 },
                 child: Container(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     top: 15.0,
                     left: 25.0,
                     right: 25.0,
                   ),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color(0xFF1C3857),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(25.0),
@@ -210,10 +213,8 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
                             borderRadius: BorderRadius.circular(25.0),
                           ),
                         ),
-                        SizedBox(
-                          height: 25.0,
-                        ),
-                        Text(
+                        const SizedBox(height: 25.0),
+                        const Text(
                           "Edit Address",
                           style: TextStyle(
                             height: 1.0,
@@ -223,12 +224,10 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        SizedBox(
-                          height: 20.0,
-                        ),
+                        const SizedBox(height: 20.0),
                         TextFormField(
                           initialValue: addressData.addressName,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                           decoration: InputDecoration(
@@ -236,7 +235,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
                             hintStyle: TextStyle(
                               color: Colors.white.withOpacity(0.55),
                             ),
-                            focusedBorder: UnderlineInputBorder(
+                            focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.white,
                               ),
@@ -253,12 +252,10 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
                             });
                           },
                         ),
-                        SizedBox(
-                          height: 35.0,
-                        ),
+                        const SizedBox(height: 35.0),
                         TextFormField(
                           initialValue: addressData.completeAddress,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                           decoration: InputDecoration(
@@ -266,7 +263,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
                             hintStyle: TextStyle(
                               color: Colors.white.withOpacity(0.55),
                             ),
-                            focusedBorder: UnderlineInputBorder(
+                            focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.white,
                               ),
@@ -283,9 +280,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
                             });
                           },
                         ),
-                        SizedBox(
-                          height: 35.0,
-                        ),
+                        const SizedBox(height: 35.0),
                         Row(
                           children: [
                             customRadioButton(
@@ -296,9 +291,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
                                 2, "Other", addressData.addressType),
                           ],
                         ),
-                        SizedBox(
-                          height: 30.0,
-                        ),
+                        const SizedBox(height: 30.0),
                         SignatureButton(
                           onTap: () async {
                             if (formKey.currentState.validate()) {
@@ -307,13 +300,17 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen> {
                               await DatabaseService(
                                 uid: user.uid,
                                 addressId: widget.addressId,
-                              ).updateAdress(
-                                geoPoint ?? addressData.geoPoint,
-                                addressName ?? addressData.addressName,
-                                completeAddress ?? addressData.completeAddress,
-                                selected ?? addressData.addressType,
-                              );
-                              Navigator.pop(context);
+                              )
+                                  .updateAdress(
+                                    geoPoint ?? addressData.geoPoint,
+                                    addressName ?? addressData.addressName,
+                                    completeAddress ??
+                                        addressData.completeAddress,
+                                    selected ?? addressData.addressType,
+                                  )
+                                  .then(
+                                    (value) => Navigator.pop(context),
+                                  );
                             }
                           },
                           text: "Save and Proceed",

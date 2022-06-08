@@ -7,9 +7,10 @@ import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 class TimePicker extends StatelessWidget {
   final Function onTimeChange;
 
-  TimePicker({
+  const TimePicker({
+    Key key,
     this.onTimeChange,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,12 @@ class TimePicker extends StatelessWidget {
           minutesInterval: 5,
           is24HourMode: false,
           isForce2Digits: true,
-          normalTextStyle: TextStyle(
+          normalTextStyle: const TextStyle(
             fontSize: 25.0,
             fontWeight: FontWeight.bold,
             color: Color(0xFF1C3857),
           ),
-          highlightedTextStyle: TextStyle(
+          highlightedTextStyle: const TextStyle(
             fontSize: 25.0,
             color: Color(0xFF1C3857),
             fontWeight: FontWeight.bold,

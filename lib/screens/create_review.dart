@@ -13,15 +13,16 @@ import 'package:help4you/constants/custom_text_field.dart';
 class CreateReviewScreen extends StatefulWidget {
   final String uid;
 
-  CreateReviewScreen({
+  const CreateReviewScreen({
+    Key key,
     @required this.uid,
-  });
+  }) : super(key: key);
 
   @override
-  _CreateReviewScreenState createState() => _CreateReviewScreenState();
+  CreateReviewScreenState createState() => CreateReviewScreenState();
 }
 
-class _CreateReviewScreenState extends State<CreateReviewScreen> {
+class CreateReviewScreenState extends State<CreateReviewScreen> {
   // Variables
   double rating;
   String review;
@@ -38,14 +39,14 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
         });
       },
       child: Container(
-        padding: EdgeInsets.all(8.5),
+        padding: const EdgeInsets.all(8.5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.0),
           border: Border.all(
             width: 3,
             color: (index == selected)
-                ? Color(0xFF1C3857).withOpacity(0.4)
-                : Color(0xFF95989A).withOpacity(0.2),
+                ? const Color(0xFF1C3857).withOpacity(0.4)
+                : const Color(0xFF95989A).withOpacity(0.2),
           ),
         ),
         width: (index == 0) ? 177.5 : 218.5,
@@ -58,12 +59,10 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                     : Icons.thumb_down_rounded,
                 color: (index == 0) ? Colors.lightGreen : Colors.red,
               ),
-              SizedBox(
-                width: 7.5,
-              ),
+              const SizedBox(width: 7.5),
               Text(
                 (index == 0) ? "Recommended" : "Do Not Recommend",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 17.0,
                 ),
               ),
@@ -87,8 +86,8 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: Colors.transparent,
-          leading: SignatureButton(type: "Back Button"),
-          title: Text(
+          leading: const SignatureButton(type: "Back Button"),
+          title: const Text(
             "Create Review",
             style: TextStyle(
               fontSize: 25.0,
@@ -99,27 +98,25 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Form(
               key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Give Your Rating",
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   SimpleStarRating(
                     isReadOnly: false,
-                    filledIcon: Icon(
+                    filledIcon: const Icon(
                       CupertinoIcons.star_fill,
                       size: 35.0,
                       color: Color(0xFFFEA700),
@@ -127,7 +124,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                     nonFilledIcon: Icon(
                       CupertinoIcons.star,
                       size: 35.0,
-                      color: Color(0xFF95989A).withOpacity(0.4),
+                      color: const Color(0xFF95989A).withOpacity(0.4),
                     ),
                     onRated: (value) {
                       setState(() {
@@ -142,9 +139,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                       }
                     },
                   ),
-                  SizedBox(
-                    height: 25.0,
-                  ),
+                  const SizedBox(height: 25.0),
                   CustomFields(
                     type: "Normal",
                     maxLines: 10,
@@ -163,32 +158,24 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                       }
                     },
                   ),
-                  SizedBox(
-                    height: 25.0,
-                  ),
-                  Text(
+                  const SizedBox(height: 25.0),
+                  const Text(
                     "Do you recommend the professional to others?",
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
+                  const SizedBox(height: 15.0),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       customRadioButton(0),
-                      SizedBox(
-                        height: 10.0,
-                      ),
+                      const SizedBox(height: 10.0),
                       customRadioButton(1),
                     ],
                   ),
-                  SizedBox(
-                    height: 25.0,
-                  ),
+                  const SizedBox(height: 25.0),
                   SignatureButton(
                     onTap: () async {
                       if (selected == 0) {
@@ -200,16 +187,20 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                           isRecommended = false;
                         });
                       }
-                      if (formKey.currentState.validate() && rating != 0.0)
+                      if (formKey.currentState.validate() && rating != 0.0) {
                         await DatabaseService(
                           uid: user.uid,
                           professionalUID: widget.uid,
-                        ).createReview(
-                          rating,
-                          review,
-                          isRecommended,
-                        );
-                      Navigator.pop(context);
+                        )
+                            .createReview(
+                              rating,
+                              review,
+                              isRecommended,
+                            )
+                            .then(
+                              (value) => Navigator.pop(context),
+                            );
+                      }
                     },
                     text: "Add Review",
                     withIcon: false,

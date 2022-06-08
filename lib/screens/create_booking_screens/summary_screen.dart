@@ -15,12 +15,13 @@ class SummaryScreen extends StatelessWidget {
   final GeoPoint geoPointLocation;
   final DateTime bookingTimings;
 
-  SummaryScreen({
+  const SummaryScreen({
+    Key key,
     @required this.professionalUID,
     @required this.completeAddress,
     @required this.geoPointLocation,
     @required this.bookingTimings,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +32,8 @@ class SummaryScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: SignatureButton(type: "Back Button"),
-        title: Text(
+        leading: const SignatureButton(type: "Back Button"),
+        title: const Text(
           "Booking Summary",
           style: TextStyle(
             fontSize: 25.0,

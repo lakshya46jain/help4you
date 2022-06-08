@@ -12,21 +12,23 @@ import 'package:help4you/screens/bookings_screen/bookings_screen.dart';
 import 'package:help4you/screens/message_list_screen/message_list_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
+  const BottomNavBar({Key key}) : super(key: key);
+
   @override
-  _BottomNavBarState createState() => _BottomNavBarState();
+  BottomNavBarState createState() => BottomNavBarState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar>
+class BottomNavBarState extends State<BottomNavBar>
     with WidgetsBindingObserver {
   // Selected Index
   int selectedIndex = 0;
 
   // Tab Bar Tabs
   final tabs = [
-    HomeScreen(),
-    BookingsScreen(),
-    MessageListScreen(),
-    ProfileScreen(),
+    const HomeScreen(),
+    const BookingsScreen(),
+    const MessageListScreen(),
+    const ProfileScreen(),
   ];
 
   // Current Index Tap
@@ -68,7 +70,7 @@ class _BottomNavBarState extends State<BottomNavBar>
             left: 0.0,
             right: 0.0,
             child: ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(25.0),
               ),
               child: BottomNavigationBar(
@@ -79,9 +81,9 @@ class _BottomNavBarState extends State<BottomNavBar>
                 unselectedFontSize: 1.0,
                 currentIndex: selectedIndex,
                 type: BottomNavigationBarType.fixed,
-                selectedItemColor: Color(0xFF1C3857),
-                unselectedItemColor: Color(0xFF1C3857),
-                items: [
+                selectedItemColor: const Color(0xFF1C3857),
+                unselectedItemColor: const Color(0xFF1C3857),
+                items: const [
                   BottomNavigationBarItem(
                     icon: Icon(FluentIcons.home_24_regular),
                     activeIcon: Icon(FluentIcons.home_24_filled),

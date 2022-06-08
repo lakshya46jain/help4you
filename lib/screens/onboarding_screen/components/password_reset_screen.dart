@@ -10,6 +10,8 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
 class PasswordResetScreen extends StatefulWidget {
+  const PasswordResetScreen({Key key}) : super(key: key);
+
   @override
   State<PasswordResetScreen> createState() => _PasswordResetScreenState();
 }
@@ -30,7 +32,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             CupertinoIcons.chevron_left,
             size: 25.0,
             color: Color(0xFFFEA700),
@@ -42,7 +44,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,7 +54,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Forgot Password",
                     style: TextStyle(
                       height: 1.3,
@@ -62,7 +64,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 5.0),
+                  const SizedBox(height: 5.0),
                   Text(
                     "Provide us the email address of your Help4You account and we will send you an email with instructions to reset your password.",
                     style: TextStyle(
@@ -73,7 +75,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                       fontWeight: FontWeight.normal,
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   CustomFields(
                     type: "Normal",
                     keyboardType: TextInputType.emailAddress,
@@ -102,7 +104,9 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                   try {
                     if (formKey.currentState.validate()) {
                       HapticFeedback.heavyImpact();
-                      await AuthService().resetPassword(emailAddress).then(
+                      await AuthService()
+                          .resetPassword(emailAddress)
+                          .then(
                             (value) => showCustomSnackBar(
                               context,
                               CupertinoIcons.checkmark_alt_circle,
@@ -110,8 +114,10 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                               "Congratulations!",
                               "Password reset link has been sent to $emailAddress",
                             ),
+                          )
+                          .then(
+                            (value) => Navigator.pop(context),
                           );
-                      Navigator.pop(context);
                     }
                   } catch (error) {
                     if (error.code == "invalid-email") {

@@ -17,19 +17,20 @@ class ServiceTiles extends StatefulWidget {
   final String serviceDescription;
   final double servicePrice;
 
-  ServiceTiles({
+  const ServiceTiles({
+    Key key,
     @required this.serviceId,
     @required this.professionalId,
     @required this.serviceTitle,
     @required this.serviceDescription,
     @required this.servicePrice,
-  });
+  }) : super(key: key);
 
   @override
-  _ServiceTilesState createState() => _ServiceTilesState();
+  ServiceTilesState createState() => ServiceTilesState();
 }
 
-class _ServiceTilesState extends State<ServiceTiles> {
+class ServiceTilesState extends State<ServiceTiles> {
   // Text Field Variables
   int quantity;
 
@@ -45,11 +46,11 @@ class _ServiceTilesState extends State<ServiceTiles> {
         CartServices cartServices = snapshot.data;
         quantity = cartServices == null ? 0 : cartServices.quantity;
         return Padding(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             vertical: 15.0,
             horizontal: 20.0,
           ),
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,46 +58,42 @@ class _ServiceTilesState extends State<ServiceTiles> {
                 Row(
                   children: [
                     Expanded(
-                      child: Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.serviceTitle,
-                              style: TextStyle(
-                                fontSize: 21.0,
-                                color: Color(0xFF1C3857),
-                                fontWeight: FontWeight.bold,
-                              ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.serviceTitle,
+                            style: const TextStyle(
+                              fontSize: 21.0,
+                              color: Color(0xFF1C3857),
+                              fontWeight: FontWeight.bold,
                             ),
-                            SizedBox(
-                              height: 10,
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            "${widget.servicePrice}",
+                            style: const TextStyle(
+                              color: Color(0xFF1C3857),
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w600,
                             ),
-                            Text(
-                              "${widget.servicePrice}",
-                              style: TextStyle(
-                                color: Color(0xFF1C3857),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 10.0),
+                      padding: const EdgeInsets.only(left: 10.0),
                       child: Container(
                         height: 30.0,
                         width: 80.0,
-                        padding: EdgeInsets.all(2.5),
+                        padding: const EdgeInsets.all(2.5),
                         decoration: BoxDecoration(
                           color: (quantity == 0)
                               ? Colors.white
-                              : Color(0xFFFEA700),
+                              : const Color(0xFFFEA700),
                           borderRadius: BorderRadius.circular(5),
                           border: Border.all(
-                            color: Color(0xFFFEA700),
+                            color: const Color(0xFFFEA700),
                           ),
                         ),
                         child: (quantity == 0)
@@ -104,7 +101,7 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
+                                  children: const [
                                     Text(
                                       "Add",
                                       style: TextStyle(
@@ -113,9 +110,7 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
+                                    SizedBox(width: 5.0),
                                     Icon(
                                       CupertinoIcons.add,
                                       color: Color(0xFFFEA700),
@@ -132,19 +127,21 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                           professionalUID:
                                               widget.professionalId)
                                       .addToCart(
-                                    widget.serviceId,
-                                    widget.serviceTitle,
-                                    widget.serviceDescription,
-                                    widget.servicePrice,
-                                    quantity,
-                                  );
-                                  showCustomSnackBar(
-                                    context,
-                                    CupertinoIcons.checkmark_alt_circle,
-                                    Colors.green,
-                                    "Congratulations!",
-                                    "Service was added to your cart",
-                                  );
+                                        widget.serviceId,
+                                        widget.serviceTitle,
+                                        widget.serviceDescription,
+                                        widget.servicePrice,
+                                        quantity,
+                                      )
+                                      .then(
+                                        (value) => showCustomSnackBar(
+                                          context,
+                                          CupertinoIcons.checkmark_alt_circle,
+                                          Colors.green,
+                                          "Congratulations!",
+                                          "Service was added to your cart",
+                                        ),
+                                      );
                                 },
                               )
                             : Row(
@@ -153,13 +150,13 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                 children: [
                                   GestureDetector(
                                     child: Container(
-                                      padding: EdgeInsets.all(2.0),
+                                      padding: const EdgeInsets.all(2.0),
                                       decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(2.5),
                                         color: Colors.white,
                                       ),
-                                      child: Icon(
+                                      child: const Icon(
                                         CupertinoIcons.minus,
                                         color: Color(0xFF1C3857),
                                         size: 18.0,
@@ -175,38 +172,42 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                             .doc(user.uid)
                                             .collection("Cart")
                                             .doc(widget.serviceId)
-                                            .delete();
-                                        showCustomSnackBar(
-                                          context,
-                                          CupertinoIcons
-                                              .exclamationmark_triangle,
-                                          Colors.orange,
-                                          "Warning!",
-                                          "Service has been removed from your cart.",
-                                        );
+                                            .delete()
+                                            .then(
+                                              (value) => showCustomSnackBar(
+                                                context,
+                                                CupertinoIcons
+                                                    .exclamationmark_triangle,
+                                                Colors.orange,
+                                                "Warning!",
+                                                "Service has been removed from your cart.",
+                                              ),
+                                            );
                                       } else {
                                         setState(() {
                                           quantity--;
                                         });
                                         await DatabaseService(uid: user.uid)
                                             .updateQuantity(
-                                          widget.serviceId,
-                                          quantity,
-                                        );
-                                        showCustomSnackBar(
-                                          context,
-                                          CupertinoIcons
-                                              .exclamationmark_triangle,
-                                          Colors.orange,
-                                          "Warning!",
-                                          "Service has been removed from your cart.",
-                                        );
+                                              widget.serviceId,
+                                              quantity,
+                                            )
+                                            .then(
+                                              (value) => showCustomSnackBar(
+                                                context,
+                                                CupertinoIcons
+                                                    .exclamationmark_triangle,
+                                                Colors.orange,
+                                                "Warning!",
+                                                "Service has been removed from your cart.",
+                                              ),
+                                            );
                                       }
                                     },
                                   ),
                                   Text(
                                     "$quantity",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -214,13 +215,13 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                   ),
                                   GestureDetector(
                                     child: Container(
-                                      padding: EdgeInsets.all(2.0),
+                                      padding: const EdgeInsets.all(2.0),
                                       decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(2.5),
                                         color: Colors.white,
                                       ),
-                                      child: Icon(
+                                      child: const Icon(
                                         CupertinoIcons.add,
                                         color: Color(0xFFFEA700),
                                         size: 18.0,
@@ -233,16 +234,19 @@ class _ServiceTilesState extends State<ServiceTiles> {
                                         });
                                         await DatabaseService(uid: user.uid)
                                             .updateQuantity(
-                                          widget.serviceId,
-                                          quantity,
-                                        );
-                                        showCustomSnackBar(
-                                          context,
-                                          CupertinoIcons.checkmark_alt_circle,
-                                          Colors.green,
-                                          "Congratulations!",
-                                          "Service was added to your cart",
-                                        );
+                                              widget.serviceId,
+                                              quantity,
+                                            )
+                                            .then(
+                                              (value) => showCustomSnackBar(
+                                                context,
+                                                CupertinoIcons
+                                                    .checkmark_alt_circle,
+                                                Colors.green,
+                                                "Congratulations!",
+                                                "Service was added to your cart",
+                                              ),
+                                            );
                                       } else {
                                         showCustomSnackBar(
                                           context,
@@ -261,22 +265,18 @@ class _ServiceTilesState extends State<ServiceTiles> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 Text(
                   widget.serviceDescription,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14.0,
                     color: Color(0xFF95989A),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                const SizedBox(height: 10),
                 Divider(
                   thickness: 3.0,
-                  color: Color(0xFF95989A).withOpacity(0.2),
+                  color: const Color(0xFF95989A).withOpacity(0.2),
                 ),
               ],
             ),

@@ -13,10 +13,11 @@ class PaymentMethodScreen extends StatefulWidget {
   final String uid;
   final String bookingId;
 
-  PaymentMethodScreen({
+  const PaymentMethodScreen({
+    Key key,
     @required this.uid,
     @required this.bookingId,
-  });
+  }) : super(key: key);
 
   @override
   State<PaymentMethodScreen> createState() => _PaymentMethodScreenState();
@@ -32,33 +33,33 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: SignatureButton(type: "Back Button"),
+        leading: const SignatureButton(type: "Back Button"),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Payment methods",
                   style: TextStyle(
                     fontSize: 28.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 15.0),
-                Text(
+                const SizedBox(height: 15.0),
+                const Text(
                   "Please choose your desired method of payment to the professional.",
                   style: TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 25.0),
-                Text(
+                const SizedBox(height: 25.0),
+                const Text(
                   "Cash Payment",
                   style: TextStyle(
                     fontSize: 14.0,
@@ -66,7 +67,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 15.0),
+                const SizedBox(height: 15.0),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -74,18 +75,18 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     });
                   },
                   child: Container(
-                    padding: EdgeInsets.all(9.0),
+                    padding: const EdgeInsets.all(9.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: (selectedIndex == 0)
-                          ? Border.all(color: Color(0xFFFEA700))
+                          ? Border.all(color: const Color(0xFFFEA700))
                           : null,
                       boxShadow: [
                         BoxShadow(
                           color: (selectedIndex != 0)
-                              ? Color(0xFF95989A).withOpacity(0.4)
+                              ? const Color(0xFF95989A).withOpacity(0.4)
                               : Colors.transparent,
-                          offset: Offset(0, 5),
+                          offset: const Offset(0, 5),
                           blurRadius: 5.0,
                         ),
                       ],
@@ -99,25 +100,26 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                             Container(
                               width: 75.0,
                               height: 75.0,
-                              color: Color(0xFF1C3857),
+                              color: const Color(0xFF1C3857),
                             ),
-                            SizedBox(width: 15.0),
+                            const SizedBox(width: 15.0),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "Cash payment",
                                   style: TextStyle(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(height: 5.0),
+                                const SizedBox(height: 5.0),
                                 Text(
                                   "Popular method",
                                   style: TextStyle(
                                     fontSize: 13.0,
-                                    color: Color(0xFF95989A).withOpacity(0.75),
+                                    color: const Color(0xFF95989A)
+                                        .withOpacity(0.75),
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -126,7 +128,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                           ],
                         ),
                         (selectedIndex == 0)
-                            ? Icon(
+                            ? const Icon(
                                 CupertinoIcons.checkmark_square_fill,
                                 color: Color(0xFFFEA700),
                                 size: 30.0,
@@ -147,7 +149,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                             Navigator.pushAndRemoveUntil(
                               context,
                               PageTransition(
-                                child: ConfirmationScreen(
+                                child: const ConfirmationScreen(
                                   title: "Payment Completed",
                                   description:
                                       "Thank you for choosing Help4You! We hope the service delivered to you provided you with an impeccable experience.",
@@ -175,9 +177,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                           withIcon: false,
                           type: "Yellow",
                         ),
-                        SizedBox(
-                          height: 50.0,
-                        ),
+                        const SizedBox(height: 50.0),
                       ],
                     ),
                   )

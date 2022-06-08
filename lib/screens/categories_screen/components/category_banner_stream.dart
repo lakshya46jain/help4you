@@ -8,6 +8,8 @@ import 'package:help4you/models/service_category_model.dart';
 import 'package:help4you/screens/categories_screen/components/occupation_banner.dart';
 
 class CategoryBannerStream extends StatefulWidget {
+  const CategoryBannerStream({Key key}) : super(key: key);
+
   @override
   State<CategoryBannerStream> createState() => _CategoryBannerStreamState();
 }
@@ -78,19 +80,17 @@ class _CategoryBannerStreamState extends State<CategoryBannerStream> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 15.0),
+        const SizedBox(height: 15.0),
         SearchBar(
           width: MediaQuery.of(context).size.width,
           hintText: "Search categories...",
           controller: searchController,
         ),
-        SizedBox(
-          height: 15.0,
-        ),
+        const SizedBox(height: 15.0),
         Expanded(
           child: ListView.builder(
             shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             itemCount: resultsList.length,
             itemBuilder: (context, index) {
               DocumentSnapshot documentSnapshot = resultsList[index];

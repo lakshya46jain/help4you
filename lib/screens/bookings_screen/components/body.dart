@@ -11,9 +11,10 @@ import 'package:help4you/screens/bookings_screen/components/booking_tile.dart';
 class BookingsScreenBody extends StatelessWidget {
   final String bookingStatus;
 
-  BookingsScreenBody({
+  const BookingsScreenBody({
+    Key key,
     this.bookingStatus,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +31,8 @@ class BookingsScreenBody extends StatelessWidget {
         if (snapshot.hasData) {
           return ListView.builder(
             shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.only(
+            physics: const BouncingScrollPhysics(),
+            padding: const EdgeInsets.only(
               top: 0.0,
               bottom: 100.0,
               right: 0.0,

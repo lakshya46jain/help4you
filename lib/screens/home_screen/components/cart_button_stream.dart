@@ -10,9 +10,10 @@ import 'package:help4you/screens/cart_screen/cart_screen.dart';
 class CartButtonStream extends StatelessWidget {
   final Help4YouUser user;
 
-  CartButtonStream({
+  const CartButtonStream({
+    Key key,
     @required this.user,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class CartButtonStream extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => CartScreen(),
+                builder: (context) => const CartScreen(),
               ),
             );
           },
@@ -39,7 +40,7 @@ class CartButtonStream extends StatelessWidget {
             height: 40.0,
             width: 40.0,
             decoration: BoxDecoration(
-              color: Color(0xFF1C3857),
+              color: const Color(0xFF1C3857),
               borderRadius: BorderRadius.circular(
                 10.0,
               ),
@@ -47,7 +48,7 @@ class CartButtonStream extends StatelessWidget {
             child: Center(
               child: Text(
                 "$totalItems",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20.0,
                   fontFamily: "BalooPaaji",
                   fontWeight: FontWeight.w600,

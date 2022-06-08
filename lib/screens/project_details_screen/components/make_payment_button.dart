@@ -8,15 +8,16 @@ class MakePaymentButton extends StatelessWidget {
   final String uid;
   final String bookingId;
 
-  MakePaymentButton({
+  const MakePaymentButton({
+    Key key,
     @required this.uid,
     @required this.bookingId,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 15.0,
         horizontal: 30.0,
       ),
@@ -35,7 +36,7 @@ class MakePaymentButton extends StatelessWidget {
         );
       },
       color: Colors.green,
-      child: Text(
+      child: const Text(
         "Make Payment",
         style: TextStyle(
           fontSize: 17.0,

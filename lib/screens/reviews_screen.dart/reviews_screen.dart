@@ -10,9 +10,10 @@ import 'package:help4you/screens/reviews_screen.dart/components/body.dart';
 class ReviewsScreen extends StatelessWidget {
   final String professionalUID;
 
-  ReviewsScreen({
+  const ReviewsScreen({
+    Key key,
     @required this.professionalUID,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class ReviewsScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: SignatureButton(type: "Back Button"),
+        leading: const SignatureButton(type: "Back Button"),
         actions: [
           IconButton(
             onPressed: () {
@@ -33,7 +34,7 @@ class ReviewsScreen extends StatelessWidget {
                 ),
               );
             },
-            icon: Icon(
+            icon: const Icon(
               CupertinoIcons.add,
               size: 25.0,
               color: Color(0xFFFEA700),

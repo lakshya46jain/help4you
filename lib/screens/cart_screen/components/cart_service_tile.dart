@@ -17,25 +17,26 @@ class CartServiceTile extends StatelessWidget {
   final double servicePrice;
   final int quantity;
 
-  CartServiceTile({
+  const CartServiceTile({
+    Key key,
     this.serviceId,
     @required this.professionalId,
     @required this.serviceTitle,
     @required this.serviceDescription,
     @required this.servicePrice,
     @required this.quantity,
-  });
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // Get User
     final user = Provider.of<Help4YouUser>(context);
 
     return Padding(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 15.0,
         horizontal: 20.0,
       ),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,44 +44,40 @@ class CartServiceTile extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          serviceTitle,
-                          style: TextStyle(
-                            fontSize: 21.0,
-                            color: Color(0xFF1C3857),
-                            fontWeight: FontWeight.bold,
-                          ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        serviceTitle,
+                        style: const TextStyle(
+                          fontSize: 21.0,
+                          color: Color(0xFF1C3857),
+                          fontWeight: FontWeight.bold,
                         ),
-                        SizedBox(
-                          height: 10,
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        "$servicePrice",
+                        style: const TextStyle(
+                          color: Color(0xFF1C3857),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w600,
                         ),
-                        Text(
-                          "$servicePrice",
-                          style: TextStyle(
-                            color: Color(0xFF1C3857),
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 10.0),
+                  padding: const EdgeInsets.only(left: 10.0),
                   child: Container(
                     height: 30.0,
                     width: 80.0,
-                    padding: EdgeInsets.all(2.5),
+                    padding: const EdgeInsets.all(2.5),
                     decoration: BoxDecoration(
-                      color: Color(0xFFFEA700),
+                      color: const Color(0xFFFEA700),
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(
-                        color: Color(0xFFFEA700),
+                        color: const Color(0xFFFEA700),
                       ),
                     ),
                     child: Row(
@@ -88,12 +85,12 @@ class CartServiceTile extends StatelessWidget {
                       children: [
                         GestureDetector(
                           child: Container(
-                            padding: EdgeInsets.all(2.0),
+                            padding: const EdgeInsets.all(2.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2.5),
                               color: Colors.white,
                             ),
-                            child: Icon(
+                            child: const Icon(
                               CupertinoIcons.minus,
                               color: Color(0xFF1C3857),
                               size: 18.0,
@@ -106,33 +103,37 @@ class CartServiceTile extends StatelessWidget {
                                   .doc(user.uid)
                                   .collection("Cart")
                                   .doc(serviceId)
-                                  .delete();
-                              showCustomSnackBar(
-                                context,
-                                CupertinoIcons.exclamationmark_triangle,
-                                Colors.orange,
-                                "Warning!",
-                                "Service has been removed from your cart.",
-                              );
+                                  .delete()
+                                  .then(
+                                    (value) => showCustomSnackBar(
+                                      context,
+                                      CupertinoIcons.exclamationmark_triangle,
+                                      Colors.orange,
+                                      "Warning!",
+                                      "Service has been removed from your cart.",
+                                    ),
+                                  );
                             } else {
                               await DatabaseService(uid: user.uid)
                                   .updateQuantity(
-                                serviceId,
-                                quantity - 1,
-                              );
-                              showCustomSnackBar(
-                                context,
-                                CupertinoIcons.exclamationmark_triangle,
-                                Colors.orange,
-                                "Warning!",
-                                "Service has been removed from your cart.",
-                              );
+                                    serviceId,
+                                    quantity - 1,
+                                  )
+                                  .then(
+                                    (value) => showCustomSnackBar(
+                                      context,
+                                      CupertinoIcons.exclamationmark_triangle,
+                                      Colors.orange,
+                                      "Warning!",
+                                      "Service has been removed from your cart.",
+                                    ),
+                                  );
                             }
                           },
                         ),
                         Text(
                           "$quantity",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16.0,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -140,12 +141,12 @@ class CartServiceTile extends StatelessWidget {
                         ),
                         GestureDetector(
                           child: Container(
-                            padding: EdgeInsets.all(2.0),
+                            padding: const EdgeInsets.all(2.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2.5),
                               color: Colors.white,
                             ),
-                            child: Icon(
+                            child: const Icon(
                               CupertinoIcons.add,
                               color: Color(0xFFFEA700),
                               size: 18.0,
@@ -155,16 +156,18 @@ class CartServiceTile extends StatelessWidget {
                             if (quantity != 25) {
                               await DatabaseService(uid: user.uid)
                                   .updateQuantity(
-                                serviceId,
-                                quantity + 1,
-                              );
-                              showCustomSnackBar(
-                                context,
-                                CupertinoIcons.checkmark_alt_circle,
-                                Colors.green,
-                                "Congratulations!",
-                                "Service was added to your cart",
-                              );
+                                    serviceId,
+                                    quantity + 1,
+                                  )
+                                  .then(
+                                    (value) => showCustomSnackBar(
+                                      context,
+                                      CupertinoIcons.checkmark_alt_circle,
+                                      Colors.green,
+                                      "Congratulations!",
+                                      "Service was added to your cart",
+                                    ),
+                                  );
                             } else {
                               showCustomSnackBar(
                                 context,
@@ -182,22 +185,18 @@ class CartServiceTile extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Text(
               serviceDescription,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14.0,
                 color: Color(0xFF95989A),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Divider(
               thickness: 3.0,
-              color: Color(0xFF95989A).withOpacity(0.2),
+              color: const Color(0xFF95989A).withOpacity(0.2),
             ),
           ],
         ),

@@ -20,7 +20,8 @@ class IconButtonStream extends StatelessWidget {
   final String fullName;
   final String phoneIsoCode;
 
-  IconButtonStream({
+  const IconButtonStream({
+    Key key,
     @required this.user,
     @required this.imageFile,
     @required this.formKey,
@@ -28,7 +29,7 @@ class IconButtonStream extends StatelessWidget {
     @required this.nonInternationalNumber,
     @required this.fullName,
     @required this.phoneIsoCode,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class IconButtonStream extends StatelessWidget {
       builder: (context, snapshot) {
         UserDataCustomer userData = snapshot.data;
         return IconButton(
-          icon: Icon(
+          icon: const Icon(
             CupertinoIcons.checkmark_alt,
             size: 24.0,
             color: Color(0xFFFEA700),
@@ -48,7 +49,7 @@ class IconButtonStream extends StatelessWidget {
               if (imageFile != null) {
                 Reference firebaseStorageRef = FirebaseStorage.instance
                     .ref()
-                    .child(("H4Y Profile Pictures/" + user.uid));
+                    .child(("H4Y Profile Pictures/${user.uid}"));
                 UploadTask uploadTask = firebaseStorageRef.putFile(imageFile);
                 await uploadTask;
                 String downloadAddress =
@@ -87,16 +88,19 @@ class IconButtonStream extends StatelessWidget {
                     userData.emailAddress ?? userData.emailAddress,
                   );
                 } else {
-                  await DatabaseService(uid: user.uid).updateUserData(
-                    fullName ?? userData.fullName,
-                    userData.countryCode ?? userData.countryCode,
-                    userData.phoneIsoCode ?? userData.phoneIsoCode,
-                    userData.nonInternationalNumber ??
-                        userData.nonInternationalNumber,
-                    userData.phoneNumber ?? userData.phoneNumber,
-                    userData.emailAddress ?? userData.emailAddress,
-                  );
-                  Navigator.pop(context);
+                  await DatabaseService(uid: user.uid)
+                      .updateUserData(
+                        fullName ?? userData.fullName,
+                        userData.countryCode ?? userData.countryCode,
+                        userData.phoneIsoCode ?? userData.phoneIsoCode,
+                        userData.nonInternationalNumber ??
+                            userData.nonInternationalNumber,
+                        userData.phoneNumber ?? userData.phoneNumber,
+                        userData.emailAddress ?? userData.emailAddress,
+                      )
+                      .then(
+                        (value) => Navigator.pop(context),
+                      );
                 }
               }
               setProfilePicture();

@@ -8,6 +8,8 @@ import 'package:help4you/screens/categories_screen/categories_screen.dart';
 import 'package:help4you/screens/home_screen/components/category_horizontal_list.dart';
 
 class OccupationListBuilder extends StatelessWidget {
+  const OccupationListBuilder({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     // Get User
@@ -16,11 +18,11 @@ class OccupationListBuilder extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
+          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 "Categories",
                 style: TextStyle(
                   fontSize: 25.0,
@@ -34,11 +36,11 @@ class OccupationListBuilder extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CategoriesScreen(),
+                      builder: (context) => const CategoriesScreen(),
                     ),
                   );
                 },
-                child: Text(
+                child: const Text(
                   "See All",
                   style: TextStyle(
                     fontSize: 19.0,
@@ -51,9 +53,7 @@ class OccupationListBuilder extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-          height: 15.0,
-        ),
+        const SizedBox(height: 15.0),
         CategoryHorizontalList(
           user: user,
         ),

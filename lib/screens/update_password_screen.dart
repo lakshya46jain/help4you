@@ -10,6 +10,8 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
 class UpdatePasswordScreen extends StatefulWidget {
+  const UpdatePasswordScreen({Key key}) : super(key: key);
+
   @override
   State<UpdatePasswordScreen> createState() => _UpdatePasswordScreenState();
 }
@@ -18,7 +20,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   // Text Field Variables
   String password;
 
-  RegExp regex = new RegExp(
+  RegExp regex = RegExp(
     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
   );
 
@@ -37,7 +39,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
           elevation: 0.0,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
-          title: Text(
+          title: const Text(
             "Update Email Address",
             style: TextStyle(
               fontSize: 25.0,
@@ -56,7 +58,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                 Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 15.0,
                         vertical: 10.0,
                       ),
@@ -83,7 +85,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 15.0,
                         vertical: 10.0,
                       ),
@@ -108,7 +110,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                 ),
                 SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: SignatureButton(
                       withIcon: true,
                       text: "CONTINUE",
@@ -116,13 +118,15 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                       onTap: () async {
                         try {
                           if (formKey.currentState.validate()) {
-                            await AuthService().updatePassword(password);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BottomNavBar(),
-                              ),
-                            );
+                            await AuthService().updatePassword(password).then(
+                                  (value) => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const BottomNavBar(),
+                                    ),
+                                  ),
+                                );
                           }
                         } catch (error) {
                           if (error.code == "email-already-in-use") {

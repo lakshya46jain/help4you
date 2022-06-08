@@ -8,17 +8,18 @@ import 'package:help4you/screens/cart_screen/components/cart_service_tile.dart';
 class CartListBuilder extends StatelessWidget {
   final List<CartServices> cartServices;
 
-  CartListBuilder({
+  const CartListBuilder({
+    Key key,
     @required this.cartServices,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
       itemCount: cartServices.length,
-      padding: EdgeInsets.all(0.0),
-      physics: BouncingScrollPhysics(),
+      padding: const EdgeInsets.all(0.0),
+      physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) {
         return CartServiceTile(
           serviceId: cartServices[index].serviceId,

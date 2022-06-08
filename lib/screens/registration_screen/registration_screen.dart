@@ -15,17 +15,19 @@ import 'package:help4you/constants/custom_text_field.dart';
 import 'package:help4you/screens/registration_screen/components/registration_continue_button.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({Key key}) : super(key: key);
+
   @override
-  _RegistrationScreenState createState() => _RegistrationScreenState();
+  RegistrationScreenState createState() => RegistrationScreenState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class RegistrationScreenState extends State<RegistrationScreen> {
   // Text Field Variables
   String fullName;
   String emailAddress;
   String password;
 
-  RegExp regex = new RegExp(
+  RegExp regex = RegExp(
     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
   );
 
@@ -40,7 +42,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     File cropped = await ImageCropper()
         .cropImage(
           sourcePath: selectedFile.path,
-          aspectRatio: CropAspectRatio(
+          aspectRatio: const CropAspectRatio(
             ratioX: 1.0,
             ratioY: 1.0,
           ),
@@ -72,7 +74,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        title: Text(
+        title: const Text(
           "Register Details",
           style: TextStyle(
             fontSize: 25.0,
@@ -85,7 +87,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       body: Form(
         key: formKey,
         child: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 10.0,
             right: 10.0,
             bottom: 10.0,
@@ -96,12 +98,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               UserDataCustomer userData = snapshot.data;
               if (snapshot.hasData) {
                 return SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: 15.0,
-                      ),
+                      const SizedBox(height: 15.0),
                       SizedBox(
                         height: 115.0,
                         width: 115.0,
@@ -134,14 +134,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     Widget dialogButton(String title,
                                         Color color, Function onTap) {
                                       return Padding(
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                           horizontal: 15.0,
                                           vertical: 7.5,
                                         ),
                                         child: GestureDetector(
                                           onTap: onTap,
                                           child: Container(
-                                            padding: EdgeInsets.all(15.0),
+                                            padding: const EdgeInsets.all(15.0),
                                             width: double.infinity,
                                             decoration: BoxDecoration(
                                               color: color,
@@ -151,7 +151,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                             child: Center(
                                               child: Text(
                                                 title,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 18.0,
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
@@ -171,15 +171,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                         children: [
                                           dialogButton(
                                             "Camera",
-                                            Color(0xFFFEA700),
+                                            const Color(0xFFFEA700),
                                             () => getImage(ImageSource.camera),
                                           ),
                                           dialogButton(
                                             "Photo Library",
-                                            Color(0xFF1C3857),
+                                            const Color(0xFF1C3857),
                                             () => getImage(ImageSource.gallery),
                                           ),
-                                          SizedBox(height: 7.5),
+                                          const SizedBox(height: 7.5),
                                         ],
                                       ),
                                     ).show();
@@ -188,18 +188,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(10.0),
-                                        color: Color(0xFFF2F3F7),
+                                        color: const Color(0xFFF2F3F7),
                                         border: Border.all(
                                           color: Colors.white,
                                         ),
-                                        boxShadow: [
+                                        boxShadow: const [
                                           BoxShadow(
                                             offset: Offset(0, 15),
                                             blurRadius: 20.0,
                                             color: Color(0xFFDADADA),
                                           ),
                                         ]),
-                                    child: Icon(
+                                    child: const Icon(
                                       CupertinoIcons.camera,
                                       color: Color(0xFF1C3857),
                                     ),
@@ -210,11 +210,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: 25.0,
-                      ),
+                      const SizedBox(height: 25.0),
                       Padding(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15.0,
                           vertical: 10.0,
                         ),
@@ -240,7 +238,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15.0,
                           vertical: 10.0,
                         ),
@@ -266,7 +264,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15.0,
                           vertical: 10.0,
                         ),
@@ -293,7 +291,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15.0,
                           vertical: 10.0,
                         ),
@@ -327,7 +325,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                 );
               } else {
-                return Container(width: 0.0, height: 0.0);
+                return Container();
               }
             },
           ),

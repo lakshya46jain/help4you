@@ -11,9 +11,10 @@ import 'package:help4you/screens/professionals_screen/components/professional_to
 class ListingScreenBody extends StatefulWidget {
   final String occupation;
 
-  ListingScreenBody({
+  const ListingScreenBody({
+    Key key,
     @required this.occupation,
-  });
+  }) : super(key: key);
 
   @override
   State<ListingScreenBody> createState() => _ListingScreenBodyState();
@@ -33,7 +34,7 @@ class _ListingScreenBodyState extends State<ListingScreenBody> {
           if (snapshot.data.docs.length == 0) {
             return Center(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: SizedBox(
                   width: double.infinity,
                   child: SvgPicture.asset(
@@ -45,7 +46,7 @@ class _ListingScreenBodyState extends State<ListingScreenBody> {
           } else {
             return ListView.builder(
               shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount: snapshot.data.docs.length,
               itemBuilder: (context, index) {
                 DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
@@ -78,7 +79,7 @@ class _ListingScreenBodyState extends State<ListingScreenBody> {
             );
           }
         } else {
-          return Container(width: 0.0, height: 0.0);
+          return Container();
         }
       },
     );

@@ -25,7 +25,8 @@ class ProjectDetailsScreen extends StatelessWidget {
   final String otp;
   final List<CartServices> bookedItemsList;
 
-  ProjectDetailsScreen({
+  const ProjectDetailsScreen({
+    Key key,
     @required this.uid,
     @required this.address,
     @required this.bookingId,
@@ -37,25 +38,25 @@ class ProjectDetailsScreen extends StatelessWidget {
     @required this.paymentMethod,
     @required this.otp,
     @required this.bookedItemsList,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Widget otpRow(int index) {
       return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 2.5),
+        padding: const EdgeInsets.symmetric(horizontal: 2.5),
         child: Container(
           width: 40.0,
           height: 50.0,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: Color.fromRGBO(222, 231, 240, .57),
-            border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
+            color: const Color.fromRGBO(222, 231, 240, .57),
+            border: Border.all(color: const Color.fromRGBO(114, 178, 238, 1)),
           ),
           child: Center(
             child: Text(
               otp[index],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Color.fromRGBO(30, 60, 87, 1),
@@ -70,8 +71,8 @@ class ProjectDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: SignatureButton(type: "Back Button"),
-        title: Text(
+        leading: const SignatureButton(type: "Back Button"),
+        title: const Text(
           "Project Details",
           style: TextStyle(
             fontSize: 25.0,
@@ -87,15 +88,15 @@ class ProjectDetailsScreen extends StatelessWidget {
               dialogType: DialogType.SUCCES,
               body: Column(
                 children: [
-                  SizedBox(height: 5.0),
-                  Text(
+                  const SizedBox(height: 5.0),
+                  const Text(
                     "COMPLETION CODE",
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -107,11 +108,11 @@ class ProjectDetailsScreen extends StatelessWidget {
                       otpRow(5),
                     ],
                   ),
-                  SizedBox(height: 25.0),
+                  const SizedBox(height: 25.0),
                 ],
               ),
             ).show(),
-            icon: Icon(
+            icon: const Icon(
               CupertinoIcons.barcode,
               size: 25.0,
               color: Color(0xFFFEA700),
@@ -120,7 +121,7 @@ class ProjectDetailsScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,16 +129,16 @@ class ProjectDetailsScreen extends StatelessWidget {
               BookedItemsList(
                 bookedItemsList: bookedItemsList,
               ),
-              SizedBox(height: 5.0),
-              Divider(
+              const SizedBox(height: 5.0),
+              const Divider(
                 thickness: 1.0,
                 color: Color(0xFFFEA700),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "Total:",
                     style: TextStyle(
                       fontSize: 19.0,
@@ -146,29 +147,29 @@ class ProjectDetailsScreen extends StatelessWidget {
                   ),
                   Text(
                     "$totalPrice",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 19.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 15.0),
+              const SizedBox(height: 15.0),
               Text(
                 "Order: #$bookingId",
-                style: TextStyle(fontSize: 15.0),
+                style: const TextStyle(fontSize: 15.0),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Text(
                 "Location: $address (${DateFormat("d MMMM yyyy").format(preferredTimings.toDate().toLocal())} ${DateFormat.jm().format(preferredTimings.toDate().toLocal())})",
-                style: TextStyle(fontSize: 15.0),
+                style: const TextStyle(fontSize: 15.0),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Text(
                 "Payment Method: $paymentMethod",
-                style: TextStyle(fontSize: 15.0),
+                style: const TextStyle(fontSize: 15.0),
               ),
-              SizedBox(height: 50.0),
+              const SizedBox(height: 50.0),
             ],
           ),
         ),

@@ -7,11 +7,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:help4you/screens/bookings_screen/components/body.dart';
 
 class BookingsScreen extends StatefulWidget {
+  const BookingsScreen({Key key}) : super(key: key);
+
   @override
-  _BookingsScreenState createState() => _BookingsScreenState();
+  BookingsScreenState createState() => BookingsScreenState();
 }
 
-class _BookingsScreenState extends State<BookingsScreen> {
+class BookingsScreenState extends State<BookingsScreen> {
   int index = 0;
   String bookingStatus;
   FixedExtentScrollController scrollController;
@@ -44,7 +46,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        title: Text(
+        title: const Text(
           "Booking",
           style: TextStyle(
             fontSize: 25.0,
@@ -55,13 +57,13 @@ class _BookingsScreenState extends State<BookingsScreen> {
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 5.0),
+            padding: const EdgeInsets.only(right: 5.0),
             child: IconButton(
               onPressed: () {
                 scrollController.dispose();
                 scrollController =
                     FixedExtentScrollController(initialItem: index);
-                final pickerOptions = Container(
+                final pickerOptions = SizedBox(
                   height: 225.0,
                   child: CupertinoPicker(
                     scrollController: scrollController,
@@ -104,7 +106,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                           (item) => Center(
                             child: Text(
                               item,
-                              style: TextStyle(fontSize: 22.0),
+                              style: const TextStyle(fontSize: 22.0),
                             ),
                           ),
                         )
@@ -116,7 +118,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
                   builder: (BuildContext context) => pickerOptions,
                 );
               },
-              icon: Icon(
+              icon: const Icon(
                 CupertinoIcons.line_horizontal_3_decrease,
                 color: Color(0xFF1C3857),
               ),

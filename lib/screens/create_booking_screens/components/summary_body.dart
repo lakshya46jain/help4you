@@ -14,12 +14,13 @@ class SummaryBody extends StatelessWidget {
   final String completeAddress;
   final DateTime bookingTimings;
 
-  SummaryBody({
+  const SummaryBody({
+    Key key,
     @required this.professionalUID,
     @required this.user,
     @required this.completeAddress,
     @required this.bookingTimings,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +31,19 @@ class SummaryBody extends StatelessWidget {
         List<CartServices> cartServices = snapshot.data;
         if (snapshot.hasData) {
           return SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     vertical: 15.0,
                     horizontal: 20.0,
                   ),
                   child: Text.rich(
                     TextSpan(
                       text: "Selected Address:",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF1C3857),
                         fontWeight: FontWeight.bold,
                         fontSize: 16.0,
@@ -50,7 +51,7 @@ class SummaryBody extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: " $completeAddress",
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xFF95989A),
                             fontWeight: FontWeight.normal,
                           ),
@@ -60,13 +61,13 @@ class SummaryBody extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 20.0,
                   ),
                   child: Text.rich(
                     TextSpan(
                       text: "Preferred Timing:",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF1C3857),
                         fontWeight: FontWeight.bold,
                         fontSize: 16.0,
@@ -75,7 +76,7 @@ class SummaryBody extends StatelessWidget {
                         TextSpan(
                           text:
                               " ${DateFormat.jm().format(bookingTimings)} on ${DateFormat("d MMMM yyyy").format(bookingTimings)}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xFF95989A),
                             fontWeight: FontWeight.normal,
                           ),
@@ -84,20 +85,16 @@ class SummaryBody extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 25.0,
-                ),
+                const SizedBox(height: 25.0),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Divider(
                     thickness: 3.0,
-                    color: Color(0xFF95989A).withOpacity(0.2),
+                    color: const Color(0xFF95989A).withOpacity(0.2),
                   ),
                 ),
-                SizedBox(
-                  height: 25.0,
-                ),
-                Padding(
+                const SizedBox(height: 25.0),
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
                     "Ordered Services",
@@ -109,14 +106,12 @@ class SummaryBody extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10.0,
-                ),
+                const SizedBox(height: 10.0),
                 ListView.builder(
                   shrinkWrap: true,
                   itemCount: cartServices.length,
-                  padding: EdgeInsets.all(0.0),
-                  physics: NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(0.0),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     return BookingServiceTile(
                       serviceId: cartServices[index].serviceId,
@@ -133,7 +128,7 @@ class SummaryBody extends StatelessWidget {
             ),
           );
         } else {
-          return Container(width: 0.0, height: 0.0);
+          return Container();
         }
       },
     );

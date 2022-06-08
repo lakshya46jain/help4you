@@ -16,10 +16,11 @@ class ContinueButtonStream extends StatelessWidget {
   final Help4YouUser user;
   final List<CartServices> cartServices;
 
-  ContinueButtonStream({
+  const ContinueButtonStream({
+    Key key,
     @required this.user,
     @required this.cartServices,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class ContinueButtonStream extends StatelessWidget {
         List<Address> addressData = snapshot.data;
         return GestureDetector(
           onTap: () {
-            if (cartServices.length != 0) {
+            if (cartServices.isNotEmpty) {
               Set<String> uniqueUsers = {};
               for (CartServices cartService in cartServices) {
                 uniqueUsers.add(cartService.professionalId);
@@ -44,7 +45,7 @@ class ContinueButtonStream extends StatelessWidget {
                   ),
                 );
               } else {
-                if (addressData.length == 0) {
+                if (addressData.isEmpty) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -75,10 +76,10 @@ class ContinueButtonStream extends StatelessWidget {
             }
           },
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             height: MediaQuery.of(context).size.height * 0.13,
             width: MediaQuery.of(context).size.width * 0.6,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFF1C3857),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30.0),
@@ -86,7 +87,7 @@ class ContinueButtonStream extends StatelessWidget {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
                   "Continue",
                   style: TextStyle(

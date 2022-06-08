@@ -7,11 +7,13 @@ import 'package:help4you/models/user_model.dart';
 import 'package:help4you/screens/profile_screen/components/body.dart';
 
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key key}) : super(key: key);
+
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  ProfileScreenState createState() => ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     // Get User
@@ -19,7 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: ProfileScreenBody(user: user),
       ),
     );

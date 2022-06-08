@@ -9,15 +9,16 @@ class OccupationBanner extends StatelessWidget {
   final String buttonBanner;
   final String occupation;
 
-  OccupationBanner({
+  const OccupationBanner({
+    Key key,
     this.buttonBanner,
     this.occupation,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 20.0,
         vertical: 10.0,
       ),

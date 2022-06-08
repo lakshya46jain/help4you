@@ -15,15 +15,16 @@ import 'package:help4you/screens/create_booking_screens/components/saved_address
 class SavedAddressScreen extends StatefulWidget {
   final String professionalUID;
 
-  SavedAddressScreen({
+  const SavedAddressScreen({
+    Key key,
     @required this.professionalUID,
-  });
+  }) : super(key: key);
 
   @override
-  _SavedAddressScreenState createState() => _SavedAddressScreenState();
+  SavedAddressScreenState createState() => SavedAddressScreenState();
 }
 
-class _SavedAddressScreenState extends State<SavedAddressScreen> {
+class SavedAddressScreenState extends State<SavedAddressScreen> {
   int selected;
 
   @override
@@ -35,8 +36,8 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: SignatureButton(type: "Back Button"),
-        title: Text(
+        leading: const SignatureButton(type: "Back Button"),
+        title: const Text(
           "Address Options",
           style: TextStyle(
             fontSize: 25.0,
@@ -47,7 +48,7 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               CupertinoIcons.add,
               size: 25.0,
               color: Color(0xFFFEA700),
@@ -75,8 +76,8 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
               children: [
                 ListView.builder(
                   shrinkWrap: true,
-                  padding: EdgeInsets.all(0.0),
-                  physics: BouncingScrollPhysics(),
+                  padding: const EdgeInsets.all(0.0),
+                  physics: const BouncingScrollPhysics(),
                   itemCount: addressOptions.length,
                   itemBuilder: (context, index) {
                     return SavedAddressTile(
@@ -98,7 +99,7 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                 ),
                 (selected != null)
                     ? Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           left: 20.0,
                           right: 20.0,
                           bottom: 50.0,
@@ -124,14 +125,11 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                           ),
                         ),
                       )
-                    : Container(
-                        height: 0.0,
-                        width: 0.0,
-                      ),
+                    : Container(),
               ],
             );
           } else {
-            return Container(width: 0.0, height: 0.0);
+            return Container();
           }
         },
       ),

@@ -13,29 +13,30 @@ class ProfessionalCard extends StatelessWidget {
   final double rating;
   final String profilePicture;
 
-  ProfessionalCard({
+  const ProfessionalCard({
+    Key key,
     @required this.uid,
     @required this.fullName,
     @required this.occupation,
     @required this.rating,
     @required this.profilePicture,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 35.0),
+            padding: const EdgeInsets.only(left: 35.0),
             child: Container(
               height: 140.0,
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     offset: Offset(0, 15),
                     blurRadius: 20.0,
@@ -44,7 +45,7 @@ class ProfessionalCard extends StatelessWidget {
                 ],
               ),
               child: Padding(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 95.0,
                   top: 15.0,
                   bottom: 15.0,
@@ -56,7 +57,7 @@ class ProfessionalCard extends StatelessWidget {
                   children: [
                     Text(
                       fullName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         height: 1.0,
                         fontSize: 20.0,
                         fontFamily: "BalooPaaji",
@@ -64,28 +65,24 @@ class ProfessionalCard extends StatelessWidget {
                         color: Color(0xFF1C3857),
                       ),
                     ),
-                    SizedBox(
-                      height: 3,
-                    ),
+                    const SizedBox(height: 3),
                     Text(
                       occupation,
-                      style: TextStyle(
+                      style: const TextStyle(
                         height: 1.0,
                         fontSize: 17.0,
                         fontFamily: "BalooPaaji",
                         color: Color(0xFF95989A),
                       ),
                     ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                    const SizedBox(height: 20.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               "Rating",
                               style: TextStyle(
                                 height: 1.0,
@@ -94,23 +91,19 @@ class ProfessionalCard extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
-                              height: 2.5,
-                            ),
+                            const SizedBox(height: 2.5),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Icon(
+                                const Icon(
                                   CupertinoIcons.star_fill,
                                   color: Color(0xFFFEA700),
                                   size: 18.0,
                                 ),
-                                SizedBox(
-                                  width: 2.5,
-                                ),
+                                const SizedBox(width: 2.5),
                                 Text(
                                   "$rating",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16.0,
                                     fontFamily: "BalooPaaji",
                                   ),
@@ -119,13 +112,11 @@ class ProfessionalCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
+                        const SizedBox(width: 20.0),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               "Jobs",
                               style: TextStyle(
                                 height: 1.0,
@@ -134,9 +125,7 @@ class ProfessionalCard extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
-                              height: 2.5,
-                            ),
+                            const SizedBox(height: 2.5),
                             StreamBuilder(
                               stream: FirebaseFirestore.instance
                                   .collection("H4Y Users Database")
@@ -152,7 +141,7 @@ class ProfessionalCard extends StatelessWidget {
                                 }
                                 return Text(
                                   "$totalServices" ?? "0",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontFamily: "BalooPaaji",
                                     fontSize: 16.0,
                                   ),
@@ -176,8 +165,8 @@ class ProfessionalCard extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  color: Color(0xFFF5F6F9),
-                  boxShadow: [
+                  color: const Color(0xFFF5F6F9),
+                  boxShadow: const [
                     BoxShadow(
                       offset: Offset(0, 15),
                       blurRadius: 20.0,

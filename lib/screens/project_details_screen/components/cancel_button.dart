@@ -10,15 +10,16 @@ class CancelButton extends StatelessWidget {
   final String uid;
   final String bookingId;
 
-  CancelButton({
+  const CancelButton({
+    Key key,
     @required this.uid,
     @required this.bookingId,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 15.0,
         horizontal: 30.0,
       ),
@@ -47,7 +48,7 @@ class CancelButton extends StatelessWidget {
         ).show();
       },
       color: Colors.red,
-      child: Text(
+      child: const Text(
         "Cancel Project",
         style: TextStyle(
           fontSize: 17.0,

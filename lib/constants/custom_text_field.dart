@@ -21,7 +21,8 @@ class CustomFields extends StatelessWidget {
   final String nonInternationalNumber;
   final Function onCountryChanged;
 
-  CustomFields({
+  const CustomFields({
+    Key key,
     this.keyboardType,
     this.maxLines,
     this.validator,
@@ -37,7 +38,7 @@ class CustomFields extends StatelessWidget {
     this.phoneIsoCode,
     this.nonInternationalNumber,
     this.onCountryChanged,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,30 +53,30 @@ class CustomFields extends StatelessWidget {
             onChanged: onChanged,
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: TextStyle(
+              hintStyle: const TextStyle(
                 color: Color(0xFF95989A),
               ),
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              contentPadding: EdgeInsets.all(20.0),
+              contentPadding: const EdgeInsets.all(20.0),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
                 borderSide: BorderSide(
-                  color: Color(0xFF1C3857).withOpacity(0.5),
+                  color: const Color(0xFF1C3857).withOpacity(0.5),
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Color(0xFF1C3857),
                 ),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
-                borderSide: BorderSide(color: Colors.red),
+                borderSide: const BorderSide(color: Colors.red),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
-                borderSide: BorderSide(color: Colors.red),
+                borderSide: const BorderSide(color: Colors.red),
               ),
             ),
           )
@@ -86,31 +87,31 @@ class CustomFields extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: 'Enter Phone Number...',
                   floatingLabelBehavior: FloatingLabelBehavior.always,
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     horizontal: 0.0,
                     vertical: 20.0,
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
                     borderSide: BorderSide(
-                      color: Color(0xFF1C3857).withOpacity(0.5),
+                      color: const Color(0xFF1C3857).withOpacity(0.5),
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xFF1C3857),
                     ),
                   ),
                   focusedErrorBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.red,
                     ),
                   ),
                   errorBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.red,
                     ),
                   ),

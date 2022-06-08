@@ -12,6 +12,8 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
 class UpdateEmailAddressScreen extends StatefulWidget {
+  const UpdateEmailAddressScreen({Key key}) : super(key: key);
+
   @override
   State<UpdateEmailAddressScreen> createState() =>
       _UpdateEmailAddressScreenState();
@@ -39,7 +41,7 @@ class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
           elevation: 0.0,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
-          title: Text(
+          title: const Text(
             "Update Email Address",
             style: TextStyle(
               fontSize: 25.0,
@@ -58,7 +60,7 @@ class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
                 Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 15.0,
                         vertical: 10.0,
                       ),
@@ -86,7 +88,7 @@ class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
                 ),
                 SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: SignatureButton(
                       withIcon: true,
                       text: "CONTINUE",
@@ -94,16 +96,20 @@ class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
                       onTap: () async {
                         try {
                           if (formKey.currentState.validate()) {
-                            await AuthService().updateEmailAddress(
-                              user.uid,
-                              emailAddress,
-                            );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BottomNavBar(),
-                              ),
-                            );
+                            await AuthService()
+                                .updateEmailAddress(
+                                  user.uid,
+                                  emailAddress,
+                                )
+                                .then(
+                                  (value) => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const BottomNavBar(),
+                                    ),
+                                  ),
+                                );
                           }
                         } catch (error) {
                           if (error.code == "email-already-in-use") {

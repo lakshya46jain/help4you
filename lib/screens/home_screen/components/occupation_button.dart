@@ -9,10 +9,11 @@ class OccupationButton extends StatelessWidget {
   final String buttonLogo;
   final String occupation;
 
-  OccupationButton({
+  const OccupationButton({
+    Key key,
     this.buttonLogo,
     this.occupation,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class OccupationButton extends StatelessWidget {
           ),
         );
       },
-      child: Container(
+      child: SizedBox(
         width: 150.0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

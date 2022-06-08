@@ -11,6 +11,8 @@ import 'package:help4you/screens/server_error_screen.dart';
 import 'package:help4you/screens/onboarding_screen/onboarding_screen.dart';
 
 class Wrapper extends StatefulWidget {
+  const Wrapper({Key key}) : super(key: key);
+
   @override
   State<Wrapper> createState() => _WrapperState();
 }
@@ -47,8 +49,8 @@ class _WrapperState extends State<Wrapper> {
               onPressed: () => checkInternetConnectivity(),
             )
           : (user == null)
-              ? OnboardingScreen()
-              : BottomNavBar(),
+              ? const OnboardingScreen()
+              : const BottomNavBar(),
     );
   }
 }

@@ -10,9 +10,10 @@ import 'package:help4you/screens/reviews_screen.dart/components/review_tile.dart
 class ReviewsBody extends StatelessWidget {
   final String professionalUID;
 
-  ReviewsBody({
+  const ReviewsBody({
+    Key key,
     @required this.professionalUID,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +22,10 @@ class ReviewsBody extends StatelessWidget {
       builder: (context, snapshot) {
         List<Reviews> reviews = snapshot.data;
         if (snapshot.hasData) {
-          if (reviews.length == 0) {
+          if (reviews.isEmpty) {
             return Center(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: SizedBox(
                   width: double.infinity,
                   child: SvgPicture.asset(
@@ -36,7 +37,7 @@ class ReviewsBody extends StatelessWidget {
           } else {
             return ListView.builder(
               itemCount: reviews.length,
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return ReviewTile(
                   reviewId: reviews[index].reviewId,
@@ -50,7 +51,7 @@ class ReviewsBody extends StatelessWidget {
             );
           }
         } else {
-          return Container(width: 0.0, height: 0.0);
+          return Container();
         }
       },
     );

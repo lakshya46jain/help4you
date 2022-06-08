@@ -15,6 +15,8 @@ import 'package:help4you/constants/custom_text_field.dart';
 import 'package:help4you/screens/onboarding_screen/components/password_reset_screen.dart';
 
 class EmailAddressAuthScreen extends StatefulWidget {
+  const EmailAddressAuthScreen({Key key}) : super(key: key);
+
   @override
   State<EmailAddressAuthScreen> createState() => _EmailAddressAuthScreenState();
 }
@@ -52,7 +54,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             CupertinoIcons.chevron_left,
             size: 25.0,
             color: Color(0xFFFEA700),
@@ -64,7 +66,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
         ),
         actions: [
           GestureDetector(
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.only(right: 15.0),
               child: Center(
                 child: Text(
@@ -79,14 +81,14 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
             onTap: () {
               Widget dialogButton(String title, Color color, Function onTap) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 15.0,
                     vertical: 7.5,
                   ),
                   child: GestureDetector(
                     onTap: onTap,
                     child: Container(
-                      padding: EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(15.0),
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: color,
@@ -95,7 +97,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                       child: Center(
                         child: Text(
                           title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18.0,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -115,20 +117,20 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                   children: [
                     dialogButton(
                       "Forgot Password",
-                      Color(0xFFFEA700),
+                      const Color(0xFFFEA700),
                       () {
                         Navigator.pop(context);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PasswordResetScreen(),
+                            builder: (context) => const PasswordResetScreen(),
                           ),
                         );
                       },
                     ),
                     dialogButton(
                       "Contact Support",
-                      Color(0xFF1C3857),
+                      const Color(0xFF1C3857),
                       () async {
                         if (Platform.isIOS) {
                           final iosDeviceInfo =
@@ -156,7 +158,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                         );
                       },
                     ),
-                    SizedBox(height: 7.5),
+                    const SizedBox(height: 7.5),
                   ],
                 ),
               ).show();
@@ -165,7 +167,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -175,7 +177,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Sign in with your email address",
                     style: TextStyle(
                       height: 1.3,
@@ -185,9 +187,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
+                  const SizedBox(height: 30.0),
                   CustomFields(
                     type: "Normal",
                     keyboardType: TextInputType.emailAddress,
@@ -207,9 +207,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                       });
                     },
                   ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
+                  const SizedBox(height: 10.0),
                   CustomFields(
                     type: "Normal",
                     maxLines: 1,

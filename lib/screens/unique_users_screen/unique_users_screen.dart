@@ -14,9 +14,10 @@ import 'package:help4you/screens/unique_users_screen/components/unique_users_til
 class UniqueUsersScreen extends StatefulWidget {
   final Set<String> uniqueUsers;
 
-  UniqueUsersScreen({
+  const UniqueUsersScreen({
+    Key key,
     this.uniqueUsers,
-  });
+  }) : super(key: key);
 
   @override
   State<UniqueUsersScreen> createState() => _UniqueUsersScreenState();
@@ -34,8 +35,8 @@ class _UniqueUsersScreenState extends State<UniqueUsersScreen> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading: SignatureButton(type: "Back Button"),
-        title: Text(
+        leading: const SignatureButton(type: "Back Button"),
+        title: const Text(
           "Requested Professionals",
           style: TextStyle(
             fontSize: 25.0,
@@ -50,7 +51,7 @@ class _UniqueUsersScreenState extends State<UniqueUsersScreen> {
         children: [
           ListView.builder(
             shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             itemCount: widget.uniqueUsers.length,
             itemBuilder: (context, index) {
               return UniqueUsersTile(
@@ -67,7 +68,7 @@ class _UniqueUsersScreenState extends State<UniqueUsersScreen> {
           ),
           (selected != null)
               ? Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: 20.0,
                     right: 20.0,
                     bottom: 50.0,
@@ -80,7 +81,7 @@ class _UniqueUsersScreenState extends State<UniqueUsersScreen> {
                         return SignatureButton(
                           type: "Yellow",
                           onTap: () {
-                            if (addressData.length == 0) {
+                            if (addressData.isEmpty) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -108,10 +109,7 @@ class _UniqueUsersScreenState extends State<UniqueUsersScreen> {
                     ),
                   ),
                 )
-              : Container(
-                  width: 0.0,
-                  height: 0.0,
-                ),
+              : Container(),
         ],
       ),
     );

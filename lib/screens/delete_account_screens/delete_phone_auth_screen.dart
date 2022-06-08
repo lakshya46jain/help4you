@@ -10,12 +10,14 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
 class DeleteAccPhoneAuthScreen extends StatefulWidget {
+  const DeleteAccPhoneAuthScreen({Key key}) : super(key: key);
+
   @override
-  _DeleteAccPhoneAuthScreenState createState() =>
-      _DeleteAccPhoneAuthScreenState();
+  DeleteAccPhoneAuthScreenState createState() =>
+      DeleteAccPhoneAuthScreenState();
 }
 
-class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
+class DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
   // Text Field Variables
   String countryCode = "+1";
   String phoneIsoCode = "US";
@@ -29,7 +31,7 @@ class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             CupertinoIcons.chevron_left,
             size: 25.0,
             color: Color(0xFFFEA700),
@@ -41,7 +43,7 @@ class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +51,7 @@ class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Enter your mobile number",
                   style: TextStyle(
                     height: 1.3,
@@ -59,9 +61,7 @@ class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
-                  height: 30.0,
-                ),
+                const SizedBox(height: 30.0),
                 CustomFields(
                   type: "Phone",
                   autoFocus: true,
@@ -79,10 +79,8 @@ class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
                     });
                   },
                 ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                Text(
+                const SizedBox(height: 30.0),
+                const Text(
                   "By continuing, you agree to our",
                   style: TextStyle(
                     height: 1.0,
@@ -97,14 +95,14 @@ class _DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return PolicyDialog(
+                        return const PolicyDialog(
                           mdFileName: 'terms_and_conditions.md',
                         );
                       },
                       barrierDismissible: false,
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "Terms & Conditions",
                     style: TextStyle(
                       height: 1.3,
