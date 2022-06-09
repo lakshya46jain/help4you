@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:image_picker/image_picker.dart';
@@ -197,7 +198,21 @@ class MessageScreenState extends State<MessageScreen> {
                       itemCount: messages.length,
                       itemBuilder: (context, index) {
                         return MessageBubble(
-                          chatRoomId: "${user.uid}/_${widget.uid}",
+                          groupByDate: (index == messages.length - 1)
+                              ? true
+                              : (DateFormat.yMd().format(messages[index]
+                                          .timeStamp
+                                          .toDate()
+                                          .toLocal()) !=
+                                      DateFormat.yMd().format(
+                                          messages[index + 1]
+                                              .timeStamp
+                                              .toDate()
+                                              .toLocal()))
+                                  ? true
+                                  : false,
+                          timeStamp: messages[index].timeStamp,
+                          chatRoomId: "${user.uid}_${widget.uid}",
                           messageId: messages[index].messageId,
                           type: messages[index].type,
                           profilePicture: widget.profilePicture,
@@ -210,7 +225,7 @@ class MessageScreenState extends State<MessageScreen> {
                             setState(() {
                               message = messages[index].message;
                               messageId = messages[index].messageId;
-                              chatRoomId = "${user.uid}/_${widget.uid}";
+                              chatRoomId = "${user.uid}_${widget.uid}";
                               messageType = messages[index].type;
                               isSentByMe = (messages[index].sender == user.uid)
                                   ? true

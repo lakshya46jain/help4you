@@ -151,10 +151,10 @@ class DatabaseService {
   // Create Chat Room
   Future createChatRoom() async {
     DocumentSnapshot ds =
-        await chatRoomCollection.doc("$uid/_$professionalUID").get();
+        await chatRoomCollection.doc("${uid}_$professionalUID").get();
     if (!ds.exists) {
-      await chatRoomCollection.doc("$uid/_$professionalUID").set({
-        "Chat Room ID": "$uid/_$professionalUID",
+      await chatRoomCollection.doc("${uid}_$professionalUID").set({
+        "Chat Room ID": "${uid}_$professionalUID",
         "Connection Date": DateTime.now().toUtc(),
         "Customer UID": uid,
         "Professional UID": professionalUID,
@@ -168,7 +168,7 @@ class DatabaseService {
     String message,
   ) async {
     await chatRoomCollection
-        .doc("$uid/_$professionalUID")
+        .doc("${uid}_$professionalUID")
         .collection("Messages")
         .doc()
         .set({
@@ -513,7 +513,7 @@ class DatabaseService {
   // Get Messages Documents
   Stream<List<Messages>> get messagesData {
     return chatRoomCollection
-        .doc("$uid/_$professionalUID")
+        .doc("${uid}_$professionalUID")
         .collection("Messages")
         .orderBy("Time Stamp", descending: true)
         .snapshots()
@@ -523,7 +523,7 @@ class DatabaseService {
   // Get Last Message Document
   Stream<List<Messages>> get lastMessageData {
     return chatRoomCollection
-        .doc("$uid/_$professionalUID")
+        .doc("${uid}_$professionalUID")
         .collection("Messages")
         .orderBy("Time Stamp", descending: true)
         .limit(1)

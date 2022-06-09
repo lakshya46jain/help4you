@@ -150,7 +150,9 @@ class MessageTile extends StatelessWidget {
                                     )
                                     .snapshots(),
                                 builder: (context, snapshot) {
-                                  int unreadLength = snapshot.data.docs.length;
+                                  int unreadLength = (snapshot.hasData)
+                                      ? snapshot.data.docs.length
+                                      : 0;
                                   return Row(
                                     children: [
                                       Expanded(
