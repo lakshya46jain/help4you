@@ -219,9 +219,8 @@ class MessageTile extends StatelessWidget {
                                                   child: Text(
                                                     (unreadLength > 99)
                                                         ? "99+"
-                                                        : snapshot.data.docs
-                                                                .length >
-                                                            99.toString(),
+                                                        : unreadLength
+                                                            .toString(),
                                                     style: const TextStyle(
                                                       fontSize: 14.0,
                                                       color: Colors.white,
