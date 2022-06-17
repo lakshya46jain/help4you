@@ -8,10 +8,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 // File Imports
 import 'package:help4you/screens/message_screen/messages_screen.dart';
+import 'package:help4you/screens/professionals_screen/timeslots_screen.dart';
 import 'package:help4you/screens/professionals_screen/components/service_tile.dart';
 import 'package:help4you/screens/professionals_screen/components/custom_media_button.dart';
 
-class DetailsScreenBody extends StatelessWidget {
+class DetailsScreenBody extends StatefulWidget {
   final String profilePicture;
   final String fullName;
   final String occupation;
@@ -27,6 +28,11 @@ class DetailsScreenBody extends StatelessWidget {
     @required this.professionalUID,
   }) : super(key: key);
 
+  @override
+  State<DetailsScreenBody> createState() => _DetailsScreenBodyState();
+}
+
+class _DetailsScreenBodyState extends State<DetailsScreenBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -49,7 +55,7 @@ class DetailsScreenBody extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: CachedNetworkImage(
-                      imageUrl: profilePicture,
+                      imageUrl: widget.profilePicture,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -60,7 +66,7 @@ class DetailsScreenBody extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      fullName,
+                      widget.fullName,
                       style: const TextStyle(
                         color: Color(0xFF1C3857),
                         fontWeight: FontWeight.w800,
@@ -69,7 +75,7 @@ class DetailsScreenBody extends StatelessWidget {
                     ),
                     const SizedBox(height: 5.0),
                     Text(
-                      occupation,
+                      widget.occupation,
                       style: const TextStyle(
                         color: Color(0xFF95989A),
                         fontSize: 18.0,
@@ -91,37 +97,38 @@ class DetailsScreenBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomMediaButton(
-                  onTap: () {
-                    FlutterPhoneDirectCaller.callNumber(
-                      phoneNumber,
-                    );
-                  },
+                  onTap: () =>
+                      FlutterPhoneDirectCaller.callNumber(widget.phoneNumber),
                   icon: CupertinoIcons.phone_solid,
                   color: const Color(0xFF1C3857),
                   title: "Contact",
                 ),
                 CustomMediaButton(
-                  onTap: () {},
-                  icon: CupertinoIcons.book_fill,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TimeSlotsScreen(
+                        professionalUID: widget.professionalUID,
+                      ),
+                    ),
+                  ),
+                  icon: CupertinoIcons.time_solid,
                   color: const Color(0xFF1C3857),
-                  title: "Rate Card",
+                  title: "Time Slots",
                 ),
                 CustomMediaButton(
-                  onTap: () {
-                    // Navigate To Message Screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MessageScreen(
-                          uid: professionalUID,
-                          fullName: fullName,
-                          occupation: occupation,
-                          phoneNumber: phoneNumber,
-                          profilePicture: profilePicture,
-                        ),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MessageScreen(
+                        uid: widget.professionalUID,
+                        fullName: widget.fullName,
+                        occupation: widget.occupation,
+                        phoneNumber: widget.phoneNumber,
+                        profilePicture: widget.profilePicture,
                       ),
-                    );
-                  },
+                    ),
+                  ),
                   icon: CupertinoIcons.chat_bubble_fill,
                   color: const Color(0xFF1C3857),
                   title: "Message",
@@ -132,7 +139,7 @@ class DetailsScreenBody extends StatelessWidget {
           StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection("H4Y Services Database")
-                .where("Professional UID", isEqualTo: professionalUID)
+                .where("Professional UID", isEqualTo: widget.professionalUID)
                 .where("Visibility", isEqualTo: true)
                 .snapshots(),
             builder: (context, snapshot) {
@@ -157,7 +164,7 @@ class DetailsScreenBody extends StatelessWidget {
                       DocumentSnapshot documentSnapshot =
                           snapshot.data.docs[index];
                       return ServiceTiles(
-                        professionalId: professionalUID,
+                        professionalId: widget.professionalUID,
                         serviceId: documentSnapshot.id,
                         serviceTitle: documentSnapshot["Service Title"],
                         serviceDescription:

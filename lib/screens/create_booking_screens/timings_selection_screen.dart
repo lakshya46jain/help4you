@@ -5,7 +5,6 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 import 'package:help4you/constants/signature_button.dart';
-import 'package:help4you/screens/create_booking_screens/components/time_picker.dart';
 import 'package:help4you/screens/create_booking_screens/components/timings_footer.dart';
 
 class TimingsSelectionScreen extends StatefulWidget {
@@ -26,21 +25,114 @@ class TimingsSelectionScreen extends StatefulWidget {
 
 class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
   // Calendar Variables
-  DateTime focusedDay = DateTime.now();
+  DateTime focusedDay = DateTime.now().toLocal();
 
   DateTime firstDay = DateTime.utc(
     DateTime.now().year,
     DateTime.now().month,
     DateTime.now().day,
-  );
+  ).toLocal();
 
   DateTime lastDay = DateTime.utc(
-    DateTime.now().year + 1,
+    DateTime.now().year,
     DateTime.now().month,
-    DateTime.now().day,
-  );
+    DateTime.now().day + 7,
+  ).toLocal();
 
-  DateTime time = DateTime.now();
+  static const timeSlot = {
+    '08:00 AM',
+    '08:30 AM',
+    '09:00 AM',
+    '09:30 AM',
+    '10:00 AM',
+    '10:30 AM',
+    '11:00 AM',
+    '11:30 AM',
+    '12:00 PM',
+    '12:30 PM',
+    '01:00 PM',
+    '01:30 PM',
+    '02:00 PM',
+    '02:30 PM',
+    '03:00 PM',
+    '03:30 PM',
+    '04:00 PM',
+    '04:30 PM',
+    '05:00 PM',
+    '05:30 PM',
+    '06:00 PM',
+    '06:30 PM',
+    '07:00 PM',
+  };
+
+  int selected;
+  var preferredTimings = [];
+  var unavailableIndex = [];
+
+  Future checkTimeSlotAvailability(int index) async {
+    final bookingsDataAccepted = await FirebaseFirestore.instance
+        .collection("H4Y Bookings Database")
+        .where("Professional UID", isEqualTo: widget.professionalUID)
+        .where("Booking Status", isEqualTo: "Accepted")
+        .get();
+
+    for (var element in bookingsDataAccepted.docs) {
+      if (element.exists) {
+        preferredTimings
+            .add(element.data()["Preferred Timings"].toDate().toLocal());
+      }
+    }
+
+    final bookingsDataPending = await FirebaseFirestore.instance
+        .collection("H4Y Bookings Database")
+        .where("Professional UID", isEqualTo: widget.professionalUID)
+        .where("Booking Status", isEqualTo: "Booking Pending")
+        .get();
+
+    for (var element in bookingsDataPending.docs) {
+      if (element.exists) {
+        preferredTimings
+            .add(element.data()["Preferred Timings"].toDate().toLocal());
+      }
+    }
+
+    if (preferredTimings.contains(
+      DateTime(
+        focusedDay.year,
+        focusedDay.month,
+        focusedDay.day,
+        (timeSlot.elementAt(index).contains("PM"))
+            ? int.parse(
+                    timeSlot.elementAt(index).split(':')[0].substring(0, 2)) +
+                12
+            : int.parse(
+                timeSlot.elementAt(index).split(':')[0].substring(0, 2)),
+        int.parse(timeSlot.elementAt(index).split(':')[1].substring(0, 2)),
+      ),
+    )) {
+      unavailableIndex.add(index);
+      setState(() {});
+    } else if (DateTime.now().isAfter(
+          DateTime(
+            focusedDay.year,
+            focusedDay.month,
+            focusedDay.day,
+            (timeSlot.elementAt(index).contains("PM") &&
+                    !timeSlot.elementAt(index).contains("12"))
+                ? int.parse(timeSlot
+                        .elementAt(index)
+                        .split(':')[0]
+                        .substring(0, 2)) +
+                    12
+                : int.parse(
+                    timeSlot.elementAt(index).split(':')[0].substring(0, 2)),
+            int.parse(timeSlot.elementAt(index).split(':')[1].substring(0, 2)),
+          ),
+        ) ==
+        true) {
+      unavailableIndex.add(index);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +167,7 @@ class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
                   right: 20.0,
                 ),
                 child: Text(
-                  "Pick Date",
+                  "Select date of service",
                   style: TextStyle(
                     fontSize: 23.0,
                     color: Color(0xFF1C3857),
@@ -89,10 +181,9 @@ class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
                   firstDay: firstDay,
                   lastDay: lastDay,
                   focusedDay: focusedDay,
+                  startingDayOfWeek: StartingDayOfWeek.monday,
                   calendarFormat: CalendarFormat.week,
-                  availableCalendarFormats: const {
-                    CalendarFormat.week: "Week",
-                  },
+                  availableCalendarFormats: const {CalendarFormat.week: "Week"},
                   daysOfWeekStyle: const DaysOfWeekStyle(
                     weekdayStyle: TextStyle(
                       fontSize: 16.0,
@@ -108,6 +199,7 @@ class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
                   onDaySelected: (DateTime selectDay, DateTime focusDay) {
                     setState(() {
                       focusedDay = selectDay;
+                      unavailableIndex = [];
                     });
                   },
                   selectedDayPredicate: (DateTime date) {
@@ -132,7 +224,7 @@ class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
                       fontWeight: FontWeight.w600,
                     ),
                     outsideTextStyle: TextStyle(
-                      color: const Color(0xFF1C3857).withOpacity(0.65),
+                      color: const Color(0xFF1C3857).withOpacity(0.5),
                       fontWeight: FontWeight.w600,
                     ),
                     weekendTextStyle: const TextStyle(
@@ -144,7 +236,7 @@ class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
                       fontWeight: FontWeight.w600,
                     ),
                     disabledTextStyle: TextStyle(
-                      color: const Color(0xFF1C3857).withOpacity(0.65),
+                      color: const Color(0xFF1C3857).withOpacity(0.5),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -194,7 +286,7 @@ class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
                   right: 20.0,
                 ),
                 child: Text(
-                  "Pick Time",
+                  "Time to start the service",
                   style: TextStyle(
                     fontSize: 23.0,
                     color: Color(0xFF1C3857),
@@ -202,20 +294,93 @@ class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
                   ),
                 ),
               ),
-              TimePicker(
-                onTimeChange: (DateTime timeSpinnerVal) {
-                  setState(() {
-                    time = timeSpinnerVal;
-                  });
-                },
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SizedBox(
+                  height: (selected == null)
+                      ? MediaQuery.of(context).size.height * 0.5
+                      : MediaQuery.of(context).size.height * 0.35,
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: timeSlot.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: 2.7,
+                    ),
+                    itemBuilder: (context, index) {
+                      checkTimeSlotAvailability(index);
+                      return Opacity(
+                        opacity: (unavailableIndex.contains(index)) ? 0.3 : 1.0,
+                        child: GestureDetector(
+                          onTap: () {
+                            if (!unavailableIndex.contains(index)) {
+                              setState(() {
+                                selected = index;
+                              });
+                            }
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                              top: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              color: (selected == index)
+                                  ? const Color(0xFF1C3857)
+                                  : const Color(0xFFEEEEEE),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Center(
+                              child: Container(
+                                margin: const EdgeInsets.only(left: 2),
+                                child: Text(
+                                  timeSlot.elementAt(index),
+                                  style: TextStyle(
+                                    color: (selected == index)
+                                        ? Colors.white
+                                        : const Color.fromARGB(255, 7, 4, 4),
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
             ],
           ),
-          TimingsFooter(
-            time: time,
-            focusedDay: focusedDay,
-            widget: widget,
-          ),
+          (selected != null)
+              ? TimingsFooter(
+                  mergedTime: DateTime(
+                    focusedDay.year,
+                    focusedDay.month,
+                    focusedDay.day,
+                    (timeSlot.elementAt(selected).contains("PM") &&
+                            !timeSlot.elementAt(selected).contains("12"))
+                        ? int.parse(timeSlot
+                                .elementAt(selected)
+                                .split(':')[0]
+                                .substring(0, 2)) +
+                            12
+                        : int.parse(timeSlot
+                            .elementAt(selected)
+                            .split(':')[0]
+                            .substring(0, 2)),
+                    int.parse(timeSlot
+                        .elementAt(selected)
+                        .split(':')[1]
+                        .substring(0, 2)),
+                  ).toUtc(),
+                  slotBooked: selected,
+                  widget: widget,
+                )
+              : Container(),
         ],
       ),
     );

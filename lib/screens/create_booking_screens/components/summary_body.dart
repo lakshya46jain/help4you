@@ -75,7 +75,7 @@ class SummaryBody extends StatelessWidget {
                       children: [
                         TextSpan(
                           text:
-                              " ${DateFormat.jm().format(bookingTimings)} on ${DateFormat("d MMMM yyyy").format(bookingTimings)}",
+                              " ${DateFormat.jm().format(bookingTimings.toLocal())} on ${DateFormat("d MMMM yyyy").format(bookingTimings.toLocal())}",
                           style: const TextStyle(
                             color: Color(0xFF95989A),
                             fontWeight: FontWeight.normal,

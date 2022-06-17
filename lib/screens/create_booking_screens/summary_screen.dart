@@ -14,6 +14,7 @@ class SummaryScreen extends StatelessWidget {
   final String completeAddress;
   final GeoPoint geoPointLocation;
   final DateTime bookingTimings;
+  final int slotBooked;
 
   const SummaryScreen({
     Key key,
@@ -21,6 +22,7 @@ class SummaryScreen extends StatelessWidget {
     @required this.completeAddress,
     @required this.geoPointLocation,
     @required this.bookingTimings,
+    @required this.slotBooked,
   }) : super(key: key);
 
   @override
@@ -54,6 +56,7 @@ class SummaryScreen extends StatelessWidget {
         completeAddress: completeAddress,
         geoPointLocation: geoPointLocation,
         bookingTimings: bookingTimings,
+        slotBooked: slotBooked,
       ),
     );
   }

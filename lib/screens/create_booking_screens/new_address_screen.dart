@@ -6,11 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:help4you/constants/signature_button.dart';
 
 class NewAddressScreen extends StatefulWidget {
@@ -155,7 +155,7 @@ class NewAddressScreenState extends State<NewAddressScreen> {
       ),
       extendBodyBehindAppBar: true,
       body: SlidingUpPanel(
-        maxHeight: 425.0,
+        maxHeight: MediaQuery.of(context).size.height * 0.5,
         parallaxOffset: 0.75,
         parallaxEnabled: true,
         color: Colors.transparent,
@@ -176,114 +176,116 @@ class NewAddressScreenState extends State<NewAddressScreen> {
                 topRight: Radius.circular(25.0),
               ),
             ),
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  Container(
-                    width: 75.0,
-                    height: 4.0,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.55),
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                  ),
-                  const SizedBox(height: 25.0),
-                  const Text(
-                    "Add Address",
-                    style: TextStyle(
-                      height: 1.0,
-                      fontSize: 30.0,
-                      color: Colors.white,
-                      fontFamily: "BalooPaaji",
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 20.0),
-                  TextFormField(
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                    decoration: InputDecoration(
-                      hintText: "Add a Name for the Address*",
-                      hintStyle: TextStyle(
+            child: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    Container(
+                      width: 75.0,
+                      height: 4.0,
+                      decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.55),
+                        borderRadius: BorderRadius.circular(25.0),
                       ),
-                      focusedBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
-                        ),
+                    ),
+                    const SizedBox(height: 25.0),
+                    const Text(
+                      "Add Address",
+                      style: TextStyle(
+                        height: 1.0,
+                        fontSize: 30.0,
+                        color: Colors.white,
+                        fontFamily: "BalooPaaji",
+                        fontWeight: FontWeight.w600,
                       ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
+                    ),
+                    const SizedBox(height: 20.0),
+                    TextFormField(
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: "Add a Name for the Address*",
+                        hintStyle: TextStyle(
                           color: Colors.white.withOpacity(0.55),
                         ),
-                      ),
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        addressName = value;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 35.0),
-                  TextFormField(
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                    decoration: InputDecoration(
-                      hintText: "Complete Address*",
-                      hintStyle: TextStyle(
-                        color: Colors.white.withOpacity(0.55),
-                      ),
-                      focusedBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white,
+                        focusedBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white.withOpacity(0.55),
+                          ),
                         ),
                       ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
+                      onChanged: (value) {
+                        setState(() {
+                          addressName = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 35.0),
+                    TextFormField(
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: "Complete Address*",
+                        hintStyle: TextStyle(
                           color: Colors.white.withOpacity(0.55),
                         ),
+                        focusedBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white.withOpacity(0.55),
+                          ),
+                        ),
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          completeAddress = value;
+                        });
+                      },
                     ),
-                    onChanged: (value) {
-                      setState(() {
-                        completeAddress = value;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 35.0),
-                  Row(
-                    children: [
-                      customRadioButton(0, "Home"),
-                      customRadioButton(1, "Office"),
-                      customRadioButton(2, "Other"),
-                    ],
-                  ),
-                  const SizedBox(height: 30.0),
-                  SignatureButton(
-                    onTap: () async {
-                      if (formKey.currentState.validate()) {
-                        FocusScope.of(context).unfocus();
-                        GeoPoint geoPoint = GeoPoint(latitude, longitude);
-                        await DatabaseService(uid: user.uid)
-                            .addAdress(
-                              geoPoint,
-                              addressName,
-                              completeAddress,
-                              selected,
-                            )
-                            .then(
-                              (value) => Navigator.pop(context),
-                            );
-                      }
-                    },
-                    text: "Save and Proceed",
-                    withIcon: false,
-                    type: "Yellow",
-                  ),
-                ],
+                    const SizedBox(height: 35.0),
+                    Row(
+                      children: [
+                        customRadioButton(0, "Home"),
+                        customRadioButton(1, "Office"),
+                        customRadioButton(2, "Other"),
+                      ],
+                    ),
+                    const SizedBox(height: 30.0),
+                    SignatureButton(
+                      onTap: () async {
+                        if (formKey.currentState.validate()) {
+                          FocusScope.of(context).unfocus();
+                          GeoPoint geoPoint = GeoPoint(latitude, longitude);
+                          await DatabaseService(uid: user.uid)
+                              .addAdress(
+                                geoPoint,
+                                addressName,
+                                completeAddress,
+                                selected,
+                              )
+                              .then(
+                                (value) => Navigator.pop(context),
+                              );
+                        }
+                      },
+                      text: "Save and Proceed",
+                      withIcon: false,
+                      type: "Yellow",
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

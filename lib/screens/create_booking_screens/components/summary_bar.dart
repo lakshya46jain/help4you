@@ -18,6 +18,7 @@ class SummaryBar extends StatelessWidget {
   final String completeAddress;
   final GeoPoint geoPointLocation;
   final DateTime bookingTimings;
+  final int slotBooked;
 
   const SummaryBar({
     Key key,
@@ -25,6 +26,7 @@ class SummaryBar extends StatelessWidget {
     @required this.completeAddress,
     @required this.geoPointLocation,
     @required this.bookingTimings,
+    @required this.slotBooked,
   }) : super(key: key);
 
   @override
@@ -113,6 +115,7 @@ class SummaryBar extends StatelessWidget {
                     completeAddress,
                     geoPointLocation,
                     bookingTimings,
+                    slotBooked,
                     "Booking Pending",
                     bookedItems,
                     total,
