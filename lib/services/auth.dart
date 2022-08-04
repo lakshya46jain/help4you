@@ -113,8 +113,6 @@ class AuthService {
                               ),
                             );
                       } else {
-                        await DatabaseService(uid: user.uid)
-                            .addOneSignalTokenID();
                         await DatabaseService(uid: user.uid).updateUserData(
                           fullName,
                           countryCode,
@@ -137,6 +135,8 @@ class AuthService {
                                 (route) => false,
                               ),
                             );
+                        await DatabaseService(uid: user.uid)
+                            .addOneSignalTokenID();
                       }
                     },
                   ).catchError(

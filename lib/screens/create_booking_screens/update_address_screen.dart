@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
@@ -85,6 +86,21 @@ class UpdateAddressScreenState extends State<UpdateAddressScreen> {
   // Variables
   String addressName;
   String completeAddress;
+
+  void getPermission() async {
+    var locationStatus = await Permission.location.status;
+    if (locationStatus.isDenied) {
+      Permission.location.request();
+    } else if (locationStatus.isPermanentlyDenied) {
+      openAppSettings();
+    }
+  }
+
+  @override
+  void initState() {
+    getPermission();
+    super.initState();
+  }
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
