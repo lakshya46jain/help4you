@@ -124,6 +124,8 @@ class SummaryBar extends StatelessWidget {
                     professionalUID,
                     "You have a new booking!",
                     "Please check the details and update the user as soon as possible.",
+                    "Booking",
+                    bookingId,
                   );
                 },
                 child: Container(

@@ -171,6 +171,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                               widget.uid,
                               "Congratulations",
                               "Your payment was successfully completed.",
+                              "Booking",
+                              widget.bookingId,
                             );
                           },
                           text: "Continue",

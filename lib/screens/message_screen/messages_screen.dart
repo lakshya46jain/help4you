@@ -96,6 +96,8 @@ class MessageScreenState extends State<MessageScreen> {
       widget.uid,
       fullName,
       "Sent a photo",
+      "Message",
+      "${user.uid}_${widget.uid}",
     );
   }
 
@@ -290,6 +292,8 @@ class MessageScreenState extends State<MessageScreen> {
                         widget.uid,
                         "",
                         "This message is no longer available because it was unsent by the sender.",
+                        "Message",
+                        "",
                       );
                     },
                     copySaveOnTap: () async {
@@ -326,6 +330,8 @@ class MessageScreenState extends State<MessageScreen> {
                         widget.uid,
                         fullName,
                         messageController.text.trim(),
+                        "Message",
+                        "${user.uid}_${widget.uid}",
                       );
                       messageController.clear();
                       setState(() {

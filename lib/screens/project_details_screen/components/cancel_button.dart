@@ -43,6 +43,8 @@ class CancelButton extends StatelessWidget {
               uid,
               "Booking Status Update",
               "There's an update in the booking status by the customer. Have a look at it!",
+              "Booking",
+              bookingId,
             );
           },
         ).show();

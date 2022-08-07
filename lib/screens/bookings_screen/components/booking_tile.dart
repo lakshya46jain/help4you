@@ -211,8 +211,6 @@ class BookingTile extends StatelessWidget {
                             address: address,
                             bookingId: bookingId,
                             totalPrice: totalPrice,
-                            occupation: occupation,
-                            thumbnailURL: profilePicture,
                             bookingStatus: bookingStatus,
                             preferredTimings: preferredTimings,
                             bookedItemsList: bookedItemsList,

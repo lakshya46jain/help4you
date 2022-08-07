@@ -17,8 +17,6 @@ class ProjectDetailsScreen extends StatelessWidget {
   final String address;
   final String bookingId;
   final double totalPrice;
-  final String occupation;
-  final String thumbnailURL;
   final String bookingStatus;
   final Timestamp preferredTimings;
   final String paymentMethod;
@@ -31,8 +29,6 @@ class ProjectDetailsScreen extends StatelessWidget {
     @required this.address,
     @required this.bookingId,
     @required this.totalPrice,
-    @required this.occupation,
-    @required this.thumbnailURL,
     @required this.bookingStatus,
     @required this.preferredTimings,
     @required this.paymentMethod,
