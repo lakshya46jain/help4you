@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/models/user_model.dart';
@@ -45,12 +46,11 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
           elevation: 0.0,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
-          title: const Text(
+          title: Text(
             "Link Email Address",
-            style: TextStyle(
+            style: GoogleFonts.balooPaaji2(
               fontSize: 25.0,
-              color: Color(0xFF1C3857),
-              fontFamily: "BalooPaaji",
+              color: const Color(0xFF1C3857),
               fontWeight: FontWeight.w600,
             ),
           ),

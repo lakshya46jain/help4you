@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 // File Imports
+import 'package:google_fonts/google_fonts.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/address_model.dart';
@@ -36,12 +37,11 @@ class _UniqueUsersScreenState extends State<UniqueUsersScreen> {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         leading: const SignatureButton(type: "Back Button"),
-        title: const Text(
+        title: Text(
           "Requested Professionals",
-          style: TextStyle(
+          style: GoogleFonts.balooPaaji2(
             fontSize: 25.0,
-            color: Color(0xFF1C3857),
-            fontFamily: "BalooPaaji",
+            color: const Color(0xFF1C3857),
             fontWeight: FontWeight.w600,
           ),
         ),

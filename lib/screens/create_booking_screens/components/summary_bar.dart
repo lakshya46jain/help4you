@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:page_transition/page_transition.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:random_string_generator/random_string_generator.dart';
 // File Imports
@@ -68,10 +69,9 @@ class SummaryBar extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(
                   "$total",
-                  style: const TextStyle(
+                  style: GoogleFonts.balooPaaji2(
                     fontSize: 28.0,
-                    color: Color(0xFF1C3857),
-                    fontFamily: "BalooPaaji",
+                    color: const Color(0xFF1C3857),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -140,17 +140,16 @@ class SummaryBar extends StatelessWidget {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         "Checkout",
-                        style: TextStyle(
+                        style: GoogleFonts.balooPaaji2(
                           fontSize: 28.0,
                           color: Colors.white,
-                          fontFamily: "BalooPaaji",
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Icon(
+                      const Icon(
                         CupertinoIcons.chevron_right,
                         color: Colors.white,
                         size: 28.0,

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -206,13 +207,12 @@ class NewAddressScreenState extends State<NewAddressScreen> {
                       ),
                     ),
                     const SizedBox(height: 25.0),
-                    const Text(
+                    Text(
                       "Add Address",
-                      style: TextStyle(
+                      style: GoogleFonts.balooPaaji2(
                         height: 1.0,
                         fontSize: 30.0,
                         color: Colors.white,
-                        fontFamily: "BalooPaaji",
                         fontWeight: FontWeight.w600,
                       ),
                     ),

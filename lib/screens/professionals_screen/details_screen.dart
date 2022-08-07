@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 // File Imports
 import 'package:help4you/services/database.dart';
 import 'package:help4you/models/reviews_model.dart';
@@ -99,11 +100,10 @@ class DetailsScreen extends StatelessWidget {
                           }
                           return Text(
                             rating.toStringAsFixed(1),
-                            style: const TextStyle(
+                            style: GoogleFonts.balooPaaji2(
                               height: 1.75,
-                              color: Color(0xFF1C3857),
+                              color: const Color(0xFF1C3857),
                               fontSize: 25.0,
-                              fontFamily: "BalooPaaji",
                               fontWeight: FontWeight.w900,
                             ),
                           );

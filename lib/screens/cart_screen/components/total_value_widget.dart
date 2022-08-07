@@ -1,6 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
@@ -35,10 +36,9 @@ class TotalValueWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 "$total",
-                style: const TextStyle(
+                style: GoogleFonts.balooPaaji2(
                   fontSize: 28.0,
-                  color: Color(0xFF1C3857),
-                  fontFamily: "BalooPaaji",
+                  color: const Color(0xFF1C3857),
                   fontWeight: FontWeight.w600,
                 ),
               ),

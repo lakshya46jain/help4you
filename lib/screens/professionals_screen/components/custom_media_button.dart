@@ -1,6 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 // File Imports
 
 class CustomMediaButton extends StatelessWidget {
@@ -48,11 +49,10 @@ class CustomMediaButton extends StatelessWidget {
               const SizedBox(height: 10.0),
               Text(
                 title,
-                style: const TextStyle(
+                style: GoogleFonts.balooPaaji2(
                   height: 1.0,
                   fontSize: 18.0,
-                  color: Color(0xFF1C3857),
-                  fontFamily: "BalooPaaji",
+                  color: const Color(0xFF1C3857),
                 ),
               ),
             ],

@@ -1,6 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
@@ -48,9 +49,8 @@ class CartButtonStream extends StatelessWidget {
             child: Center(
               child: Text(
                 "$totalItems",
-                style: const TextStyle(
+                style: GoogleFonts.balooPaaji2(
                   fontSize: 20.0,
-                  fontFamily: "BalooPaaji",
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
                 ),

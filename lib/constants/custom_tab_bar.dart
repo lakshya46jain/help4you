@@ -1,6 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 // File Imports
 
 class CustomTabBar extends StatefulWidget {
@@ -138,9 +139,8 @@ class CustomTabBarButton extends StatelessWidget {
         child: Text(
           text ?? "",
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: GoogleFonts.balooPaaji2(
             fontSize: 23.0,
-            fontFamily: "BalooPaaji",
             fontWeight: FontWeight.w600,
             color: selectedPage == pageNumber
                 ? Colors.white

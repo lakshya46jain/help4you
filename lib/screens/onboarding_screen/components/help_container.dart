@@ -1,6 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 // File Imports
 
 class HelpContainer extends StatelessWidget {
@@ -42,22 +43,20 @@ class HelpContainer extends StatelessWidget {
           const SizedBox(height: 15.0),
           Text(
             title,
-            style: const TextStyle(
+            style: GoogleFonts.balooPaaji2(
               height: 1.3,
               fontSize: 19.0,
               color: Colors.black,
-              fontFamily: "BalooPaaji",
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 10.0),
           Text(
             description,
-            style: TextStyle(
+            style: GoogleFonts.balooPaaji2(
               height: 1.3,
               fontSize: 16.0,
               color: Colors.black.withOpacity(0.5),
-              fontFamily: "BalooPaaji",
               fontWeight: FontWeight.normal,
             ),
           ),
@@ -69,11 +68,10 @@ class HelpContainer extends StatelessWidget {
             onTap: onTap,
             child: Text(
               buttonText,
-              style: const TextStyle(
+              style: GoogleFonts.balooPaaji2(
                 height: 1.3,
                 fontSize: 16.0,
                 color: Colors.blueAccent,
-                fontFamily: "BalooPaaji",
                 fontWeight: FontWeight.w500,
               ),
             ),

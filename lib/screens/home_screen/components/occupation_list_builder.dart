@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/screens/categories_screen/categories_screen.dart';
@@ -22,12 +23,11 @@ class OccupationListBuilder extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 "Categories",
-                style: TextStyle(
+                style: GoogleFonts.balooPaaji2(
                   fontSize: 25.0,
-                  color: Color(0xFF1C3857),
-                  fontFamily: "BalooPaaji",
+                  color: const Color(0xFF1C3857),
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -40,12 +40,11 @@ class OccupationListBuilder extends StatelessWidget {
                     ),
                   );
                 },
-                child: const Text(
+                child: Text(
                   "See All",
-                  style: TextStyle(
+                  style: GoogleFonts.balooPaaji2(
                     fontSize: 19.0,
-                    color: Color(0xFFFEA700),
-                    fontFamily: "BalooPaaji",
+                    color: const Color(0xFFFEA700),
                     fontWeight: FontWeight.w600,
                   ),
                 ),

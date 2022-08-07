@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
@@ -87,18 +88,17 @@ class ContinueButtonStream extends StatelessWidget {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Text(
                   "Continue",
-                  style: TextStyle(
+                  style: GoogleFonts.balooPaaji2(
                     fontSize: 28.0,
                     color: Colors.white,
-                    fontFamily: "BalooPaaji",
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(width: 5.0),
-                Icon(
+                const SizedBox(width: 5.0),
+                const Icon(
                   CupertinoIcons.chevron_right,
                   color: Colors.white,
                   size: 28.0,

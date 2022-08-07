@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
@@ -57,22 +58,20 @@ class ProfessionalCard extends StatelessWidget {
                   children: [
                     Text(
                       fullName,
-                      style: const TextStyle(
+                      style: GoogleFonts.balooPaaji2(
                         height: 1.0,
                         fontSize: 20.0,
-                        fontFamily: "BalooPaaji",
                         fontWeight: FontWeight.w700,
-                        color: Color(0xFF1C3857),
+                        color: const Color(0xFF1C3857),
                       ),
                     ),
                     const SizedBox(height: 3),
                     Text(
                       occupation,
-                      style: const TextStyle(
+                      style: GoogleFonts.balooPaaji2(
                         height: 1.0,
                         fontSize: 17.0,
-                        fontFamily: "BalooPaaji",
-                        color: Color(0xFF95989A),
+                        color: const Color(0xFF95989A),
                       ),
                     ),
                     const SizedBox(height: 20.0),
@@ -82,12 +81,11 @@ class ProfessionalCard extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               "Rating",
-                              style: TextStyle(
+                              style: GoogleFonts.balooPaaji2(
                                 height: 1.0,
                                 fontSize: 17.0,
-                                fontFamily: "BalooPaaji",
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -103,9 +101,8 @@ class ProfessionalCard extends StatelessWidget {
                                 const SizedBox(width: 2.5),
                                 Text(
                                   "$rating",
-                                  style: const TextStyle(
+                                  style: GoogleFonts.balooPaaji2(
                                     fontSize: 16.0,
-                                    fontFamily: "BalooPaaji",
                                   ),
                                 ),
                               ],
@@ -116,12 +113,11 @@ class ProfessionalCard extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               "Jobs",
-                              style: TextStyle(
+                              style: GoogleFonts.balooPaaji2(
                                 height: 1.0,
                                 fontSize: 17.0,
-                                fontFamily: "BalooPaaji",
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -141,8 +137,7 @@ class ProfessionalCard extends StatelessWidget {
                                 }
                                 return Text(
                                   "$totalServices" ?? "0",
-                                  style: const TextStyle(
-                                    fontFamily: "BalooPaaji",
+                                  style: GoogleFonts.balooPaaji2(
                                     fontSize: 16.0,
                                   ),
                                 );

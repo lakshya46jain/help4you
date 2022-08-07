@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
@@ -54,24 +55,22 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Forgot Password",
-                    style: TextStyle(
+                    style: GoogleFonts.balooPaaji2(
                       height: 1.3,
                       fontSize: 24.0,
                       color: Colors.black,
-                      fontFamily: "BalooPaaji",
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 5.0),
                   Text(
                     "Provide us the email address of your Help4You account and we will send you an email with instructions to reset your password.",
-                    style: TextStyle(
+                    style: GoogleFonts.balooPaaji2(
                       height: 1.3,
                       fontSize: 14.0,
                       color: Colors.black.withOpacity(0.5),
-                      fontFamily: "BalooPaaji",
                       fontWeight: FontWeight.normal,
                     ),
                   ),

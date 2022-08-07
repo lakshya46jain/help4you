@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 // File Imports
@@ -59,24 +60,22 @@ class _HelpScreenState extends State<HelpScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 "Need help logging in?",
-                style: TextStyle(
+                style: GoogleFonts.balooPaaji2(
                   height: 1.3,
                   fontSize: 24.0,
                   color: Colors.black,
-                  fontFamily: "BalooPaaji",
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 5.0),
               Text(
                 "Try the following",
-                style: TextStyle(
+                style: GoogleFonts.balooPaaji2(
                   height: 1.3,
                   fontSize: 18.0,
                   color: Colors.black.withOpacity(0.5),
-                  fontFamily: "BalooPaaji",
                   fontWeight: FontWeight.normal,
                 ),
               ),

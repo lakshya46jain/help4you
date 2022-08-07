@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -177,13 +178,12 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Sign in with your email address",
-                    style: TextStyle(
+                    style: GoogleFonts.balooPaaji2(
                       height: 1.3,
                       fontSize: 22.0,
                       color: Colors.black,
-                      fontFamily: "BalooPaaji",
                       fontWeight: FontWeight.bold,
                     ),
                   ),

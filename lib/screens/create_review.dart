@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_star_rating/simple_star_rating.dart';
 // File Imports
 import 'package:help4you/models/user_model.dart';
@@ -87,12 +88,11 @@ class CreateReviewScreenState extends State<CreateReviewScreen> {
           elevation: 0.0,
           backgroundColor: Colors.transparent,
           leading: const SignatureButton(type: "Back Button"),
-          title: const Text(
+          title: Text(
             "Create Review",
-            style: TextStyle(
+            style: GoogleFonts.balooPaaji2(
               fontSize: 25.0,
-              color: Color(0xFF1C3857),
-              fontFamily: "BalooPaaji",
+              color: const Color(0xFF1C3857),
               fontWeight: FontWeight.w600,
             ),
           ),

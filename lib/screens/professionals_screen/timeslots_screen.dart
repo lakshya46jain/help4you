@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:help4you/constants/signature_button.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
@@ -134,12 +135,11 @@ class TimeSlotsScreenState extends State<TimeSlotsScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: const Text(
+        title: Text(
           "View Availability",
-          style: TextStyle(
+          style: GoogleFonts.balooPaaji2(
             fontSize: 25.0,
-            color: Color(0xFF1C3857),
-            fontFamily: "BalooPaaji",
+            color: const Color(0xFF1C3857),
             fontWeight: FontWeight.w600,
           ),
         ),

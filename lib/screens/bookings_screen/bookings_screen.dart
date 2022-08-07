@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 // File Imports
 import 'package:help4you/screens/bookings_screen/components/body.dart';
@@ -57,12 +58,11 @@ class BookingsScreenState extends State<BookingsScreen> {
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        title: const Text(
+        title: Text(
           "Booking",
-          style: TextStyle(
+          style: GoogleFonts.balooPaaji2(
             fontSize: 25.0,
-            color: Color(0xFF1C3857),
-            fontFamily: "BalooPaaji",
+            color: const Color(0xFF1C3857),
             fontWeight: FontWeight.w600,
           ),
         ),

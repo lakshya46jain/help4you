@@ -1,6 +1,7 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
 // Dependency Imports
+import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
@@ -142,12 +143,11 @@ class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         leading: const SignatureButton(type: "Back Button"),
-        title: const Text(
+        title: Text(
           "Select Timings",
-          style: TextStyle(
+          style: GoogleFonts.balooPaaji2(
             fontSize: 25.0,
-            color: Color(0xFF1C3857),
-            fontFamily: "BalooPaaji",
+            color: const Color(0xFF1C3857),
             fontWeight: FontWeight.w600,
           ),
         ),
