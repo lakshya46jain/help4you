@@ -167,6 +167,9 @@ class PhoneAuthScreenState extends State<PhoneAuthScreen> {
             SafeArea(
               child: SignatureButton(
                 onTap: () async {
+                  if (countryCode.contains("+")) {
+                    countryCode = countryCode.replaceAll("+", "");
+                  }
                   HapticFeedback.heavyImpact();
                   await AuthService().phoneAuthentication(
                     "",

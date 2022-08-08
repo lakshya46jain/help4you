@@ -62,18 +62,21 @@ class IconButtonStream extends StatelessWidget {
               }
             }
 
+            if (countryCode.contains("+")) {
+              countryCode.replaceAll("+", "");
+            }
             HapticFeedback.heavyImpact();
             FocusScope.of(context).unfocus();
             try {
               if (formKey.currentState.validate()) {
-                if (userData.phoneNumber !=
-                    '+$countryCode$nonInternationalNumber') {
+                String phoneNumber = "+$countryCode$nonInternationalNumber";
+                if (userData.phoneNumber != phoneNumber) {
                   await AuthService().phoneAuthentication(
                     fullName,
                     countryCode,
                     phoneIsoCode,
                     nonInternationalNumber,
-                    '+$countryCode$nonInternationalNumber',
+                    phoneNumber,
                     userData.emailAddress,
                     "Update Phone Number",
                     context,
@@ -83,8 +86,7 @@ class IconButtonStream extends StatelessWidget {
                     countryCode ?? userData.countryCode,
                     phoneIsoCode ?? userData.phoneIsoCode,
                     nonInternationalNumber ?? userData.nonInternationalNumber,
-                    '+$countryCode$nonInternationalNumber' ??
-                        userData.phoneNumber,
+                    phoneNumber ?? userData.phoneNumber,
                     userData.emailAddress ?? userData.emailAddress,
                   );
                 } else {
