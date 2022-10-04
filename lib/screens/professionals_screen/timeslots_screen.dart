@@ -97,7 +97,8 @@ class TimeSlotsScreenState extends State<TimeSlotsScreen> {
         focusedDay.year,
         focusedDay.month,
         focusedDay.day,
-        (timeSlot.elementAt(index).contains("PM"))
+        (timeSlot.elementAt(index).contains("PM") &&
+                !timeSlot.elementAt(index).contains("12"))
             ? int.parse(
                     timeSlot.elementAt(index).split(':')[0].substring(0, 2)) +
                 12
@@ -107,7 +108,6 @@ class TimeSlotsScreenState extends State<TimeSlotsScreen> {
       ),
     )) {
       unavailableIndex.add(index);
-      setState(() {});
     } else if (DateTime.now().isAfter(
           DateTime(
             focusedDay.year,
@@ -128,6 +128,7 @@ class TimeSlotsScreenState extends State<TimeSlotsScreen> {
         true) {
       unavailableIndex.add(index);
     }
+    setState(() {});
   }
 
   @override

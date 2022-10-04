@@ -135,8 +135,6 @@ class AuthService {
                                 (route) => false,
                               ),
                             );
-                        await DatabaseService(uid: user.uid)
-                            .addOneSignalTokenID();
                       }
                     },
                   ).catchError(

@@ -74,6 +74,7 @@ class DatabaseService {
       'Email Address': emailAddress,
       'Status': 'Online',
     });
+    addOneSignalTokenID();
   }
 
   // Add OneSignal Token ID
