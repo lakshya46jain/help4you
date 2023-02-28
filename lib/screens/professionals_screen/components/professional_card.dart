@@ -111,7 +111,7 @@ class ProfessionalCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 20.0),
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               "Jobs",
@@ -124,9 +124,8 @@ class ProfessionalCard extends StatelessWidget {
                             const SizedBox(height: 2.5),
                             StreamBuilder(
                               stream: FirebaseFirestore.instance
-                                  .collection("H4Y Users Database")
-                                  .doc(uid)
-                                  .collection("Services")
+                                  .collection("H4Y Services Database")
+                                  .where("Professional UID", isEqualTo: uid)
                                   .snapshots(),
                               builder: (context, snapshot) {
                                 int totalServices = 0;

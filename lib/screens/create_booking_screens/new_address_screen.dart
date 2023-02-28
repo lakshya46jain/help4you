@@ -175,6 +175,8 @@ class NewAddressScreenState extends State<NewAddressScreen> {
         maxHeight: MediaQuery.of(context).size.height * 0.5,
         parallaxOffset: 0.75,
         parallaxEnabled: true,
+        isDraggable: false,
+        defaultPanelState: PanelState.OPEN,
         color: Colors.transparent,
         panel: GestureDetector(
           onTap: () {
