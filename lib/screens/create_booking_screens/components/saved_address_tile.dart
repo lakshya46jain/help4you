@@ -60,9 +60,7 @@ class SavedAddressTile extends StatelessWidget {
               label: "Delete",
               onPressed: (context) async {
                 await FirebaseFirestore.instance
-                    .collection("H4Y Users Database")
-                    .doc(uid)
-                    .collection("Saved Address")
+                    .collection("H4Y Saved Addresses Database")
                     .doc(addressId)
                     .delete();
               },
