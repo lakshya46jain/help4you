@@ -98,10 +98,10 @@ class ServiceTilesState extends State<ServiceTiles> {
                         ),
                         child: (quantity == 0)
                             ? GestureDetector(
-                                child: Row(
+                                child: const Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
+                                  children: [
                                     Text(
                                       "Add",
                                       style: TextStyle(

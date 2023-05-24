@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 // Dependency Imports
 // File Imports
 
-class SearchBar extends StatelessWidget {
+class CustomSearchBar extends StatelessWidget {
   final double width;
   final TextEditingController controller;
   final String hintText;
 
-  const SearchBar({
+  const CustomSearchBar({
     Key key,
     @required this.width,
     this.controller,

@@ -63,8 +63,8 @@ class PhoneAuthScreenState extends State<PhoneAuthScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: GestureDetector(
-              child: Row(
-                children: const [
+              child: const Row(
+                children: [
                   Icon(
                     CupertinoIcons.question_circle,
                     size: 25.0,

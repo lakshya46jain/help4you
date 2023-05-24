@@ -81,7 +81,7 @@ class _CategoryBannerStreamState extends State<CategoryBannerStream> {
     return Column(
       children: [
         const SizedBox(height: 15.0),
-        SearchBar(
+        CustomSearchBar(
           width: MediaQuery.of(context).size.width,
           hintText: "Search categories...",
           controller: searchController,
