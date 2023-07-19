@@ -7,7 +7,7 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/categories_screen/components/category_banner_stream.dart';
 
 class CategoriesScreen extends StatefulWidget {
-  const CategoriesScreen({Key key}) : super(key: key);
+  const CategoriesScreen({Key? key}) : super(key: key);
 
   @override
   CategoriesScreenState createState() => CategoriesScreenState();

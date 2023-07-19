@@ -14,27 +14,27 @@ import 'package:help4you/screens/create_booking_screens/new_address_screen.dart'
 import 'package:help4you/screens/create_booking_screens/saved_address_screen.dart';
 
 class ContinueButtonStream extends StatelessWidget {
-  final Help4YouUser user;
-  final List<CartServices> cartServices;
+  final Help4YouUser? user;
+  final List<CartServices>? cartServices;
 
   const ContinueButtonStream({
-    Key key,
-    @required this.user,
-    @required this.cartServices,
+    Key? key,
+    required this.user,
+    required this.cartServices,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: DatabaseService(uid: user.uid).addressListData,
+      stream: DatabaseService(uid: user!.uid).addressListData,
       builder: (context, snapshot) {
-        List<Address> addressData = snapshot.data;
+        List<Address>? addressData = snapshot.data as List<Address>?;
         return GestureDetector(
           onTap: () {
-            if (cartServices.isNotEmpty) {
+            if (cartServices!.isNotEmpty) {
               Set<String> uniqueUsers = {};
-              for (CartServices cartService in cartServices) {
-                uniqueUsers.add(cartService.professionalId);
+              for (CartServices cartService in cartServices!) {
+                uniqueUsers.add(cartService.professionalId!);
               }
               if (uniqueUsers.length != 1) {
                 Navigator.push(
@@ -46,7 +46,7 @@ class ContinueButtonStream extends StatelessWidget {
                   ),
                 );
               } else {
-                if (addressData.isEmpty) {
+                if (addressData!.isEmpty) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(

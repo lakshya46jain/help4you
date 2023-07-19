@@ -14,27 +14,27 @@ import 'package:help4you/screens/project_details_screen/components/booked_items_
 import 'package:help4you/screens/project_details_screen/components/make_payment_button.dart';
 
 class ProjectDetailsScreen extends StatelessWidget {
-  final String uid;
-  final String address;
-  final String bookingId;
-  final double totalPrice;
-  final String bookingStatus;
-  final Timestamp preferredTimings;
-  final String paymentMethod;
-  final String otp;
-  final List<CartServices> bookedItemsList;
+  final String? uid;
+  final String? address;
+  final String? bookingId;
+  final double? totalPrice;
+  final String? bookingStatus;
+  final Timestamp? preferredTimings;
+  final String? paymentMethod;
+  final String? otp;
+  final List<CartServices>? bookedItemsList;
 
   const ProjectDetailsScreen({
-    Key key,
-    @required this.uid,
-    @required this.address,
-    @required this.bookingId,
-    @required this.totalPrice,
-    @required this.bookingStatus,
-    @required this.preferredTimings,
-    @required this.paymentMethod,
-    @required this.otp,
-    @required this.bookedItemsList,
+    Key? key,
+    required this.uid,
+    required this.address,
+    required this.bookingId,
+    required this.totalPrice,
+    required this.bookingStatus,
+    required this.preferredTimings,
+    required this.paymentMethod,
+    required this.otp,
+    required this.bookedItemsList,
   }) : super(key: key);
 
   @override
@@ -52,7 +52,7 @@ class ProjectDetailsScreen extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              otp[index],
+              otp![index],
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -81,7 +81,7 @@ class ProjectDetailsScreen extends StatelessWidget {
           IconButton(
             onPressed: () => AwesomeDialog(
               context: context,
-              dialogType: DialogType.SUCCES,
+              dialogType: DialogType.success,
               body: Column(
                 children: [
                   const SizedBox(height: 5.0),
@@ -157,7 +157,7 @@ class ProjectDetailsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               Text(
-                "Location: $address (${DateFormat("d MMMM yyyy").format(preferredTimings.toDate().toLocal())} ${DateFormat.jm().format(preferredTimings.toDate().toLocal())})",
+                "Location: $address (${DateFormat("d MMMM yyyy").format(preferredTimings!.toDate().toLocal())} ${DateFormat.jm().format(preferredTimings!.toDate().toLocal())})",
                 style: const TextStyle(fontSize: 15.0),
               ),
               const SizedBox(height: 10.0),

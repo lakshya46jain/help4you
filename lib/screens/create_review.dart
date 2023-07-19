@@ -12,11 +12,11 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
 class CreateReviewScreen extends StatefulWidget {
-  final String uid;
+  final String? uid;
 
   const CreateReviewScreen({
-    Key key,
-    @required this.uid,
+    Key? key,
+    required this.uid,
   }) : super(key: key);
 
   @override
@@ -25,10 +25,10 @@ class CreateReviewScreen extends StatefulWidget {
 
 class CreateReviewScreenState extends State<CreateReviewScreen> {
   // Variables
-  double rating;
-  String review;
+  double? rating;
+  String? review;
   int selected = 0;
-  bool isRecommended;
+  bool? isRecommended;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   // Custom Radio Button
@@ -77,7 +77,7 @@ class CreateReviewScreenState extends State<CreateReviewScreen> {
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return GestureDetector(
       onTap: () {
@@ -128,9 +128,9 @@ class CreateReviewScreenState extends State<CreateReviewScreen> {
                     ),
                     onRated: (value) {
                       setState(() {
-                        rating = value;
+                        rating = value!;
                       });
-                      if (rating > 3.5) {
+                      if (rating! > 3.5) {
                         setState(() {
                           selected = 0;
                         });
@@ -150,8 +150,8 @@ class CreateReviewScreenState extends State<CreateReviewScreen> {
                         review = value;
                       });
                     },
-                    validator: (value) {
-                      if (review.isEmpty) {
+                    validator: (String? value) {
+                      if (review!.isEmpty) {
                         return "Please provide a review to the professional";
                       } else {
                         return null;
@@ -187,9 +187,9 @@ class CreateReviewScreenState extends State<CreateReviewScreen> {
                           isRecommended = false;
                         });
                       }
-                      if (formKey.currentState.validate() && rating != 0.0) {
+                      if (formKey.currentState!.validate() && rating != 0.0) {
                         await DatabaseService(
-                          uid: user.uid,
+                          uid: user!.uid,
                           professionalUID: widget.uid,
                         )
                             .createReview(

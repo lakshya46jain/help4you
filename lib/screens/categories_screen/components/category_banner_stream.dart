@@ -8,7 +8,7 @@ import 'package:help4you/models/service_category_model.dart';
 import 'package:help4you/screens/categories_screen/components/occupation_banner.dart';
 
 class CategoryBannerStream extends StatefulWidget {
-  const CategoryBannerStream({Key key}) : super(key: key);
+  const CategoryBannerStream({Key? key}) : super(key: key);
 
   @override
   State<CategoryBannerStream> createState() => _CategoryBannerStreamState();
@@ -18,7 +18,7 @@ class _CategoryBannerStreamState extends State<CategoryBannerStream> {
   // Search Controller
   TextEditingController searchController = TextEditingController();
 
-  Future resultsLoaded;
+  Future? resultsLoaded;
   List allResults = [];
   List resultsList = [];
 
@@ -51,8 +51,8 @@ class _CategoryBannerStreamState extends State<CategoryBannerStream> {
       for (var categorySnapshot in allResults) {
         var category = ServiceCategoryBanner.fromSnapshot(categorySnapshot)
             .occupation
-            .toLowerCase();
-        if (category.contains(searchController.text.toLowerCase())) {
+            ?.toLowerCase();
+        if (category!.contains(searchController.text.toLowerCase())) {
           showResults.add(categorySnapshot);
         }
       }

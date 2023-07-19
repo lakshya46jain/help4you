@@ -20,12 +20,12 @@ class DetailsScreenBody extends StatefulWidget {
   final String professionalUID;
 
   const DetailsScreenBody({
-    Key key,
-    @required this.profilePicture,
-    @required this.fullName,
-    @required this.occupation,
-    @required this.phoneNumber,
-    @required this.professionalUID,
+    Key? key,
+    required this.profilePicture,
+    required this.fullName,
+    required this.occupation,
+    required this.phoneNumber,
+    required this.professionalUID,
   }) : super(key: key);
 
   @override
@@ -114,7 +114,7 @@ class _DetailsScreenBodyState extends State<DetailsScreenBody> {
                   ),
                   icon: CupertinoIcons.time_solid,
                   color: const Color(0xFF1C3857),
-                  title: "Time Slots",
+                  title: "Availability",
                 ),
                 CustomMediaButton(
                   onTap: () => Navigator.push(
@@ -142,7 +142,7 @@ class _DetailsScreenBodyState extends State<DetailsScreenBody> {
                 .where("Professional UID", isEqualTo: widget.professionalUID)
                 .where("Visibility", isEqualTo: true)
                 .snapshots(),
-            builder: (context, snapshot) {
+            builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data.docs.length == 0) {
                   return Padding(

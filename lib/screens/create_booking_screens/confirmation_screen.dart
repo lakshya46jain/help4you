@@ -8,11 +8,11 @@ import 'package:page_transition/page_transition.dart';
 import 'package:help4you/screens/wrapper.dart';
 
 class ConfirmationScreen extends StatefulWidget {
-  final String title;
-  final String description;
+  final String? title;
+  final String? description;
 
   const ConfirmationScreen({
-    Key key,
+    Key? key,
     this.title,
     this.description,
   }) : super(key: key);

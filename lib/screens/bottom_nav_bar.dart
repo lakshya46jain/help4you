@@ -18,7 +18,7 @@ import 'package:help4you/screens/message_list_screen/message_list_screen.dart';
 import 'package:help4you/screens/project_details_screen/project_details_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({Key key}) : super(key: key);
+  const BottomNavBar({Key? key}) : super(key: key);
 
   @override
   BottomNavBarState createState() => BottomNavBarState();
@@ -54,11 +54,11 @@ class BottomNavBarState extends State<BottomNavBar>
   Future<void> notificationOpenHandler() async {
     OneSignal.shared.setNotificationOpenedHandler((openedResult) {
       String notifType =
-          openedResult.notification.additionalData['Notification Type'];
+          openedResult.notification.additionalData!['Notification Type'];
       String documentId =
-          openedResult.notification.additionalData['Document ID'];
+          openedResult.notification.additionalData!['Document ID'];
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        final user = FirebaseAuth.instance.currentUser.uid;
+        final user = FirebaseAuth.instance.currentUser!.uid;
         String professionalUID = documentId.replaceAll("${user}_", "");
         if (notifType == "Message" && documentId != "") {
           FirebaseFirestore.instance
@@ -66,10 +66,10 @@ class BottomNavBarState extends State<BottomNavBar>
               .doc(professionalUID)
               .get()
               .then((value) {
-            String profilePicture = value.data()["Profile Picture"];
-            String fullName = value.data()["Full Name"];
-            String occupation = value.data()["Occupation"];
-            String phoneNumber = value.data()["Phone Number"];
+            String profilePicture = value.data()!["Profile Picture"];
+            String fullName = value.data()!["Full Name"];
+            String occupation = value.data()!["Occupation"];
+            String phoneNumber = value.data()!["Phone Number"];
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -89,14 +89,14 @@ class BottomNavBarState extends State<BottomNavBar>
               .doc(documentId)
               .get()
               .then((value) {
-            int paymentMethodData = value.data()["Payment Method"];
-            String otp = value.data()["One Time Password"];
-            String address = value.data()["Address"];
-            double totalPrice = value.data()["Total Price"];
-            String bookingStatus = value.data()["Booking Status"];
-            Timestamp preferredTimings = value.data()["Preferred Timings"];
+            int paymentMethodData = value.data()!["Payment Method"];
+            String otp = value.data()!["One Time Password"];
+            String address = value.data()!["Address"];
+            double totalPrice = value.data()!["Total Price"];
+            String bookingStatus = value.data()!["Booking Status"];
+            Timestamp preferredTimings = value.data()!["Preferred Timings"];
             List<CartServices> bookedItems = [];
-            List<dynamic> bookedItemsMap = value.data()["Booked Items"];
+            List<dynamic> bookedItemsMap = value.data()!["Booked Items"];
             for (var element in bookedItemsMap) {
               bookedItems.add(
                 CartServices(
@@ -137,7 +137,7 @@ class BottomNavBarState extends State<BottomNavBar>
   }
 
   void setStatus(String status) {
-    DatabaseService(uid: FirebaseAuth.instance.currentUser.uid)
+    DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid)
         .updateUserStatus(status);
   }
 

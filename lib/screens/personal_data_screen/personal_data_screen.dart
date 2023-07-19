@@ -23,7 +23,7 @@ import 'package:help4you/screens/delete_account_screens/delete_phone_auth_screen
 import 'package:help4you/screens/personal_data_screen/components/icon_button_stream.dart';
 
 class PersonalDataScreen extends StatefulWidget {
-  const PersonalDataScreen({Key key}) : super(key: key);
+  const PersonalDataScreen({Key? key}) : super(key: key);
 
   @override
   PersonalDataScreenState createState() => PersonalDataScreenState();
@@ -31,31 +31,31 @@ class PersonalDataScreen extends StatefulWidget {
 
 class PersonalDataScreenState extends State<PersonalDataScreen> {
   // Text Field Variables
-  String fullName;
-  String countryCode;
-  String phoneIsoCode;
-  String nonInternationalNumber;
+  String? fullName;
+  String? countryCode;
+  String? phoneIsoCode;
+  String? nonInternationalNumber;
 
   // Global Key
   final formKey = GlobalKey<FormState>();
 
   // Active Image File
-  File imageFile;
+  File? imageFile;
 
   // Select Image Via Image Picker
   Future getImage(ImageSource source) async {
     final selected = await ImagePicker().pickImage(source: source);
     if (selected == null) return;
-    File image = File(selected.path);
+    File? image = File(selected.path);
     image = await cropImage(selected);
     setState(() {
-      imageFile = image;
+      imageFile = image!;
     });
   }
 
   // Crop Selected Image
-  Future<File> cropImage(XFile selectedFile) async {
-    CroppedFile cropped = await ImageCropper().cropImage(
+  Future<File?> cropImage(XFile selectedFile) async {
+    CroppedFile? cropped = await ImageCropper().cropImage(
       sourcePath: selectedFile.path,
       aspectRatio: const CropAspectRatio(
         ratioX: 1.0,
@@ -63,6 +63,7 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
       ),
       cropStyle: CropStyle.rectangle,
     );
+    // ignore: unnecessary_null_comparison
     if (cropped == null) return null;
     return File(cropped.path);
   }
@@ -72,13 +73,14 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
     super.initState();
     FirebaseFirestore.instance
         .collection("H4Y Users Database")
-        .doc(FirebaseAuth.instance.currentUser.uid)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
       setState(() {
-        countryCode = value.data()["Country Code"];
-        phoneIsoCode = value.data()["Phone ISO Code"];
-        nonInternationalNumber = value.data()["Non International Number"];
+        fullName = value.data()!["Full Name"];
+        countryCode = value.data()!["Country Code"];
+        phoneIsoCode = value.data()!["Phone ISO Code"];
+        nonInternationalNumber = value.data()!["Non International Number"];
       });
     });
   }
@@ -86,10 +88,10 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
-    if (countryCode.contains("+")) {
-      countryCode = countryCode.replaceAll("+", "");
+    if (countryCode!.contains("+")) {
+      countryCode = countryCode!.replaceAll("+", "");
     }
 
     return GestureDetector(
@@ -136,9 +138,10 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
                     bottom: 10.0,
                   ),
                   child: StreamBuilder(
-                    stream: DatabaseService(uid: user.uid).userData,
+                    stream: DatabaseService(uid: user!.uid).userData,
                     builder: (context, snapshot) {
-                      UserDataCustomer userData = snapshot.data;
+                      UserDataCustomer? userData =
+                          snapshot.data as UserDataCustomer?;
                       if (snapshot.hasData) {
                         return Column(
                           children: [
@@ -152,16 +155,18 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
                                   SizedBox(
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10.0),
+                                      // ignore: unnecessary_null_comparison
                                       child: (imageFile != null)
                                           ? Container(
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
-                                                  image: FileImage(imageFile),
+                                                  image: FileImage(imageFile!),
                                                 ),
                                               ),
                                             )
                                           : CachedNetworkImage(
-                                              imageUrl: userData.profilePicture,
+                                              imageUrl: userData!.profilePicture
+                                                  .toString(),
                                               fit: BoxFit.fill,
                                             ),
                                     ),
@@ -175,7 +180,7 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
                                       child: GestureDetector(
                                         onTap: () {
                                           Widget dialogButton(String title,
-                                              Color color, Function onTap) {
+                                              Color color, VoidCallback onTap) {
                                             return Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
@@ -213,7 +218,7 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
                                           AwesomeDialog(
                                             context: context,
                                             headerAnimationLoop: false,
-                                            dialogType: DialogType.INFO,
+                                            dialogType: DialogType.info,
                                             body: Column(
                                               children: [
                                                 dialogButton(
@@ -318,9 +323,9 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
                                 type: "Normal",
                                 keyboardType: TextInputType.name,
                                 hintText: "Enter Full Name...",
-                                initialValue: userData.fullName,
-                                validator: (String value) {
-                                  if (value.isEmpty) {
+                                initialValue: userData!.fullName,
+                                validator: (String? value) {
+                                  if (value!.isEmpty) {
                                     return "Name field cannot be empty";
                                   } else if (value.length < 2) {
                                     return "Name must be atleast 2 characters long";
@@ -362,7 +367,7 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
                                 phoneIsoCode: userData.phoneIsoCode,
                                 nonInternationalNumber:
                                     userData.nonInternationalNumber,
-                                onChanged: (phone) {
+                                onChangedPhone: (phone) {
                                   setState(() {
                                     nonInternationalNumber = phone.number;
                                   });
@@ -401,9 +406,10 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
                 StreamBuilder(
                   stream: DatabaseService(uid: user.uid).userData,
                   builder: (context, snapshot) {
-                    UserDataCustomer userData = snapshot.data;
+                    UserDataCustomer? userData =
+                        snapshot.data as UserDataCustomer?;
                     if (snapshot.hasData) {
-                      if (FirebaseAuth.instance.currentUser.email == null) {
+                      if (FirebaseAuth.instance.currentUser?.email == null) {
                         return SignatureButton(
                           type: "Expanded",
                           icon: CupertinoIcons.link,
@@ -414,7 +420,7 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
                               countryCode,
                               phoneIsoCode,
                               nonInternationalNumber,
-                              "${userData.countryCode}${userData.nonInternationalNumber}",
+                              "${userData!.countryCode}${userData.nonInternationalNumber}",
                               "",
                               "Link Email Address",
                               context,
@@ -434,7 +440,7 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
                                   countryCode,
                                   phoneIsoCode,
                                   nonInternationalNumber,
-                                  "+${userData.countryCode}${userData.nonInternationalNumber}",
+                                  "+${userData!.countryCode}${userData.nonInternationalNumber}",
                                   "",
                                   "Update Password",
                                   context,
@@ -451,7 +457,7 @@ class PersonalDataScreenState extends State<PersonalDataScreen> {
                                   countryCode,
                                   phoneIsoCode,
                                   nonInternationalNumber,
-                                  "+${userData.countryCode}${userData.nonInternationalNumber}",
+                                  "+${userData!.countryCode}${userData.nonInternationalNumber}",
                                   "",
                                   "Update Email Address",
                                   context,

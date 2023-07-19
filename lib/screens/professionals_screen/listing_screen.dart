@@ -10,8 +10,8 @@ class ProfessionalListingScreen extends StatelessWidget {
   final String occupation;
 
   const ProfessionalListingScreen({
-    Key key,
-    @required this.occupation,
+    Key? key,
+    required this.occupation,
   }) : super(key: key);
 
   @override

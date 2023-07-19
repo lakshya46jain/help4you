@@ -11,7 +11,7 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
 class PasswordResetScreen extends StatefulWidget {
-  const PasswordResetScreen({Key key}) : super(key: key);
+  const PasswordResetScreen({Key? key}) : super(key: key);
 
   @override
   State<PasswordResetScreen> createState() => _PasswordResetScreenState();
@@ -19,8 +19,8 @@ class PasswordResetScreen extends StatefulWidget {
 
 class _PasswordResetScreenState extends State<PasswordResetScreen> {
   // Text Field Variables
-  String emailAddress;
-  String password;
+  String? emailAddress;
+  String? password;
 
   // Global Key
   final formKey = GlobalKey<FormState>();
@@ -79,8 +79,8 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                     type: "Normal",
                     keyboardType: TextInputType.emailAddress,
                     hintText: "Enter Email Address...",
-                    validator: (String value) {
-                      if (value.isEmpty) {
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
                         return "Email address field cannot be empty";
                       } else if (!value.contains("@")) {
                         return "Please enter a valid email address";
@@ -101,7 +101,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
               child: SignatureButton(
                 onTap: () async {
                   try {
-                    if (formKey.currentState.validate()) {
+                    if (formKey.currentState!.validate()) {
                       HapticFeedback.heavyImpact();
                       await AuthService()
                           .resetPassword(emailAddress)
@@ -119,7 +119,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                           );
                     }
                   } catch (error) {
-                    if (error.code == "invalid-email") {
+                    if (error.toString().contains("invalid-email")) {
                       showCustomSnackBar(
                         context,
                         CupertinoIcons.exclamationmark_circle,
@@ -127,7 +127,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                         "Error!",
                         "The email entered is invalid. Please try again.",
                       );
-                    } else if (error.code == "user-not-found") {
+                    } else if (error.toString().contains("user-not-found")) {
                       showCustomSnackBar(
                         context,
                         CupertinoIcons.exclamationmark_triangle,

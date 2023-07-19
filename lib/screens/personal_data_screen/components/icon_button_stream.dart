@@ -12,31 +12,31 @@ import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 
 class IconButtonStream extends StatelessWidget {
-  final Help4YouUser user;
-  final File imageFile;
-  final GlobalKey<FormState> formKey;
-  final String countryCode;
-  final String nonInternationalNumber;
-  final String fullName;
-  final String phoneIsoCode;
+  final Help4YouUser? user;
+  final File? imageFile;
+  final GlobalKey<FormState>? formKey;
+  final String? countryCode;
+  final String? nonInternationalNumber;
+  final String? fullName;
+  final String? phoneIsoCode;
 
   const IconButtonStream({
-    Key key,
-    @required this.user,
-    @required this.imageFile,
-    @required this.formKey,
-    @required this.countryCode,
-    @required this.nonInternationalNumber,
-    @required this.fullName,
-    @required this.phoneIsoCode,
+    Key? key,
+    required this.user,
+    required this.imageFile,
+    required this.formKey,
+    required this.countryCode,
+    required this.nonInternationalNumber,
+    required this.fullName,
+    required this.phoneIsoCode,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: DatabaseService(uid: user.uid).userData,
+      stream: DatabaseService(uid: user!.uid).userData,
       builder: (context, snapshot) {
-        UserDataCustomer userData = snapshot.data;
+        UserDataCustomer? userData = snapshot.data as UserDataCustomer?;
         return IconButton(
           icon: const Icon(
             CupertinoIcons.checkmark_alt,
@@ -46,31 +46,32 @@ class IconButtonStream extends StatelessWidget {
           onPressed: () async {
             // Upload Picture to Firebase
             Future setProfilePicture() async {
+              // ignore: unnecessary_null_comparison
               if (imageFile != null) {
                 Reference firebaseStorageRef = FirebaseStorage.instance
                     .ref()
-                    .child(("H4Y Profile Pictures/${user.uid}"));
-                UploadTask uploadTask = firebaseStorageRef.putFile(imageFile);
+                    .child(("H4Y Profile Pictures/${user!.uid}"));
+                UploadTask uploadTask = firebaseStorageRef.putFile(imageFile!);
                 await uploadTask;
                 String downloadAddress =
                     await firebaseStorageRef.getDownloadURL();
-                await DatabaseService(uid: user.uid)
+                await DatabaseService(uid: user!.uid)
                     .updateProfilePicture(downloadAddress);
               } else {
-                await DatabaseService(uid: user.uid)
-                    .updateProfilePicture(userData.profilePicture);
+                await DatabaseService(uid: user!.uid)
+                    .updateProfilePicture(userData!.profilePicture);
               }
             }
 
-            if (countryCode.contains("+")) {
-              countryCode.replaceAll("+", "");
+            if (countryCode!.contains("+")) {
+              countryCode!.replaceAll("+", "");
             }
             HapticFeedback.heavyImpact();
             FocusScope.of(context).unfocus();
             try {
-              if (formKey.currentState.validate()) {
+              if (formKey!.currentState!.validate()) {
                 String phoneNumber = "+$countryCode$nonInternationalNumber";
-                if (userData.phoneNumber != phoneNumber) {
+                if (userData!.phoneNumber != phoneNumber) {
                   await AuthService().phoneAuthentication(
                     fullName,
                     countryCode,
@@ -81,24 +82,23 @@ class IconButtonStream extends StatelessWidget {
                     "Update Phone Number",
                     context,
                   );
-                  await DatabaseService(uid: user.uid).updateUserData(
-                    fullName ?? userData.fullName,
-                    countryCode ?? userData.countryCode,
-                    phoneIsoCode ?? userData.phoneIsoCode,
-                    nonInternationalNumber ?? userData.nonInternationalNumber,
-                    phoneNumber ?? userData.phoneNumber,
-                    userData.emailAddress ?? userData.emailAddress,
+                  await DatabaseService(uid: user!.uid).updateUserData(
+                    fullName,
+                    countryCode,
+                    phoneIsoCode,
+                    nonInternationalNumber,
+                    phoneNumber,
+                    userData.emailAddress,
                   );
                 } else {
-                  await DatabaseService(uid: user.uid)
+                  await DatabaseService(uid: user!.uid)
                       .updateUserData(
-                        fullName ?? userData.fullName,
-                        userData.countryCode ?? userData.countryCode,
-                        userData.phoneIsoCode ?? userData.phoneIsoCode,
-                        userData.nonInternationalNumber ??
-                            userData.nonInternationalNumber,
-                        userData.phoneNumber ?? userData.phoneNumber,
-                        userData.emailAddress ?? userData.emailAddress,
+                        fullName,
+                        userData.countryCode,
+                        userData.phoneIsoCode,
+                        userData.nonInternationalNumber,
+                        userData.phoneNumber,
+                        userData.emailAddress,
                       )
                       .then(
                         (value) => Navigator.pop(context),

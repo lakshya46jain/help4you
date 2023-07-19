@@ -8,27 +8,27 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:help4you/screens/create_booking_screens/update_address_screen.dart';
 
 class SavedAddressTile extends StatelessWidget {
-  final String uid;
-  final String addressId;
-  final String addressName;
-  final String completeAddress;
-  final int addressType;
-  final GeoPoint geoPointLocation;
-  final int index;
-  final int selected;
-  final Function onTap;
+  final String? uid;
+  final String? addressId;
+  final String? addressName;
+  final String? completeAddress;
+  final int? addressType;
+  final GeoPoint? geoPointLocation;
+  final int? index;
+  final int? selected;
+  final VoidCallback? onTap;
 
   const SavedAddressTile({
-    Key key,
-    @required this.uid,
-    @required this.addressId,
-    @required this.addressName,
-    @required this.completeAddress,
-    @required this.addressType,
-    @required this.geoPointLocation,
-    @required this.index,
-    @required this.selected,
-    @required this.onTap,
+    Key? key,
+    required this.uid,
+    required this.addressId,
+    required this.addressName,
+    required this.completeAddress,
+    required this.addressType,
+    required this.geoPointLocation,
+    required this.index,
+    required this.selected,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -104,7 +104,7 @@ class SavedAddressTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        addressName,
+                        addressName!,
                         style: const TextStyle(
                           fontSize: 21.0,
                           color: Color(0xFF1C3857),
@@ -126,7 +126,7 @@ class SavedAddressTile extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        completeAddress,
+                        completeAddress!,
                         style: const TextStyle(
                           fontSize: 14.0,
                           color: Color(0xFF95989A),

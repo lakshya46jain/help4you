@@ -13,7 +13,7 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
 class UpdateEmailAddressScreen extends StatefulWidget {
-  const UpdateEmailAddressScreen({Key key}) : super(key: key);
+  const UpdateEmailAddressScreen({Key? key}) : super(key: key);
 
   @override
   State<UpdateEmailAddressScreen> createState() =>
@@ -22,7 +22,7 @@ class UpdateEmailAddressScreen extends StatefulWidget {
 
 class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
   // Text Field Variables
-  String emailAddress;
+  String? emailAddress;
 
   // Global Key
   final formKey = GlobalKey<FormState>();
@@ -30,7 +30,7 @@ class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return GestureDetector(
       onTap: () {
@@ -68,8 +68,8 @@ class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
                         type: "Normal",
                         keyboardType: TextInputType.emailAddress,
                         hintText: "Enter Email Address...",
-                        validator: (String value) {
-                          if (value.isEmpty) {
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
                             return "Email address field cannot be empty";
                           } else if (!value.contains("@")) {
                             return "Please enter a valid email address";
@@ -95,10 +95,10 @@ class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
                       icon: CupertinoIcons.chevron_right,
                       onTap: () async {
                         try {
-                          if (formKey.currentState.validate()) {
+                          if (formKey.currentState!.validate()) {
                             await AuthService()
                                 .updateEmailAddress(
-                                  user.uid,
+                                  user!.uid,
                                   emailAddress,
                                 )
                                 .then(
@@ -112,7 +112,9 @@ class _UpdateEmailAddressScreenState extends State<UpdateEmailAddressScreen> {
                                 );
                           }
                         } catch (error) {
-                          if (error.code == "email-already-in-use") {
+                          if (error
+                              .toString()
+                              .contains("email-already-in-use")) {
                             showCustomSnackBar(
                               context,
                               CupertinoIcons.exclamationmark_circle,

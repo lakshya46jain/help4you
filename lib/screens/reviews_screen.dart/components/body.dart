@@ -8,11 +8,11 @@ import 'package:help4you/models/reviews_model.dart';
 import 'package:help4you/screens/reviews_screen.dart/components/review_tile.dart';
 
 class ReviewsBody extends StatelessWidget {
-  final String professionalUID;
+  final String? professionalUID;
 
   const ReviewsBody({
-    Key key,
-    @required this.professionalUID,
+    Key? key,
+    required this.professionalUID,
   }) : super(key: key);
 
   @override
@@ -20,9 +20,9 @@ class ReviewsBody extends StatelessWidget {
     return StreamBuilder(
       stream: DatabaseService(professionalUID: professionalUID).reviewsData,
       builder: (context, snapshot) {
-        List<Reviews> reviews = snapshot.data;
+        List<Reviews>? reviews = snapshot.data as List<Reviews>?;
         if (snapshot.hasData) {
-          if (reviews.isEmpty) {
+          if (reviews!.isEmpty) {
             return Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),

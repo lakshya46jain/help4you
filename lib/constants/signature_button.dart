@@ -6,14 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 // File Imports
 
 class SignatureButton extends StatelessWidget {
-  final Function onTap;
-  final String text;
-  final IconData icon;
-  final bool withIcon;
-  final String type;
+  final VoidCallback? onTap;
+  final String? text;
+  final IconData? icon;
+  final bool? withIcon;
+  final String? type;
 
   const SignatureButton({
-    Key key,
+    Key? key,
     this.onTap,
     this.text,
     this.icon,
@@ -55,7 +55,7 @@ class SignatureButton extends StatelessWidget {
                   const SizedBox(width: 20.0),
                   Expanded(
                     child: Text(
-                      text,
+                      text!,
                       style: GoogleFonts.balooPaaji2(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w600,
@@ -79,9 +79,7 @@ class SignatureButton extends StatelessWidget {
                   size: 25.0,
                   color: Color(0xFFFEA700),
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                onPressed: () => Navigator.pop(context),
               )
             : MaterialButton(
                 padding: const EdgeInsets.all(0),
@@ -107,7 +105,7 @@ class SignatureButton extends StatelessWidget {
                               Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  text,
+                                  text!,
                                   style: TextStyle(
                                     fontSize: 20.0,
                                     color: Colors.white,
@@ -131,7 +129,7 @@ class SignatureButton extends StatelessWidget {
                         : Align(
                             alignment: Alignment.center,
                             child: Text(
-                              text,
+                              text!,
                               style: TextStyle(
                                 fontSize: 22.0,
                                 color: Colors.white,

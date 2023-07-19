@@ -16,11 +16,11 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/constants/signature_button.dart';
 
 class NewAddressScreen extends StatefulWidget {
-  final String professionalUID;
+  final String? professionalUID;
 
   const NewAddressScreen({
-    Key key,
-    @required this.professionalUID,
+    Key? key,
+    required this.professionalUID,
   }) : super(key: key);
 
   @override
@@ -29,10 +29,10 @@ class NewAddressScreen extends StatefulWidget {
 
 class NewAddressScreenState extends State<NewAddressScreen> {
   // Google Maps Variables
-  double latitude;
-  double longitude;
-  Position currentPosition;
-  GoogleMapController newGoogleMapsController;
+  double? latitude;
+  double? longitude;
+  Position? currentPosition;
+  GoogleMapController? newGoogleMapsController;
   Completer<GoogleMapController> googleMapsController = Completer();
   static const CameraPosition googlePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
@@ -49,7 +49,7 @@ class NewAddressScreenState extends State<NewAddressScreen> {
     longitude = position.longitude;
     CameraPosition cameraPosition =
         CameraPosition(target: latLngPosition, zoom: 14);
-    newGoogleMapsController.animateCamera(
+    newGoogleMapsController!.animateCamera(
       CameraUpdate.newCameraPosition(cameraPosition),
     );
     Marker myLocationMarker = Marker(
@@ -66,8 +66,8 @@ class NewAddressScreenState extends State<NewAddressScreen> {
   int selected = 0;
 
   // Variables
-  String addressName;
-  String completeAddress;
+  String? addressName;
+  String? completeAddress;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -128,7 +128,7 @@ class NewAddressScreenState extends State<NewAddressScreen> {
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -283,10 +283,10 @@ class NewAddressScreenState extends State<NewAddressScreen> {
                     const SizedBox(height: 30.0),
                     SignatureButton(
                       onTap: () async {
-                        if (formKey.currentState.validate()) {
+                        if (formKey.currentState!.validate()) {
                           FocusScope.of(context).unfocus();
-                          GeoPoint geoPoint = GeoPoint(latitude, longitude);
-                          await DatabaseService(uid: user.uid)
+                          GeoPoint geoPoint = GeoPoint(latitude!, longitude!);
+                          await DatabaseService(uid: user!.uid)
                               .addAdress(
                                 geoPoint,
                                 addressName,

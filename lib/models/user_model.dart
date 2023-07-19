@@ -1,6 +1,6 @@
 // Help4You Unique User ID
 class Help4YouUser {
-  final String uid;
+  final String? uid;
 
   Help4YouUser({
     this.uid,
@@ -9,16 +9,16 @@ class Help4YouUser {
 
 // Help4You Customer Details
 class UserDataCustomer {
-  final String uid;
-  final String fullName;
-  final String profilePicture;
-  final String countryCode;
-  final String phoneIsoCode;
-  final String nonInternationalNumber;
-  final String phoneNumber;
-  final String emailAddress;
-  final int adminLevel;
-  final String status;
+  final String? uid;
+  final String? fullName;
+  final String? profilePicture;
+  final String? countryCode;
+  final String? phoneIsoCode;
+  final String? nonInternationalNumber;
+  final String? phoneNumber;
+  final String? emailAddress;
+  final int? adminLevel;
+  final String? status;
 
   UserDataCustomer({
     this.uid,

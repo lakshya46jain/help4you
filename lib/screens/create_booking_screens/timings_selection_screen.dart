@@ -9,13 +9,13 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/create_booking_screens/components/timings_footer.dart';
 
 class TimingsSelectionScreen extends StatefulWidget {
-  final String professionalUID;
-  final String completeAddress;
-  final GeoPoint geoPointLocation;
+  final String? professionalUID;
+  final String? completeAddress;
+  final GeoPoint? geoPointLocation;
 
   const TimingsSelectionScreen({
-    Key key,
-    @required this.professionalUID,
+    Key? key,
+    required this.professionalUID,
     this.completeAddress,
     this.geoPointLocation,
   }) : super(key: key);
@@ -66,7 +66,7 @@ class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
     '07:00 PM',
   };
 
-  int selected;
+  int? selected;
   var preferredTimings = [];
   var unavailableIndex = [];
 
@@ -299,6 +299,7 @@ class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: SizedBox(
+                  // ignore: unnecessary_null_comparison
                   height: (selected == null)
                       ? MediaQuery.of(context).size.height * 0.5
                       : MediaQuery.of(context).size.height * 0.35,
@@ -357,25 +358,26 @@ class TimingsSelectionScreenState extends State<TimingsSelectionScreen> {
               ),
             ],
           ),
+          // ignore: unnecessary_null_comparison
           (selected != null)
               ? TimingsFooter(
                   mergedTime: DateTime(
                     focusedDay.year,
                     focusedDay.month,
                     focusedDay.day,
-                    (timeSlot.elementAt(selected).contains("PM") &&
-                            !timeSlot.elementAt(selected).contains("12"))
+                    (timeSlot.elementAt(selected!).contains("PM") &&
+                            !timeSlot.elementAt(selected!).contains("12"))
                         ? int.parse(timeSlot
-                                .elementAt(selected)
+                                .elementAt(selected!)
                                 .split(':')[0]
                                 .substring(0, 2)) +
                             12
                         : int.parse(timeSlot
-                            .elementAt(selected)
+                            .elementAt(selected!)
                             .split(':')[0]
                             .substring(0, 2)),
                     int.parse(timeSlot
-                        .elementAt(selected)
+                        .elementAt(selected!)
                         .split(':')[1]
                         .substring(0, 2)),
                   ).toUtc(),

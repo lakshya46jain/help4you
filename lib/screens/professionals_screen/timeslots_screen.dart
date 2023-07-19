@@ -8,10 +8,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // File Imports
 
 class TimeSlotsScreen extends StatefulWidget {
-  final String professionalUID;
+  final String? professionalUID;
 
   const TimeSlotsScreen({
-    Key key,
+    Key? key,
     this.professionalUID,
   }) : super(key: key);
 
@@ -61,7 +61,7 @@ class TimeSlotsScreenState extends State<TimeSlotsScreen> {
     '07:00 PM',
   };
 
-  int selected;
+  int? selected;
   var preferredTimings = [];
   var unavailableIndex = [];
 
@@ -137,7 +137,7 @@ class TimeSlotsScreenState extends State<TimeSlotsScreen> {
       appBar: AppBar(
         elevation: 0.0,
         title: Text(
-          "View Availability",
+          "Availability",
           style: GoogleFonts.balooPaaji2(
             fontSize: 25.0,
             color: const Color(0xFF1C3857),
@@ -159,7 +159,7 @@ class TimeSlotsScreenState extends State<TimeSlotsScreen> {
                 right: 20.0,
               ),
               child: Text(
-                "Select date of service",
+                "Service Dates",
                 style: TextStyle(
                   fontSize: 23.0,
                   color: Color(0xFF1C3857),
@@ -278,7 +278,7 @@ class TimeSlotsScreenState extends State<TimeSlotsScreen> {
                 right: 20.0,
               ),
               child: Text(
-                "Time to start the service",
+                "Service Timings",
                 style: TextStyle(
                   fontSize: 23.0,
                   color: Color(0xFF1C3857),

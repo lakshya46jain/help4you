@@ -17,12 +17,12 @@ class DetailsScreen extends StatelessWidget {
   final String phoneNumber;
 
   const DetailsScreen({
-    Key key,
-    @required this.professionalUID,
-    @required this.profilePicture,
-    @required this.fullName,
-    @required this.occupation,
-    @required this.phoneNumber,
+    Key? key,
+    required this.professionalUID,
+    required this.profilePicture,
+    required this.fullName,
+    required this.occupation,
+    required this.phoneNumber,
   }) : super(key: key);
 
   @override
@@ -86,15 +86,16 @@ class DetailsScreen extends StatelessWidget {
                         stream: DatabaseService(
                           professionalUID: professionalUID,
                         ).reviewsData,
-                        builder: (context, snapshot) {
+                        builder: (context, AsyncSnapshot snapshot) {
                           double ratingTotal = 0;
                           double rating = 0;
-                          List<Reviews> professionalRatings = snapshot.data;
+                          List<Reviews>? professionalRatings =
+                              snapshot.data as List<Reviews>?;
                           if (snapshot.connectionState ==
                               ConnectionState.active) {
                             for (Reviews professionalRatings
-                                in professionalRatings) {
-                              ratingTotal += professionalRatings.rating;
+                                in professionalRatings!) {
+                              ratingTotal += professionalRatings.rating!;
                               rating = ratingTotal / snapshot.data.length;
                             }
                           }

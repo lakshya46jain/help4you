@@ -11,7 +11,7 @@ import 'package:help4you/screens/onboarding_screen/components/help_container.dar
 import 'package:help4you/screens/onboarding_screen/components/email_address_auth_screen.dart';
 
 class HelpScreen extends StatefulWidget {
-  const HelpScreen({Key key}) : super(key: key);
+  const HelpScreen({Key? key}) : super(key: key);
 
   @override
   State<HelpScreen> createState() => _HelpScreenState();
@@ -19,9 +19,9 @@ class HelpScreen extends StatefulWidget {
 
 class _HelpScreenState extends State<HelpScreen> {
   // Device Details Variables
-  String platform;
-  String deviceType;
-  String osDetails;
+  String? platform;
+  String? deviceType;
+  String? osDetails;
 
   // Send Email Function
   Future launchEmail(
@@ -56,7 +56,12 @@ class _HelpScreenState extends State<HelpScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(
+            left: 20.0,
+            right: 20.0,
+            top: 10.0,
+            bottom: 20.0,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -79,7 +84,7 @@ class _HelpScreenState extends State<HelpScreen> {
                   fontWeight: FontWeight.normal,
                 ),
               ),
-              const SizedBox(height: 30.0),
+              const SizedBox(height: 20.0),
               HelpContainer(
                 icon: CupertinoIcons.mail_solid,
                 title: "Already have an account?",

@@ -11,27 +11,27 @@ import 'package:help4you/screens/message_screen/messages_screen.dart';
 import 'package:help4you/screens/project_details_screen/project_details_screen.dart';
 
 class BookingTile extends StatelessWidget {
-  final String address;
-  final String bookingId;
-  final double totalPrice;
-  final String professionalUID;
-  final Timestamp preferredTimings;
-  final String bookingStatus;
-  final List<CartServices> bookedItemsList;
-  final String otp;
-  final String paymentMethod;
+  final String? address;
+  final String? bookingId;
+  final double? totalPrice;
+  final String? professionalUID;
+  final Timestamp? preferredTimings;
+  final String? bookingStatus;
+  final List<CartServices>? bookedItemsList;
+  final String? otp;
+  final String? paymentMethod;
 
   const BookingTile({
-    Key key,
-    @required this.address,
-    @required this.bookingId,
-    @required this.totalPrice,
-    @required this.professionalUID,
-    @required this.preferredTimings,
-    @required this.bookingStatus,
-    @required this.bookedItemsList,
-    @required this.otp,
-    @required this.paymentMethod,
+    Key? key,
+    required this.address,
+    required this.bookingId,
+    required this.totalPrice,
+    required this.professionalUID,
+    required this.preferredTimings,
+    required this.bookingStatus,
+    required this.bookedItemsList,
+    required this.otp,
+    required this.paymentMethod,
   }) : super(key: key);
 
   @override
@@ -41,7 +41,7 @@ class BookingTile extends StatelessWidget {
           .collection("H4Y Users Database")
           .doc(professionalUID)
           .snapshots(),
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           String profilePicture = snapshot.data["Profile Picture"];
           String fullName = snapshot.data["Full Name"];
@@ -93,7 +93,7 @@ class BookingTile extends StatelessWidget {
                                   ? Colors.red.withOpacity(0.15)
                                   : const Color(0xFFFEA700).withOpacity(0.15),
                           child: Text(
-                            bookingStatus,
+                            bookingStatus!,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 13.0,
@@ -113,7 +113,7 @@ class BookingTile extends StatelessWidget {
                     const SizedBox(height: 7.5),
                     Text(
                       DateFormat("EEE, d MMM, ''yy At h:mm a")
-                          .format(preferredTimings.toDate().toLocal()),
+                          .format(preferredTimings!.toDate().toLocal()),
                       style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.w600,
@@ -176,7 +176,7 @@ class BookingTile extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => MessageScreen(
-                                      uid: professionalUID,
+                                      uid: professionalUID!,
                                       profilePicture: profilePicture,
                                       fullName: fullName,
                                       occupation: occupation,
@@ -207,15 +207,15 @@ class BookingTile extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => ProjectDetailsScreen(
-                            uid: professionalUID,
-                            address: address,
-                            bookingId: bookingId,
-                            totalPrice: totalPrice,
-                            bookingStatus: bookingStatus,
-                            preferredTimings: preferredTimings,
-                            bookedItemsList: bookedItemsList,
-                            otp: otp,
-                            paymentMethod: paymentMethod,
+                            uid: professionalUID!,
+                            address: address!,
+                            bookingId: bookingId!,
+                            totalPrice: totalPrice!,
+                            bookingStatus: bookingStatus!,
+                            preferredTimings: preferredTimings!,
+                            bookedItemsList: bookedItemsList!,
+                            otp: otp!,
+                            paymentMethod: paymentMethod!,
                           ),
                         ),
                       ),

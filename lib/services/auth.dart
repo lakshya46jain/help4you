@@ -24,12 +24,12 @@ class AuthService {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   // Create User Object Based on Firebase User
-  Help4YouUser _userFromFirebase(User user) {
-    return user != null ? Help4YouUser(uid: user.uid) : null;
+  Help4YouUser? _userFromFirebase(User? user) {
+    return (user != null) ? Help4YouUser(uid: user.uid) : null;
   }
 
   // Authenticate User
-  Stream<Help4YouUser> get user {
+  Stream<Help4YouUser?> get user {
     return auth.authStateChanges().map(_userFromFirebase);
   }
 
@@ -67,14 +67,14 @@ class AuthService {
 
   // Phone Authentication
   Future phoneAuthentication(
-    String fullName,
-    String countryCode,
-    String phoneIsoCode,
-    String nonInternationalNumber,
-    String phoneNumber,
-    String emailAddress,
-    String motive,
-    BuildContext context,
+    String? fullName,
+    String? countryCode,
+    String? phoneIsoCode,
+    String? nonInternationalNumber,
+    String? phoneNumber,
+    String? emailAddress,
+    String? motive,
+    BuildContext? context,
   ) async {
     auth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
@@ -83,13 +83,13 @@ class AuthService {
       verificationFailed: (FirebaseAuthException exception) async {
         verificationFailed(
           exception,
-          context,
+          context!,
         );
       },
-      codeSent: (String verificationId, int resendToken) async {
+      codeSent: (String verificationId, int? resendToken) async {
         if (motive == "Registration") {
           Navigator.push(
-            context,
+            context!,
             MaterialPageRoute(
               builder: (context) => VerificationScreen(
                 phoneIsoCode: phoneIsoCode,
@@ -103,13 +103,13 @@ class AuthService {
                   );
                   auth.signInWithCredential(credential).then(
                     (UserCredential result) async {
-                      User user = result.user;
+                      User? user = result.user;
                       DocumentSnapshot ds = await FirebaseFirestore.instance
                           .collection("H4Y Users Database")
-                          .doc(user.uid)
+                          .doc(user?.uid)
                           .get();
                       if (ds.exists) {
-                        await DatabaseService(uid: user.uid)
+                        await DatabaseService(uid: user?.uid)
                             .addOneSignalTokenID()
                             .then(
                               (value) => Navigator.pushAndRemoveUntil(
@@ -121,7 +121,7 @@ class AuthService {
                               ),
                             );
                       } else {
-                        await DatabaseService(uid: user.uid).updateUserData(
+                        await DatabaseService(uid: user?.uid).updateUserData(
                           fullName,
                           countryCode,
                           phoneIsoCode,
@@ -129,7 +129,7 @@ class AuthService {
                           phoneNumber,
                           emailAddress,
                         );
-                        await DatabaseService(uid: user.uid)
+                        await DatabaseService(uid: user?.uid)
                             .updateProfilePicture(
                               "https://drive.google.com/uc?export=view&id=1Fis4yJe7_d_RROY7JdSihM2--GH5aqbe",
                             )
@@ -154,7 +154,7 @@ class AuthService {
           );
         } else if (motive == "Delete Account") {
           Navigator.push(
-            context,
+            context!,
             MaterialPageRoute(
               builder: (context) => DeleteAccVerificationScreen(
                 phoneNumber: phoneNumber,
@@ -166,7 +166,7 @@ class AuthService {
                     verificationId: verificationId,
                     smsCode: pin,
                   );
-                  auth.currentUser.delete();
+                  auth.currentUser?.delete();
                   signOut();
                   Navigator.pushAndRemoveUntil(
                     context,
@@ -184,7 +184,7 @@ class AuthService {
             motive == "Update Email Address" ||
             motive == "Update Password") {
           Navigator.push(
-            context,
+            context!,
             MaterialPageRoute(
               builder: (context) => UpdateNumVerificationScreen(
                 phoneNumber: phoneNumber,
@@ -195,7 +195,7 @@ class AuthService {
                     verificationId: verificationId,
                     smsCode: pin,
                   );
-                  await auth.currentUser
+                  await auth.currentUser!
                       .updatePhoneNumber(phoneCredential)
                       .catchError((error) {
                     verificationFailed(error, context);
@@ -213,7 +213,7 @@ class AuthService {
                           } else if (motive == "Update Password") {
                             return const UpdatePasswordScreen();
                           } else {
-                            return null;
+                            return Container();
                           }
                         },
                       ),
@@ -234,33 +234,33 @@ class AuthService {
 
   // Linking Phone & Email Credential
   Future linkPhoneAndEmailCredential(
-    String uid,
-    String emailAddress,
-    String password,
+    String? uid,
+    String? emailAddress,
+    String? password,
   ) async {
     var credential = EmailAuthProvider.credential(
-      email: emailAddress,
-      password: password,
+      email: emailAddress!,
+      password: password!,
     );
-    await auth.currentUser.linkWithCredential(credential).then(
+    await auth.currentUser!.linkWithCredential(credential).then(
           (value) => DatabaseService(uid: uid).updateEmailAddress(emailAddress),
         );
   }
 
   // Login With Email Address & Password
   Future loginWithEmailAddressAndPassword(
-    String emailAddress,
-    String password,
+    String? emailAddress,
+    String? password,
     BuildContext context,
   ) async {
     await auth
         .signInWithEmailAndPassword(
-      email: emailAddress,
-      password: password,
+      email: emailAddress!,
+      password: password!,
     )
         .then(
       (value) async {
-        String uid = auth.currentUser.uid.toString();
+        String uid = auth.currentUser!.uid.toString();
         await DatabaseService(uid: uid).addOneSignalTokenID().then(
               (value) => Navigator.pushAndRemoveUntil(
                 context,
@@ -276,31 +276,31 @@ class AuthService {
 
   // Reset Password
   Future resetPassword(
-    String emailAddress,
+    String? emailAddress,
   ) async {
-    await auth.sendPasswordResetEmail(email: emailAddress);
+    await auth.sendPasswordResetEmail(email: emailAddress!);
   }
 
   // Updating Email Address
   Future updateEmailAddress(
-    String uid,
-    String emailAddress,
+    String? uid,
+    String? emailAddress,
   ) async {
-    await auth.currentUser.updateEmail(emailAddress).then(
+    await auth.currentUser!.updateEmail(emailAddress!).then(
           (value) => DatabaseService(uid: uid).updateEmailAddress(emailAddress),
         );
   }
 
   // Updating Password
   Future updatePassword(
-    String password,
+    String? password,
   ) async {
-    await auth.currentUser.updatePassword(password);
+    await auth.currentUser!.updatePassword(password!);
   }
 
   // Sign Out
   Future signOut() async {
-    String uid = auth.currentUser.uid.toString();
+    String uid = auth.currentUser!.uid.toString();
     await DatabaseService(uid: uid).removeOneSignalTokenID().then(
           (value) async => await auth.signOut(),
         );

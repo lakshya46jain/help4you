@@ -11,7 +11,7 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
 class UpdatePasswordScreen extends StatefulWidget {
-  const UpdatePasswordScreen({Key key}) : super(key: key);
+  const UpdatePasswordScreen({Key? key}) : super(key: key);
 
   @override
   State<UpdatePasswordScreen> createState() => _UpdatePasswordScreenState();
@@ -19,7 +19,7 @@ class UpdatePasswordScreen extends StatefulWidget {
 
 class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
   // Text Field Variables
-  String password;
+  String? password;
 
   RegExp regex = RegExp(
     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
@@ -41,7 +41,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           title: Text(
-            "Update Email Address",
+            "Update Password",
             style: GoogleFonts.balooPaaji2(
               fontSize: 25.0,
               color: const Color(0xFF1C3857),
@@ -68,8 +68,8 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                         obscureText: true,
                         keyboardType: TextInputType.visiblePassword,
                         hintText: "Enter Password...",
-                        validator: (String value) {
-                          if (value.isEmpty) {
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
                             return "Password field cannot be empty";
                           } else if (!regex.hasMatch(value)) {
                             return "Please include atleast one (a-z), (0-9) & special symbol";
@@ -95,8 +95,8 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                         obscureText: true,
                         keyboardType: TextInputType.visiblePassword,
                         hintText: "Confirm Password...",
-                        validator: (String value) {
-                          if (value.isEmpty) {
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
                             return "Confirm Password field cannot be empty";
                           } else if (value != password) {
                             return "The password entered does not match";
@@ -117,7 +117,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                       icon: CupertinoIcons.chevron_right,
                       onTap: () async {
                         try {
-                          if (formKey.currentState.validate()) {
+                          if (formKey.currentState!.validate()) {
                             await AuthService().updatePassword(password).then(
                                   (value) => Navigator.push(
                                     context,
@@ -129,7 +129,9 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                                 );
                           }
                         } catch (error) {
-                          if (error.code == "email-already-in-use") {
+                          if (error
+                              .toString()
+                              .contains("email-already-in-use")) {
                             showCustomSnackBar(
                               context,
                               CupertinoIcons.exclamationmark_circle,

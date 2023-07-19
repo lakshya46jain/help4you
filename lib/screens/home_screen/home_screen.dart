@@ -7,7 +7,7 @@ import 'package:help4you/screens/home_screen/components/header.dart';
 import 'package:help4you/screens/home_screen/components/occupation_list_builder.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   HomeScreenState createState() => HomeScreenState();
@@ -32,7 +32,7 @@ class HomeScreenState extends State<HomeScreen> {
                 hintText: "Search locations...",
                 width: MediaQuery.of(context).size.width,
               ),
-              const SizedBox(height: 20.0),
+              const SizedBox(height: 10.0),
               const OccupationListBuilder(),
               const SizedBox(height: 20.0),
               Container(

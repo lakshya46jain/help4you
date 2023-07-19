@@ -6,17 +6,17 @@ import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/screens/project_details_screen/components/dashed_line.dart';
 
 class BookedItemsList extends StatelessWidget {
-  final List<CartServices> bookedItemsList;
+  final List<CartServices>? bookedItemsList;
 
   const BookedItemsList({
-    Key key,
-    @required this.bookedItemsList,
+    Key? key,
+    required this.bookedItemsList,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: bookedItemsList.length,
+      itemCount: bookedItemsList!.length,
       shrinkWrap: true,
       padding: const EdgeInsets.all(0.0),
       physics: const NeverScrollableScrollPhysics(),
@@ -41,7 +41,7 @@ class BookedItemsList extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Qty ${bookedItemsList[index].quantity}",
+                        "Qty ${bookedItemsList![index].quantity}",
                         style: const TextStyle(
                           fontSize: 13.0,
                           color: Colors.grey,
@@ -54,14 +54,14 @@ class BookedItemsList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        bookedItemsList[index].serviceTitle,
+                        bookedItemsList![index].serviceTitle!,
                         style: const TextStyle(
                           fontSize: 17.0,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       Text(
-                        "${bookedItemsList[index].servicePrice}",
+                        "${bookedItemsList![index].servicePrice}",
                         style: const TextStyle(
                           fontSize: 17.0,
                           fontWeight: FontWeight.w500,
@@ -71,7 +71,7 @@ class BookedItemsList extends StatelessWidget {
                   ),
                   const SizedBox(height: 5.0),
                   Text(
-                    bookedItemsList[index].serviceDescription,
+                    bookedItemsList![index].serviceDescription!,
                     style: const TextStyle(
                       fontSize: 13.0,
                       color: Colors.grey,

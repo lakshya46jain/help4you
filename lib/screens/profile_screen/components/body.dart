@@ -14,11 +14,11 @@ import 'package:help4you/screens/profile_screen/components/profile_stream.dart';
 import 'package:help4you/screens/personal_data_screen/personal_data_screen.dart';
 
 class ProfileScreenBody extends StatefulWidget {
-  final Help4YouUser user;
+  final Help4YouUser? user;
 
   const ProfileScreenBody({
-    Key key,
-    @required this.user,
+    Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -37,6 +37,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      // ignore: unnecessary_null_comparison
       children: (widget.user != null)
           ? [
               const SizedBox(height: 70.0),
@@ -83,11 +84,12 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
                 },
               ),
               StreamBuilder(
-                stream: DatabaseService(uid: widget.user.uid).userData,
+                stream: DatabaseService(uid: widget.user!.uid).userData,
                 builder: (context, snapshot) {
-                  UserDataCustomer userData = snapshot.data;
+                  UserDataCustomer? userData =
+                      snapshot.data as UserDataCustomer?;
                   if (snapshot.hasData) {
-                    if (userData.adminLevel > 0) {
+                    if (userData!.adminLevel! > 0) {
                       return SignatureButton(
                         type: "Expanded",
                         icon: CupertinoIcons.person_2,
@@ -110,7 +112,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
                 type: "Expanded",
                 icon: CupertinoIcons.square_arrow_right,
                 text: "Sign Out",
-                onTap: () {
+                onTap: () async {
                   return AuthService().signOut();
                 },
               ),

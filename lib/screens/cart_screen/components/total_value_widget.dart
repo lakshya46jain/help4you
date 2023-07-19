@@ -9,23 +9,23 @@ import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/screens/cart_screen/components/continue_button_stream.dart';
 
 class TotalValueWidget extends StatelessWidget {
-  final Help4YouUser user;
+  final Help4YouUser? user;
 
   const TotalValueWidget({
-    Key key,
-    @required this.user,
+    Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: DatabaseService(uid: user.uid).cartServiceListData,
+      stream: DatabaseService(uid: user!.uid).cartServiceListData,
       builder: (context, snapshot) {
         double total = 0;
-        List<CartServices> cartServices = snapshot.data;
+        List<CartServices>? cartServices = snapshot.data as List<CartServices>?;
         if (snapshot.connectionState == ConnectionState.active) {
-          for (CartServices cartService in cartServices) {
-            total += cartService.servicePrice * cartService.quantity;
+          for (CartServices cartService in cartServices!) {
+            total += cartService.servicePrice! * cartService.quantity!;
           }
         }
         return Row(

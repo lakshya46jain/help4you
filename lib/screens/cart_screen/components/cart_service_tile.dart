@@ -10,26 +10,26 @@ import 'package:help4you/models/user_model.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
 
 class CartServiceTile extends StatelessWidget {
-  final String serviceId;
-  final String professionalId;
-  final String serviceTitle;
-  final String serviceDescription;
-  final double servicePrice;
-  final int quantity;
+  final String? serviceId;
+  final String? professionalId;
+  final String? serviceTitle;
+  final String? serviceDescription;
+  final double? servicePrice;
+  final int? quantity;
 
   const CartServiceTile({
-    Key key,
+    Key? key,
     this.serviceId,
-    @required this.professionalId,
-    @required this.serviceTitle,
-    @required this.serviceDescription,
-    @required this.servicePrice,
-    @required this.quantity,
+    required this.professionalId,
+    required this.serviceTitle,
+    required this.serviceDescription,
+    required this.servicePrice,
+    required this.quantity,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -48,7 +48,7 @@ class CartServiceTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        serviceTitle,
+                        serviceTitle!,
                         style: const TextStyle(
                           fontSize: 21.0,
                           color: Color(0xFF1C3857),
@@ -97,10 +97,10 @@ class CartServiceTile extends StatelessWidget {
                             ),
                           ),
                           onTap: () async {
-                            if (quantity - 1 == 0) {
+                            if (quantity! - 1 == 0) {
                               await FirebaseFirestore.instance
                                   .collection("H4Y Users Database")
-                                  .doc(user.uid)
+                                  .doc(user!.uid)
                                   .collection("Cart")
                                   .doc(serviceId)
                                   .delete()
@@ -114,10 +114,10 @@ class CartServiceTile extends StatelessWidget {
                                     ),
                                   );
                             } else {
-                              await DatabaseService(uid: user.uid)
+                              await DatabaseService(uid: user!.uid)
                                   .updateQuantity(
                                     serviceId,
-                                    quantity - 1,
+                                    quantity! - 1,
                                   )
                                   .then(
                                     (value) => showCustomSnackBar(
@@ -154,10 +154,10 @@ class CartServiceTile extends StatelessWidget {
                           ),
                           onTap: () async {
                             if (quantity != 25) {
-                              await DatabaseService(uid: user.uid)
+                              await DatabaseService(uid: user!.uid)
                                   .updateQuantity(
                                     serviceId,
-                                    quantity + 1,
+                                    quantity! + 1,
                                   )
                                   .then(
                                     (value) => showCustomSnackBar(
@@ -187,7 +187,7 @@ class CartServiceTile extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              serviceDescription,
+              serviceDescription!,
               style: const TextStyle(
                 fontSize: 14.0,
                 color: Color(0xFF95989A),

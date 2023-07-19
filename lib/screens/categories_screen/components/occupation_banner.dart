@@ -6,11 +6,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:help4you/screens/professionals_screen/listing_screen.dart';
 
 class OccupationBanner extends StatelessWidget {
-  final String buttonBanner;
-  final String occupation;
+  final String? buttonBanner;
+  final String? occupation;
 
   const OccupationBanner({
-    Key key,
+    Key? key,
     this.buttonBanner,
     this.occupation,
   }) : super(key: key);
@@ -28,7 +28,7 @@ class OccupationBanner extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => ProfessionalListingScreen(
-                occupation: occupation,
+                occupation: occupation!,
               ),
             ),
           );
@@ -37,7 +37,7 @@ class OccupationBanner extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           child: CachedNetworkImage(
             fit: BoxFit.fill,
-            imageUrl: buttonBanner,
+            imageUrl: buttonBanner!,
           ),
         ),
       ),

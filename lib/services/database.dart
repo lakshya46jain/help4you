@@ -14,12 +14,12 @@ import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/models/service_category_model.dart';
 
 class DatabaseService {
-  final String uid;
-  final String professionalUID;
-  final String serviceId;
-  final String addressId;
-  final String bookingId;
-  final String bookingStatus;
+  final String? uid;
+  final String? professionalUID;
+  final String? serviceId;
+  final String? addressId;
+  final String? bookingId;
+  final String? bookingStatus;
 
   DatabaseService({
     this.uid,
@@ -56,12 +56,12 @@ class DatabaseService {
 
   // Update User Data
   Future updateUserData(
-    String fullName,
-    String countryCode,
-    String phoneIsoCode,
-    String nonInternationalNumber,
-    String phoneNumber,
-    String emailAddress,
+    String? fullName,
+    String? countryCode,
+    String? phoneIsoCode,
+    String? nonInternationalNumber,
+    String? phoneNumber,
+    String? emailAddress,
   ) async {
     await userCollection.doc(uid).set({
       'Full Name': fullName,
@@ -80,7 +80,7 @@ class DatabaseService {
   // Add OneSignal Token ID
   Future addOneSignalTokenID() async {
     var status = await OneSignal.shared.getDeviceState();
-    String tokenId = status.userId;
+    String? tokenId = status?.userId;
     await userCollection.doc(uid).update({
       'OneSignal Token IDs': FieldValue.arrayUnion([tokenId]),
     });
@@ -89,7 +89,7 @@ class DatabaseService {
   // Remove OneSignal Token ID
   Future removeOneSignalTokenID() async {
     var status = await OneSignal.shared.getDeviceState();
-    String tokenId = status.userId;
+    String? tokenId = status?.userId;
     await userCollection.doc(uid).update({
       'OneSignal Token IDs': FieldValue.arrayRemove([tokenId]),
     });
@@ -97,7 +97,7 @@ class DatabaseService {
 
   // Update User Profile Picture
   Future updateProfilePicture(
-    String profilePicture,
+    String? profilePicture,
   ) async {
     await userCollection.doc(uid).update({
       'Profile Picture': profilePicture,
@@ -106,7 +106,7 @@ class DatabaseService {
 
   // Update User Email Address
   Future updateEmailAddress(
-    String emailAddress,
+    String? emailAddress,
   ) async {
     await userCollection.doc(uid).update({
       'Email Address': emailAddress,
@@ -115,7 +115,7 @@ class DatabaseService {
 
   // Update User Online Status
   Future updateUserStatus(
-    String status,
+    String? status,
   ) async {
     await userCollection.doc(uid).update({
       'Status': status,
@@ -124,11 +124,11 @@ class DatabaseService {
 
   // Add To Cart
   Future addToCart(
-    String serviceId,
-    String serviceTitle,
-    String serviceDescription,
-    double servicePrice,
-    int quantity,
+    String? serviceId,
+    String? serviceTitle,
+    String? serviceDescription,
+    double? servicePrice,
+    int? quantity,
   ) async {
     await userCollection.doc(uid).collection("Cart").doc(serviceId).set({
       'Service Title': serviceTitle,
@@ -141,8 +141,8 @@ class DatabaseService {
 
   // Update Cart Quantity
   Future updateQuantity(
-    String serviceId,
-    int quantity,
+    String? serviceId,
+    int? quantity,
   ) async {
     await userCollection.doc(uid).collection("Cart").doc(serviceId).update({
       'Quantity': quantity,
@@ -165,8 +165,8 @@ class DatabaseService {
 
   // Add Chat Room Messages
   Future addMessageToChatRoom(
-    String type,
-    String message,
+    String? type,
+    String? message,
   ) async {
     await chatRoomCollection
         .doc("${uid}_$professionalUID")
@@ -183,8 +183,8 @@ class DatabaseService {
 
   // Update Message Read Status
   Future updateMessageReadStatus(
-    String chatRoomId,
-    String messageId,
+    String? chatRoomId,
+    String? messageId,
   ) async {
     await chatRoomCollection
         .doc(chatRoomId)
@@ -197,9 +197,9 @@ class DatabaseService {
 
   // Create Reviews
   Future createReview(
-    double rating,
-    String review,
-    bool isRecommended,
+    double? rating,
+    String? review,
+    bool? isRecommended,
   ) async {
     await reviewsCollection.doc().set({
       "Rating": rating,
@@ -213,10 +213,10 @@ class DatabaseService {
 
   // Add Address
   Future addAdress(
-    GeoPoint geoPoint,
-    String addressName,
-    String completeAddress,
-    int addressType,
+    GeoPoint? geoPoint,
+    String? addressName,
+    String? completeAddress,
+    int? addressType,
   ) async {
     await savedAddressCollection.doc().set({
       "Customer UID": uid,
@@ -229,10 +229,10 @@ class DatabaseService {
 
   // Update Address
   Future updateAdress(
-    GeoPoint geoPoint,
-    String addressName,
-    String completeAddress,
-    int addressType,
+    GeoPoint? geoPoint,
+    String? addressName,
+    String? completeAddress,
+    int? addressType,
   ) async {
     await savedAddressCollection.doc(addressId).update({
       "Address Name": addressName,
@@ -244,14 +244,14 @@ class DatabaseService {
 
   // Create Booking
   Future createBooking(
-    String bookingId,
-    String address,
-    GeoPoint addressGeoPoint,
-    DateTime preferredTimings,
-    int slotBooked,
-    String bookingStatus,
-    List<Map> bookedItems,
-    double totalPrice,
+    String? bookingId,
+    String? address,
+    GeoPoint? addressGeoPoint,
+    DateTime? preferredTimings,
+    int? slotBooked,
+    String? bookingStatus,
+    List<Map>? bookedItems,
+    double? totalPrice,
   ) async {
     await bookingsCollection.doc(bookingId).set({
       "Customer UID": uid,
@@ -277,7 +277,7 @@ class DatabaseService {
 
   // Update Booking Status
   Future updateBookingStatus(
-    String bookingStatus,
+    String? bookingStatus,
   ) async {
     await bookingsCollection.doc(bookingId).update({
       "Booking Status": bookingStatus,
@@ -286,7 +286,7 @@ class DatabaseService {
 
   // Update Booking Status
   Future updatePaymentMethod(
-    int paymentMethod,
+    int? paymentMethod,
   ) async {
     await bookingsCollection.doc(bookingId).update({
       "Payment Method": paymentMethod,

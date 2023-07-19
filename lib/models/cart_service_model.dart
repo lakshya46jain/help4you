@@ -1,11 +1,11 @@
 // Service Model
 class CartServices {
-  final String serviceId;
-  final String serviceTitle;
-  final String serviceDescription;
-  final double servicePrice;
-  final int quantity;
-  final String professionalId;
+  final String? serviceId;
+  final String? serviceTitle;
+  final String? serviceDescription;
+  final double? servicePrice;
+  final int? quantity;
+  final String? professionalId;
 
   CartServices({
     this.serviceId,

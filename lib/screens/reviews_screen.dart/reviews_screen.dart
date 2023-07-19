@@ -8,11 +8,11 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/screens/reviews_screen.dart/components/body.dart';
 
 class ReviewsScreen extends StatelessWidget {
-  final String professionalUID;
+  final String? professionalUID;
 
   const ReviewsScreen({
-    Key key,
-    @required this.professionalUID,
+    Key? key,
+    required this.professionalUID,
   }) : super(key: key);
 
   @override

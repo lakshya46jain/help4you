@@ -11,7 +11,7 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
 class DeleteAccPhoneAuthScreen extends StatefulWidget {
-  const DeleteAccPhoneAuthScreen({Key key}) : super(key: key);
+  const DeleteAccPhoneAuthScreen({Key? key}) : super(key: key);
 
   @override
   DeleteAccPhoneAuthScreenState createState() =>
@@ -22,8 +22,8 @@ class DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
   // Text Field Variables
   String countryCode = "+1";
   String phoneIsoCode = "US";
-  String nonInternationalNumber;
-  String emailAddress;
+  String? nonInternationalNumber;
+  String? emailAddress;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
                   autoFocus: true,
                   phoneIsoCode: phoneIsoCode,
                   nonInternationalNumber: nonInternationalNumber,
-                  onChanged: (phone) {
+                  onChangedPhone: (phone) {
                     setState(() {
                       nonInternationalNumber = phone.number;
                     });

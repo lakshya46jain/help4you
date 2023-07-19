@@ -17,11 +17,11 @@ import 'package:help4you/models/address_model.dart';
 import 'package:help4you/constants/signature_button.dart';
 
 class UpdateAddressScreen extends StatefulWidget {
-  final String addressId;
+  final String? addressId;
 
   const UpdateAddressScreen({
-    Key key,
-    @required this.addressId,
+    Key? key,
+    required this.addressId,
   }) : super(key: key);
 
   @override
@@ -30,10 +30,10 @@ class UpdateAddressScreen extends StatefulWidget {
 
 class UpdateAddressScreenState extends State<UpdateAddressScreen> {
   // Google Maps Variables
-  double latitude;
-  double longitude;
-  Position currentPosition;
-  GoogleMapController newGoogleMapsController;
+  double? latitude;
+  double? longitude;
+  Position? currentPosition;
+  GoogleMapController? newGoogleMapsController;
   Completer<GoogleMapController> googleMapsController = Completer();
   static const CameraPosition googlePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
@@ -46,7 +46,7 @@ class UpdateAddressScreenState extends State<UpdateAddressScreen> {
     longitude = geoPoint.longitude;
     CameraPosition cameraPosition =
         CameraPosition(target: latLngPosition, zoom: 14);
-    newGoogleMapsController.animateCamera(
+    newGoogleMapsController!.animateCamera(
       CameraUpdate.newCameraPosition(cameraPosition),
     );
     Marker myLocationMarker = Marker(
@@ -68,7 +68,7 @@ class UpdateAddressScreenState extends State<UpdateAddressScreen> {
     longitude = position.longitude;
     CameraPosition cameraPosition =
         CameraPosition(target: latLngPosition, zoom: 14);
-    newGoogleMapsController.animateCamera(
+    newGoogleMapsController!.animateCamera(
       CameraUpdate.newCameraPosition(cameraPosition),
     );
     Marker myLocationMarker = Marker(
@@ -85,8 +85,8 @@ class UpdateAddressScreenState extends State<UpdateAddressScreen> {
   int selected = 0;
 
   // Variables
-  String addressName;
-  String completeAddress;
+  String? addressName;
+  String? completeAddress;
 
   void getPermission() async {
     var locationStatus = await Permission.location.status;
@@ -147,7 +147,7 @@ class UpdateAddressScreenState extends State<UpdateAddressScreen> {
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -191,10 +191,10 @@ class UpdateAddressScreenState extends State<UpdateAddressScreen> {
       ),
       extendBodyBehindAppBar: true,
       body: StreamBuilder(
-        stream: DatabaseService(uid: user.uid, addressId: widget.addressId)
+        stream: DatabaseService(uid: user!.uid, addressId: widget.addressId)
             .addressData,
         builder: (context, snapshot) {
-          Address addressData = snapshot.data;
+          Address? addressData = snapshot.data as Address?;
           if (snapshot.hasData) {
             return SlidingUpPanel(
               maxHeight: 425.0,
@@ -242,7 +242,7 @@ class UpdateAddressScreenState extends State<UpdateAddressScreen> {
                         ),
                         const SizedBox(height: 20.0),
                         TextFormField(
-                          initialValue: addressData.addressName,
+                          initialValue: addressData!.addressName,
                           style: const TextStyle(
                             color: Colors.white,
                           ),
@@ -300,29 +300,29 @@ class UpdateAddressScreenState extends State<UpdateAddressScreen> {
                         Row(
                           children: [
                             customRadioButton(
-                                0, "Home", addressData.addressType),
+                                0, "Home", addressData.addressType!),
                             customRadioButton(
-                                1, "Office", addressData.addressType),
+                                1, "Office", addressData.addressType!),
                             customRadioButton(
-                                2, "Other", addressData.addressType),
+                                2, "Other", addressData.addressType!),
                           ],
                         ),
                         const SizedBox(height: 30.0),
                         SignatureButton(
                           onTap: () async {
-                            if (formKey.currentState.validate()) {
+                            if (formKey.currentState!.validate()) {
                               FocusScope.of(context).unfocus();
-                              GeoPoint geoPoint = GeoPoint(latitude, longitude);
+                              GeoPoint geoPoint =
+                                  GeoPoint(latitude!, longitude!);
                               await DatabaseService(
                                 uid: user.uid,
                                 addressId: widget.addressId,
                               )
                                   .updateAdress(
-                                    geoPoint ?? addressData.geoPoint,
-                                    addressName ?? addressData.addressName,
-                                    completeAddress ??
-                                        addressData.completeAddress,
-                                    selected ?? addressData.addressType,
+                                    geoPoint,
+                                    addressName,
+                                    completeAddress,
+                                    selected,
                                   )
                                   .then(
                                     (value) => Navigator.pop(context),
@@ -349,7 +349,7 @@ class UpdateAddressScreenState extends State<UpdateAddressScreen> {
                 onMapCreated: (GoogleMapController controller) {
                   googleMapsController.complete(controller);
                   newGoogleMapsController = controller;
-                  currentLocation(addressData.geoPoint);
+                  currentLocation(addressData.geoPoint!);
                 },
               ),
             );

@@ -11,25 +11,25 @@ import 'package:help4you/screens/create_booking_screens/components/summary_bar.d
 import 'package:help4you/screens/create_booking_screens/components/summary_body.dart';
 
 class SummaryScreen extends StatelessWidget {
-  final String professionalUID;
-  final String completeAddress;
-  final GeoPoint geoPointLocation;
-  final DateTime bookingTimings;
-  final int slotBooked;
+  final String? professionalUID;
+  final String? completeAddress;
+  final GeoPoint? geoPointLocation;
+  final DateTime? bookingTimings;
+  final int? slotBooked;
 
   const SummaryScreen({
-    Key key,
-    @required this.professionalUID,
-    @required this.completeAddress,
-    @required this.geoPointLocation,
-    @required this.bookingTimings,
-    @required this.slotBooked,
+    Key? key,
+    required this.professionalUID,
+    required this.completeAddress,
+    required this.geoPointLocation,
+    required this.bookingTimings,
+    required this.slotBooked,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return Scaffold(
       appBar: AppBar(

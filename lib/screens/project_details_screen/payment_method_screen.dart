@@ -10,13 +10,13 @@ import 'package:help4you/services/onesignal_configuration.dart';
 import 'package:help4you/screens/create_booking_screens/confirmation_screen.dart';
 
 class PaymentMethodScreen extends StatefulWidget {
-  final String uid;
-  final String bookingId;
+  final String? uid;
+  final String? bookingId;
 
   const PaymentMethodScreen({
-    Key key,
-    @required this.uid,
-    @required this.bookingId,
+    Key? key,
+    required this.uid,
+    required this.bookingId,
   }) : super(key: key);
 
   @override
@@ -25,7 +25,7 @@ class PaymentMethodScreen extends StatefulWidget {
 
 class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   // Selected Index
-  int selectedIndex;
+  int? selectedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -140,6 +140,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                 ),
               ],
             ),
+            // ignore: unnecessary_null_comparison
             (selectedIndex != null)
                 ? SafeArea(
                     child: Column(
@@ -168,11 +169,11 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                                   .updatePaymentMethod(1);
                             }
                             sendNotification(
-                              widget.uid,
+                              widget.uid!,
                               "Congratulations",
                               "Your payment was successfully completed.",
                               "Booking",
-                              widget.bookingId,
+                              widget.bookingId!,
                             );
                           },
                           text: "Continue",

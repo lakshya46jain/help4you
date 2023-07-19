@@ -7,16 +7,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 class UniqueUsersTile extends StatelessWidget {
   final String uid;
-  final Function onTap;
+  final VoidCallback onTap;
   final int index;
   final int selected;
 
   const UniqueUsersTile({
-    Key key,
-    @required this.uid,
-    @required this.onTap,
-    @required this.index,
-    @required this.selected,
+    Key? key,
+    required this.uid,
+    required this.onTap,
+    required this.index,
+    required this.selected,
   }) : super(key: key);
 
   @override
@@ -30,7 +30,7 @@ class UniqueUsersTile extends StatelessWidget {
               .collection("H4Y Users Database")
               .doc(uid)
               .snapshots(),
-          builder: (context, snapshot) {
+          builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               String profilePicture = snapshot.data["Profile Picture"];
               String fullName = snapshot.data["Full Name"];

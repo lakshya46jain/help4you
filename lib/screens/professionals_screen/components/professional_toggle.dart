@@ -15,13 +15,13 @@ class ProfessionalsToggle extends StatelessWidget {
   final double rating;
 
   const ProfessionalsToggle({
-    Key key,
-    @required this.professionalUID,
-    @required this.profilePicture,
-    @required this.fullName,
-    @required this.occupation,
-    @required this.phoneNumber,
-    @required this.rating,
+    Key? key,
+    required this.professionalUID,
+    required this.profilePicture,
+    required this.fullName,
+    required this.occupation,
+    required this.phoneNumber,
+    required this.rating,
   }) : super(key: key);
 
   @override

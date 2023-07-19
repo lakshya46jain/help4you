@@ -13,7 +13,7 @@ import 'package:help4you/screens/cart_screen/components/bottom_nav_bar.dart';
 import 'package:help4you/screens/cart_screen/components/cart_list_builder.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({Key key}) : super(key: key);
+  const CartScreen({Key? key}) : super(key: key);
 
   @override
   CartScreenState createState() => CartScreenState();
@@ -23,7 +23,7 @@ class CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -41,11 +41,12 @@ class CartScreenState extends State<CartScreen> {
         ),
       ),
       body: StreamBuilder(
-        stream: DatabaseService(uid: user.uid).cartServiceListData,
+        stream: DatabaseService(uid: user!.uid).cartServiceListData,
         builder: (context, snapshot) {
-          List<CartServices> cartServices = snapshot.data;
+          List<CartServices>? cartServices =
+              snapshot.data as List<CartServices>?;
           if (snapshot.hasData) {
-            if (cartServices.isEmpty) {
+            if (cartServices!.isEmpty) {
               return Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),

@@ -9,7 +9,7 @@ import 'package:help4you/models/user_model.dart';
 import 'package:help4you/screens/message_list_screen/components/body.dart';
 
 class MessageListScreen extends StatefulWidget {
-  const MessageListScreen({Key key}) : super(key: key);
+  const MessageListScreen({Key? key}) : super(key: key);
 
   @override
   State<MessageListScreen> createState() => _MessageListScreenState();
@@ -34,7 +34,7 @@ class _MessageListScreenState extends State<MessageListScreen> {
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return GestureDetector(
       onTap: () {

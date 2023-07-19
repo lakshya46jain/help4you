@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Services Category Model
 class ServiceCategoryLogo {
-  final String occupation;
-  final String buttonLogo;
+  final String? occupation;
+  final String? buttonLogo;
 
   ServiceCategoryLogo({
     this.occupation,
@@ -12,8 +12,8 @@ class ServiceCategoryLogo {
 }
 
 class ServiceCategoryBanner {
-  final String occupation;
-  final String buttonBanner;
+  final String? occupation;
+  final String? buttonBanner;
 
   ServiceCategoryBanner(
     this.occupation,

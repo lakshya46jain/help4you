@@ -7,12 +7,12 @@ import 'package:help4you/models/user_model.dart';
 import 'package:help4you/screens/cart_screen/components/total_value_widget.dart';
 
 class CartNavBar extends StatelessWidget {
-  const CartNavBar({Key key}) : super(key: key);
+  const CartNavBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.13,
@@ -30,7 +30,7 @@ class CartNavBar extends StatelessWidget {
         ],
       ),
       child: TotalValueWidget(
-        user: user,
+        user: user!,
       ),
     );
   }

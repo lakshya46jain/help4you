@@ -9,7 +9,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:help4you/screens/bookings_screen/components/body.dart';
 
 class BookingsScreen extends StatefulWidget {
-  const BookingsScreen({Key key}) : super(key: key);
+  const BookingsScreen({Key? key}) : super(key: key);
 
   @override
   BookingsScreenState createState() => BookingsScreenState();
@@ -17,8 +17,8 @@ class BookingsScreen extends StatefulWidget {
 
 class BookingsScreenState extends State<BookingsScreen> {
   int index = 0;
-  String bookingStatus;
-  FixedExtentScrollController scrollController;
+  String? bookingStatus;
+  FixedExtentScrollController? scrollController;
 
   final items = [
     "Show All Bookings",
@@ -48,7 +48,7 @@ class BookingsScreenState extends State<BookingsScreen> {
 
   @override
   void dispose() {
-    scrollController.dispose();
+    scrollController!.dispose();
     super.dispose();
   }
 
@@ -71,7 +71,7 @@ class BookingsScreenState extends State<BookingsScreen> {
             padding: const EdgeInsets.only(right: 5.0),
             child: IconButton(
               onPressed: () {
-                scrollController.dispose();
+                scrollController!.dispose();
                 scrollController =
                     FixedExtentScrollController(initialItem: index);
                 final pickerOptions = SizedBox(

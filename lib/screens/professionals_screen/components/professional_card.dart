@@ -15,18 +15,18 @@ class ProfessionalCard extends StatelessWidget {
   final String profilePicture;
 
   const ProfessionalCard({
-    Key key,
-    @required this.uid,
-    @required this.fullName,
-    @required this.occupation,
-    @required this.rating,
-    @required this.profilePicture,
+    Key? key,
+    required this.uid,
+    required this.fullName,
+    required this.occupation,
+    required this.rating,
+    required this.profilePicture,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
       child: Stack(
         children: [
           Padding(
@@ -127,7 +127,7 @@ class ProfessionalCard extends StatelessWidget {
                                   .collection("H4Y Services Database")
                                   .where("Professional UID", isEqualTo: uid)
                                   .snapshots(),
-                              builder: (context, snapshot) {
+                              builder: (context, AsyncSnapshot snapshot) {
                                 int totalServices = 0;
                                 if (snapshot.connectionState ==
                                     ConnectionState.active) {
@@ -135,7 +135,7 @@ class ProfessionalCard extends StatelessWidget {
                                   totalServices = documents.length;
                                 }
                                 return Text(
-                                  "$totalServices" ?? "0",
+                                  "$totalServices",
                                   style: GoogleFonts.balooPaaji2(
                                     fontSize: 16.0,
                                   ),

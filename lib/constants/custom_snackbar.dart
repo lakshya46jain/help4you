@@ -14,11 +14,7 @@ showCustomSnackBar(
     content: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Icon(
-          icon,
-          size: 27,
-          color: color,
-        ),
+        Icon(icon, size: 27, color: color),
         const SizedBox(width: 10.0),
         Expanded(
           child: Text.rich(

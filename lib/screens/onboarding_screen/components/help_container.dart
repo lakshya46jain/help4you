@@ -5,14 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 // File Imports
 
 class HelpContainer extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String description;
-  final Function onTap;
-  final String buttonText;
+  final IconData? icon;
+  final String? title;
+  final String? description;
+  final VoidCallback? onTap;
+  final String? buttonText;
 
   const HelpContainer({
-    Key key,
+    Key? key,
     this.icon,
     this.title,
     this.description,
@@ -42,7 +42,7 @@ class HelpContainer extends StatelessWidget {
           ),
           const SizedBox(height: 15.0),
           Text(
-            title,
+            title!,
             style: GoogleFonts.balooPaaji2(
               height: 1.3,
               fontSize: 19.0,
@@ -52,7 +52,7 @@ class HelpContainer extends StatelessWidget {
           ),
           const SizedBox(height: 10.0),
           Text(
-            description,
+            description!,
             style: GoogleFonts.balooPaaji2(
               height: 1.3,
               fontSize: 16.0,
@@ -67,7 +67,7 @@ class HelpContainer extends StatelessWidget {
           GestureDetector(
             onTap: onTap,
             child: Text(
-              buttonText,
+              buttonText!,
               style: GoogleFonts.balooPaaji2(
                 height: 1.3,
                 fontSize: 16.0,

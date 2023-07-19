@@ -13,7 +13,7 @@ import 'package:help4you/constants/signature_button.dart';
 import 'package:help4you/constants/custom_text_field.dart';
 
 class LinkEmailAddressScreen extends StatefulWidget {
-  const LinkEmailAddressScreen({Key key}) : super(key: key);
+  const LinkEmailAddressScreen({Key? key}) : super(key: key);
 
   @override
   State<LinkEmailAddressScreen> createState() => _LinkEmailAddressScreenState();
@@ -21,8 +21,8 @@ class LinkEmailAddressScreen extends StatefulWidget {
 
 class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
   // Text Field Variables
-  String emailAddress;
-  String password;
+  String? emailAddress;
+  String? password;
 
   RegExp regex = RegExp(
     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
@@ -34,7 +34,7 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return GestureDetector(
       onTap: () {
@@ -72,8 +72,8 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                         type: "Normal",
                         keyboardType: TextInputType.emailAddress,
                         hintText: "Enter Email Address...",
-                        validator: (String value) {
-                          if (value.isEmpty) {
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
                             return "Email address field cannot be empty";
                           } else if (!value.contains("@")) {
                             return "Please enter a valid email address";
@@ -99,8 +99,8 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                         obscureText: true,
                         keyboardType: TextInputType.visiblePassword,
                         hintText: "Enter Password...",
-                        validator: (String value) {
-                          if (value.isEmpty) {
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
                             return "Password field cannot be empty";
                           } else if (!regex.hasMatch(value)) {
                             return "Please include atleast one (a-z), (0-9) & special symbol";
@@ -126,8 +126,8 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                         obscureText: true,
                         keyboardType: TextInputType.visiblePassword,
                         hintText: "Confirm Password...",
-                        validator: (String value) {
-                          if (value.isEmpty) {
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
                             return "Confirm Password field cannot be empty";
                           } else if (value != password) {
                             return "The password entered does not match";
@@ -148,10 +148,10 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                       icon: CupertinoIcons.chevron_right,
                       onTap: () async {
                         try {
-                          if (formKey.currentState.validate()) {
+                          if (formKey.currentState!.validate()) {
                             await AuthService()
                                 .linkPhoneAndEmailCredential(
-                                  user.uid,
+                                  user!.uid,
                                   emailAddress,
                                   password,
                                 )
@@ -166,7 +166,9 @@ class _LinkEmailAddressScreenState extends State<LinkEmailAddressScreen> {
                                 );
                           }
                         } catch (error) {
-                          if (error.code == "email-already-in-use") {
+                          if (error
+                              .toString()
+                              .contains("email-already-in-use")) {
                             showCustomSnackBar(
                               context,
                               CupertinoIcons.exclamationmark_circle,

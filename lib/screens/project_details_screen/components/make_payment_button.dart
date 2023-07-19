@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:help4you/screens/project_details_screen/payment_method_screen.dart';
 
 class MakePaymentButton extends StatelessWidget {
-  final String uid;
-  final String bookingId;
+  final String? uid;
+  final String? bookingId;
 
   const MakePaymentButton({
-    Key key,
-    @required this.uid,
-    @required this.bookingId,
+    Key? key,
+    required this.uid,
+    required this.bookingId,
   }) : super(key: key);
 
   @override

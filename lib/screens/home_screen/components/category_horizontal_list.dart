@@ -8,19 +8,20 @@ import 'package:help4you/models/service_category_model.dart';
 import 'package:help4you/screens/home_screen/components/occupation_button.dart';
 
 class CategoryHorizontalList extends StatelessWidget {
-  final Help4YouUser user;
+  final Help4YouUser? user;
 
   const CategoryHorizontalList({
-    Key key,
-    @required this.user,
+    Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: DatabaseService(uid: user.uid).serviceCategoryData,
+      stream: DatabaseService(uid: user!.uid).serviceCategoryData,
       builder: (context, snapshot) {
-        List<ServiceCategoryLogo> servicesCategory = snapshot.data;
+        List<ServiceCategoryLogo>? servicesCategory =
+            snapshot.data as List<ServiceCategoryLogo>?;
         if (snapshot.hasData) {
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
@@ -31,7 +32,7 @@ class CategoryHorizontalList extends StatelessWidget {
               children: [
                 const SizedBox(width: 20.0),
                 ...List.generate(
-                  servicesCategory.length,
+                  servicesCategory!.length,
                   (index) {
                     return OccupationButton(
                       buttonLogo: servicesCategory[index].buttonLogo,

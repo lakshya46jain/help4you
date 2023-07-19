@@ -16,7 +16,7 @@ import 'package:help4you/constants/custom_text_field.dart';
 import 'package:help4you/screens/onboarding_screen/components/password_reset_screen.dart';
 
 class EmailAddressAuthScreen extends StatefulWidget {
-  const EmailAddressAuthScreen({Key key}) : super(key: key);
+  const EmailAddressAuthScreen({Key? key}) : super(key: key);
 
   @override
   State<EmailAddressAuthScreen> createState() => _EmailAddressAuthScreenState();
@@ -24,22 +24,22 @@ class EmailAddressAuthScreen extends StatefulWidget {
 
 class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
   // Text Field Variables
-  String emailAddress;
-  String password;
+  String? emailAddress;
+  String? password;
 
   // Device Details Variables
-  String platform;
-  String deviceType;
-  String osDetails;
+  String? platform;
+  String? deviceType;
+  String? osDetails;
 
   // Send Email Function
   Future launchEmail(
-    String toEmail,
-    String subject,
-    String message,
+    String? toEmail,
+    String? subject,
+    String? message,
   ) async {
     final url =
-        'mailto:$toEmail?subject=${Uri.encodeFull(subject)}&body=${Uri.encodeFull(message)}';
+        'mailto:$toEmail?subject=${Uri.encodeFull(subject!)}&body=${Uri.encodeFull(message!)}';
     if (await canLaunchUrlString(url)) {
       await launchUrlString(url);
     }
@@ -66,109 +66,125 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
           },
         ),
         actions: [
-          GestureDetector(
-            child: const Padding(
-              padding: EdgeInsets.only(right: 15.0),
-              child: Center(
-                child: Text(
-                  "Help",
-                  style: TextStyle(
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: GestureDetector(
+              child: const Row(
+                children: [
+                  Icon(
+                    CupertinoIcons.question_circle,
+                    size: 25.0,
                     color: Color(0xFFFEA700),
-                    fontWeight: FontWeight.bold,
                   ),
-                ),
-              ),
-            ),
-            onTap: () {
-              Widget dialogButton(String title, Color color, Function onTap) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15.0,
-                    vertical: 7.5,
-                  ),
-                  child: GestureDetector(
-                    onTap: onTap,
-                    child: Container(
-                      padding: const EdgeInsets.all(15.0),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: color,
-                        borderRadius: BorderRadius.circular(10.0),
+                  SizedBox(width: 5.0),
+                  Center(
+                    child: Text(
+                      "Help",
+                      style: TextStyle(
+                        color: Color(0xFFFEA700),
+                        fontWeight: FontWeight.bold,
                       ),
-                      child: Center(
-                        child: Text(
-                          title,
-                          style: const TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Widget dialogButton(
+                    String title, Color color, VoidCallback onTap) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15.0,
+                      vertical: 7.5,
+                    ),
+                    child: GestureDetector(
+                      onTap: onTap,
+                      child: Container(
+                        padding: const EdgeInsets.all(15.0),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: color,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Center(
+                          child: Text(
+                            title,
+                            style: const TextStyle(
+                              fontSize: 18.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              }
+                  );
+                }
 
-              AwesomeDialog(
-                context: context,
-                headerAnimationLoop: false,
-                dialogType: DialogType.WARNING,
-                body: Column(
-                  children: [
-                    dialogButton(
-                      "Forgot Password",
-                      const Color(0xFFFEA700),
-                      () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const PasswordResetScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                    dialogButton(
-                      "Contact Support",
-                      const Color(0xFF1C3857),
-                      () async {
-                        if (Platform.isIOS) {
-                          final iosDeviceInfo =
-                              await DeviceInfoPlugin().iosInfo;
-                          setState(() {
-                            platform = "iOS";
-                            deviceType =
-                                "${iosDeviceInfo.model} (${iosDeviceInfo.name})";
-                            osDetails =
-                                "${iosDeviceInfo.systemName} ${iosDeviceInfo.systemVersion}";
-                          });
-                        } else if (Platform.isAndroid) {
-                          final androidDeviceInfo =
-                              await DeviceInfoPlugin().androidInfo;
-                          setState(() {
-                            platform = "Android";
-                            deviceType = androidDeviceInfo.model;
-                            osDetails = androidDeviceInfo.version.toString();
-                          });
-                        }
-                        await launchEmail(
-                          "lakshyaj465@gmail.com",
-                          "[Help4You-$platform]: Issue in logging in Help4You App",
-                          "Full Name: \n\nPhone Number: \n\nIssue: \n\n| The Below Information Must Not Be Edited |\n\nApp Version: Alpha 1\nDevice Type: $deviceType\nOS Details: $osDetails",
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 7.5),
-                  ],
-                ),
-              ).show();
-            },
+                AwesomeDialog(
+                  context: context,
+                  headerAnimationLoop: false,
+                  dialogType: DialogType.warning,
+                  body: Column(
+                    children: [
+                      dialogButton(
+                        "Forgot Password",
+                        const Color(0xFFFEA700),
+                        () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const PasswordResetScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                      dialogButton(
+                        "Contact Support",
+                        const Color(0xFF1C3857),
+                        () async {
+                          if (Platform.isIOS) {
+                            final iosDeviceInfo =
+                                await DeviceInfoPlugin().iosInfo;
+                            setState(() {
+                              platform = "iOS";
+                              deviceType =
+                                  "${iosDeviceInfo.model} (${iosDeviceInfo.name})";
+                              osDetails =
+                                  "${iosDeviceInfo.systemName} ${iosDeviceInfo.systemVersion}";
+                            });
+                          } else if (Platform.isAndroid) {
+                            final androidDeviceInfo =
+                                await DeviceInfoPlugin().androidInfo;
+                            setState(() {
+                              platform = "Android";
+                              deviceType = androidDeviceInfo.model;
+                              osDetails = androidDeviceInfo.version.toString();
+                            });
+                          }
+                          await launchEmail(
+                            "lakshyaj465@gmail.com",
+                            "[Help4You-$platform]: Issue in logging in Help4You App",
+                            "Full Name: \n\nPhone Number: \n\nIssue: \n\n| The Below Information Must Not Be Edited |\n\nApp Version: Alpha 1\nDevice Type: $deviceType\nOS Details: $osDetails",
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 7.5),
+                    ],
+                  ),
+                ).show();
+              },
+            ),
           ),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(
+          left: 20.0,
+          right: 20.0,
+          top: 10.0,
+          bottom: 20.0,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -192,8 +208,8 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                     type: "Normal",
                     keyboardType: TextInputType.emailAddress,
                     hintText: "Enter Email Address...",
-                    validator: (String value) {
-                      if (value.isEmpty) {
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
                         return "Email address field cannot be empty";
                       } else if (!value.contains("@")) {
                         return "Please enter a valid email address";
@@ -214,8 +230,8 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                     obscureText: true,
                     keyboardType: TextInputType.visiblePassword,
                     hintText: "Enter Password...",
-                    validator: (String value) {
-                      if (value.isEmpty) {
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
                         return "Password field cannot be empty";
                       } else {
                         return null;
@@ -234,7 +250,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
               child: SignatureButton(
                 onTap: () async {
                   try {
-                    if (formKey.currentState.validate()) {
+                    if (formKey.currentState!.validate()) {
                       HapticFeedback.heavyImpact();
                       await AuthService().loginWithEmailAddressAndPassword(
                         emailAddress,
@@ -243,7 +259,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                       );
                     }
                   } catch (error) {
-                    if (error.code == "invalid-email") {
+                    if (error.toString().contains("invalid-email")) {
                       showCustomSnackBar(
                         context,
                         CupertinoIcons.exclamationmark_circle,
@@ -251,7 +267,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                         "Error!",
                         "The email entered is invalid. Please try again.",
                       );
-                    } else if (error.code == "user-not-found") {
+                    } else if (error.toString().contains("user-not-found")) {
                       showCustomSnackBar(
                         context,
                         CupertinoIcons.exclamationmark_triangle,
@@ -259,7 +275,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                         "Warning!",
                         "There is no user associated with this email address. Please register.",
                       );
-                    } else if (error.code == "wrong-password") {
+                    } else if (error.toString().contains("wrong-password")) {
                       showCustomSnackBar(
                         context,
                         CupertinoIcons.exclamationmark_circle,

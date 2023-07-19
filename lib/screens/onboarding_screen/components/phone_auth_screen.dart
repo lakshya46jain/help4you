@@ -12,15 +12,15 @@ import 'package:help4you/constants/custom_text_field.dart';
 import 'package:help4you/screens/onboarding_screen/components/help_screen.dart';
 
 class PhoneAuthScreen extends StatefulWidget {
-  final String countryCode;
-  final String phoneIsoCode;
-  final String nonInternationalNumber;
+  final String? countryCode;
+  final String? phoneIsoCode;
+  final String? nonInternationalNumber;
 
   const PhoneAuthScreen({
-    Key key,
-    @required this.countryCode,
-    @required this.phoneIsoCode,
-    @required this.nonInternationalNumber,
+    Key? key,
+    required this.countryCode,
+    required this.phoneIsoCode,
+    required this.nonInternationalNumber,
   }) : super(key: key);
 
   @override
@@ -29,9 +29,9 @@ class PhoneAuthScreen extends StatefulWidget {
 
 class PhoneAuthScreenState extends State<PhoneAuthScreen> {
   // Text Field Variables
-  String countryCode;
-  String phoneIsoCode;
-  String nonInternationalNumber;
+  String? countryCode;
+  String? phoneIsoCode;
+  String? nonInternationalNumber;
 
   @override
   void initState() {
@@ -95,7 +95,12 @@ class PhoneAuthScreenState extends State<PhoneAuthScreen> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(
+          left: 20.0,
+          right: 20.0,
+          top: 10.0,
+          bottom: 20.0,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,7 +123,7 @@ class PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   autoFocus: true,
                   phoneIsoCode: widget.phoneIsoCode,
                   nonInternationalNumber: widget.nonInternationalNumber,
-                  onChanged: (phone) {
+                  onChangedPhone: (phone) {
                     setState(() {
                       nonInternationalNumber = phone.number;
                     });
@@ -167,8 +172,8 @@ class PhoneAuthScreenState extends State<PhoneAuthScreen> {
             SafeArea(
               child: SignatureButton(
                 onTap: () async {
-                  if (countryCode.contains("+")) {
-                    countryCode = countryCode.replaceAll("+", "");
+                  if (countryCode!.contains("+")) {
+                    countryCode = countryCode!.replaceAll("+", "");
                   }
                   HapticFeedback.heavyImpact();
                   await AuthService().phoneAuthentication(

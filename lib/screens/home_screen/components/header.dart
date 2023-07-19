@@ -11,12 +11,12 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/screens/home_screen/components/cart_button_stream.dart';
 
 class Header extends StatelessWidget {
-  const Header({Key key}) : super(key: key);
+  const Header({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     // Key Variables
     var message = '';
@@ -44,9 +44,9 @@ class Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           StreamBuilder(
-            stream: DatabaseService(uid: user.uid).userData,
+            stream: DatabaseService(uid: user!.uid).userData,
             builder: (context, snapshot) {
-              UserDataCustomer userData = snapshot.data;
+              UserDataCustomer? userData = snapshot.data as UserDataCustomer?;
               if (snapshot.hasData) {
                 return Row(
                   children: [
@@ -55,7 +55,7 @@ class Header extends StatelessWidget {
                       child: CachedNetworkImage(
                         height: 60,
                         width: 60,
-                        imageUrl: userData.profilePicture,
+                        imageUrl: userData!.profilePicture!,
                       ),
                     ),
                     const SizedBox(width: 15.0),
@@ -72,7 +72,7 @@ class Header extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          userData.fullName,
+                          userData.fullName!,
                           style: GoogleFonts.balooPaaji2(
                             height: 1.0,
                             fontSize: 23.0,

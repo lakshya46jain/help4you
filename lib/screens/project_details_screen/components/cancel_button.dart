@@ -7,13 +7,13 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/services/onesignal_configuration.dart';
 
 class CancelButton extends StatelessWidget {
-  final String uid;
-  final String bookingId;
+  final String? uid;
+  final String? bookingId;
 
   const CancelButton({
-    Key key,
-    @required this.uid,
-    @required this.bookingId,
+    Key? key,
+    required this.uid,
+    required this.bookingId,
   }) : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class CancelButton extends StatelessWidget {
       onPressed: () {
         AwesomeDialog(
           context: context,
-          dialogType: DialogType.WARNING,
+          dialogType: DialogType.warning,
           title: "Warning!",
           desc:
               "Do you want to continue cancelling your booking? Note: This action is not reversible.",
@@ -40,11 +40,11 @@ class CancelButton extends StatelessWidget {
             await DatabaseService(bookingId: bookingId)
                 .updateBookingStatus("Customer Cancelled");
             sendNotification(
-              uid,
+              uid!,
               "Booking Status Update",
               "There's an update in the booking status by the customer. Have a look at it!",
               "Booking",
-              bookingId,
+              bookingId!,
             );
           },
         ).show();

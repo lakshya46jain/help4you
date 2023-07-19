@@ -5,13 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 // File Imports
 
 class CustomTabBar extends StatefulWidget {
-  final String text1;
-  final String text2;
-  final Widget widget1;
-  final Widget widget2;
+  final String? text1;
+  final String? text2;
+  final Widget? widget1;
+  final Widget? widget2;
 
   const CustomTabBar({
-    Key key,
+    Key? key,
     this.text1,
     this.text2,
     this.widget1,
@@ -24,12 +24,12 @@ class CustomTabBar extends StatefulWidget {
 
 class CustomTabBarState extends State<CustomTabBar> {
   int _selectedPage = 0;
-  PageController _pageController;
+  PageController? _pageController;
 
   void _changePage(int pageNum) {
     setState(() {
       _selectedPage = pageNum;
-      _pageController.animateToPage(
+      _pageController!.animateToPage(
         pageNum,
         duration: const Duration(milliseconds: 1000),
         curve: Curves.fastLinearToSlowEaseIn,
@@ -45,7 +45,7 @@ class CustomTabBarState extends State<CustomTabBar> {
 
   @override
   void dispose() {
-    _pageController.dispose();
+    _pageController!.dispose();
     super.dispose();
   }
 
@@ -90,8 +90,8 @@ class CustomTabBarState extends State<CustomTabBar> {
             },
             controller: _pageController,
             children: [
-              widget.widget1,
-              widget.widget2,
+              widget.widget1!,
+              widget.widget2!,
             ],
           ),
         )
@@ -101,13 +101,13 @@ class CustomTabBarState extends State<CustomTabBar> {
 }
 
 class CustomTabBarButton extends StatelessWidget {
-  final String text;
-  final int selectedPage;
-  final int pageNumber;
-  final Function onPressed;
+  final String? text;
+  final int? selectedPage;
+  final int? pageNumber;
+  final VoidCallback? onPressed;
 
   const CustomTabBarButton({
-    Key key,
+    Key? key,
     this.text,
     this.selectedPage,
     this.pageNumber,
@@ -137,7 +137,7 @@ class CustomTabBarButton extends StatelessWidget {
           horizontal: selectedPage == pageNumber ? 0 : 10.0,
         ),
         child: Text(
-          text ?? "",
+          text!,
           textAlign: TextAlign.center,
           style: GoogleFonts.balooPaaji2(
             fontSize: 23.0,

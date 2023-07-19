@@ -9,26 +9,26 @@ import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/screens/create_booking_screens/components/booking_service_tile.dart';
 
 class SummaryBody extends StatelessWidget {
-  final String professionalUID;
-  final Help4YouUser user;
-  final String completeAddress;
-  final DateTime bookingTimings;
+  final String? professionalUID;
+  final Help4YouUser? user;
+  final String? completeAddress;
+  final DateTime? bookingTimings;
 
   const SummaryBody({
-    Key key,
-    @required this.professionalUID,
-    @required this.user,
-    @required this.completeAddress,
-    @required this.bookingTimings,
+    Key? key,
+    required this.professionalUID,
+    required this.user,
+    required this.completeAddress,
+    required this.bookingTimings,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: DatabaseService(uid: user.uid, professionalUID: professionalUID)
+      stream: DatabaseService(uid: user!.uid, professionalUID: professionalUID)
           .filteredCartServiceListData,
       builder: (context, snapshot) {
-        List<CartServices> cartServices = snapshot.data;
+        List<CartServices>? cartServices = snapshot.data as List<CartServices>?;
         if (snapshot.hasData) {
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
@@ -75,7 +75,7 @@ class SummaryBody extends StatelessWidget {
                       children: [
                         TextSpan(
                           text:
-                              " ${DateFormat.jm().format(bookingTimings.toLocal())} on ${DateFormat("d MMMM yyyy").format(bookingTimings.toLocal())}",
+                              " ${DateFormat.jm().format(bookingTimings!.toLocal())} on ${DateFormat("d MMMM yyyy").format(bookingTimings!.toLocal())}",
                           style: const TextStyle(
                             color: Color(0xFF95989A),
                             fontWeight: FontWeight.normal,
@@ -109,7 +109,7 @@ class SummaryBody extends StatelessWidget {
                 const SizedBox(height: 10.0),
                 ListView.builder(
                   shrinkWrap: true,
-                  itemCount: cartServices.length,
+                  itemCount: cartServices!.length,
                   padding: const EdgeInsets.all(0.0),
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {

@@ -14,23 +14,23 @@ import 'package:help4you/constants/custom_snackbar.dart';
 import 'package:help4you/constants/signature_button.dart';
 
 class RegistrationContinueButton extends StatefulWidget {
-  final File imageFile;
-  final Help4YouUser user;
-  final UserDataCustomer userData;
-  final GlobalKey<FormState> formKey;
-  final String emailAddress;
-  final String password;
-  final String fullName;
+  final File? imageFile;
+  final Help4YouUser? user;
+  final UserDataCustomer? userData;
+  final GlobalKey<FormState>? formKey;
+  final String? emailAddress;
+  final String? password;
+  final String? fullName;
 
   const RegistrationContinueButton({
-    Key key,
-    @required this.imageFile,
-    @required this.user,
-    @required this.userData,
-    @required this.formKey,
-    @required this.emailAddress,
-    @required this.password,
-    @required this.fullName,
+    Key? key,
+    required this.imageFile,
+    required this.user,
+    required this.userData,
+    required this.formKey,
+    required this.emailAddress,
+    required this.password,
+    required this.fullName,
   }) : super(key: key);
 
   @override
@@ -54,26 +54,27 @@ class _RegistrationContinueButtonState
         onTap: () async {
           // Upload Picture to Firebase
           Future setProfilePicture() async {
+            // ignore: unnecessary_null_comparison
             if (widget.imageFile != null) {
               Reference firebaseStorageRef = FirebaseStorage.instance
                   .ref()
-                  .child(("H4Y Profile Pictures/${widget.user.uid}"));
+                  .child(("H4Y Profile Pictures/${widget.user!.uid}"));
               UploadTask uploadTask =
-                  firebaseStorageRef.putFile(widget.imageFile);
+                  firebaseStorageRef.putFile(widget.imageFile!);
               await uploadTask;
               String downloadAddress =
                   await firebaseStorageRef.getDownloadURL();
-              await DatabaseService(uid: widget.user.uid)
+              await DatabaseService(uid: widget.user!.uid)
                   .updateProfilePicture(downloadAddress);
             } else {
-              await DatabaseService(uid: widget.user.uid)
-                  .updateProfilePicture(widget.userData.profilePicture);
+              await DatabaseService(uid: widget.user!.uid)
+                  .updateProfilePicture(widget.userData!.profilePicture);
             }
           }
 
           HapticFeedback.heavyImpact();
           try {
-            if (widget.formKey.currentState.validate()) {
+            if (widget.formKey!.currentState!.validate()) {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
@@ -82,22 +83,22 @@ class _RegistrationContinueButtonState
                 (route) => false,
               );
               await AuthService().linkPhoneAndEmailCredential(
-                widget.user.uid,
+                widget.user!.uid,
                 widget.emailAddress,
                 widget.password,
               );
-              await DatabaseService(uid: widget.user.uid).updateUserData(
-                widget.fullName ?? widget.userData.fullName,
-                widget.userData.countryCode,
-                widget.userData.phoneIsoCode,
-                widget.userData.nonInternationalNumber,
-                widget.userData.phoneNumber,
+              await DatabaseService(uid: widget.user!.uid).updateUserData(
+                widget.fullName,
+                widget.userData!.countryCode,
+                widget.userData!.phoneIsoCode,
+                widget.userData!.nonInternationalNumber,
+                widget.userData!.phoneNumber,
                 widget.emailAddress,
               );
               setProfilePicture();
             }
           } catch (error) {
-            if (error.code == "email-already-in-use") {
+            if (error.toString().contains("email-already-in-use")) {
               showCustomSnackBar(
                 context,
                 CupertinoIcons.exclamationmark_circle,

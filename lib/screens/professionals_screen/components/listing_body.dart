@@ -12,8 +12,8 @@ class ListingScreenBody extends StatefulWidget {
   final String occupation;
 
   const ListingScreenBody({
-    Key key,
-    @required this.occupation,
+    Key? key,
+    required this.occupation,
   }) : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class _ListingScreenBodyState extends State<ListingScreenBody> {
           .where("Account Type", isEqualTo: "Professional")
           .where("Occupation", isEqualTo: widget.occupation)
           .snapshots(),
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.docs.length == 0) {
             return Center(
@@ -54,15 +54,18 @@ class _ListingScreenBodyState extends State<ListingScreenBody> {
                   stream: DatabaseService(
                     professionalUID: documentSnapshot.id,
                   ).reviewsData,
-                  builder: (context, snapshot) {
+                  builder: (context, AsyncSnapshot snapshot) {
                     double ratingTotal = 0;
-                    double rating = 0;
-                    List<Reviews> professionalRatings = snapshot.data;
+                    double? rating = 0;
+                    List<Reviews>? professionalRatings =
+                        snapshot.data as List<Reviews>?;
                     if (snapshot.connectionState == ConnectionState.active) {
-                      for (Reviews professionalRatings in professionalRatings) {
-                        ratingTotal += professionalRatings.rating;
+                      for (Reviews professionalRatings
+                          in professionalRatings!) {
+                        ratingTotal += professionalRatings.rating!;
                         rating = ratingTotal / snapshot.data.length;
-                        rating = num.parse(rating.toStringAsFixed(1));
+                        rating =
+                            num.parse(rating.toStringAsFixed(1)) as double?;
                       }
                     }
                     return ProfessionalsToggle(
@@ -71,7 +74,7 @@ class _ListingScreenBodyState extends State<ListingScreenBody> {
                       fullName: documentSnapshot["Full Name"],
                       occupation: documentSnapshot["Occupation"],
                       phoneNumber: documentSnapshot["Phone Number"],
-                      rating: rating,
+                      rating: rating!,
                     );
                   },
                 );

@@ -15,25 +15,25 @@ import 'package:help4you/services/onesignal_configuration.dart';
 import 'package:help4you/screens/create_booking_screens/confirmation_screen.dart';
 
 class SummaryBar extends StatelessWidget {
-  final String professionalUID;
-  final String completeAddress;
-  final GeoPoint geoPointLocation;
-  final DateTime bookingTimings;
-  final int slotBooked;
+  final String? professionalUID;
+  final String? completeAddress;
+  final GeoPoint? geoPointLocation;
+  final DateTime? bookingTimings;
+  final int? slotBooked;
 
   const SummaryBar({
-    Key key,
-    @required this.professionalUID,
-    @required this.completeAddress,
-    @required this.geoPointLocation,
-    @required this.bookingTimings,
-    @required this.slotBooked,
+    Key? key,
+    required this.professionalUID,
+    required this.completeAddress,
+    required this.geoPointLocation,
+    required this.bookingTimings,
+    required this.slotBooked,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.13,
@@ -51,14 +51,16 @@ class SummaryBar extends StatelessWidget {
         ],
       ),
       child: StreamBuilder(
-        stream: DatabaseService(uid: user.uid, professionalUID: professionalUID)
-            .filteredCartServiceListData,
+        stream:
+            DatabaseService(uid: user!.uid, professionalUID: professionalUID)
+                .filteredCartServiceListData,
         builder: (context, snapshot) {
           double total = 0;
-          List<CartServices> cartServices = snapshot.data;
+          List<CartServices>? cartServices =
+              snapshot.data as List<CartServices>?;
           if (snapshot.connectionState == ConnectionState.active) {
-            for (CartServices cartService in cartServices) {
-              total += cartService.servicePrice * cartService.quantity;
+            for (CartServices cartService in cartServices!) {
+              total += cartService.servicePrice! * cartService.quantity!;
             }
           }
           return Row(
@@ -85,7 +87,7 @@ class SummaryBar extends StatelessWidget {
                     hasSymbols: false,
                   ).generate();
                   List<Map> bookedItems = [];
-                  for (CartServices cartService in cartServices) {
+                  for (CartServices cartService in cartServices!) {
                     bookedItems.add({
                       "Title": cartService.serviceTitle,
                       "Description": cartService.serviceDescription,
@@ -121,7 +123,7 @@ class SummaryBar extends StatelessWidget {
                     total,
                   );
                   sendNotification(
-                    professionalUID,
+                    professionalUID!,
                     "You have a new booking!",
                     "Please check the details and update the user as soon as possible.",
                     "Booking",

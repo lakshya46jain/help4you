@@ -9,17 +9,17 @@ import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 
 class ProfileStream extends StatelessWidget {
-  const ProfileStream({Key key}) : super(key: key);
+  const ProfileStream({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return StreamBuilder(
-      stream: DatabaseService(uid: user.uid).userData,
+      stream: DatabaseService(uid: user!.uid).userData,
       builder: (context, snapshot) {
-        UserDataCustomer userData = snapshot.data;
+        UserDataCustomer? userData = snapshot.data as UserDataCustomer?;
         if (snapshot.hasData) {
           return Padding(
             padding:
@@ -45,7 +45,8 @@ class ProfileStream extends StatelessWidget {
                     child: CachedNetworkImage(
                       height: 75.0,
                       width: 75.0,
-                      imageUrl: userData.profilePicture,
+                      imageUrl: userData!.profilePicture ??
+                          "https://drive.google.com/uc?export=view&id=1Fis4yJe7_d_RROY7JdSihM2--GH5aqbe",
                     ),
                   ),
                 ),
@@ -55,7 +56,7 @@ class ProfileStream extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      userData.fullName,
+                      userData.fullName ?? "Full Name",
                       style: GoogleFonts.balooPaaji2(
                         height: 1.5,
                         fontSize: 25.0,
@@ -64,7 +65,7 @@ class ProfileStream extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      userData.phoneNumber,
+                      userData.phoneNumber ?? "Phone Number",
                       style: GoogleFonts.balooPaaji2(
                         height: 1.0,
                         fontSize: 18.0,

@@ -9,12 +9,12 @@ import 'package:help4you/screens/categories_screen/categories_screen.dart';
 import 'package:help4you/screens/home_screen/components/category_horizontal_list.dart';
 
 class OccupationListBuilder extends StatelessWidget {
-  const OccupationListBuilder({Key key}) : super(key: key);
+  const OccupationListBuilder({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return Column(
       children: [
@@ -52,7 +52,7 @@ class OccupationListBuilder extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 15.0),
+        const SizedBox(height: 5.0),
         CategoryHorizontalList(
           user: user,
         ),

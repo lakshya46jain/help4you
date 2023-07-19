@@ -18,12 +18,12 @@ class ServiceTiles extends StatefulWidget {
   final double servicePrice;
 
   const ServiceTiles({
-    Key key,
-    @required this.serviceId,
-    @required this.professionalId,
-    @required this.serviceTitle,
-    @required this.serviceDescription,
-    @required this.servicePrice,
+    Key? key,
+    required this.serviceId,
+    required this.professionalId,
+    required this.serviceTitle,
+    required this.serviceDescription,
+    required this.servicePrice,
   }) : super(key: key);
 
   @override
@@ -32,22 +32,23 @@ class ServiceTiles extends StatefulWidget {
 
 class ServiceTilesState extends State<ServiceTiles> {
   // Text Field Variables
-  int quantity;
+  int? quantity;
 
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return StreamBuilder(
-      stream: DatabaseService(uid: user.uid, serviceId: widget.serviceId)
+      stream: DatabaseService(uid: user!.uid, serviceId: widget.serviceId)
           .cartServiceData,
       builder: (context, snapshot) {
-        CartServices cartServices = snapshot.data;
-        quantity = cartServices == null ? 0 : cartServices.quantity;
+        CartServices? cartServices = snapshot.data as CartServices?;
+        // ignore: unnecessary_null_comparison
+        quantity = (cartServices == null ? 0 : cartServices.quantity)!;
         return Padding(
           padding: const EdgeInsets.symmetric(
-            vertical: 15.0,
+            vertical: 10.0,
             horizontal: 20.0,
           ),
           child: SizedBox(
@@ -120,7 +121,7 @@ class ServiceTilesState extends State<ServiceTiles> {
                                 ),
                                 onTap: () async {
                                   setState(() {
-                                    quantity++;
+                                    quantity = quantity! + 1;
                                   });
                                   await DatabaseService(
                                           uid: user.uid,
@@ -163,9 +164,9 @@ class ServiceTilesState extends State<ServiceTiles> {
                                       ),
                                     ),
                                     onTap: () async {
-                                      if (quantity - 1 == 0) {
+                                      if (quantity! - 1 == 0) {
                                         setState(() {
-                                          quantity--;
+                                          quantity = quantity! - 1;
                                         });
                                         await FirebaseFirestore.instance
                                             .collection("H4Y Users Database")
@@ -185,7 +186,7 @@ class ServiceTilesState extends State<ServiceTiles> {
                                             );
                                       } else {
                                         setState(() {
-                                          quantity--;
+                                          quantity = quantity! - 1;
                                         });
                                         await DatabaseService(uid: user.uid)
                                             .updateQuantity(
@@ -230,7 +231,7 @@ class ServiceTilesState extends State<ServiceTiles> {
                                     onTap: () async {
                                       if (quantity != 25) {
                                         setState(() {
-                                          quantity++;
+                                          quantity = quantity! + 1;
                                         });
                                         await DatabaseService(uid: user.uid)
                                             .updateQuantity(

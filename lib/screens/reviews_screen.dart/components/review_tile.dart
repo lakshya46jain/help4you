@@ -9,21 +9,21 @@ import 'package:cached_network_image/cached_network_image.dart';
 // File Imports
 
 class ReviewTile extends StatelessWidget {
-  final String reviewId;
-  final String customerUID;
-  final Timestamp timeStamp;
-  final double rating;
-  final String review;
-  final bool isRecommended;
+  final String? reviewId;
+  final String? customerUID;
+  final Timestamp? timeStamp;
+  final double? rating;
+  final String? review;
+  final bool? isRecommended;
 
   const ReviewTile({
-    Key key,
-    @required this.reviewId,
-    @required this.customerUID,
-    @required this.timeStamp,
-    @required this.rating,
-    @required this.review,
-    @required this.isRecommended,
+    Key? key,
+    required this.reviewId,
+    required this.customerUID,
+    required this.timeStamp,
+    required this.rating,
+    required this.review,
+    required this.isRecommended,
   }) : super(key: key);
 
   @override
@@ -33,7 +33,7 @@ class ReviewTile extends StatelessWidget {
           .collection("H4Y Users Database")
           .doc(customerUID)
           .snapshots(),
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           // Customer Data Strings
           String profilePicture = snapshot.data["Profile Picture"];
@@ -83,7 +83,7 @@ class ReviewTile extends StatelessWidget {
                                   opacity: 0.64,
                                   child: Text(
                                     DateFormat('dd MMM yyyy')
-                                        .format(timeStamp.toDate().toLocal()),
+                                        .format(timeStamp!.toDate().toLocal()),
                                     style: const TextStyle(
                                       fontSize: 16.0,
                                     ),
@@ -93,7 +93,7 @@ class ReviewTile extends StatelessWidget {
                             ),
                             const SizedBox(height: 7.5),
                             SimpleStarRating(
-                              rating: rating,
+                              rating: rating!,
                               filledIcon: const Icon(
                                 CupertinoIcons.star_fill,
                                 size: 25.0,
@@ -109,7 +109,7 @@ class ReviewTile extends StatelessWidget {
                             Opacity(
                               opacity: 0.64,
                               child: Text(
-                                review,
+                                review!,
                                 maxLines: null,
                                 style: const TextStyle(
                                   fontSize: 15.0,

@@ -13,10 +13,10 @@ import 'package:help4you/screens/create_booking_screens/saved_address_screen.dar
 import 'package:help4you/screens/unique_users_screen/components/unique_users_tile.dart';
 
 class UniqueUsersScreen extends StatefulWidget {
-  final Set<String> uniqueUsers;
+  final Set<String>? uniqueUsers;
 
   const UniqueUsersScreen({
-    Key key,
+    Key? key,
     this.uniqueUsers,
   }) : super(key: key);
 
@@ -25,12 +25,12 @@ class UniqueUsersScreen extends StatefulWidget {
 }
 
 class _UniqueUsersScreenState extends State<UniqueUsersScreen> {
-  int selected;
+  int? selected;
 
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -52,20 +52,21 @@ class _UniqueUsersScreenState extends State<UniqueUsersScreen> {
           ListView.builder(
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
-            itemCount: widget.uniqueUsers.length,
+            itemCount: widget.uniqueUsers?.length,
             itemBuilder: (context, index) {
               return UniqueUsersTile(
-                uid: widget.uniqueUsers.elementAt(index),
+                uid: widget.uniqueUsers!.elementAt(index),
                 onTap: () {
                   setState(() {
                     selected = index;
                   });
                 },
                 index: index,
-                selected: selected,
+                selected: selected!,
               );
             },
           ),
+          // ignore: unnecessary_null_comparison
           (selected != null)
               ? Padding(
                   padding: const EdgeInsets.only(
@@ -75,19 +76,20 @@ class _UniqueUsersScreenState extends State<UniqueUsersScreen> {
                   ),
                   child: SafeArea(
                     child: StreamBuilder(
-                      stream: DatabaseService(uid: user.uid).addressListData,
+                      stream: DatabaseService(uid: user!.uid).addressListData,
                       builder: (context, snapshot) {
-                        List<Address> addressData = snapshot.data;
+                        List<Address>? addressData =
+                            snapshot.data as List<Address>?;
                         return SignatureButton(
                           type: "Yellow",
                           onTap: () {
-                            if (addressData.isEmpty) {
+                            if (addressData!.isEmpty) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => NewAddressScreen(
-                                    professionalUID:
-                                        widget.uniqueUsers.elementAt(selected),
+                                    professionalUID: widget.uniqueUsers!
+                                        .elementAt(selected!),
                                   ),
                                 ),
                               );
@@ -96,8 +98,8 @@ class _UniqueUsersScreenState extends State<UniqueUsersScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => SavedAddressScreen(
-                                    professionalUID:
-                                        widget.uniqueUsers.elementAt(selected),
+                                    professionalUID: widget.uniqueUsers!
+                                        .elementAt(selected!),
                                   ),
                                 ),
                               );

@@ -5,19 +5,19 @@ import 'package:google_fonts/google_fonts.dart';
 // File Imports
 
 class CustomMediaButton extends StatelessWidget {
-  final Function onTap;
-  final IconData icon;
-  final Color color;
-  final String text;
-  final String title;
+  final VoidCallback? onTap;
+  final IconData? icon;
+  final Color? color;
+  final String? text;
+  final String? title;
 
   const CustomMediaButton({
-    Key key,
-    @required this.onTap,
+    Key? key,
+    required this.onTap,
     this.icon,
-    @required this.color,
+    required this.color,
     this.text,
-    @required this.title,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -48,7 +48,7 @@ class CustomMediaButton extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               Text(
-                title,
+                title!,
                 style: GoogleFonts.balooPaaji2(
                   height: 1.0,
                   fontSize: 18.0,

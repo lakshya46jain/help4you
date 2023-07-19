@@ -7,15 +7,15 @@ import 'package:help4you/screens/create_booking_screens/summary_screen.dart';
 import 'package:help4you/screens/create_booking_screens/timings_selection_screen.dart';
 
 class TimingsFooter extends StatelessWidget {
-  final DateTime mergedTime;
-  final int slotBooked;
-  final TimingsSelectionScreen widget;
+  final DateTime? mergedTime;
+  final int? slotBooked;
+  final TimingsSelectionScreen? widget;
 
   const TimingsFooter({
-    Key key,
-    @required this.mergedTime,
-    @required this.slotBooked,
-    @required this.widget,
+    Key? key,
+    required this.mergedTime,
+    required this.slotBooked,
+    required this.widget,
   }) : super(key: key);
 
   @override
@@ -34,9 +34,9 @@ class TimingsFooter extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SummaryScreen(
-                      professionalUID: widget.professionalUID,
-                      completeAddress: widget.completeAddress,
-                      geoPointLocation: widget.geoPointLocation,
+                      professionalUID: widget!.professionalUID,
+                      completeAddress: widget!.completeAddress,
+                      geoPointLocation: widget!.geoPointLocation,
                       bookingTimings: mergedTime,
                       slotBooked: slotBooked,
                     ),

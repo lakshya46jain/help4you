@@ -9,23 +9,23 @@ import 'package:help4you/models/cart_service_model.dart';
 import 'package:help4you/screens/cart_screen/cart_screen.dart';
 
 class CartButtonStream extends StatelessWidget {
-  final Help4YouUser user;
+  final Help4YouUser? user;
 
   const CartButtonStream({
-    Key key,
-    @required this.user,
+    Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: DatabaseService(uid: user.uid).cartServiceListData,
+      stream: DatabaseService(uid: user!.uid).cartServiceListData,
       builder: (context, snapshot) {
         int totalItems = 0;
-        List<CartServices> cartServices = snapshot.data;
+        List<CartServices>? cartServices = snapshot.data as List<CartServices>?;
         if (snapshot.connectionState == ConnectionState.active) {
-          for (CartServices cartService in cartServices) {
-            totalItems += cartService.quantity;
+          for (CartServices cartService in cartServices!) {
+            totalItems += cartService.quantity!;
           }
         }
         return GestureDetector(

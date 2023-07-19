@@ -14,11 +14,11 @@ import 'package:help4you/screens/create_booking_screens/timings_selection_screen
 import 'package:help4you/screens/create_booking_screens/components/saved_address_tile.dart';
 
 class SavedAddressScreen extends StatefulWidget {
-  final String professionalUID;
+  final String? professionalUID;
 
   const SavedAddressScreen({
-    Key key,
-    @required this.professionalUID,
+    Key? key,
+    required this.professionalUID,
   }) : super(key: key);
 
   @override
@@ -26,12 +26,12 @@ class SavedAddressScreen extends StatefulWidget {
 }
 
 class SavedAddressScreenState extends State<SavedAddressScreen> {
-  int selected;
+  int? selected;
 
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -67,9 +67,9 @@ class SavedAddressScreenState extends State<SavedAddressScreen> {
         ],
       ),
       body: StreamBuilder(
-        stream: DatabaseService(uid: user.uid).addressListData,
+        stream: DatabaseService(uid: user!.uid).addressListData,
         builder: (context, snapshot) {
-          List<Address> addressOptions = snapshot.data;
+          List<Address>? addressOptions = snapshot.data as List<Address>?;
           if (snapshot.hasData) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,7 +78,7 @@ class SavedAddressScreenState extends State<SavedAddressScreen> {
                   shrinkWrap: true,
                   padding: const EdgeInsets.all(0.0),
                   physics: const BouncingScrollPhysics(),
-                  itemCount: addressOptions.length,
+                  itemCount: addressOptions!.length,
                   itemBuilder: (context, index) {
                     return SavedAddressTile(
                       uid: user.uid,
@@ -97,6 +97,7 @@ class SavedAddressScreenState extends State<SavedAddressScreen> {
                     );
                   },
                 ),
+                // ignore: unnecessary_null_comparison
                 (selected != null)
                     ? Padding(
                         padding: const EdgeInsets.only(
@@ -113,10 +114,10 @@ class SavedAddressScreenState extends State<SavedAddressScreen> {
                                 MaterialPageRoute(
                                   builder: (context) => TimingsSelectionScreen(
                                     professionalUID: widget.professionalUID,
-                                    completeAddress: addressOptions[selected]
+                                    completeAddress: addressOptions[selected!]
                                         .completeAddress,
                                     geoPointLocation:
-                                        addressOptions[selected].geoPoint,
+                                        addressOptions[selected!].geoPoint,
                                   ),
                                 ),
                               );

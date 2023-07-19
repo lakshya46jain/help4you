@@ -9,25 +9,25 @@ import 'package:help4you/models/booking_model.dart';
 import 'package:help4you/screens/bookings_screen/components/booking_tile.dart';
 
 class BookingsScreenBody extends StatelessWidget {
-  final String bookingStatus;
+  final String? bookingStatus;
 
   const BookingsScreenBody({
-    Key key,
+    Key? key,
     this.bookingStatus,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // Get User
-    final user = Provider.of<Help4YouUser>(context);
+    final user = Provider.of<Help4YouUser?>(context);
 
     return StreamBuilder(
       stream: DatabaseService(
-        uid: user.uid,
+        uid: user!.uid,
         bookingStatus: bookingStatus,
       ).bookingsListData,
       builder: (context, snapshot) {
-        List<Booking> bookingsList = snapshot.data;
+        List<Booking>? bookingsList = snapshot.data as List<Booking>?;
         if (snapshot.hasData) {
           return ListView.builder(
             shrinkWrap: true,
@@ -38,9 +38,9 @@ class BookingsScreenBody extends StatelessWidget {
               right: 0.0,
               left: 0.0,
             ),
-            itemCount: bookingsList.length,
+            itemCount: bookingsList!.length,
             itemBuilder: (context, index) {
-              int paymentMethod = bookingsList[index].paymentMethod;
+              int? paymentMethod = bookingsList[index].paymentMethod;
               return BookingTile(
                 address: bookingsList[index].address,
                 bookingId: bookingsList[index].bookingId,
