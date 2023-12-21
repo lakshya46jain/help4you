@@ -99,6 +99,7 @@ class _RegistrationContinueButtonState
             }
           } catch (error) {
             if (error.toString().contains("email-already-in-use")) {
+              // ignore: use_build_context_synchronously
               showCustomSnackBar(
                 context,
                 CupertinoIcons.exclamationmark_circle,
@@ -107,6 +108,7 @@ class _RegistrationContinueButtonState
                 "Email is already in use. Please try again later.",
               );
             } else {
+              // ignore: use_build_context_synchronously
               showCustomSnackBar(
                 context,
                 CupertinoIcons.exclamationmark_circle,

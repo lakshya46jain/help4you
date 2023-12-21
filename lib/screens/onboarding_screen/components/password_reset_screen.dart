@@ -120,6 +120,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                     }
                   } catch (error) {
                     if (error.toString().contains("invalid-email")) {
+                      // ignore: use_build_context_synchronously
                       showCustomSnackBar(
                         context,
                         CupertinoIcons.exclamationmark_circle,
@@ -128,6 +129,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                         "The email entered is invalid. Please try again.",
                       );
                     } else if (error.toString().contains("user-not-found")) {
+                      // ignore: use_build_context_synchronously
                       showCustomSnackBar(
                         context,
                         CupertinoIcons.exclamationmark_triangle,

@@ -260,6 +260,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                     }
                   } catch (error) {
                     if (error.toString().contains("invalid-email")) {
+                      // ignore: use_build_context_synchronously
                       showCustomSnackBar(
                         context,
                         CupertinoIcons.exclamationmark_circle,
@@ -268,6 +269,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                         "The email entered is invalid. Please try again.",
                       );
                     } else if (error.toString().contains("user-not-found")) {
+                      // ignore: use_build_context_synchronously
                       showCustomSnackBar(
                         context,
                         CupertinoIcons.exclamationmark_triangle,
@@ -276,6 +278,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
                         "There is no user associated with this email address. Please register.",
                       );
                     } else if (error.toString().contains("wrong-password")) {
+                      // ignore: use_build_context_synchronously
                       showCustomSnackBar(
                         context,
                         CupertinoIcons.exclamationmark_circle,

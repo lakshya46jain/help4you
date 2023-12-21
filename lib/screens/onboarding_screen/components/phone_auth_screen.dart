@@ -135,7 +135,7 @@ class PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: 30.0),
+                const SizedBox(height: 15.0),
                 Text(
                   "By continuing, you agree to our",
                   style: GoogleFonts.balooPaaji2(

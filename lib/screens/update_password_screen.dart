@@ -132,6 +132,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                           if (error
                               .toString()
                               .contains("email-already-in-use")) {
+                            // ignore: use_build_context_synchronously
                             showCustomSnackBar(
                               context,
                               CupertinoIcons.exclamationmark_circle,
