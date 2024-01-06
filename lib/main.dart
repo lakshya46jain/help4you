@@ -8,11 +8,14 @@ import 'package:firebase_core/firebase_core.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
 import 'package:help4you/screens/wrapper.dart';
+import 'package:help4you/firebase_options.dart';
 import 'package:help4you/models/user_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

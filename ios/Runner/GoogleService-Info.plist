@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>541516325231-3o34fnb0sb2pdd8niprk3g9o3ni496fs.apps.googleusercontent.com</string>
+	<string>541516325231-rcgrha4csl53ks5o22en97dskmlnjboh.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.541516325231-3o34fnb0sb2pdd8niprk3g9o3ni496fs</string>
+	<string>com.googleusercontent.apps.541516325231-rcgrha4csl53ks5o22en97dskmlnjboh</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>541516325231-1pplm53673gv5eq3ufc2p8po9l5b4imo.apps.googleusercontent.com</string>
+	<string>541516325231-602oe5go9pip3irqar396at12e738v2v.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBFO-DXJ0NazFbZ05iT7MNY54UB_d9FNCM</string>
 	<key>GCM_SENDER_ID</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.lakshya.help4you</string>
+	<string>com.help4youcompany.help4you</string>
 	<key>PROJECT_ID</key>
 	<string>help4you-f4e08</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:541516325231:ios:7fd81c6c777edd8792089a</string>
+	<string>1:541516325231:ios:9f1fccba179b83c892089a</string>
 </dict>
 </plist>
