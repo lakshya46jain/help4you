@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.541516325231-3o34fnb0sb2pdd8niprk3g9o3ni496fs</string>
+				<string>app-1-541516325231-ios-9f1fccba179b83c892089a</string>
 			</array>
 		</dict>
 	</array>
@@ -49,6 +49,11 @@
 	<string>This lets you share from your camera roll and enables other features for photos and videos.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
