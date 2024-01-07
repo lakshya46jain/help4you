@@ -179,9 +179,7 @@ class NewAddressScreenState extends State<NewAddressScreen> {
         defaultPanelState: PanelState.OPEN,
         color: Colors.transparent,
         panel: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Container(
             padding: const EdgeInsets.only(
               top: 15.0,

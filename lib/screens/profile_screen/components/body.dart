@@ -1,8 +1,10 @@
 // Flutter Imports
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:share_plus/share_plus.dart';
+import 'package:rate_my_app/rate_my_app.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 // File Imports
 import 'package:help4you/services/auth.dart';
@@ -10,8 +12,8 @@ import 'package:help4you/services/database.dart';
 import 'package:help4you/models/user_model.dart';
 import 'package:help4you/screens/handbook_screen.dart';
 import 'package:help4you/constants/signature_button.dart';
+import 'package:help4you/screens/personal_data_screen.dart';
 import 'package:help4you/screens/profile_screen/components/profile_stream.dart';
-import 'package:help4you/screens/personal_data_screen/personal_data_screen.dart';
 
 class ProfileScreenBody extends StatefulWidget {
   final Help4YouUser? user;
@@ -33,6 +35,10 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
       throw 'Could not launch $url';
     }
   }
+
+  RateMyApp rateMyApp = RateMyApp(
+    googlePlayIdentifier: 'com.help4youcompany.help4you',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +133,42 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
                 type: "Expanded",
                 icon: CupertinoIcons.star,
                 text: "Rate Us",
-                onTap: () {},
+                onTap: () async {
+                  await rateMyApp.showStarRateDialog(
+                    context,
+                    title: 'Rate Help4You',
+                    message:
+                        'Did you like your experience with Help4You? Then take a little bit of your time to leave a rating:',
+                    actionsBuilder: (context, stars) {
+                      return [
+                        TextButton(
+                          child: const Text('Ok'),
+                          onPressed: () async {
+                            HapticFeedback.lightImpact();
+                            await rateMyApp
+                                .callEvent(RateMyAppEventType.rateButtonPressed)
+                                .then(
+                                  (value) =>
+                                      Navigator.pop<RateMyAppDialogButton>(
+                                    context,
+                                    RateMyAppDialogButton.rate,
+                                  ),
+                                );
+                          },
+                        ),
+                      ];
+                    },
+                    dialogStyle: const DialogStyle(
+                      titleAlign: TextAlign.center,
+                      messageAlign: TextAlign.center,
+                      messagePadding: EdgeInsets.only(bottom: 20),
+                    ),
+                    starRatingOptions: const StarRatingOptions(),
+                    onDismissed: () => rateMyApp.callEvent(
+                      RateMyAppEventType.laterButtonPressed,
+                    ),
+                  );
+                },
               ),
               SignatureButton(
                 type: "Expanded",
@@ -136,6 +177,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
                 onTap: () {
                   launchInApp(
                     "https://forms.monday.com/forms/59fb3ed6751002d5a4e1be3fb9a80ac0?r=use1",
+                    // TODO: Change to feedback form link
                   );
                 },
               ),
@@ -146,6 +188,7 @@ class _ProfileScreenBodyState extends State<ProfileScreenBody> {
                 onTap: () {
                   Share.share(
                     "Have you tried the Help4You app? It's simple to book services like appliance repair, electricians, gardeners & more...\nTo download our app please visit https://www.help4you.webflow.io/download",
+                    // TODO: Change to landing page link
                     subject: "Try Help4You",
                   );
                 },

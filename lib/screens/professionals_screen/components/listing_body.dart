@@ -34,7 +34,7 @@ class _ListingScreenBodyState extends State<ListingScreenBody> {
           if (snapshot.data.docs.length == 0) {
             return Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 40.0),
                 child: SizedBox(
                   width: double.infinity,
                   child: SvgPicture.asset(

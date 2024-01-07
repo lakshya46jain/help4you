@@ -96,7 +96,7 @@ class ProfessionalCard extends StatelessWidget {
                                 const Icon(
                                   CupertinoIcons.star_fill,
                                   color: Color(0xFFFEA700),
-                                  size: 18.0,
+                                  size: 16.0,
                                 ),
                                 const SizedBox(width: 2.5),
                                 Text(
@@ -114,7 +114,7 @@ class ProfessionalCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              "Jobs",
+                              "Services",
                               style: GoogleFonts.balooPaaji2(
                                 height: 1.0,
                                 fontSize: 17.0,

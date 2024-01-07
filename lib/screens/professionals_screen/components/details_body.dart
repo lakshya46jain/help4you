@@ -146,7 +146,7 @@ class _DetailsScreenBodyState extends State<DetailsScreenBody> {
               if (snapshot.hasData) {
                 if (snapshot.data.docs.length == 0) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
                     child: SizedBox(
                       width: double.infinity,
                       height: MediaQuery.of(context).size.height * 0.61,

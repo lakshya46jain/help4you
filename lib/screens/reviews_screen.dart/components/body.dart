@@ -25,7 +25,7 @@ class ReviewsBody extends StatelessWidget {
           if (reviews!.isEmpty) {
             return Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 40.0),
                 child: SizedBox(
                   width: double.infinity,
                   child: SvgPicture.asset(

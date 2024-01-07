@@ -36,8 +36,8 @@ class OccupationButton extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: CachedNetworkImage(
-                height: 135,
-                width: 135,
+                height: 135.0,
+                width: 135.0,
                 imageUrl: buttonLogo!,
               ),
             ),

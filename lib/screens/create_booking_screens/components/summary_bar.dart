@@ -121,7 +121,7 @@ class SummaryBar extends StatelessWidget {
                     bookedItems,
                     total,
                   );
-                  // Send Notification: Please check the details and update the user as soon as possible.
+                  // TODO Send Notification: Please check the details and update the user as soon as possible.
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),

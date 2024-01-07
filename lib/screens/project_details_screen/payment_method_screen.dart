@@ -167,7 +167,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                               await DatabaseService(bookingId: widget.bookingId)
                                   .updatePaymentMethod(1);
                             }
-                            // Send Notification: Your payment was successfully completed.
+                            // TODO Send Notification: Your payment was successfully completed.
                           },
                           text: "Continue",
                           withIcon: false,

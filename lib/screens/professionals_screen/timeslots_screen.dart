@@ -128,7 +128,7 @@ class TimeSlotsScreenState extends State<TimeSlotsScreen> {
         true) {
       unavailableIndex.add(index);
     }
-    setState(() {});
+    // TODO: Fix the timings availability not updating.
   }
 
   @override

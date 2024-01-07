@@ -17,11 +17,10 @@ class BookingsScreen extends StatefulWidget {
 
 class BookingsScreenState extends State<BookingsScreen> {
   int index = 0;
-  String? bookingStatus;
+  String? bookingStatus = "Booking Pending";
   FixedExtentScrollController? scrollController;
 
   final items = [
-    "Show All Bookings",
     "Booking Pending",
     "Accepted",
     "Completed Projects",
@@ -84,29 +83,25 @@ class BookingsScreenState extends State<BookingsScreen> {
                       setState(() => this.index = index);
                       if (index == 0) {
                         setState(() {
-                          bookingStatus = null;
+                          bookingStatus = "Booking Pending";
                         });
                       } else if (index == 1) {
                         setState(() {
-                          bookingStatus = "Booking Pending";
+                          bookingStatus = "Accepted";
                         });
                       } else if (index == 2) {
                         setState(() {
-                          bookingStatus = "Accepted";
+                          bookingStatus = "Job Completed";
                         });
                       } else if (index == 3) {
                         setState(() {
-                          bookingStatus = "Job Completed";
+                          bookingStatus = "Payment Completed";
                         });
                       } else if (index == 4) {
                         setState(() {
-                          bookingStatus = "Payment Completed";
-                        });
-                      } else if (index == 5) {
-                        setState(() {
                           bookingStatus = "Rejected";
                         });
-                      } else if (index == 6) {
+                      } else if (index == 5) {
                         setState(() {
                           bookingStatus = "Customer Cancelled";
                         });

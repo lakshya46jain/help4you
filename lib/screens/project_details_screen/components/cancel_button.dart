@@ -38,7 +38,7 @@ class CancelButton extends StatelessWidget {
             Navigator.pop(context);
             await DatabaseService(bookingId: bookingId)
                 .updateBookingStatus("Customer Cancelled");
-            // Send Notification: There's an update in the booking status by the customer. Have a look at it!
+            // TODO Send Notification: There's an update in the booking status by the customer. Have a look at it!
           },
         ).show();
       },

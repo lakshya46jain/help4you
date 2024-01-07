@@ -56,62 +56,59 @@ class DetailsScreen extends StatelessWidget {
                   ),
                 );
               },
-              child: SizedBox(
-                height: 0.75,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 0.0,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15.0),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 10.0,
-                        color: Color(0xFFDADADA),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        CupertinoIcons.star_fill,
-                        color: Color(0xFFFEA700),
-                      ),
-                      const SizedBox(width: 7.5),
-                      StreamBuilder(
-                        stream: DatabaseService(
-                          professionalUID: professionalUID,
-                        ).reviewsData,
-                        builder: (context, AsyncSnapshot snapshot) {
-                          double ratingTotal = 0;
-                          double rating = 0;
-                          List<Reviews>? professionalRatings =
-                              snapshot.data as List<Reviews>?;
-                          if (snapshot.connectionState ==
-                              ConnectionState.active) {
-                            for (Reviews professionalRatings
-                                in professionalRatings!) {
-                              ratingTotal += professionalRatings.rating!;
-                              rating = ratingTotal / snapshot.data.length;
-                            }
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 0.0,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15.0),
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 10.0,
+                      color: Color(0xFFDADADA),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      CupertinoIcons.star_fill,
+                      color: Color(0xFFFEA700),
+                    ),
+                    const SizedBox(width: 7.5),
+                    StreamBuilder(
+                      stream: DatabaseService(
+                        professionalUID: professionalUID,
+                      ).reviewsData,
+                      builder: (context, AsyncSnapshot snapshot) {
+                        double ratingTotal = 0;
+                        double rating = 0;
+                        List<Reviews>? professionalRatings =
+                            snapshot.data as List<Reviews>?;
+                        if (snapshot.connectionState ==
+                            ConnectionState.active) {
+                          for (Reviews professionalRatings
+                              in professionalRatings!) {
+                            ratingTotal += professionalRatings.rating!;
+                            rating = ratingTotal / snapshot.data.length;
                           }
-                          return Text(
-                            rating.toStringAsFixed(1),
-                            style: GoogleFonts.balooPaaji2(
-                              height: 1.75,
-                              color: const Color(0xFF1C3857),
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+                        }
+                        return Text(
+                          rating.toStringAsFixed(1),
+                          style: GoogleFonts.balooPaaji2(
+                            height: 1.75,
+                            color: const Color(0xFF1C3857),
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),
