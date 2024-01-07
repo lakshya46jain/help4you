@@ -63,11 +63,15 @@ class BottomNavBarState extends State<BottomNavBar>
             bottom: 0.0,
             left: 0.0,
             right: 0.0,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(25.0),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(25.0),
+                ),
               ),
               child: BottomNavigationBar(
+                backgroundColor: Colors.transparent,
                 onTap: onTap,
                 elevation: 0.0,
                 iconSize: 27.0,

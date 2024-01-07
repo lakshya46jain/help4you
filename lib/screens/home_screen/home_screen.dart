@@ -36,7 +36,7 @@ class HomeScreenState extends State<HomeScreen> {
               const OccupationListBuilder(),
               const SizedBox(height: 20.0),
               Container(
-                height: MediaQuery.of(context).size.height * 0.43,
+                height: MediaQuery.of(context).size.height,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Color(0xFF1C3857),
