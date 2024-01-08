@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // Dependency Imports
 import 'package:intl/intl.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:full_screen_image_null_safe/full_screen_image_null_safe.dart';
+import 'package:custom_full_image_screen/custom_full_image_screen.dart';
 // File Imports
 import 'package:help4you/services/database.dart';
 
@@ -143,20 +143,39 @@ class MessageBubbleCore extends StatelessWidget {
             borderRadius: BorderRadius.circular(22.0),
           ),
           child: (type == "Media")
-              ? FullScreenWidget(
-                  disposeLevel: DisposeLevel.High,
-                  child: Center(
-                    child: Hero(
-                      tag: "Message Media",
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15.0),
-                        child: CachedNetworkImage(
-                          fit: BoxFit.fill,
-                          imageUrl: message,
-                        ),
+              ? ImageCachedFullscreen(
+                  placeholder: const Center(
+                    child: CupertinoActivityIndicator(
+                      color: Colors.white,
+                      radius: 25.0,
+                    ),
+                  ),
+                  placeholderDetails: const Center(
+                    child: CupertinoActivityIndicator(
+                      color: Colors.white,
+                      radius: 50.0,
+                    ),
+                  ),
+                  errorWidget: Center(
+                    child: Text(
+                      "Currently, we are facing difficulties in loading the picture. Please try again later.",
+                      style: GoogleFonts.balooPaaji2(
+                        fontSize: 15.0,
+                        color: const Color(0xFF1C3857),
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                   ),
+                  iconBackButtonColor: const Color(0xFFFEA700),
+                  backgroundColorDetails: Colors.white,
+                  imageUrl: message,
+                  imageWidth: 250.0,
+                  imageHeight: 250.0,
+                  imageBorderRadius: 15.0,
+                  imageFit: BoxFit.fill,
+                  imageDetailsFit: BoxFit.contain,
+                  hideAppBarDetails: false,
+                  withHeroAnimation: true,
                 )
               : Text(
                   message,
