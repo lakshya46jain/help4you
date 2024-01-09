@@ -11,11 +11,11 @@ import 'package:help4you/models/user_model.dart';
 import 'package:help4you/services/database.dart';
 import 'package:help4you/screens/bottom_nav_bar.dart';
 import 'package:help4you/constants/custom_snackbar.dart';
+import 'package:help4you/screens/registration_screen.dart';
 import 'package:help4you/screens/update_password_screen.dart';
 import 'package:help4you/screens/update_num_verification.dart';
 import 'package:help4you/screens/link_email_address_screen.dart';
 import 'package:help4you/screens/update_email_address_screen.dart';
-import 'package:help4you/screens/registration_screen/registration_screen.dart';
 import 'package:help4you/screens/onboarding_screen/components/verification_screen.dart';
 import 'package:help4you/screens/delete_account_screens/delete_verification_screen.dart';
 
@@ -96,6 +96,7 @@ class AuthService {
                 nonInternationalNumber: nonInternationalNumber,
                 phoneNumber: phoneNumber,
                 submitOTP: (pin) {
+                  // TODO: Implement loading screen
                   HapticFeedback.heavyImpact();
                   var credential = PhoneAuthProvider.credential(
                     verificationId: verificationId,
@@ -158,6 +159,7 @@ class AuthService {
                 phoneIsoCode: phoneIsoCode,
                 nonInternationalNumber: nonInternationalNumber,
                 submitOTP: (pin) {
+                  // TODO: Implement loading screen
                   HapticFeedback.heavyImpact();
                   PhoneAuthProvider.credential(
                     verificationId: verificationId,
@@ -188,6 +190,7 @@ class AuthService {
                 phoneIsoCode: phoneIsoCode,
                 nonInternationalNumber: nonInternationalNumber,
                 submitOTP: (pin) async {
+                  // TODO: Implement loading screen
                   var phoneCredential = PhoneAuthProvider.credential(
                     verificationId: verificationId,
                     smsCode: pin,

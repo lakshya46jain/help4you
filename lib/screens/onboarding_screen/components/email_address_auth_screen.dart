@@ -61,8 +61,8 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
             color: Color(0xFFFEA700),
           ),
           onPressed: () {
-            Navigator.pop(context);
             FocusScope.of(context).unfocus();
+            Navigator.pop(context);
           },
         ),
         actions: [
@@ -249,6 +249,7 @@ class _EmailAddressAuthScreenState extends State<EmailAddressAuthScreen> {
             SafeArea(
               child: SignatureButton(
                 onTap: () async {
+                  // TODO: Implement loading screen
                   try {
                     if (formKey.currentState!.validate()) {
                       HapticFeedback.heavyImpact();

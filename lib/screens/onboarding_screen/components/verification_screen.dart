@@ -105,6 +105,7 @@ class VerificationScreenState extends State<VerificationScreen> {
                 const SizedBox(height: 30.0),
                 GestureDetector(
                   onTap: () async {
+                    // TODO: Implement loading screen
                     FirebaseAuth.instance.verifyPhoneNumber(
                       phoneNumber: widget.phoneNumber,
                       timeout: const Duration(seconds: 120),

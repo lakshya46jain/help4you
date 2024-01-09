@@ -55,8 +55,8 @@ class PhoneAuthScreenState extends State<PhoneAuthScreen> {
             color: Color(0xFFFEA700),
           ),
           onPressed: () {
-            Navigator.pop(context);
             FocusScope.of(context).unfocus();
+            Navigator.pop(context);
           },
         ),
         actions: [
@@ -83,6 +83,7 @@ class PhoneAuthScreenState extends State<PhoneAuthScreen> {
                 ],
               ),
               onTap: () {
+                FocusScope.of(context).unfocus();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -176,6 +177,7 @@ class PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     countryCode = countryCode!.replaceAll("+", "");
                   }
                   HapticFeedback.heavyImpact();
+                  // TODO: Implement loading screen
                   await AuthService().phoneAuthentication(
                     "",
                     countryCode,

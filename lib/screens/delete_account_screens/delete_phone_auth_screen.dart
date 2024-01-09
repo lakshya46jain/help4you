@@ -116,6 +116,7 @@ class DeleteAccPhoneAuthScreenState extends State<DeleteAccPhoneAuthScreen> {
             SafeArea(
               child: SignatureButton(
                 onTap: () async {
+                  // TODO: Implement loading screen
                   HapticFeedback.heavyImpact();
                   if (countryCode.contains("+")) {
                     countryCode = countryCode.replaceAll("+", "");
