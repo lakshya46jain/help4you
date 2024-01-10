@@ -23,6 +23,7 @@ class ListingScreenBody extends StatefulWidget {
 class _ListingScreenBodyState extends State<ListingScreenBody> {
   @override
   Widget build(BuildContext context) {
+    // TODO: Filter professionals based on closest to current location
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection("H4Y Users Database")

@@ -26,6 +26,7 @@ class HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 50.0),
               const Header(),
               const SizedBox(height: 5.0),
+              // TODO: Give functionality to the location search bar
               CustomSearchBar(
                 hintText: "Search locations...",
                 width: MediaQuery.of(context).size.width,

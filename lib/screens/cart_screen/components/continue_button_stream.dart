@@ -25,6 +25,7 @@ class ContinueButtonStream extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Change the way booking takes in addresses.
     return StreamBuilder(
       stream: DatabaseService(uid: user!.uid).addressListData,
       builder: (context, snapshot) {
