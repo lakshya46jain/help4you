@@ -39,4 +39,4 @@ The app is designed with a focus on improving the user experience across all dev
 
 - **Timings**: Resolve the issue where available timings are not updating correctly in the timeslot screen.
 
-- **Links**: Update the links on the profile screen
+- **Links**: Update the links on the profile screen.
